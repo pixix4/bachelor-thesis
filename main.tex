@@ -37,6 +37,76 @@
 
 \subimport*{tex/}{c0_abstract}
 
+\chapter{Hintergrund}
+
+\begin{itemize}
+  \item Einführung in BROS und BPMN
+  \item Erläuterung des Konsistenzproblemes
+\end{itemize}
+
+\section{Methoden der Konsistenzprüfung}
+
+\begin{itemize}
+  \item Related-work (Bezüglich UML)
+  \item Abgenzung dieser Arbeit
+\end{itemize}
+
+\chapter{Konsistenz zwischen BROS und BPMN}
+
+\begin{itemize}
+  \item Einführung in das Pizzabeispiel (fehlerhaftes Beispiel was später erweitert wird)
+  \item Definition von Konsistenz
+\end{itemize}
+
+\section{Das Metamodell als Vergleichsgrundlage}
+
+\begin{itemize}
+  \item Vereinfachte Metamodelle für BROS und BPMN, die für die Konsistenzprüfung notwendig sind
+\end{itemize}
+
+\section{Konsistenzregeln}
+
+\begin{itemize}
+  \item Iterative Verbesserung des Pizzabeispiels
+  \item Vorstellung der implementierten Konsistenzregeln
+\end{itemize}
+
+\chapter{Implementierung der automatischen Konsistenzprüfung}
+
+\begin{itemize}
+  \item Kotlin, webbasiert
+  \item Dateiformat BROS und BPMN
+  \item Interne Datenstruktur
+\end{itemize}
+
+\section{Matching Algorithmus}
+
+\begin{itemize}
+  \item String Matching
+  \item Fixpunkt Algorithmus
+  \item Predefined matchings
+\end{itemize}
+
+\section{Verifizierungsalgorithmus}
+
+\begin{itemize}
+  \item Verifizierung auf Grundlage des Matchings
+\end{itemize}
+
+\section{Erweiterbarkeit dieses Ansatzes}
+
+\begin{itemize}
+  \item Zeigen das eine neue Regel leicht hinzugefügt werden kann
+  \item Bspw. jedes BROS Event muss auf eine BPMN Element mappen
+\end{itemize}
+
+\chapter{Zusammenfassung}
+
+\begin{itemize}
+  \item Zusammenfassung der Arbeit
+  \item Ausblick auf mögliche Erweiterungen
+\end{itemize}
+
 \printbibliography
 
 \end{document}

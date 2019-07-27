@@ -1,7 +1,25 @@
 \chapter{Einleitung}
 
-\begin{itemize}
-  \item Motivation (Einordung in Forschungsfeld)
-  \item Problemdefinition
-  \item Outline/Herangehensweise/Sturktur der Arbeit
-\end{itemize}
+\textit{Größtenteils aus dem MD übernommen}
+
+\section{Motivation}
+
+Die heutigen Methoden zur Erstellung von Software hängen stark von geeigneten definierten Modellen ab, um die Struktur und das Verhalten der Software zu spezifizieren.
+Einerseits werden zur Strukturdefinition häufig UML-Strukturdiagramme verwendet, wie z.B. Klassendiagramme oder Komponentendiagramme.
+Andererseits werden prozedurale Modelle verwendet, um das Verhalten der Software darzustellen, z.B. BPMN-Diagramme, Sequenzdiagramme oder Petrinetze.
+Dennoch besteht eine Lücke zwischen diesen beiden Modellperspektiven: Während die Geschäftsprozesse in prozeduralen Modellen modelliert werden, kann die eigentliche Implementierung der Software nicht ohne die Strukturmodelle erfolgen.
+Die Strukturmodelle müssen daher an den Verhaltensmodellen ausgerichtet sein, damit das anschließend entwickelte Softwaresystem auch die in den Vorgehensmodellen definierten Geschäftsprozesse umsetzt.
+
+\section{Problemdefinition}
+
+Derzeit gibt es keine systematische Möglichkeit, prozessuale Geschäftsprozesse (z.B. in Form von BPMN-Prozessen) in Strukturmodellen der Software zu spezifizieren, um eine solche Konsistenz sicherzustellen.
+Als erster Ansatz wird dieses Problem in der Sprache der Business Role-Object Specification (BROS) gelöst, indem zeitliche Elemente in eine statische Strukturmodellspezifikation eingefügt werden.
+Es ist jedoch eine manuelle, komplexe und fehleranfällige Aufgabe, die Konsistenz von BROS mit einer bestimmten prozeduralen Geschäftsprozessen sicherzustellen und zu überprüfen.
+
+\section{Struktur der Arbeit}
+
+In dieser Arbeit wird die Konsistenz zwischen BROS und der prozeduralen BPMN untersucht.
+Zu diesem Zweck werden die Modellelemente in einem BROS- und einem BPMN-Modell miteinander verglichen, um etwaige Abweichungen in Bezug auf mehrere Konsistenzkonzepte, sogenannte Konsistenzbeschränkungen, zu ermitteln.
+Basierend auf dieser Analyse werden dem Modellierer Warnungen gegeben, wenn Konsistenzbeschränkungen verletzt werden und wie die Probleme möglicherweise gelöst werden können.
+Diese Aufgabe wird automatisch über ein Tool ausgeführt werden. Die Proof-of-concept Implementierung nutzt dazu die Modelle des BROS-Editor FRaMED.io und des BPMN-Editor bpnm.io.
+Um den Wert und die Flexibilität für zukünftige Entwicklungen zu erhöhen, wird besondere Aufmerksamkeit auf die Erweiterbarkeit des Tools gelegt.

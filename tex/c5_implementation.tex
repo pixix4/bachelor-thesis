@@ -1,9 +1,40 @@
 \chapter{Implementierung der automatischen Konsistenzprüfung}
 
+Um die Umsetzbarkeit und die Funkionalität dieses Ansatzes zu zeigen wurde eine Referenzimplementierung angefertigt. 
+
 \section{Implementierung der Referenzarchitektur}
+
+Eine Anforderung war eine mögliche Integration in den bestehenden BROS-Editor FRaMED.io.
+Durch die Verwendung von Kotlin konnte das Parsing der BROS-JSON Datei direkt übernommen werden.
+Das Dateiformat von bpmn.io basiert auf XMI und kann nativ von JS geparsed werden.
 
 \section{Matching der Modelelemente}
 
+Um die Verifizierung der Modelle zu ermöglichen muss zunächst ein dazugehöriges Matching aufgebaut werden.
+Dazu werden Elemente mit Kompatiblen Typen anhand ihres Namens zugeordnet.
+Zusätzlich kann, aufgrund des Fixpunkt-Algorithmus, ein bestehendes Matching auf andere Elemente übertragen werden.
+Sollte dies nicht ausreichen kann der Modellierer explizit ein Predefined-Matching einfügen was ein Element Matching erzwingt oder verbietet.
+
+\textit{Erklärung einiger Matching-Regeln und ihrer Syntax}
+
 \section{Implementierung der Konsistenzregeln}
 
+Dank des bestehenden Matchings lassen sich die genannten Konsistenzregeln einfach implementieren.
+
+\textit{Erklärung einiger Verifikationsregeln und ihrer Syntax}
+
 \section{Benutzerinterface}
+
+Da das entwickelte Tool eine Webanwendung ist kann es in allen moderneren Browsern benutzt werden die JS aktiviert haben.
+Das Tool hat ein zweistufiges Interface.
+Als erster Schritt müssen die Quelldateien der zu überprüfenden Modelle geladen werden.
+Dazu können die Dateien einfach per Drag'n'Drop in das Tool geladen werden.
+Das Tool erkennt den Inhalt unabhängig des Namens und läd die entsprechende Datei.
+Alternativ kann eine manuelle Dateiauswahl genutzt werden oder der Inhalt der Datei in das Textfeld kopiert werden.
+Sobald jeweils ein valides BPMN- und BROS-Modell geladen wurden, wird die Konsistenzprüfung automatisch gestartet.
+
+Die Ergebnisse der Konsistenzprüfung werden unterhalb der Eingabemaske angezeigt.
+Zunächst werden statistische Informationen zu den geladen Modellen, des Matchings und der Validierung angezeigt.
+Unterhalb dieser Statistiken befindet sich die Liste der Validierungsergebnisse.
+Mit hilfe der Tableiste kann das BPMN- oder BROS-Matching oder auch das geladene Predefined-Matching anzeigen.
+Das Predefined-Matching kann per Klick auf die Element-IDs direkt bearbeitet werden.

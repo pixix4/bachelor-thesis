@@ -2,6 +2,36 @@
 
 \section{Zusammenfassung}
 
-\section{Wissenschaftliche Beitrag}
+Ziel dieser Arbeit war die automatisierte Konsistenzprüfung von BPMN- und BROS-Modellen.
+Dazu wurden anhand bestehender Arbeiten ein neuer Ansatz entwickelt.
+Die Funktionalität dieses Ansatzes wurde anhand einer Referenzimplementierung und einer Fallstudie gezeigt.  
+
+\section{Wissenschaftlicher Beitrag}
+
+\begin{itemize}
+    \item \textbf{Nature:} beides
+    \item \textbf{Diagrams:} BPMN-BROS
+    \item \textbf{Consistency Type:} \emph{Intra-Modell (horizontale) Konsistenz}
+    \item \textbf{Intermediate Representation:} Nein
+    \item \textbf{Consitency Strategy:} \emph{Monitoring} (Auf einem Regelsatz basierend)
+    \item \textbf{Automatable:} gut (H)
+    \item \textbf{Extensibility:} gut (H)
+\end{itemize}
+
+Der Ansatz und das entwickelte Tool geben dem Modellierer Warnungen und Hinweise die auf mögliche Inkonsistenzen deuten.
+Dabei werden explizit keine Handlungsempfehlungen oder Lösungsmöglichkeiten gegeben.
+Dies liegt in der alleinigen Verantwortung des Modellierers.
+Des Weiteren wird keine syntaktische und semantische Konsistenzprüfung der Einzelmodelle durchgeführt.
+Die zu überprüfenden Modelle müssen alleinstehend Konsistent sein.
+Nur die Korrektheit des Dateiformats wird indirekt überprüft, da es eine Vorraussetzung zum Parsen des Modelles ist.
 
 \section{Zukünftige Arbeiten}
+
+Eine Abgrenzung dieser Arbeit war, das keine Handlungsempfehlungen oder Lösungsmöglichkeiten bei gefundenen Inkonsistenzen gegeben werden.
+In diesem Feld sollte evaluiert werden welche Inkonsistenzmuster häufig auftreten und ob diese eine Vorhersehbare Lösungsmöglichkeit aufweisen.
+Auch könnte die Fehlertoleranz des Tools erhöht werden, indem man eine syntaktische und semantische Konsistenzprüfung der Einzelmodelle integriert.
+Diese ist momentan noch von externen Programmen abhängig oder aufgabe des Modellierers.
+Da externe Programme meist auf diese Aufgabe spezialisiert sind müsste zunächst evaluiert werden ob eine integrierte Lösung auch eine gleichbleibende Erkennungsrate besitzt.
+Um die Benutzbarkeit des Tools weiter zu verbessern kann eine Integration in FRaMED.io erfolgen.
+Die technische Grundlage ist mit der Referenzimplementierung bereits gegeben.
+Hierfür müsste noch evaluiert werden wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.

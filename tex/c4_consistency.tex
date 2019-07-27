@@ -2,6 +2,18 @@
 
 \section{Konsistenzproblem}
 
+Viele der bereits existierenden Methoden lassen sich anpassen und können mit andren Modellen genutzt werden. Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms verwendet werden.
+Allerdings ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
+Das liegt an der Möglichkeit ein BROS Modell beliebig anzureichern und das Events eine Abstraktion eines beliebigen Prozesses sein können.
+
 \section{Konsistenzregeln}
 
+\textit{Erläuterung der implementierten Regeln anhand von Minimalbeispielen.}
+
 \section{Referenzarchitektur}
+
+Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von zB. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
+Dies hat den Vorteil das die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung gebaut werden muss.
+Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen die als \emph{Layered Graph} dargestellt werden.
+Im ersten Schritt wird ein Matching von Modellelementen aufgebaut. Dies wird iterativ, in Form eines Fixpunkt-Algorithmus, durchgeführt um kaskadierendes Matching zu erlauben.
+Im zweiten Schritt werden anhand des Matching die Regeln ausgeführt.

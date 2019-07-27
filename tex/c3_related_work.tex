@@ -1,7 +1,56 @@
 \chapter{Verwandte Arbeiten}
 
+Der Bereich der Konsistenzprüfung zwischen Strukturbasierten und Verhaltensbasierten Modellen ist seit Jahren ein gut erforschter Bereich.
+Ins besondere gibt es ein großes Spektrum an Methoden zum Vergleichen von verschiedenen UML Diagrammen.
+
 \section{Klassifikationsschema}
+
+Die bestehenden Methoden für UML Diagramme wurden von \cite{Usman2008} und \cite{Lucas2009} zusammengestellt.
+Beide Arbeiten nutzen ein ähnliches Schema:
+
+\begin{itemize}
+    \item \textbf{Nature:} Es beschreibt den Fokus der vergleichbaren Modelle. Mögliche Werte sind strukturbasiert, verhaltensbasiert und beides.
+    \item \textbf{Diagrams:} Es beschreibt welche konkreten Modelle von der Methode unterstützt werden. Die Arbeiten von \cite{Usman2008} und \cite{Lucas2009} beziehen sich dabei ausschließlich auf UML Diagramme.
+    \item \textbf{Consistency Type:} Es beschreibt welche Arten der Konsistenz von der Methode überprüft werden. Dabei wird hauptsächlich unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz bei verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen)und \emph{Evolutionskonsistenz} (Konsistenz der eines Modelles über verschiedende Entwicklungsstufen). Zusätzlich spezifiziert \cite{Usman2008} noch die \emph{semantische-} und die \emph{syntaktische Konsistenz}. Diese Beziehen sich auf die Konsistenz eines Modelles zu seinem Metamodell. Dies wird für die nachfolgende Arbeit als Vorraussetzung angesehen und nicht näher betrachtet.
+    \item \textbf{Intermediate Representation:} Es beschreibt ob die Methode eine temporäre Zwischendarstellung benötigt oder nicht.
+    \item \textbf{Consitency Strategy:} Es beschreibt die benutzte Validierungsstrategie. Es werden drei verschiedene Strategien genannt und zwar \emph{Analysis} (Auf einem Algorithmus basierend), \emph{Monitoring} (Auf einem Regelsatz basierend) und \emph{Construction} (Auf der Generierung des zu vergleichenden Modelles basierend).
+    \item \textbf{Automatable:} Es beschreibt ob die Methode manuell oder automatisiert von einem Programm durchgeführt werden kann. Mögliche Werte sind gut (H), mittel (M) und schlecht (L).
+    \item \textbf{Extensibility:} Es beschreibt wie gut die Methode um weitere Konsistenzregeln erweiterbar ist. Mögliche Werte sind gut (H), mittel (M) und schlecht (L).
+\end{itemize}
 
 \section{Aktuelle Verfahren zur Konsistenzprüfung}
 
+Transformation zu \emph{CSP/Object-Z}
+\begin{itemize}
+    \item Rasch und Wehrheim (\cite{Usman2008})
+    \item Kim and Carrington (\cite{Usman2008})
+\end{itemize}
+
+Transformation zu \emph{Pertinetze}
+\begin{itemize}
+    \item Shinkawa (\cite{Usman2008})
+    \item Liu et al. (\cite{Usman2008})
+    \item Bernardi et al. (\cite{Usman2008})
+\end{itemize}
+
+Anwendung von \emph{Description Logic}
+\begin{itemize}
+    \item Satoh et al. (\cite{Usman2008})
+    \item Mens et al. (\cite{Usman2008})
+    \item \cite{Simmonds2004}
+\end{itemize}
+
+Transformation in gemeinsames Modell
+\begin{itemize}
+    \item \cite{Egyed2001} (ViewIntegra)
+\end{itemize}
+
+Nutzung von UML (zB. \emph{OCL})
+\begin{itemize}
+    \item Briant et al. (\cite{Usman2008})
+    \item Eqyed (\cite{Usman2008})
+\end{itemize}
+
 \section{Vergleich der bestehenden Verfahren}
+
+\textit{Vergleich der oben genannten Methoden.}

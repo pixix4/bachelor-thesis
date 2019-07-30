@@ -1,18 +1,34 @@
 \chapter{Konsistenz zwischen BPMN und BROS}
 
-\section{Konsistenzproblem}
-
-Viele der bereits existierenden Methoden lassen sich anpassen und können mit andren Modellen genutzt werden. Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms verwendet werden.
+Viele der bereits existierenden Verfahren lassen sich anpassen und können mit anderen Modellen genutzt werden. 
+Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms verwendet werden.
 Allerdings ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
 Das liegt an der Möglichkeit ein BROS Modell beliebig anzureichern und das Events eine Abstraktion eines beliebigen Prozesses sein können.
+
+\section{Konsistenzproblem}
+
+Wie bereits erwähnt, sind heutige Softwaresystem stark von den dazugehörigen Modellen anhängig.
+Damit ein solches System erfolgreich implementierten werden kann müssen die Modelle konsistent zueinander seien.
+Sollten schon zu Beginn eines Projektes unbemerkt Inkonsistenzen auftreten kann dies zum scheitern des ganzen Projektes führen.
+Die verhaltensbasierte Modelle beschreiben die Interaktion innerhalb eines Systems.
+Dabei benötigen sie die Funktionalität die von den strukturbasierten Modellen bereitgestellt wird.
+Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet kann das Softwaresystem nicht funktionieren.
 
 \section{Konsistenzregeln}
 
 \textit{Erläuterung der implementierten Regeln anhand von Minimalbeispielen.}
 
+\begin{enumerate}
+    \item Zu jeder BPMN-Swimlane muss ein BROS-RoleType gehören
+    \item Zu jedem BPMN-TerminationEvent muss ein BROS-Event mit DestroyRelation oder ein BROS-ReturnEvent gehören
+    \item Zu jedem BPMN-EndEvent muss ein BROS-ReturnEvent gehören
+    \item Zu jedem BPMN-StartEvent muss ein BROS-Event mit CreateRelation gehören
+    \item Zu jedem BPMN-Process muss eine BROS-Scene oder ein BROS-Event gehören 
+\end{enumerate}
+
 \section{Referenzarchitektur}
 
-Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von zB. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
+Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z.B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
 Dies hat den Vorteil das die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung gebaut werden muss.
 Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen die als \emph{Layered Graph} dargestellt werden.
 Im ersten Schritt wird ein Matching von Modellelementen aufgebaut. Dies wird iterativ, in Form eines Fixpunkt-Algorithmus, durchgeführt um kaskadierendes Matching zu erlauben.

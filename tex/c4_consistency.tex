@@ -4,6 +4,8 @@ Viele der bereits existierenden Verfahren lassen sich anpassen und können mit a
 Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms verwendet werden.
 Allerdings ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
 Das liegt an der Möglichkeit ein BROS Modell beliebig anzureichern und das Events eine Abstraktion eines beliebigen Prozesses sein können.
+Um dieses Problem zu lösen wird zunächst eine genaue Problemdefinition gegeben.
+Anschließend werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
 
 \section{Konsistenzproblem}
 
@@ -14,22 +16,243 @@ Die verhaltensbasierte Modelle beschreiben die Interaktion innerhalb eines Syste
 Dabei benötigen sie die Funktionalität die von den strukturbasierten Modellen bereitgestellt wird.
 Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet kann das Softwaresystem nicht funktionieren.
 
-\section{Konsistenzregeln}
+\section{Konsistenzregeln} \label{sec:Konsistenzregeln}
 
-\textit{Erläuterung der implementierten Regeln anhand von Minimalbeispielen.}
+Die horizontale Konsistenzprüfung zwischen zwei Modellen ohne eine Zwischendarstellung kann in zwei verschiedene Richtungen definiert werden.
+Eine Regel kann aufgrund eines Merkmales des ersten Modelles ein Merkmal im zweiten Modell fordern oder umgekehrt.
+Damit basieren diese Regeln auf der logischen Implikation.
+Um eine reflexive Regel zu erhalten (logische Äquivalenz) müssen zwei Regeln erstellt werden die sowohl die Hin- als auch die Rückrichtung abdecken.
+Im Bezug auf den Vergleich von BPMN und BROS bedeutet das, eine Regel hat immer ein Ursprungs- und ein Zielmodell.
+Da BROS beliebig erweitert werden kann, ist kein strikter Vergleich zwischen BPMN und BROS möglich.
+Aus diesem Grund sind die meisten Regel aus der BPMN Sicht aufgestellt.
 
-\begin{enumerate}
-    \item Zu jeder BPMN-Swimlane muss ein BROS-RoleType gehören
-    \item Zu jedem BPMN-TerminationEvent muss ein BROS-Event mit DestroyRelation oder ein BROS-ReturnEvent gehören
-    \item Zu jedem BPMN-EndEvent muss ein BROS-ReturnEvent gehören
-    \item Zu jedem BPMN-StartEvent muss ein BROS-Event mit CreateRelation gehören
-    \item Zu jedem BPMN-Process muss eine BROS-Scene oder ein BROS-Event gehören 
-\end{enumerate}
+Wie bereits erläutert lassen sich die BPMN- und BROS-Modelle, aufgrund deren Metamodelle, in Form von Graphen darstellen.
+Mit Hilfe des Graph-Logik-Isomorphismus können dies Graphen auch in Form von Logikprogrammen ausgedrückt werden.
+Für die Spezifikation der Regeln wird im nachfolgenden eine auf Prolog basierende Notation genutzt.
+Dies ermöglicht eine einfache und leicht verständliche Darstellung der Regeln ohne eine eigene domänenspezifische Sprache einführen zu müssen.
+Als Grundlage für die Konsistenzregeln werden die in \cref{lst:definition_facts} und \cref{lst:definition_predicats} aufgestellten Fakten und Prädikate genutzt.
+
+Die Faktenbasis besteht aus vier Bestandteilen und bildet die gesamte Modellstruktur ab.
+Mit dem Fakt \emph{bpmn/2} und \emph{bros/2} werden die jeweiligen Modellelemente aufgelistet und gleichzeitig ihren Typ zugeordnet.
+Der Fakt \emph{relation/3} bildet eine Relation zwischen zwei Modellelementen von Quelle nach Ziel ab und ordnet dieser Relation gleichzeitig einen Typ zu.
+Durch \emph{parent/2} wird der hierarchische Aufbau der Modelle abgebildet.
+Dabei ist zu beachten das jedes Element nur einen Parent haben darf.
+Es gilt implizit \emph{check\_parent(X) :- parent(X, A), parent(X, B) -> A == B.}.
+Allgemein ist zu beachten das dies keine Zwischendarstellung ist und nur zur syntaktischen Definition der Regeln genutzt wird.
+Da der Graph des BPMN-Modelles und der Graph des BROS-Modelles disjunkt sind muss keine weitere Trennung der \emph{relation/3} und \emph{parent/2} Fakten durchgeführt werden.
+
+\begin{lstlisting}[language=Prolog, caption=Definitionen der Faktenbasis, label=lst:definition_facts]
+% Definition aller BPMN Elemente mit ihrem zugehorigem Typ.
+bpmn(Bpmn, Type).
+
+% Definition aller BROS Elemente mit ihrem zugehorigem Typ.
+bros(Bros, Type).
+
+% Definition aller Relationen von Quelle nach Ziel mit Typ.
+relation(Source, Target, Type).
+
+% Definition der Modellstruktur per Eltern-Kind Beziehung.
+parent(Child, Parent).
+\end{lstlisting}
+
+Zusätzlich werden noch zwei Hilfsprädikate definiert.
+Das Prädikat \emph{transitive\_parent/2} bildet den transitiven Abschluss der \emph{parent/2} Relation.
+Jedem Kind werden all seine transitiven Eltern zugeordnet.
+Dies beinhaltet auch die Abbildung der Identität.
+Das wichtigste Prädikat ist \emph{match/2}.
+Es bildet das Matching der BPMN-Elemente zu den BROS-Elementen ab.
+Dabei wird angenommen das ein Matching bereits existiert.
+Ein Matching ist die Menge der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
+
+\begin{lstlisting}[language=Prolog, caption=Definitionen der weiterführenden Regeln, label=lst:definition_predicats]
+% Transitiver Abschluss der Modellstruktur.
+transitive_parent(Child, Parent) :- 
+    Child == Parent.
+transitive_parent(Child, Parent) :- 
+    parent(Child, Parent).
+transitive_parent(Child, Parent) :- 
+    transitive_parent(Child, X), parent(X, Parent).
+
+% Orakel fur das Matching von Modellelementen.
+match(Bpmn, Bros).
+\end{lstlisting}
+
+\textbf{Regel 1:} Zu jedem \emph{BPMN-Process} muss eine \emph{BROS-Scene} oder ein \emph{BROS-Event} existieren.
+Ein BPMN-Process stellt eine Umgebung für einen natürlichen Prozess dar.
+In BROS wird dies mit einer BROS-Scene repräsentiert.
+Allerdings kann ein BROS-Modell eine Abstraktion eines BPMN-Modelles sein.
+In diesen Fall kann der BPMN-Process auch durch ein BROS-Event modelliert werden.
+durch diese Abstraktion muss der Inhalt des BPMN-Processes nicht weiter überprüft werden.
+
+\begin{lstlisting}[language=Prolog, caption=Regel 1]
+rule_1(Bpmn) :- bpmn(Bpmn, "Process") ->
+    (
+        bros(Bros, "Scene"), match(Bpmn, Bros);
+        bros(Bros, "Event"), match(Bpmn, Bros)
+    ).
+\end{lstlisting}
+
+\textbf{Regel 2:} Zu jeder \emph{BPMN-Swimlane} innerhalb eines \emph{BPMN-Process} muss ein passender \emph{BROS-RoleType} existieren.
+Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar. 
+Dieses Konzept wird in BROS mittels Rollen dargestellt.
+Daher muss jeder Teilnehmer des BPMN-Prozesses auch als Rolle im BROS-Modell existieren.
+
+\begin{lstlisting}[language=Prolog, caption=Regel 2]
+rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
+    (
+        bros(Bros, "RoleType"), match(Bpmn, Bros)
+    ).
+\end{lstlisting}
+
+\textbf{Regel 3:} Zu jedem \emph{BPMN-TerminationEvent} muss eine \emph{BROS-ReturnEvent} existieren.
+Eine BPMN-TerminationEvent beendet den aktuellen BPMN-Prozess.
+Der BPMN-Prozess wird in BROS durch eine BROS-Scene dargestellt (Vgl. \textbf{Regel 1}).
+Eine BROS-Scene wird durch ein BROS-ReturnEvent beendet.
+Somit muss ein BPMN-TerminationEvent mit einem BROS-ReturnEvent modelliert werden.
+
+\begin{lstlisting}[language=Prolog, caption=Regel 3]
+rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
+    (
+        bros(Bros, "ReturnEvent"), 
+        match(Bpmn, Bros),
+        (
+            parent(Bros, BrosParent),
+            transitive_parent(Bpmn, BpmnParent),
+            match(BpmnParent, BrosParent)
+        )
+    ).
+\end{lstlisting}
+
+\textbf{Regel 4:} Zu jedem \emph{BPMN-EndEvent} muss ein \emph{BROS-Event} oder \emph{BROS-ReturnEvent} existieren.
+Ein BPMN-EndEvent beendet die aktuelle BPMN-Swimlane.
+Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
+Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn  zwischen diesen beiden eine BROS-DestroyRelation existiert.
+Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
+
+\begin{lstlisting}[language=Prolog, caption=Regel 4]
+rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
+    (
+        (
+            bros(Bros, "Event"),
+            match(Bpmn, Bros),
+            (
+                relation(RoleType, Bros, "DestroyRelation"),
+                transitive_parent(Bpmn, BpmnParent),
+                match(BpmnParent, RoleType)
+            )
+        );
+        (
+            bros(Bros, "ReturnEvent"), 
+            match(Bpmn, Bros),
+            (
+                parent(Bros, BrosParent),
+                transitive_parent(Bpmn, BpmnParent),
+                match(BpmnParent, BrosParent)
+            )
+        )
+    ).
+\end{lstlisting}
+
+\textbf{Regel 5:} Zu jedem \emph{BPMN-StartEvent} muss ein \emph{BROS-Event} existieren.
+Ein BPMN-StartEvent beginnt die aktuelle BPMN-Swimlane.
+Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
+Ein BROS-RoleType wird mit einem BROS-Event begonnen, wenn  zwischen diesen beiden eine BROS-CreateRelation existiert.
+Alternativ kann ein BPMN-StartEvent auch durch ein BROS-Event modelliert werden, wenn das BPMN-StartEvent das erste Event des BPMN-Prozesses ist und BROS-CreateRelation zwischen dem BROS-Event und der BROS-Scene existiert die den BROS-Prozess darstellt (Vgl. \textbf{Regel 1}).
+
+\begin{lstlisting}[language=Prolog, caption=Regel 5]
+rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
+    (
+        bros(Bros, "Event"),
+        match(Bpmn, Bros),
+        (
+            relation(Bros, X, "CreateRelation"),
+            transitive_parent(Bpmn, BpmnParent),
+            match(BpmnParent, X)
+        )
+    ).
+\end{lstlisting}
+
+\textbf{Regel 6:} Zu jedem \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss ein \emph{BPMN-Element} existieren.
+Dies ist die einzige Regel die von dem BROS-Modell aus das BPMN-Modell überprüft.
+Jedes \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss eine Ursache im BPMN-Modell haben.
+Es darf kein Event im BROS-Modell geben das nicht im BPMN-Prozess existiert.
+Ein solches BROS-Event hätte keinen Auslöser im Verhaltensmodell und könnte somit nie eintreten.
+Passende BPMN-Elemente sind BPMN-Events unabhängig vom Typ, BPMN-Activities oder auch Ausgänge eines BPMN-Gateways.
+
+\begin{lstlisting}[language=Prolog, caption=Regel 6]
+rule_6(Bros) :- (bros(Bpmn, "Event"); bros(Bpmn, "ReturnEvent")) ->
+    (
+        bpmn(Bros, "StartEvent"), match(Bpmn, Bros);
+        bpmn(Bros, "EndEvent"), match(Bpmn, Bros);
+        bpmn(Bros, "TerminationEvent"), match(Bpmn, Bros);
+        bpmn(Bros, "Event"), match(Bpmn, Bros);
+        bpmn(Bros, "Activity"), match(Bpmn, Bros);
+        bpmn(Bros, "Gateway"), match(Bpmn, Bros)
+    ).
+\end{lstlisting}
 
 \section{Referenzarchitektur}
 
 Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z.B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
 Dies hat den Vorteil das die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung gebaut werden muss.
-Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen die als \emph{Layered Graph} dargestellt werden.
+Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen die als \emph{Geschichteten Graph} dargestellt werden.
 Im ersten Schritt wird ein Matching von Modellelementen aufgebaut. Dies wird iterativ, in Form eines Fixpunkt-Algorithmus, durchgeführt um kaskadierendes Matching zu erlauben.
+Dieser Schritt wird im folgenden \emph{Matching-Algorithmus} genannt.
 Im zweiten Schritt werden anhand des Matching die Regeln ausgeführt.
+Dabei werden die Regelergebnisse aggregiert.
+Dieser Vorgang wird \emph{Verifikations-Algorithmus} bezeichnet.
+
+\begin{figure}
+    \includegraphics[width=\textwidth,keepaspectratio]{../images/ModelToGraph.pdf}%
+    \caption{Visualisierung des Graph Matching}%
+    \label{fig:ModelToGraph}
+\end{figure}
+
+Um das Verfahren anzuwenden müssen beiden Modelle in Form eines gerichteten geschichteten Graph vorliegen.
+Ein geschichteter Graph basiert auf einem Baum der die Grundstruktur des Modelles und die Eltern-Kind Beziehung abdeckt.
+Um die Relationen zwischen den Modellelementen darzustellen wird ein Schicht mit Querverweisen über den Baum gelegt.
+In \cref{fig:ModelToGraph} wird die Transformation der Modelle in die dazugehörigen Graphen dargestellt.
+Auf der linken Seite ist ein BPMN-Modell mit dem dazugehörigen Graphen. 
+Auf der rechten Seite ist ein vereinfachtes BROS-Modell mit seinem Graphen.
+Der schwarze Teil der Graphen bildet die Grundstruktur oder auch die erste Schicht.
+Dieser wird mit Hilfe der "contains"-Relation der Metamodelle direkt aufgebaut.
+In blau ist die zweite Schicht, die Schicht der Relationen, visualisiert.
+Jede Relation ist mit ihrem Typ annotiert und hat eine feste Richtung.
+Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
+
+Mit beiden Graphen kann nun der Matching-Algorithmus durchgeführt werden.
+Das Matching ist eine weitere Schicht innerhalb der Graphen, die den Graphen des BPMN-Modelles mit dem Graphen des BROS-Modelles verbindet.
+Um diese Schicht zu konstruieren wird eine Orakelfunktion genutzt.
+Diese ermittelt ob zwei Elemente zueinander gehören.
+Dabei hat die Orakelfunktion zwei Parameter, den aktuellen Konten des BPMN-Graphen und den des BROS-Graphen.
+Die übergebenen Knoten enthalten Referenzen auf ihre Relationen aus allen drei Schichten.
+In der ersten Schicht sind die Vorfahren und Nachkommen und in der zweiten Schicht die per Relation verbunden Elemente.
+Die dritte Schicht ist zu Beginn leer.
+Wenn die Orakelfunktion für das BPMN-Element \emph{x} und das BROS-Element \emph{y} ein Matching feststellt, werden die Kanten \emph{(x, y)} und \emph{(y, x)} der dritten Schicht hinzugefügt.
+Eine einmal hinzugefügt Kante kann nicht wieder entfernt werden.
+Da die dritte Schicht auch mit an das Orakel übergeben wird, kann dies aufgrund von einem bereits bestehen Matching ein eine Entscheidung treffen.
+Um dieses Verhalten zu nutzen wird der Vorgang des Matching aufbaues solange wiederholt wie sich die dritte Schicht nicht weiter ändert.
+Dieses Verhalten wird Fixpunkt-Algorithmus genannt.
+Innerhalb einer Iteration wird die Orakelfunktion auf alle paare von Elementen des BPMN- und des BROS-Modelles angewendet.
+Ein Fixpunkt-Algorithmus kann unter umständen nicht terminieren, wenn die Datenstruktur in eine oszillierenden Zustand übergeht.
+Dies wird verhindert indem Kanten nur zu dem Matching hinzugefügen werden und somit nie entfernt werden dürfen.
+Damit kann die dritte Schicht maximal zu einem Vollständigen Graphen anwachsen.
+Anschließend kann keine weitere Kante hinzugefügt werden und der Algorithmus terminiert automatisch.
+
+Mit dem konstruieren Matching kann nun der Verifikations-Algorithmus ausgeführt werden.
+In diesem Schritt werden die unter \cref{sec:Konsistenzregeln} aufgestellten Konsistenzregeln überprüft.
+Diese Überprüfung kann mittels der genannten Prolog Regeln oder auch direkt auf den Graphen durchgeführt werden.
+Anders als der Matching-Algorithmus wird der Verifikations-Algorithmus nur einmal ausgeführt.
+Da alle Regeln die Konsistenzprüfung von einem Modell auf das andere Modell durchführen, können die Regeln unabhängig voneinander auf den Modellen ausgeführt werden.
+Die Regeln die die Überprüfung aus Sicht des BPMN-Modelles ausführen werden für jedes Element des BPMN-Graphen ausgeführt.
+Um eine bessere Fehlermeldung für den Modellierer zu erstellen, wird im Falle einer Regelverletzung nicht nur das BPMN-Element, sondern auch das BROS-Element das zu dem Regelverstoß führt, als negative Konsistenzmeldung gespeichert.
+Mit Hilfe der der beiden Elemente und der verletzen Regel kann eine genaue Fehlerbeschreibung gegeben werden.
+Dieses Verhalten ist analog für die Regel die aus Sicht des BROS-Modelles arbeiten.
+Was nicht mit den Prologregeln dargestellt werden kann sind erfolgreiche Regelprüfungen.
+Jede Regel hat zu beginn eine Implikation die die gültigkeit der Regel auf bestimmte Elemente einschränkt.
+Für eine optimale Rückmeldung an den Modellierer muss zwischen einer falschen Antezedens und einer wahren Antezedens mit wahrer Konsequenz unterschieden werden.
+Im Fall das eine Regel eine wahre Antezedens und eine wahre Konsequenz aufweist wird eine positive Konsistenzmeldung gespeichert.
+
+Das Ergebnis der Konsistenzprüfung ist eine Liste von Konsistenzmeldung.
+Jede Konsistenzmeldung besteht aus ihrem Typ (positiv oder negativ), den betroffenen BPMN- und BROS-Element, der zugrundeliegenden Regel und einer textuellen Beschreibung.
+Die positiven Konsistenzmeldung helfen dem Modellierer. \textit{TODO}

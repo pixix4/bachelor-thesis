@@ -21,7 +21,7 @@ Dadurch besitzen Kotlin Programme eine hohe Erweiterbarkeit im Bezug auf andere 
 Wie auch im BROS-Editor FRaMED.io wird die Transpilierung zu Javascript genutzt.
 Ziel der Implementierung ist es, bestehende BPMN- und BROS-Modelle, mit Hilfe des hier vorgestellten Verfahrens, auf Konsistenz zu überprüfen.
 
-Als Dateiformat für BPMN-Modelle wird das auf XML basierende ()\emph{*.bpmn}) Format von dem BPMN-Editor bpmn.io unterstützt.
+Als Dateiformat für BPMN-Modelle wird das auf XML basierende (\emph{*.bpmn}) Format von dem BPMN-Editor bpmn.io unterstützt.
 Der BPMN-Editor bpmn.io ist eine moderne und Webanwendung zum editieren von BPMN-Modellen.
 Das Dateiformat enthält sowohl Strukturinformation als auch graphische Informationen.
 Diese sind in zwei XML-Namespaces getrennt.
@@ -71,13 +71,13 @@ Um den \emph{Matching-Algorithmus} ausführen zu können muss zunächst die Orak
 Dabei hat es sich als ausreichend gezeigt theoretisch miteinander kompatible Elemente anhand ihres Namens zu vergleichen.
 In \cref{lst:name_matching} ist der für den Namensvergleich genutzte Algorithmus abgebildet.
 Dabei werden die Namen zunächst in einzelne Wörter gesplittet und anschließend unabhängig ihrer Endung und Reihenfolge verglichen.
-Um die Funktionsweise dieses Algorithmus zu verdeutlichen wird dieser Beispielhaft angewendet (Vgl. \cref{eq:name_matching_1}).
-Zunächst werden beide Namen in ihre Bestandteile zerlegt (Vgl. \cref{eq:name_matching_2}) und nach der länge sortiert (Vgl. \cref{eq:name_matching_3}).
+Um die Funktionsweise dieses Algorithmus zu verdeutlichen wird dieser Beispielhaft angewendet (Vgl. Schritt \ref{eq:name_matching_1}).
+Zunächst werden beide Namen in ihre Bestandteile zerlegt (Vgl. Schritt \ref{eq:name_matching_2}) und nach der länge sortiert (Vgl. Schritt \ref{eq:name_matching_3}).
 Anschließend wird für jedes Element der ersten Menge ein passendes Element in der zweiten Menge gesucht.
 Die Zeichenketten müssen nicht komplett übereinstimmen.
 Es ist ausrechend wenn einer der beiden Strings ohne seine Endung ein Teil des anderen Strings ist.
 Um zu verhindern das ein sehr kurzer String in einem langen String erkannt wird, darf die Längenunterschied nicht größer als die Endungslänge sein.
-Wenn zu jedem Element der ersten Menge ein passendes Element der zweiten Menge gefunden wird, stimmen die beiden Namen überein (Vgl. \cref{eq:name_matching_4}).
+Wenn zu jedem Element der ersten Menge ein passendes Element der zweiten Menge gefunden wird, stimmen die beiden Namen überein (Vgl. Schritt \ref{eq:name_matching_4}).
 
 \begin{figure}
     \begin{align}
@@ -167,12 +167,13 @@ Damit wird die unter \cref{sec:Konsistenzregeln} beschriebende Dreiwertigkeit um
 Um dies zu veranschaulichen werden nachfolgend die Konsistenzregeln 2, 3 und 5 in ihre Kotlin-Implementierung überführt.
 
 \textbf{Regel 2} ist die einfachste zu implementierende Regel.
+Sie besagt das zu jeder BPMN-Swimlane ein passender BROS-RoleType existieren muss.
 Die zweite Regel ist auf dem BPMN-Graphen basiert und filtert in der Vorbedingung nach der BPMN-Swimlane.
 Dies wird mit dem Metamodell dargestellt und als erster generischer Parameter der Hilfsfunktion \emph{verifyBpmn} übergeben.
 In der Konsequenz der Implikation wird nach einem BROS-RoleType gesucht das ein Matching mit der BPMN-Swimlane aufweist.
-In der Kotlin-Implementierung wird dies aus der anderen Richtung betrachtet.
+Bei der Kotlin-Implementierung wird dies aus der anderen Richtung betrachtet.
 Da alle Elemente die ein Matching mit der BPMN-Swimlane habe bekannt sind, wird unter diesen Elementen ein BROS-RoleType gesucht.
-Sobald eins gefunden ist wird eine positive Konsistenzmeldung zurückgegeben.
+Sobald eines gefunden ist wird eine positive Konsistenzmeldung zurückgegeben.
 Um die Rückmeldung an den Modellierer zu verbessern wird der Konsistenzmeldung noch eine textuelle Beschreibung und eine Referenz auf den Knoten des BROS-Graphen auf den die Regel erfolgreich angewendet wurde hinzugefügt.
 Die Referenz zu dem Knoten des BPMN-Graphen wird automatisch von der Hilfsfunktion hinzugefügt.
 Sollte kein Element gefunden werden, wird eine negative Konsistenzmeldung zurückgeben.
@@ -189,7 +190,17 @@ Context.verifyBpmn<BpmnLane>() { bpmn ->
 }
 \end{lstlisting}
 
-\textbf{Regel 3}
+Die \textbf{Regel 3} ist ähnlich aufgebaut wie Regel 2.
+In der Regel 3 wir überprüft das zu jedem BPMN-TerminationEvent ein passendes BROS-ReturnEvent existiert.
+Genau wie die Regel 2 basiert sie auf dem BPMN-Graphen.
+Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-Event das zusätzlich ein Attribut TerminationEvent besitzt.
+Hierfür ist die Dreiwertigkeit des Rückgabewertes wichtig.
+Zunächst wird in der Vorbedingung nach einem BPMN-Event gefiltert.
+Anschließend wird jedes gefundene BPMN-Element überprüft, ob es auch ein BPMN-TerminationEvent ist.
+Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert null beendet.
+Damit wird die Ausführung der Regel komplett ignoriert, genau wie bei dem generischen Filterargument.
+Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der dritten Schicht nach einem BROS-ReturnEvent gesucht werden.
+Der Rückgabewert null ermöglicht auch komplexere Vorbedingungen leicht zu überprüfen.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]
 Context.verifyBpmn<BpmnEvent>() { bpmn ->
@@ -203,7 +214,20 @@ Context.verifyBpmn<BpmnEvent>() { bpmn ->
 }
 \end{lstlisting}
 
-\textbf{Regel 5}
+\textbf{Regel 5} gehört zu den komplexeren Regeln.
+Sie überprüft das zu jedem BPMN-StartEvent ein passendes BROS-Event existiert.
+Zusätzlich müssen beide Events auch zueinander passende Elemente erstellen bzw. starten.
+In der Vorbedingung wird überprüft, das das BPMN-Element eine BPMN-Event ist, keine BPMN-TerminationEvent ist und der Typ des BPMN-Events ein BPMN-StartEvent ist.
+Dabei wird erneut der null Rückgabewert genutzt.
+Anschließend wird in der dritten Schicht nach einem BROS-Event gesucht.
+Bei dem BROS-Event wird in der zweiten Schicht nach einer BROS-CreateRelationship gesucht.
+Diese verbindet ein BROS-Event mit dem von ihm erzeugten Element.
+Nun wird überprüft ob das Ziel der BROS-CreateRelationship sich mit in der dritten Schicht des Elternelementes des BPMN-StartEvents befindet.
+Ein BPMN-StartEvent beginnt seine BPMN-Swimlane, die auch sein Elternelement ist.
+Wenn dieses Überprüfung erfolgreich ist wird eine positive Konsistenzmeldung zurückgegeben, sonst eine negative.
+Beide Konsistenzmeldung haben neben der textuellen Beschreibung auch eine Referenz auf das BPMN-Event.
+Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsistenzmeldung zurückgegeben, allerdings ohne eine Referenz auf ein BROS-Event.
+\textit{TODO: mehrere CreateRelationsips}
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5]
 verifyBpmn<BpmnEvent>() { bpmn ->
@@ -214,15 +238,13 @@ verifyBpmn<BpmnEvent>() { bpmn ->
 
     for (match in bpmn.matchingElements) {
         val event = match.model<Event>() ?: continue
-        val container = bpmn.containerName()
-        val destroysName = match.relations<CreateRelationship>()
+        val container = bpmn.container()?.second ?: continue
+
+        val createsElement = match.relations<CreateRelationship>()
                 .firstOrNull()
-                ?.source as? ModelTree<ModelElement<*>>
-        if (
-            container != null && 
-                destroysName != null && 
-                destroysName in container.second.matchingElements
-        ) {
+                ?.target as? ModelTree<ModelElement<*>> ?: continue
+
+        if (createsElement in container.second.matchingElements) {
             return@verifyBpmn Result.match("...", bros = match)
         } else {
             return@verifyBpmn Result.error("...", bros = match)
@@ -239,11 +261,53 @@ Das Tool hat ein zweistufiges Interface.
 Als erster Schritt müssen die Quelldateien der zu überprüfenden Modelle geladen werden.
 Dazu können die Dateien einfach per Drag'n'Drop in das Tool geladen werden.
 Das Tool erkennt den Inhalt unabhängig des Namens und läd die entsprechende Datei.
-Alternativ kann eine manuelle Dateiauswahl genutzt werden oder der Inhalt der Datei in das Textfeld kopiert werden.
+Alternativ kann eine manuelle Dateiauswahl genutzt werden oder der Inhalt der Datei in das entsprechende Textfeld kopiert werden.
 Sobald jeweils ein valides BPMN- und BROS-Modell geladen wurden, wird die Konsistenzprüfung automatisch gestartet.
 
 Die Ergebnisse der Konsistenzprüfung werden unterhalb der Eingabemaske angezeigt.
 Zunächst werden statistische Informationen zu den geladen Modellen, des Matchings und der Validierung angezeigt.
+Diese sind in drei Abschnitte unterteilt.
+\begin{itemize}
+    \item \textbf{Verification stats:} Informationen zu der aktuellen Verifikation.
+    \begin{itemize}
+        \item \emph{Successful checks (x of y):} Anzahl der \emph{x} positiven Konsistenzmeldung von allen \emph{y} Konsistenzmeldung. 
+        \item \emph{Errors (x of y):} Anzahl der \emph{x} negativen Konsistenzmeldung von allen \emph{y} Konsistenzmeldung. 
+        \item \emph{Coverage (x\%):} Prozentualle Anzeige \emph{x} der \emph{Successful checks}.
+        \item \emph{Fixed point matching rounds (x):} Anzahl der durchgeführten Matching Runden \emph{x} aufgrund des Fixpunkt-Algorithmus. Mögliche Werte von \emph{x} sind:
+        \begin{itemize}
+            \item \emph{1:} Es wurde kein Matching gefunden.
+            \item \emph{2:} Es wurde ein Matching gefunden. Es gibt kein Matching was auf ein anderes Matching aufbaut.
+            \item \emph{3-5:} Es wurde ein Matching gefunden. Es gibt ein oder mehrere Matchings die auf andere Matching aufbauen.
+            \item \emph{>=6:} Es wurde ein Matching gefunden. Es ist möglich das ein kaskadieren Effekt eingetreten ist und ein zu großes Matching aufgebaut wurde. Das Matching sollte von dem Modellierer überprüft werden.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{BPMN matching stats} Informationen zu dem Matching aus Sicht des BPMN Modelles.
+    \begin{itemize}
+        \item \emph{Matched elements (x of y):} Anzahl der \emph{x} Elemente mit gefundenem Matching von allen \emph{y} Elemente.
+        \item \emph{Unmatched elements (x of y):} Anzahl der \emph{x} Elemente ohne gefundenem Matching von allen \emph{y} Elemente.
+        \item \emph{Multiple matches (x):} Anzahl der \emph{x} Elemente die mit mehreren Elementen ein Matching haben. 
+        \item \emph{Coverage (x\%):} Prozentualle Anzeige \emph{x} der \emph{Matched elements}.
+    \end{itemize}
+    \item \textbf{BROS matching stats} Informationen zu dem Matching aus Sicht des BROS Modelles.
+    \begin{itemize}
+        \item \emph{Matched elements (x of y):} Anzahl der \emph{x} Elemente mit gefundenem Matching von allen \emph{y} Elemente.
+        \item \emph{Unmatched elements (x of y):} Anzahl der \emph{x} Elemente ohne gefundenem Matching von allen \emph{y} Elemente.
+        \item \emph{Multiple matches (x):} Anzahl der \emph{x} Elemente die mit mehreren Elementen ein Matching haben. 
+        \item \emph{Coverage (x\%):} Prozentualle Anzeige \emph{x} der \emph{Matched elements}.
+    \end{itemize}
+\end{itemize}
+
 Unterhalb dieser Statistiken befindet sich die Liste der Validierungsergebnisse.
-Mit hilfe der Tableiste kann das BPMN- oder BROS-Matching oder auch das geladene Predefined-Matching anzeigen.
-Das Predefined-Matching kann per Klick auf die Element-IDs direkt bearbeitet werden.
+Mit hilfe der Tableiste kann zusätzlich das BPMN- oder BROS-Matching oder auch das geladene Predefined-Matching angezeigt werden.
+Jeder Eintrag der Liste hat den gleichen Aufbau.
+Auf der linken Seite de Eintrages ist farblich der Typ markiert. Je nach Tab gibt es unterschiedliche Farbkodierungen.
+Im Hauptteil des Eintrages sind drei Textfelder.
+Diese sind das BPMN-Element, das BROS-Element und die textuelle Beschreibung des Eintrages.
+Zusätzlich ist noch ein viertes Textfeld vorhanden das den Namen der Regel angibt, die diesen Eintrag erstellt hat.
+Mit einem klick auf das Textfeld des BPMN- oder BROS-Elementes kann direkt ein PredefinedMatching erstellt oder gelöscht werden.
+Die Verifizierungsergebnisse haben die Farbkodierungen grün (positive Konsistenzmeldung) und rot (negative Konsistenzmeldung).
+Die Matching Ergebnisse sind blau (Matching für dieses Element gefunden) und gelb (keine Matching für dieses Element gefunden) markiert.
+Da sich nicht alle Elemente eines Modelles auf das andere Abbilden lassen, ist ein Fehlendes Matching meißt kein Fehler.
+Genauso ist das vorhanden sein eines Matchings nicht immer korrekt, da das Matching auf die Namen angewiesen ist. 
+Aus diesem Grund ist die Farbkodierungen des Matchings schwächer als die der Verifizierung.
+Ein bestehendes PredefinedMatching kann auch im Tab PredefinedMatching mit dem Löschen Button oben rechts in jedem Eintrag entfernt werden.

@@ -24,12 +24,14 @@
 \usepackage[noabbrev]{cleveref}
 
 \setcounter{tocdepth}{1}
-\counterwithout{figure}{section}
+\counterwithout{figure}{chapter}
+\counterwithout{equation}{chapter}
 
 \lstset{
   basicstyle=\footnotesize, frame=tb,
   xleftmargin=.1\textwidth, xrightmargin=.1\textwidth,
-  captionpos=b, extendedchars=true
+  captionpos=b, extendedchars=true,
+  numberbychapter=false
 }
 
 \lstdefinelanguage{Kotlin}{
@@ -42,6 +44,9 @@
   ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
   sensitive=true,
 }
+
+\crefname{listing}{Quelltext}{Quelltext}
+\Crefname{listing}{Quelltext}{Quelltext}
 
 \begin{document}
 \faculty{Fakultät Informatik}
@@ -64,8 +69,9 @@
 \subimport*{tex/}{c5_implementation}
 \subimport*{tex/}{c6_evaluation}
 \subimport*{tex/}{c7_conclusion}
-\subimport*{tex/}{c8_appendix}
 
 \printbibliography
+
+\subimport*{tex/}{c8_appendix}
 
 \end{document}

@@ -102,7 +102,7 @@ Allerdings kann ein BROS-Modell eine Abstraktion eines BPMN-Modelles sein.
 In diesen Fall kann der BPMN-Process auch durch ein BROS-Event modelliert werden.
 durch diese Abstraktion muss der Inhalt des BPMN-Processes nicht weiter überprüft werden.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 1]
+\begin{lstlisting}[language=Prolog, caption=Regel 1, label=lst:rule_1]
 rule_1(Bpmn) :- bpmn(Bpmn, "Process") ->
     (
         bros(Bros, "Scene"), match(Bpmn, Bros);
@@ -115,7 +115,7 @@ Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar.
 Dieses Konzept wird in BROS mittels Rollen dargestellt.
 Daher muss jeder Teilnehmer des BPMN-Prozesses auch als Rolle im BROS-Modell existieren.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 2]
+\begin{lstlisting}[language=Prolog, caption=Regel 2, label=lst:rule_2]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
     (
         bros(Bros, "RoleType"), match(Bpmn, Bros)
@@ -128,7 +128,7 @@ Der BPMN-Prozess wird in BROS durch eine BROS-Scene dargestellt (Vgl. \textbf{Re
 Eine BROS-Scene wird durch ein BROS-ReturnEvent beendet.
 Somit muss ein BPMN-TerminationEvent mit einem BROS-ReturnEvent modelliert werden.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 3]
+\begin{lstlisting}[language=Prolog, caption=Regel 3, label=lst:rule_3]
 rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
     (
         bros(Bros, "ReturnEvent"), 
@@ -147,7 +147,7 @@ Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Reg
 Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn  zwischen diesen beiden eine BROS-DestroyRelation existiert.
 Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 4]
+\begin{lstlisting}[language=Prolog, caption=Regel 4, label=lst:rule_4]
 rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
     (
         (
@@ -177,7 +177,7 @@ Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Reg
 Ein BROS-RoleType wird mit einem BROS-Event begonnen, wenn  zwischen diesen beiden eine BROS-CreateRelation existiert.
 Alternativ kann ein BPMN-StartEvent auch durch ein BROS-Event modelliert werden, wenn das BPMN-StartEvent das erste Event des BPMN-Prozesses ist und BROS-CreateRelation zwischen dem BROS-Event und der BROS-Scene existiert die den BROS-Prozess darstellt (Vgl. \textbf{Regel 1}).
 
-\begin{lstlisting}[language=Prolog, caption=Regel 5]
+\begin{lstlisting}[language=Prolog, caption=Regel 5, label=lst:rule_5]
 rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
     (
         bros(Bros, "Event"),
@@ -197,15 +197,15 @@ Es darf kein Event im BROS-Modell geben das nicht im BPMN-Prozess existiert.
 Ein solches BROS-Event hätte keinen Auslöser im Verhaltensmodell und könnte somit nie eintreten.
 Passende BPMN-Elemente sind BPMN-Events unabhängig vom Typ, BPMN-Activities oder auch Ausgänge eines BPMN-Gateways.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 6]
-rule_6(Bros) :- (bros(Bpmn, "Event"); bros(Bpmn, "ReturnEvent")) ->
+\begin{lstlisting}[language=Prolog, caption=Regel 6, label=lst:rule_6]
+rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     (
-        bpmn(Bros, "StartEvent"), match(Bpmn, Bros);
-        bpmn(Bros, "EndEvent"), match(Bpmn, Bros);
-        bpmn(Bros, "TerminationEvent"), match(Bpmn, Bros);
-        bpmn(Bros, "Event"), match(Bpmn, Bros);
-        bpmn(Bros, "Activity"), match(Bpmn, Bros);
-        bpmn(Bros, "Gateway"), match(Bpmn, Bros)
+        bpmn(Bpmn, "StartEvent"), match(Bpmn, Bros);
+        bpmn(Bpmn, "EndEvent"), match(Bpmn, Bros);
+        bpmn(Bpmn, "TerminationEvent"), match(Bpmn, Bros);
+        bpmn(Bpmn, "Event"), match(Bpmn, Bros);
+        bpmn(Bpmn, "Activity"), match(Bpmn, Bros);
+        bpmn(Bpmn, "Gateway"), match(Bpmn, Bros)
     ).
 \end{lstlisting}
 

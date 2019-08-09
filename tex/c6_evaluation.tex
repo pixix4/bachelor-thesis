@@ -1,8 +1,11 @@
 \chapter{Fallstudie}
 
+Nachdem die verschiedenen Konsistenzregeln aufgestellt und implementiert wurden, soll nun die Benutzbarkeit und die Erweiterbarkeit des Tools gezeigt werden.
+Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools aus sicht des Anwenders durgeführt (Abschnitt 1) und anschließend eine neue Regeln aus sicht des Entwicklers implementiert (Abschnitt 2).
+
 \section{Anwendung am Beispiel einer Pizzabestellung}
 
-Nachdem die verschiedenen Konsistenzregeln aufgestellt und implementiert wurden soll nun die Benutzbarkeit und die Nützlichkeit des Tools gezeigt werden.
+
 Dafür wird der Vorgang einer Pizzabestellung betrachtet und mit Hilfe des Tools evaluiert.
 Die benutzten BPMN- und BROS-Modelle basieren auf den Modellen von \cite{Schoen}.
 
@@ -11,4 +14,55 @@ Die benutzten BPMN- und BROS-Modelle basieren auf den Modellen von \cite{Schoen}
 Bisher wurden nur Regeln vorgestellt, die die Konsistenz von BPMN-Modellen zu BROS-Modellen prüfen.
 Da das BROS-Modell gegenüber dem BPMN-Modell angereichert werden kann ist dies auch die häufigste Anwendung.
 Allerdings können auch einige Regeln in die andere Richtung überprüft werden.
-Um gleichzeitig die Erweiterbarkeit des Ansatzes und der Implementierung zu zeigen wird eine Regel hinzugefügt, die die BROS-Events und die Existenz der dazugehörigen BPMN-Elemente verifiziert.
+Um gleichzeitig die Erweiterbarkeit des Ansatzes und der Implementierung zu zeigen wird \textbf{Regel 6} aus \cref{sec:Konsistenzregeln} hinzugefügt.
+Die Regel 6 überprüft das zu jedem BROS-Event und BROS-ReturnEvent ein dazugehöriges BPMN-Element existiert. 
+Dabei können die BPMN Elemente von den Typen BPMN-Activity, BPMN-Gateway und BPMN-Event seien. 
+Der genaue Typ des BPMN-Events ist dabei nicht relevant, es kann sich dabei unter anderem um ein BPMN-StartEvent oder auch ein BPMN-TerminationEvent handeln.
+
+Jede Regel sollte zur besseren Übersicht in eine eigene Datei ausgelagert werden.
+Die bereits bestehenden Regel befinden sich im Package \emph{io.framed.modules}.
+Für die Regel 6 wird dafür die Datei \emph{Rule6BrosEvents.kt} erstellt.
+Jede Datei enthält eine Funktion die einmalig zum Setup der Regeln ausgeführt wird.
+Dies hat die Signatur \emph{fun Context.setupRule6BrosEvents()}.
+Damit wird ein Parameter definiert, der den Typ \emph{Context} hat und als Receiver (\emph{this}) genutzt werden kann.
+Innerhalb dieser Funktion können nun die Matching- und Verifikations-Funktionen definiert werden.
+Die explizite angabe des \emph{Context} Receiver Parameters ist nun nicht mehr nötig, da dies durch die Setup-Funktion an innere Funktionen propagiert wird. 
+
+Die Matching Regeln zwischen den verschiedenen BPMN-Events und dem BPMN-Gateway wurden im \cref{sec:matching_model_elements} bereits implementiert.
+Für die Erweiterung muss damit nur die Matching Regel für BPMN-Activities mittels Name-Matching hinzugefügt werden.
+Dabei wird in den generischen Parametern nach BPMN-Activities und BROS-Events gefiltert.
+Diese werden mittels ihrer Namen verglichen und bei erfolgreichen Vergleich zum Matching hinzugefügt.
+Da BROS-Events und BROS-ReturnEvents unterschiedliche Metamodell Typen haben, muss diese Matching-Regel ein weiteres mal hinzugefügt werden, wobei der generische Parameter für das BROS-Modell auf ein BROS-ReturnEvent gesetzt wird.
+Die Implementierung des Lambdas bleibt unverändert.
+
+\begin{lstlisting}[language=Kotlin, caption=Matching Regel zwischen BPMN-Activities und BROS-Events, label=lst:matching_activity_event]
+match<BpmnTask, Event> { bpmn, bros ->
+    matchStrings(bpmn.element.name, bros.element.desc)
+}
+\end{lstlisting}
+
+Nachdem das Matching auf die unterstützten Modellelemente erweitert wurde, kann nun die Verifikationsregel implementiert werden.
+Anders als die in \cref{sec:implementaion_consistency_rules} implementierten Regeln ist Regel 6 von dem BROS-Modell aus gerichtet.
+Darum wird nicht die Funktion \emph{verifyBpmn} sondern äquivalente Funktion \emph{verifyBros} genutzt.
+Im generischen Parameter der Funktion wird nach einem BROS-Event gefiltert.
+Innerhalb des Lambdas wird überprüft ob es ein Element im Matching des BROS-Events gibt das ein BPMN-Element ist.
+Hier wird zur Vereinfachung des Quellcodes ausgenutzt, das mit den Matching Regeln keine unzulässigen BROS-Elemente im Matching aufgenommen werden können.
+Sollte das Matching mit anderen BROS-Event zu BPMN-Element Regeln erweitert werden, muss im Schleifenkörper eine genauere Überprüfung des BPMN-Element Typs erfolgen.
+Analog zu der neuen Matching-Regel muss auch die Verifikationsregel ein weiteres mal mit dem Filter nach BROS-ReturnEvents eingefügt werden.
+
+\begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 6, label=lst:implementation_rule_6]
+verifyBros<Event> { bros ->
+    for (element in bros.matchingElements) {
+        val match = element.element as? BpmnElement ?: continue
+        return@verifyBros Result.match("...", bpmn = element)
+    }
+    Result.error("...")
+}
+\end{lstlisting}
+
+Ein Nachteil der Kotlin/JS Plattform ist das Fehlen von Reflection und Annotationprcessing wie in Java bzw. Kotlin/JVM.
+Aus diesem Grund wird die neu hinzugefügte Setup-Funktion nicht automatisch erkannt und muss manuell registriert werden.
+In der Datei \emph{io.framed.modules.Main.kt} existiert eine Liste von Setup-Funktionen die ausgeführt werden.
+Um nun die die neue Regel hinzuzufügen wird der Liste ein neuer Eintrag (\emph{::setupRule6BrosEvents}) hinzugefügt.
+Der Aufruf \emph{::} auf eine Funktion gibt eine Funktionsreferenz zurück und erlaubt eine spätere Ausführung.
+Die vollständige Implementierung der Regel 6 ist unter \cref{lst:Rule6BrosEvents} zu finden.

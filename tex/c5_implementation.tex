@@ -65,6 +65,7 @@ Jeder Knoten hat zusätzlich noch eine Hilfsfunktion die einen Iterator zurückg
 Diese implementiert eine einfache Breitensuche um über den Graphen zu iterieren.
 
 \section{Matching der Modelelemente}
+\label{sec:matching_model_elements}
 
 Um die Verifizierung der Modelle zu ermöglichen muss zunächst ein dazugehöriges Matching aufgebaut werden.
 Um den \emph{Matching-Algorithmus} ausführen zu können muss zunächst die Orakelfunktion implementiert werden.
@@ -152,6 +153,7 @@ Da aber in jeder Iteration, vor dem überprüfen auf Änderungen in der dritten 
 Dabei bleibt die dritte Schicht, am Ende jeder Iteration, monoton wachsend. 
 
 \section{Implementierung der Konsistenzregeln}
+\label{sec:implementaion_consistency_rules}
 
 Nach dem Aufbau des Matching in der dritten Schicht, kann der \emph{Verifikations-Algorithmus} arbeiten.
 Für das implementieren der Regeln stellt das Context Objekt zwei Hilfsfunktionen bereit.
@@ -181,7 +183,7 @@ Auch diese Meldung beinhaltet eine textuelle Beschreibung der Fehlerursache.
 Die Referenzangabe zu einem weiteren Knoten ist optional und kann, wenn die Information nicht verfügbar oder für die Auswertung des Modellierers nicht hilfreich ist, weggelassen werden.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 2, label=lst:implementation_rule_2]
-Context.verifyBpmn<BpmnLane>() { bpmn ->
+Context.verifyBpmn<BpmnLane> { bpmn ->
     for (match in bpmn.matchingElements) {
         val roleType = match.model<RoleType>() ?: continue
         return@verifyBpmn Result.match("...", bros = match)
@@ -203,7 +205,7 @@ Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der
 Der Rückgabewert null ermöglicht auch komplexere Vorbedingungen leicht zu überprüfen.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]
-Context.verifyBpmn<BpmnEvent>() { bpmn ->
+Context.verifyBpmn<BpmnEvent> { bpmn ->
     if (!bpmn.element.terminationEvent) return@verifyBpmn null
 
     for (match in bpmn.matchingElements) {
@@ -230,7 +232,7 @@ Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsis
 \textit{TODO: mehrere CreateRelationsips}
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5]
-verifyBpmn<BpmnEvent>() { bpmn ->
+verifyBpmn<BpmnEvent> { bpmn ->
     if (
         bpmn.element.terminationEvent || 
         bpmn.element.type != BpmnEvent.Type.START
@@ -281,14 +283,7 @@ Diese sind in drei Abschnitte unterteilt.
             \item \emph{>=6:} Es wurde ein Matching gefunden. Es ist möglich das ein kaskadieren Effekt eingetreten ist und ein zu großes Matching aufgebaut wurde. Das Matching sollte von dem Modellierer überprüft werden.
         \end{itemize}
     \end{itemize}
-    \item \textbf{BPMN matching stats} Informationen zu dem Matching aus Sicht des BPMN Modelles.
-    \begin{itemize}
-        \item \emph{Matched elements (x of y):} Anzahl der \emph{x} Elemente mit gefundenem Matching von allen \emph{y} Elemente.
-        \item \emph{Unmatched elements (x of y):} Anzahl der \emph{x} Elemente ohne gefundenem Matching von allen \emph{y} Elemente.
-        \item \emph{Multiple matches (x):} Anzahl der \emph{x} Elemente die mit mehreren Elementen ein Matching haben. 
-        \item \emph{Coverage (x\%):} Prozentualle Anzeige \emph{x} der \emph{Matched elements}.
-    \end{itemize}
-    \item \textbf{BROS matching stats} Informationen zu dem Matching aus Sicht des BROS Modelles.
+    \item \textbf{BPMN/BROS matching stats} Informationen zu dem Matching aus Sicht des BPMN bzw. BROS Modelles.
     \begin{itemize}
         \item \emph{Matched elements (x of y):} Anzahl der \emph{x} Elemente mit gefundenem Matching von allen \emph{y} Elemente.
         \item \emph{Unmatched elements (x of y):} Anzahl der \emph{x} Elemente ohne gefundenem Matching von allen \emph{y} Elemente.

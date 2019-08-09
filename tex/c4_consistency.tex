@@ -16,6 +16,24 @@ Die verhaltensbasierte Modelle beschreiben die Interaktion innerhalb eines Syste
 Dabei benötigen sie die Funktionalität die von den strukturbasierten Modellen bereitgestellt wird.
 Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet kann das Softwaresystem nicht funktionieren.
 
+Eine formale und allgemeingültige Definition des Konsistenzproblem in der Domain der Modellierung ist in der Literatur nur schwer zu finden.
+Bevor das Konsistenzproblem definiert werden kann muss zunächst beschieben werden was eine Inkonsistenz ist.
+Laut \cite{Nuseibeh1996} tritt eine Inkonsistenz genau dann auf, wenn eine Konsistenzregel verletzt wird.
+Eine Konsistenzregel ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen.
+Dies kann in natürlicher Sprach oder mit einem formalen Ansatz beschieben sein, wobei nur letzteres automatisiert überprüft werden kann.
+Für die Definition nach \cite{Nuseibeh1996} wird das vorhandensein eines solchen Regelsatzes vorrausgesetzt.
+Mit Hilfe dieser Definition kann das Konsistenzproblem wie folgt definiert werden:
+
+\newtheorem*{konsistenzproblem}{Definition}
+
+\begin{konsistenzproblem}
+    Das Konsistenzproblem beschreibt den Vorgang der Minimierung und Verhinderung von Inkonsistenzen über das aufstellen und prüfen von Konsistenzregeln.
+\end{konsistenzproblem}
+
+Diese Definition lässt sich leicht auf Konsistenzverfahren anwenden, die auf der Überprüfung von Regeln basieren.
+Aber auch formale Verfahren ohne einen eigenen Regelsatz lassen sich mit dieser Definition beschreiben.
+So können zB. die Verfahren, die auf der Transformation zu einem Petrinetz basieren mittels der Konsistenzregel "das konstruierte Petrinetz muss lebendig sein" überprüft werden.
+
 \section{Konsistenzregeln} \label{sec:Konsistenzregeln}
 
 Die horizontale Konsistenzprüfung zwischen zwei Modellen ohne eine Zwischendarstellung kann in zwei verschiedene Richtungen definiert werden.

@@ -1,0 +1,3034 @@
+{
+    "root": ["io.framed.model.Package", {
+            "id": 41,
+            "metadata": {
+                "creationDate": "Sat Apr 27 2019 13:17:54 GMT+0200 (Central European Summer Time)",
+                "modifiedDate": "Sat Apr 27 2019 13:17:54 GMT+0200 (Central European Summer Time)",
+                "author": ""
+            },
+            "name": "Restaurant",
+            "children": [
+                ["io.framed.model.Class", {
+                        "id": 44,
+                        "name": "Pizza",
+                        "attributes": [
+                        ],
+                        "methods": [
+                        ]
+                    }
+                ],
+                ["io.framed.model.Class", {
+                        "id": 45,
+                        "name": "Employee",
+                        "attributes": [
+                        ],
+                        "methods": [
+                        ]
+                    }
+                ],
+                ["io.framed.model.Class", {
+                        "id": 43,
+                        "name": "Order",
+                        "attributes": [
+                        ],
+                        "methods": [
+                        ]
+                    }
+                ],
+                ["io.framed.model.Class", {
+                        "id": 42,
+                        "name": "Guest",
+                        "attributes": [
+                        ],
+                        "methods": [
+                        ]
+                    }
+                ],
+                ["io.framed.model.Scene", {
+                        "id": 47,
+                        "name": "OrderPizza",
+                        "attributes": [
+                        ],
+                        "children": [
+                            ["io.framed.model.RoleType", {
+                                    "id": 54,
+                                    "name": "Receipt",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.Event", {
+                                    "id": 64,
+                                    "type": "MESSAGE",
+                                    "desc": "order passed"
+                                }
+                            ],
+                            ["io.framed.model.ReturnEvent", {
+                                    "id": 75,
+                                    "type": "STANDARD",
+                                    "desc": "pizza eaten"
+                                }
+                            ],
+                            ["io.framed.model.Event", {
+                                    "id": 59,
+                                    "type": "STANDARD",
+                                    "desc": "pizza selected"
+                                }
+                            ],
+                            ["io.framed.model.RoleType", {
+                                    "id": 49,
+                                    "name": "Order",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.ReturnEvent", {
+                                    "id": 78,
+                                    "type": "STANDARD",
+                                    "desc": "order cancelled"
+                                }
+                            ],
+                            ["io.framed.model.Event", {
+                                    "id": 66,
+                                    "type": "MESSAGE",
+                                    "desc": "baked pizza sent"
+                                }
+                            ],
+                            ["io.framed.model.RoleType", {
+                                    "id": 63,
+                                    "name": "Chef",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.Event", {
+                                    "id": 56,
+                                    "type": "STANDARD",
+                                    "desc": "pizza served"
+                                }
+                            ],
+                            ["io.framed.model.RoleType", {
+                                    "id": 50,
+                                    "name": "TastyPizza",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.Scene", {
+                                    "id": 70,
+                                    "name": "Complaint",
+                                    "attributes": [
+                                    ],
+                                    "children": [
+                                        ["io.framed.model.ReturnEvent", {
+                                                "id": 72,
+                                                "type": "SIGNAL",
+                                                "desc": "angry"
+                                            }
+                                        ],
+                                        ["io.framed.model.RoleType", {
+                                                "id": 88,
+                                                "name": "Staff",
+                                                "occurrenceConstraint": "",
+                                                "attributes": [
+                                                ],
+                                                "methods": [
+                                                ]
+                                            }
+                                        ],
+                                        ["io.framed.model.ReturnEvent", {
+                                                "id": 71,
+                                                "type": "SIGNAL",
+                                                "desc": "calmed"
+                                            }
+                                        ],
+                                        ["io.framed.model.RoleType", {
+                                                "id": 87,
+                                                "name": "AngryCustomer",
+                                                "occurrenceConstraint": "",
+                                                "attributes": [
+                                                ],
+                                                "methods": [
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.RoleType", {
+                                    "id": 60,
+                                    "name": "Waiter",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.RoleType", {
+                                    "id": 48,
+                                    "name": "Customer",
+                                    "occurrenceConstraint": "",
+                                    "attributes": [
+                                    ],
+                                    "methods": [
+                                    ]
+                                }
+                            ],
+                            ["io.framed.model.Event", {
+                                    "id": 73,
+                                    "type": "CONDITION",
+                                    "desc": "frustration high"
+                                }
+                            ],
+                            ["io.framed.model.ReturnEvent", {
+                                    "id": 76,
+                                    "type": "ERROR",
+                                    "desc": "pizza lost"
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            ]
+        }
+    ],
+    "connections": {
+        "connections": [
+            ["io.framed.model.CreateRelationship", {
+                    "id": 65,
+                    "sourceId": 64,
+                    "targetId": 63,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 79,
+                    "sourceId": 43,
+                    "targetId": 49,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.DestroyRelationship", {
+                    "id": 67,
+                    "sourceId": 63,
+                    "targetId": 66,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 86,
+                    "sourceId": 43,
+                    "targetId": 54,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Aggregation", {
+                    "id": 51,
+                    "sourceId": 48,
+                    "targetId": 49,
+                    "name": "",
+                    "sourceCardinality": "1",
+                    "targetCardinality": "*"
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 80,
+                    "sourceId": 44,
+                    "targetId": 50,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.CreateRelationship", {
+                    "id": 58,
+                    "sourceId": 56,
+                    "targetId": 50,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 136,
+                    "sourceId": 60,
+                    "targetId": 88,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 137,
+                    "sourceId": 48,
+                    "targetId": 87,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Relationship", {
+                    "id": 55,
+                    "sourceId": 49,
+                    "targetId": 54,
+                    "name": "",
+                    "sourceCardinality": "1",
+                    "targetCardinality": "1"
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 82,
+                    "sourceId": 45,
+                    "targetId": 60,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Relationship", {
+                    "id": 69,
+                    "sourceId": 60,
+                    "targetId": 63,
+                    "name": "",
+                    "sourceCardinality": "*",
+                    "targetCardinality": "*"
+                }
+            ],
+            ["io.framed.model.CreateRelationship", {
+                    "id": 57,
+                    "sourceId": 56,
+                    "targetId": 54,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 81,
+                    "sourceId": 42,
+                    "targetId": 48,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Relationship", {
+                    "id": 53,
+                    "sourceId": 48,
+                    "targetId": 50,
+                    "name": "eat",
+                    "sourceCardinality": "*",
+                    "targetCardinality": "*"
+                }
+            ],
+            ["io.framed.model.Aggregation", {
+                    "id": 52,
+                    "sourceId": 49,
+                    "targetId": 50,
+                    "name": "",
+                    "sourceCardinality": "1",
+                    "targetCardinality": "*"
+                }
+            ],
+            ["io.framed.model.CreateRelationship", {
+                    "id": 62,
+                    "sourceId": 59,
+                    "targetId": 60,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Fulfillment", {
+                    "id": 83,
+                    "sourceId": 45,
+                    "targetId": 63,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Relationship", {
+                    "id": 68,
+                    "sourceId": 63,
+                    "targetId": 50,
+                    "name": "",
+                    "sourceCardinality": "*",
+                    "targetCardinality": "*"
+                }
+            ],
+            ["io.framed.model.CreateRelationship", {
+                    "id": 74,
+                    "sourceId": 73,
+                    "targetId": 70,
+                    "name": ""
+                }
+            ],
+            ["io.framed.model.Relationship", {
+                    "id": 61,
+                    "sourceId": 48,
+                    "targetId": 60,
+                    "name": "",
+                    "sourceCardinality": "*",
+                    "targetCardinality": "*"
+                }
+            ]
+        ]
+    },
+    "layer": {
+        "41": {
+            "data": {
+                "41": {
+                    "left": -458.85093136555855,
+                    "top": 105.7446127638591,
+                    "width": 1367.5,
+                    "height": 832.5,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "42": {
+                    "left": 16,
+                    "top": 432,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "43": {
+                    "left": 16,
+                    "top": 144,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "44": {
+                    "left": 16,
+                    "top": 256,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "45": {
+                    "left": 16,
+                    "top": 560,
+                    "width": 128,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "46": {
+                    "left": 64,
+                    "top": 592,
+                    "width": 352,
+                    "height": 288,
+                    "autosize": false,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "47": {
+                    "left": 240,
+                    "top": 48,
+                    "width": 1008,
+                    "height": 624,
+                    "autosize": false,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "48": {
+                    "left": 400,
+                    "top": 32,
+                    "width": 128,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "49": {
+                    "left": 608,
+                    "top": 96,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "50": {
+                    "left": 832,
+                    "top": 32,
+                    "width": 150,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "51": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "52": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "53": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "eat",
+                            "left": -7.5,
+                            "top": -4.5,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "55": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": -13.188,
+                            "top": 11.16,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "1",
+                            "left": 10.65,
+                            "top": -20.427,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "57": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "58": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "61": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "62": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "65": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "67": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "68": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "69": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "74": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "54": {
+                    "left": 560,
+                    "top": 192,
+                    "width": 117,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "56": {
+                    "left": 736,
+                    "top": 176,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza served",
+                            "left": 32,
+                            "top": 48,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "59": {
+                    "left": 528,
+                    "top": 320,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza selected",
+                            "left": 16,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "60": {
+                    "left": 400,
+                    "top": 416,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "63": {
+                    "left": 848,
+                    "top": 416,
+                    "width": 116,
+                    "height": 40,
+                    "autosize": true,
+                    "data": {
+                        "complete-view": "false"
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "64": {
+                    "left": 784,
+                    "top": 480,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "order passed",
+                            "left": 16,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "66": {
+                    "left": 784,
+                    "top": 352,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "baked pizza sent",
+                            "left": 16,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "70": {
+                    "left": 48,
+                    "top": 176,
+                    "width": 192,
+                    "height": 180,
+                    "autosize": false,
+                    "data": {
+                        "flat-preview": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "71": {
+                    "left": 117.5,
+                    "top": 180,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "calmed",
+                            "left": 13,
+                            "top": 40,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "72": {
+                    "left": 53.5,
+                    "top": 180,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "angry",
+                            "left": -3,
+                            "top": 40,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "73": {
+                    "left": 304,
+                    "top": 240,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "frustration high",
+                            "left": 16,
+                            "top": 64,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "75": {
+                    "left": 485.5,
+                    "top": 624,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza eaten",
+                            "left": -6,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "76": {
+                    "left": 805.5,
+                    "top": 624,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza lost",
+                            "left": -6,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "77": {
+                    "left": 758,
+                    "top": 624,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "complaint angry",
+                            "left": -3,
+                            "top": 45,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "78": {
+                    "left": 645.5,
+                    "top": 624,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "order cancelled",
+                            "left": -6,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-49": {
+                    "left": 0,
+                    "top": 91.49998387096774,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Order",
+                            "left": -48,
+                            "top": -28,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "79": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-50": {
+                    "left": 0,
+                    "top": 251.49972028811527,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: TastyPizza",
+                            "left": -64,
+                            "top": 20,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "80": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-48": {
+                    "left": 0,
+                    "top": 411.50005607476635,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Customer",
+                            "left": -64,
+                            "top": 20,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "81": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-60": {
+                    "left": 0,
+                    "top": 475.50005982905986,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Waiter",
+                            "left": -48,
+                            "top": 20,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "82": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-63": {
+                    "left": 0,
+                    "top": 571.4994750957854,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Chef",
+                            "left": -48,
+                            "top": 20.001,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "83": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "84": {
+                    "left": 112,
+                    "top": 352,
+                    "width": 43,
+                    "height": 45,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "check menu",
+                            "left": 16,
+                            "top": 48,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "85": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "-54": {
+                    "left": 0,
+                    "top": 155.4998780487805,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Receipt",
+                            "left": -64,
+                            "top": 20,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "86": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "87": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 167,
+                    "height": 54,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "88": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 100,
+                    "height": 54,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "-88": {
+                    "left": 192,
+                    "top": 155.49957192907235,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: Staff",
+                            "left": 96,
+                            "top": 20.5,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "136": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "-87": {
+                    "left": 171.5,
+                    "top": 0,
+                    "width": 23,
+                    "height": 23,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "RoleType: AngryCustomer",
+                            "left": -92,
+                            "top": -16,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "137": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "379": {
+                    "left": 918,
+                    "top": 624,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "Complaint::calmed",
+                            "left": 10,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                }
+            }
+        },
+        "47": {
+            "data": {
+                "47": {
+                    "left": 163.6204512605505,
+                    "top": 88.29458471599565,
+                    "width": 1527.864030556759,
+                    "height": 870.4417674085381,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "48": {
+                    "left": 144,
+                    "top": 144,
+                    "width": 128,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "49": {
+                    "left": 544,
+                    "top": 224,
+                    "width": 116,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "50": {
+                    "left": 896,
+                    "top": 144,
+                    "width": 150,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "51": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 16.5,
+                            "top": -6,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 14.5,
+                            "top": 21,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "52": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 14,
+                            "top": 18,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "53": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "eat",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 14,
+                            "top": -4.5,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 2,
+                            "top": -4.5,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "54": {
+                    "left": 512,
+                    "top": 384,
+                    "width": 117,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "55": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "0..*",
+                            "left": -6.812,
+                            "top": 11.16,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "1",
+                            "left": -13.65,
+                            "top": -20.427,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "56": {
+                    "left": 816,
+                    "top": 368,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza received",
+                            "left": 32,
+                            "top": 64,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "57": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "58": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "59": {
+                    "left": 240,
+                    "top": 400,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza selected",
+                            "left": 16,
+                            "top": 64,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "60": {
+                    "left": 96,
+                    "top": 560,
+                    "width": 116,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "61": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": -9.5,
+                            "top": 12,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": -15.5,
+                            "top": -6,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "62": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "63": {
+                    "left": 528,
+                    "top": 496,
+                    "width": 116,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "64": {
+                    "left": 480,
+                    "top": 576,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "order passed",
+                            "left": 16,
+                            "top": 48,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "65": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "66": {
+                    "left": 720,
+                    "top": 512,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza send",
+                            "left": 32,
+                            "top": 48,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "67": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "68": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": -10.5,
+                            "top": -21.5,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 9.5,
+                            "top": 13,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "69": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 14,
+                            "top": 11.5,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": -18,
+                            "top": 11.5,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "70": {
+                    "left": -208,
+                    "top": 336,
+                    "width": 272,
+                    "height": 174,
+                    "autosize": false,
+                    "data": {
+                        "flat-preview": "false"
+                    },
+                    "labels": [
+                    ]
+                },
+                "71": {
+                    "left": 118,
+                    "top": 170,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "calmed",
+                            "left": -3,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "72": {
+                    "left": 182,
+                    "top": 170,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "angry",
+                            "left": -3,
+                            "top": 32,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "73": {
+                    "left": -96,
+                    "top": 224,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "frustration high",
+                            "left": 32,
+                            "top": -16,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "74": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "83": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "80": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "85": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "79": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "81": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "82": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "86": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "78": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "order canceld",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "77": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "complaint angry",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "75": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza eaten",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "76": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "pizza lost",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "88": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 100,
+                    "height": 52,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "87": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 167,
+                    "height": 52,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                }
+            }
+        },
+        "70": {
+            "data": {
+                "70": {
+                    "left": 165,
+                    "top": 148,
+                    "width": 1664,
+                    "height": 948,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                    ]
+                },
+                "80": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "57": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "51": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "74": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "65": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "52": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "83": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "61": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "55": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "0..*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "1",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "67": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "68": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "85": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "62": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "58": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "53": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "eat",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "69": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": -30,
+                            "id": "source"
+                        },
+                        {
+                            "text": "*",
+                            "left": 0,
+                            "top": 0,
+                            "position": 31,
+                            "id": "target"
+                        }
+                    ]
+                },
+                "79": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "81": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "82": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "86": {
+                    "left": 0,
+                    "top": 0,
+                    "width": 0,
+                    "height": 0,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0.5,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "71": {
+                    "left": 322,
+                    "top": 192,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "calmed",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "72": {
+                    "left": 416,
+                    "top": 192,
+                    "width": 44,
+                    "height": 47,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "angry",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "name"
+                        }
+                    ]
+                },
+                "87": {
+                    "left": 200,
+                    "top": 12,
+                    "width": 183,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                },
+                "88": {
+                    "left": 433,
+                    "top": 12,
+                    "width": 116,
+                    "height": 70,
+                    "autosize": true,
+                    "data": {
+                    },
+                    "labels": [
+                        {
+                            "text": "",
+                            "left": 0,
+                            "top": 0,
+                            "position": 0,
+                            "id": "occurrence"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

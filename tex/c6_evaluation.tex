@@ -1,7 +1,7 @@
 \chapter{Fallstudie}
 
 Nachdem die verschiedenen Konsistenzregeln aufgestellt und implementiert wurden, soll nun die Benutzbarkeit und die Erweiterbarkeit des Tools gezeigt werden.
-Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools aus sicht des Anwenders durgeführt (Abschnitt 1) und anschließend eine neue Regeln aus sicht des Entwicklers implementiert (Abschnitt 2).
+Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools aus sicht des Benutzers durgeführt (Abschnitt 1) und anschließend eine neue Regeln aus sicht des Entwicklers implementiert (Abschnitt 2).
 
 \section{Anwendung am Beispiel einer Pizzabestellung}
 
@@ -150,6 +150,6 @@ verifyBros<Event> { bros ->
 Ein Nachteil der Kotlin/JS Plattform ist das Fehlen von Reflection und Annotationprcessing wie in Java bzw. Kotlin/JVM.
 Aus diesem Grund wird die neu hinzugefügte Setup-Funktion nicht automatisch erkannt und muss manuell registriert werden.
 In der Datei \emph{io.framed.modules.Main.kt} existiert eine Liste von Setup-Funktionen die ausgeführt werden.
-Um nun die die neue Regel hinzuzufügen wird der Liste ein neuer Eintrag (\emph{::setupRule6BrosEvent}) hinzugefügt.
+Um nun die die neue Regel hinzuzufügen wird der Liste ein neuer Eintrag (\emph{Context::setupRule6BrosEvent}) hinzugefügt.
 Der Aufruf \emph{::} auf eine Funktion gibt eine Funktionsreferenz zurück und erlaubt eine spätere Ausführung.
 Die vollständige Implementierung der Regel 6 ist unter \cref{lst:Rule6BrosEvent} zu finden.

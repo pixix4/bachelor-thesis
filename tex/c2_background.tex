@@ -1,4 +1,7 @@
 \chapter{Hintergrund}
+\label{chap:background}
+
+\textit{TODO: Metamodell - Graph}
 
 \section{Business Process Model and Notation}
 
@@ -38,9 +41,23 @@ Die Hauptelemente von BPMN sind:
     Der Process bildet den vollständigen Geschäftsprozess ab und ist das Containerelement für die anderen Modellelemente.
 \end{itemize}
 
-bpmn.io
+Da BPMN schon längere Zeit in Benutzung ist hat es eine gute Toolunterstützung für die Modellierung.
+Eines dieser Tools ist bpmn.io\footnote{https://demo.bpmn.io/}.
+Es ist ein webbasiertes Tool das einen großteil des BPMN-Standards unterstützt.
+Das Tool speichert und lädt die BPMN-Modelle in einem auf XML-basierenden Format mit der Dateiendung \emph{.bpmn}.
+Für die weitere Arbeit dürfen die BPMN-Modelle nur die oben beschriebenen Elemente enthalten.
+Die Datenstruktur hat dabei einen ähnlichen Aufbau wie das Metamodell.
 
-Aufgrund der größe des BPMN Standards wird nur ein gekürztes Metamodell auf Basis von \cite{Loja2010} betrachtet.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{../images/bpmnMetamodell.jpg}%
+    \caption{BPMN Metamodell}%
+    \label{fig:bpmnMetamodell}
+\end{figure}
+
+Aufgrund der größe des BPMN Standards wird nur ein gekürztes Metamodell auf Basis von \cite{Loja2010} betrachtet das in \cref{fig:bpmnMetamodell} zu sehen ist.
+
+\textit{TODO: Beschreibung Metamodell, Metamodell von \cite{Loja2010} mit Implementierung zusammenführen}
 
 \section{Compartment Role Object Model}
 
@@ -79,7 +96,10 @@ Die dafür genutzten Elemente sind:
     In ihnen kann ein Submodell abgebildet werden, in das nur Relationen hinein, aber nicht hinaus führen dürfen.
 \end{itemize}
 
-CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0} Editor Support.
+CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{https://github.com/Eden-06/FRaMED-2.0} einen eigenen graphischen Editorsupport.
+Der Name des Editors ist ein Akronym für \emph{Full-fledged Role Modeling EDitor} und wurde speziell für CROM entwickelt.
+
+\textit{TODO}
 
 \section{Business Role-Object Specification}
 
@@ -107,4 +127,19 @@ Zusätzlich zu den CROM-Elemente werden folgende Modellelemente unterstützt.
     Das ReturnEvent ist nicht mit einer DestroyRelation verbunden, da es implizit im gesamten Verlauf der Scene auftreten kann.
 \end{itemize}
 
+Auch BROS besitzt mit \emph{FRaMED.io}\footnote{https://eden-06.github.io/FRaMED-io/} Editorsupport.
+\emph{FRaMED.io} ist eine Neuentwicklung von \emph{FRaMED-2.0} und wie \emph{bpmn.io} webbasiert.
+Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
+
+\textit{TODO}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{../images/brosMetamodell.jpg}%
+    \caption{BROS Metamodell}%
+    \label{fig:brosMetamodell}
+\end{figure}
+
 Mit Ausnahme von RoleConstraints wird das vollständige Metamodell aus \cite{Schoen} betrachtet.
+
+\textit{TODO: Beschreibung Metamodell, Metamodell von \cite{Schoen} mit Implementierung zusammenführen}

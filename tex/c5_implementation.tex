@@ -2,18 +2,18 @@
 
 Nachdem das hier vorgestellte Verfahren theoretisch erläutert wurde, wird nun eine praktische Umsetzung vorgestellt.
 Dafür werden im ersten Abschnitt die technischen Rahmenbedingungen aufgeführt.
-Anschließend wird jeweils die Implementierung des \emph{Matching-Algorithmus} und des \emph{Verifikations-Algorithmus} erklärt.
+Anschließend wird jeweils die Implementierung des \emph{Matching-Algorithmus} und des \emph{Verifikations-Algorithmus} beschrieben.
 Im vierten Abschnitt wird die Benutzerschnittstelle des implementierten Tools vorgestellt.
 
 \section{Implementierung der Referenzarchitektur}
 
-Im \cref{sec:Konsistenzregeln} werden die die Konsistenzregeln mit Hilfe von einem Prolog-Dialekt eingeführt.
-Dies legt nah für die Implementierung auch eine Sprache zu verwenden die auf Prolog basiert oder einfach interagieren kann.
+Im \cref{sec:Konsistenzregeln} werden die Konsistenzregeln mit Hilfe von einem Prolog-Dialekt eingeführt.
+Dies legt nah für die Implementierung auch eine Sprache zu verwenden die auf Prolog basiert oder einfach mit Prolog interagieren kann.
 Allerdings hat die Implementierung in Prolog einen entscheidenden Nachteil.
 Für den \emph{Verifikations-Algorithmus} wird ein dreiwertiger Rückgabewert pro Regel benötigt.
 Dies lässt sich mit Prolog nicht direkt abbilden.
 Zudem lassen sich die Regel dank des \emph{Graph-Logik-Isomorphismus} auch direkt auf dem Graphen anwenden.
-Eine weitere Anforderung an die Implementierung ist eine mögliche Integration in den bestehenden BROS-Editor FRaMED.io.
+Eine weitere Anforderung an die Implementierung ist eine mögliche Integration in den bestehenden BROS-Editor \emph{FRaMED.io}.
 Dieser basiert auf Web-Technologien und ist in der objektorientierten Programmiersprache Kotlin entwickelt.
 Aus diesem Grund wird auch Kotlin für die Entwicklung der Referenzimplementierung verwenden.
 Kotlin ist als JVM-Sprache entwickelt wurden, kann aber auch zu Javascript und LLVM-Bytecode transpiliert werden.
@@ -21,21 +21,21 @@ Dadurch besitzen Kotlin Programme eine hohe Erweiterbarkeit im Bezug auf andere 
 Wie auch im BROS-Editor FRaMED.io wird die Transpilierung zu Javascript genutzt.
 Ziel der Implementierung ist es, bestehende BPMN- und BROS-Modelle, mit Hilfe des hier vorgestellten Verfahrens, auf Konsistenz zu überprüfen.
 
-Als Dateiformat für BPMN-Modelle wird das auf XML basierende (\emph{*.bpmn}) Format von dem BPMN-Editor bpmn.io unterstützt.
-Der BPMN-Editor bpmn.io ist eine moderne und Webanwendung zum editieren von BPMN-Modellen.
-Das Dateiformat enthält sowohl Strukturinformation als auch graphische Informationen.
-Diese sind in zwei XML-Namespaces getrennt.
+Als Dateiformat für BPMN-Modelle wird das auf XML basierende (\emph{*.bpmn}) Format von dem BPMN-Editor \emph{bpmn.io} unterstützt.
+Der BPMN-Editor \emph{bpmn.io} ist eine moderne Webanwendung zum editieren von BPMN-Modellen.
+Das Dateiformat enthält sowohl Struktur- als auch graphische Informationen.
+Diese sind in zwei XML-Namespaces aufgeteilt.
 Die Struktur wird im Namespace \emph{bpmn}, und die graphische Notation im Namespace \emph{bpmndi} gespeichert.
 Für die Konsistenzprüfung ist nur der Namespace \emph{bpmn} relevant.
-Der Namespace \emph{bpmndi} und alle seine Kindelemente wird im folgenden ignoriert.
+Der Namespace \emph{bpmndi} und alle seine Kindelemente werden im folgenden ignoriert.
 Zum lesen der BPMN-Datei wird der XML-Parser verwendet der von Javascript nativ bereitgestellt wird.
-Von den Entwicklern von bpmn.io existiert bereits ein Parser und Validierer für BPMN-Dateien (\emph{bpmn-moddle}).
-Dieser wird explizit nicht verwendet da er in Javascript geschrieben wurde und somit eine zu starke Bindung an die Platform Javascript erzeugt.
-Die integrierte Validierungsfunktion für BPMŃ-Modelle wird auch nicht benötigt da eine Vorraussetzung für das benutzen des Tools die syntaktische und semantische Korrektheit der Modelle ist. 
+Von den Entwicklern von \emph{bpmn.io} existiert bereits ein Parser und Validierer für BPMN-Dateien (\emph{bpmn-moddle}).
+Dieser wird explizit nicht verwendet da er in Javascript geschrieben wurde und somit eine zu starke Bindung an die Plattform Javascript erzeugt.
+Die integrierte Validierungsfunktion für BPMŃ-Modelle wird auch nicht benötigt da eine Vorraussetzung für die Benutzung des Tools die syntaktische und semantische Korrektheit der Modelle ist. 
 Mit Hilfe des XML-Parsers wird das BPMN-Modell als eine Instanz des BPMN-Metamodells geladen.
 
 Die enge Kopplung zwischen dem BROS-Editor FRaMED.io und diesem Tool legt nah auch das auf JSON basierende Format des BROS-Editors zu nutzen.
-Analog zu dem BPMN-Editor, ist auch der BROS-Editor webbasiert und das Dateiformat enthält sowohl Strukturinformation als auch graphische Informationen.
+Analog zu dem BPMN-Editor, ist auch der BROS-Editor webbasiert und das Dateiformat enthält sowohl Struktur- als auch graphische Informationen.
 Die graphischen Informationen befinden sich im Root-Objekt unter dem Schlüsselwort \emph{layer}.
 Auch diese graphischen Informationen werden im weiteren ignoriert.
 Zum lesen der BROS-Dateien wird der bereits existierende Parser aus dem BROS-Editor FRaMED.io genutzt.
@@ -55,12 +55,12 @@ In dieser Abbildung sind die drei Schichten des Graphen farbig hervorgehoben.
 In schwarz ist die erste Schicht dargestellt.
 Dabei besitzt jeder Knoten eine Liste von Kind-Knoten.
 Jeder Knoten hat zusätzlich noch einen Verweis auf seinen Eltern-Knoten.
-Zusätzlich besitzt jeder Knoten noch eine Referenz auf seine Metamodell Instanz mit Typannotation.
-Die zweite Schicht wird in blau dargestellt un repräsentiert die Relation zwischen den Knoten.
+Zusätzlich besitzt jeder Knoten noch eine Referenz auf seine Metamodell-Instanz mit Typannotation.
+Die zweite Schicht ist in blau dargestellt un repräsentiert die Relation zwischen den Knoten.
 Dabei hat jeder Knoten ein Set von Verweisen auf seine Relationen.
 Die Relationen verweisen auf auf ihren Quell- und Zielknoten.
-Aus die Graphrelationen besitzen eine Referenz auf ihre Metamodell Instanz mit Typannotation.
-Schließlich wird die dritte Schicht, die das Matching zwischen den Modellen darstellt mit grün markiert.
+Auch die Graphrelationen besitzen eine Referenz auf ihre Metamodell-Instanz mit Typannotation.
+Schließlich ist die dritte Schicht, die das Matching zwischen den Modellen darstellt mit grün markiert.
 Dabei handelt es sich um ein Set von Knoten.
 Jeder Knoten hat zusätzlich noch eine Hilfsfunktion die einen Iterator zurückgibt.
 Diese implementiert eine einfache Breitensuche um über den Graphen zu iterieren.
@@ -69,17 +69,20 @@ Diese implementiert eine einfache Breitensuche um über den Graphen zu iterieren
 \label{sec:matching_model_elements}
 
 Um die Verifizierung der Modelle zu ermöglichen muss zunächst ein dazugehöriges Matching aufgebaut werden.
-Um den \emph{Matching-Algorithmus} ausführen zu können muss zunächst die Orakelfunktion implementiert werden.
-Dabei hat es sich als ausreichend gezeigt theoretisch miteinander kompatible Elemente anhand ihres Namens zu vergleichen.
+Dafür benötigt der \emph{Matching-Algorithmus} eine Implementierung der Orakelfunktion.
+Dabei hat es sich als ausreichend gezeigt Typ-kompatible Elemente anhand ihres Namens zu vergleichen.
 In \cref{lst:name_matching} ist der für den Namensvergleich genutzte Algorithmus abgebildet.
 Dabei werden die Namen zunächst in einzelne Wörter gesplittet und anschließend unabhängig ihrer Endung und Reihenfolge verglichen.
-Um die Funktionsweise dieses Algorithmus zu verdeutlichen wird dieser Beispielhaft angewendet (Vgl. Schritt \ref{eq:name_matching_1}).
-Zunächst werden beide Namen in ihre Bestandteile zerlegt (Vgl. Schritt \ref{eq:name_matching_2}) und nach der länge sortiert (Vgl. Schritt \ref{eq:name_matching_3}).
+Um die Funktionsweise dieses Algorithmus zu verdeutlichen wird dieser Beispielhaft in \cref{eq:name_matching} angewendet.
+Der Aufruf der Vergleichsfunktion erfolgt mit den beiden zu vergleichenden Zeichenketten (vgl. Schritt \ref{eq:name_matching_1}).
+Zunächst werden beide Namen in ihre Wörter zerlegt (vgl. Schritt \ref{eq:name_matching_2}) und nach der länge sortiert (vgl. Schritt \ref{eq:name_matching_3}).
+Die Worttrennung erfolgt an Leerzeichen und vor jedem Großbuchstaben der nach einem Kleinbuchstaben steht.
+Diese Einschränkung verhindert die zeichenweise Trennung von Namen die vollständig großgeschrieben sind.
 Anschließend wird für jedes Element der ersten Menge ein passendes Element in der zweiten Menge gesucht.
 Die Zeichenketten müssen nicht komplett übereinstimmen.
 Es ist ausrechend wenn einer der beiden Strings ohne seine Endung ein Teil des anderen Strings ist.
-Um zu verhindern das ein sehr kurzer String in einem langen String erkannt wird, darf die Längenunterschied nicht größer als die Endungslänge sein.
-Wenn zu jedem Element der ersten Menge ein passendes Element der zweiten Menge gefunden wird, stimmen die beiden Namen überein (Vgl. Schritt \ref{eq:name_matching_4}).
+Um zu verhindern das ein sehr kurzer String in einem langen String erkannt wird, darf die Längenunterschied nicht größer als die länge der Endung sein.
+Wenn zu jedem Element der ersten Menge ein passendes Element in der zweiten Menge gefunden wird, stimmen die beiden Namen überein (vgl. Schritt \ref{eq:name_matching_4}).
 
 \begin{figure}
     \centering
@@ -93,12 +96,12 @@ Wenn zu jedem Element der ersten Menge ein passendes Element der zweiten Menge g
     \label{eq:name_matching}
 \end{figure}
 
-Zusätzlich zum Name-Matching müssen Regeln definiert werden auf welchen Elementen es angewendet werden muss.
-Jede Regel muss das \emph{Matching} Interface implementieren.
-Um diese Regeln gebündelt zu erstellen und sammeln gibt es das \emph{Context} singleton-Objekt.
+Zusätzlich zum Name-Matching müssen Regeln definiert werden auf welchen Elementen das Name-Matching angewendet werden muss.
+Jede Regel muss dafür das \emph{Matching} Interface implementieren.
+Um diese Regeln gebündelt zu erstellen und sammeln gibt es die Hilfsklasse \emph{Context}.
 Dieses bietet verschiedene Hilfsfunktionen um auf einfache Art und Weise Matching- und Verifikations-Regeln zu implementieren.
-Dabei Funktion benötigt drei Parameter.
-Die ersten beiden Parameter sind die Referenzen auf das BPMN- und BROS-Metamodell nach den die Graphknoten gefiltert werden soll.
+Dabei benötigt die Hilfsfunktion zum erstellen einer Matching Regel drei Parameter.
+Die ersten beiden Parameter sind die Referenzen auf das BPMN- und BROS-Metamodell nach denen die Graphknoten gefiltert werden.
 Mit den Sprachfunktionen von Kotlin können diese Referenzen als generischer Parameter der Funktion übergeben werden.
 Der dritte Parameter ist ein Lambda das die beiden Knoten des BPMN-Graphen und des BROS-Graphen auf einen Wahrheitswert abbildet.
 Das Lambda wird nur ausgeführt wenn die Knoten zu den Filtern der ersten beiden Parameter passen.
@@ -115,9 +118,9 @@ Context.match<BpmnLane, RoleType> { lane, role ->
 }
 \end{lstlisting}
 
-Im zweiten Beispiel \cref{lst:match_gateway_event} wird das Matching zwischen einem BPMN-Gateway und einem BPMN-Event gebildet.
-Hierbei ist zu beachten das die Namen der BPMN-Gateway Ausgänge nicht im Metamodell des Gateways sondern im Metamodell des weiterführenden BPMN-Flows definiert ist.
-Nachdem die Knoten auf gefiltert wurden, wird überprüft ob der Name eines BPMN-SequenceFlows der an das BPMN-Gateway anschließt mit dem BROS-Event übereinstimmt.
+Im zweiten Beispiel \cref{lst:match_gateway_event} wird das Matching zwischen einem BPMN-Gateway und einem BROS-Event abgebildet.
+Hierbei ist zu beachten das die Namen der BPMN-Gateway Ausgänge nicht im Metamodell des Gateways sondern im Metamodell der weiterführenden BPMN-Flows gespeichert sind.
+Nachdem die Knoten nach den Metamodell-Typen gefiltert wurden, wird überprüft ob der Name eines BPMN-SequenceFlows der von dem BPMN-Gateway ausgeht mit dem BROS-Event übereinstimmt.
 Dafür bietet die Knoten-Klasse eine weitere Hilfsfunktion die die verbunden Relationen nach ihrem Typ gefiltert zurückgeben kann.
 
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel von einem BPMN-Gateway und einem BROS-Event, label=lst:match_gateway_event]
@@ -146,7 +149,7 @@ Context.match<BpmnEvent, Event> { bpmn, bros ->
 }
 \end{lstlisting}
 
-Allerdings kann es auch vorkommen das trotz dieser Regeln ein Matching zwischen zwei Elementen nicht gefunden wird oder auch fälschlicher Weise gefunden wirde.
+Allerdings kann es auch vorkommen das trotz dieser Regeln ein Matching zwischen zwei Elementen nicht gefunden wird oder auch fälschlicher Weise gefunden wird.
 Für diesen Fall hat der Modellierer die Möglichkeit ein sogenanntes \emph{Predefined-Matching} hinzuzufügen.
 Damit lässt sich ein Matching zwischen Elementen hinzufügen oder auch entfernen.
 Das \emph{Predefined-Matching} wird in jeder Iteration des Fixpunkt-Algorithmus, nachdem die Regeln auf den gesamten Graphen angewendet wurden ausgeführt.
@@ -158,7 +161,7 @@ Dabei bleibt die dritte Schicht, am Ende jeder Iteration, monoton wachsend.
 \label{sec:implementaion_consistency_rules}
 
 Nach dem Aufbau des Matching in der dritten Schicht, kann der \emph{Verifikations-Algorithmus} arbeiten.
-Für das implementieren der Regeln stellt das Context Objekt zwei Hilfsfunktionen bereit.
+Für das implementieren der Regeln stellt das \emph{Context} Klasse zwei Hilfsfunktionen bereit.
 Dies sind die Funktionen \emph{verifyBpmn} und \emph{verifyBros} welche jeweils zwei Parameter benötigen.
 Der erste Parameter ist der Filter des Graph-Knoten.
 Dieser stellt die Vorbedingung aus der Implikation in \cref{sec:Konsistenzregeln} dar.
@@ -167,8 +170,8 @@ Damit wird die Konsequenz der Implikation dargestellt.
 Neben einer positiven und einer negativen Konsistenzmeldung kann auch kann auch ein \emph{null} Wert zurückgegeben werden.
 Ein \emph{null} Wert bedeutet, das die Regel nicht anwendbar ist und das Ergebnis daher ignoriert werden soll.
 Damit wird die unter \cref{sec:Konsistenzregeln} beschriebende Dreiwertigkeit umgesetzt.
-
 Um dies zu veranschaulichen werden nachfolgend die Konsistenzregeln 2, 3 und 5 in ihre Kotlin-Implementierung überführt.
+Zeichenketten innerhalb der Implementierung werden dabei weggelassen und können in der Implementierung nachgelesen werden.
 
 \textbf{Regel 2} ist die einfachste zu implementierende Regel.
 Sie besagt das zu jeder BPMN-Swimlane ein passender BROS-RoleType existieren muss.
@@ -178,11 +181,11 @@ In der Konsequenz der Implikation wird nach einem BROS-RoleType gesucht das ein 
 Bei der Kotlin-Implementierung wird dies aus der anderen Richtung betrachtet.
 Da alle Elemente die ein Matching mit der BPMN-Swimlane habe bekannt sind, wird unter diesen Elementen ein BROS-RoleType gesucht.
 Sobald eines gefunden ist wird eine positive Konsistenzmeldung zurückgegeben.
-Um die Rückmeldung an den Modellierer zu verbessern wird der Konsistenzmeldung noch eine textuelle Beschreibung und eine Referenz auf den Knoten des BROS-Graphen auf den die Regel erfolgreich angewendet wurde hinzugefügt.
+Um die Rückmeldung an den Modellierer zu verbessern wird der Konsistenzmeldung noch eine textuelle Beschreibung und eine Referenz auf den Knoten des BROS-Graphen, auf den die Regel erfolgreich angewendet wurde, hinzugefügt.
 Die Referenz zu dem Knoten des BPMN-Graphen wird automatisch von der Hilfsfunktion hinzugefügt.
 Sollte kein Element gefunden werden, wird eine negative Konsistenzmeldung zurückgeben.
 Auch diese Meldung beinhaltet eine textuelle Beschreibung der Fehlerursache.
-Die Referenzangabe zu einem weiteren Knoten ist optional und kann, wenn die Information nicht verfügbar oder für die Auswertung des Modellierers nicht hilfreich ist, weggelassen werden.
+Die Referenzangabe zu einem weiteren Knoten ist optional und kann, wenn die Information nicht verfügbar oder für die Auswertung des Modellierers nicht notwendig ist, weggelassen werden.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 2, label=lst:implementation_rule_2]
 Context.verifyBpmn<BpmnLane> { bpmn ->
@@ -202,9 +205,9 @@ Hierfür ist die Dreiwertigkeit des Rückgabewertes wichtig.
 Zunächst wird in der Vorbedingung nach einem BPMN-Event gefiltert.
 Anschließend wird jedes gefundene BPMN-Element überprüft, ob es auch ein BPMN-TerminationEvent ist.
 Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert null beendet.
-Damit wird die Ausführung der Regel komplett ignoriert, genau wie bei dem generischen Filterargument.
+Damit wird die Ausführung der Regel komplett ignoriert, wie es auch bei dem generischen Filterargument geschieht.
 Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der dritten Schicht nach einem BROS-ReturnEvent gesucht werden.
-Der Rückgabewert null ermöglicht auch komplexere Vorbedingungen leicht zu überprüfen.
+Der Rückgabewert null ermöglicht es auch komplexere Vorbedingungen leicht zu überprüfen.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]
 Context.verifyBpmn<BpmnEvent> { bpmn ->
@@ -231,7 +234,6 @@ Ein BPMN-StartEvent beginnt seine BPMN-Swimlane, die auch sein Elternelement ist
 Wenn dieses Überprüfung erfolgreich ist wird eine positive Konsistenzmeldung zurückgegeben, sonst eine negative.
 Beide Konsistenzmeldung haben neben der textuellen Beschreibung auch eine Referenz auf das BPMN-Event.
 Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsistenzmeldung zurückgegeben, allerdings ohne eine Referenz auf ein BROS-Event.
-\textit{TODO: mehrere CreateRelationsips}
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5]
 verifyBpmn<BpmnEvent> { bpmn ->
@@ -242,7 +244,7 @@ verifyBpmn<BpmnEvent> { bpmn ->
 
     for (match in bpmn.matchingElements) {
         val event = match.model<Event>() ?: continue
-        val container = bpmn.container()?.second ?: continue
+        val container = bpmn.container()?.element ?: continue
 
         val createsElement = match.relations<CreateRelationship>()
                 .firstOrNull()
@@ -261,16 +263,49 @@ verifyBpmn<BpmnEvent> { bpmn ->
 \section{Benutzerinterface}
 
 Da das entwickelte Tool eine Webanwendung ist kann es in allen moderneren Browsern benutzt werden die Javascript aktiviert haben.
-Das Tool hat ein zweistufiges Interface.
-Als erster Schritt müssen die Quelldateien der zu überprüfenden Modelle geladen werden.
-Dazu können die Dateien einfach per Drag'n'Drop in das Tool geladen werden.
-Das Tool erkennt den Inhalt unabhängig des Namens und läd die entsprechende Datei.
+Die Benutzung des Tools ist in zwei Schritte unterteilt.
+Im erster Abschnitt müssen die Quelldateien der zu überprüfenden Modelle geladen werden.
+Dies ist in \cref{fig:screenshot-upload} zu sehen.
+Im mittleren UI Bereich können die Modelldateien geladen werden.
+Dazu können die Dateien einfach per Drag'n'Drop in das Tool gezogen werden.
+Das Tool erkennt den Inhalt unabhängig des Namens und importiert die entsprechende Datei.
 Alternativ kann eine manuelle Dateiauswahl genutzt werden oder der Inhalt der Datei in das entsprechende Textfeld kopiert werden.
+Unterhalb der Textfelder wird eine kurze Information zu dem geladenen Modell oder eine Fehlermeldung im Parsing-Vorgang angezeigt.
+\textit{Im oberen rechten Bereich des UIs befindet sich ein Button mit dem sich ein Demo-Projekt laden lässt um das UI zu testen. (\textbf{Button entfernen?})}
 Sobald jeweils ein valides BPMN- und BROS-Modell geladen wurden, wird die Konsistenzprüfung automatisch gestartet.
+Der Ergebnispfeil im unteren Bildschirmbereich signalisiert das ein Verifizierungsergebnis verfügbar ist.
 
-Die Ergebnisse der Konsistenzprüfung werden unterhalb der Eingabemaske angezeigt.
-Zunächst werden statistische Informationen zu den geladen Modellen, des Matchings und der Validierung angezeigt.
-Diese sind in drei Abschnitte unterteilt.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{../images/Screenshot-Upload.png}%
+    \caption{Benutzerinterface des Dateiuploads}%
+    \label{fig:screenshot-upload}
+\end{figure}
+
+Mit einem Klick auf den Ergebnispfeil oder durch das manuelle scrollen gelangt man in den zweiten UI Abschnitt.
+Dieser ist in \cref{fig:screenshot-result} dargestellt.
+Hier sind vier verschiedene Bereiche zu sehen.
+Im oberen Bereich werden statistische Informationen angezeigt.
+Direkt unterhalb des Informationsbereiches befindet sich die Navigationsleiste mit der sich der Inhalt des Hauptbereiches auswählen lässt.
+Der Hauptbereich zeigt die Validierungsergebnisse und Informationen zu dem Matching an.
+Im unteren Bildschirmbereich befindet siche eine optional einblendbare Eingabemaske, mit der ein PredefinedMatching erstellt werden kann.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{../images/Screenshot-Result.png}%
+    \caption{Benutzerinterface der Validierungsergebnisse}%
+    \label{fig:screenshot-result}
+\end{figure}
+
+Der Informationsbereich teilt sich in vier weitere Sektionen.
+Rechts befindet sich die Eigenschaftsauswahl.
+Mit ihr können verschieden Elemente im Hauptbereich nach ihrem Typ ein- und ausgeblendet werden.
+Zusätzlich kann das PredefinedMatching deaktiviert werden.
+Dies kann der Modellierer nutzen um die Ergebnisse übersichtlicher darzustellen.
+Die drei linken Sektionen beinhalten statistische Informationen zu der Durchführung und dem Ergebnis der Konsistenzprüfung.
+Dabei werden auch Informationen zu dem Matching angezeigt.
+
 \begin{itemize}
     \item \textbf{Verification stats:} Informationen zu der aktuellen Verifikation.
     \begin{itemize}
@@ -294,14 +329,14 @@ Diese sind in drei Abschnitte unterteilt.
     \end{itemize}
 \end{itemize}
 
-Unterhalb dieser Statistiken befindet sich die Liste der Validierungsergebnisse.
-Mit hilfe der Tableiste kann zusätzlich das BPMN- oder BROS-Matching oder auch das geladene Predefined-Matching angezeigt werden.
+Im Hauptbereich befindet sich die Liste der Validierungsergebnisse.
+Mit hilfe der Navigationsleiste kann zusätzlich das BPMN- oder BROS-Matching oder auch das geladene Predefined-Matching angezeigt werden.
 Jeder Eintrag der Liste hat den gleichen Aufbau.
 Auf der linken Seite de Eintrages ist farblich der Typ markiert. Je nach Tab gibt es unterschiedliche Farbkodierungen.
 Im Hauptteil des Eintrages sind drei Textfelder.
 Diese sind das BPMN-Element, das BROS-Element und die textuelle Beschreibung des Eintrages.
 Zusätzlich ist noch ein viertes Textfeld vorhanden das den Namen der Regel angibt, die diesen Eintrag erstellt hat.
-Mit einem klick auf das Textfeld des BPMN- oder BROS-Elementes kann direkt ein PredefinedMatching erstellt oder gelöscht werden.
+Mit einem Klick auf das Textfeld des BPMN- oder BROS-Elementes kann direkt ein PredefinedMatching erstellt oder gelöscht werden.
 Die Verifizierungsergebnisse haben die Farbkodierungen grün (positive Konsistenzmeldung) und rot (negative Konsistenzmeldung).
 Die Matching Ergebnisse sind blau (Matching für dieses Element gefunden) und gelb (keine Matching für dieses Element gefunden) markiert.
 Da sich nicht alle Elemente eines Modelles auf das andere Abbilden lassen, ist ein Fehlendes Matching meißt kein Fehler.

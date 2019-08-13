@@ -8,6 +8,10 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{caption}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\newcommand*\rot{\bfseries\rotatebox{90}}
 \usepackage{subcaption}
 \usepackage{listings}
 \lstloadlanguages{Prolog}
@@ -31,10 +35,14 @@
 \counterwithout{equation}{chapter}
 
 \lstset{
-  basicstyle=\footnotesize, frame=tb,
-  xleftmargin=.1\textwidth, xrightmargin=.1\textwidth,
-  captionpos=b, extendedchars=true,
-  numberbychapter=false
+  basicstyle=\footnotesize, 
+  frame=tb,
+  xleftmargin=.1\textwidth, 
+  xrightmargin=.1\textwidth,
+  captionpos=b,
+  numberbychapter=false,
+  extendedchars=true,
+  literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1,
 }
 
 \lstdefinelanguage{Kotlin}{

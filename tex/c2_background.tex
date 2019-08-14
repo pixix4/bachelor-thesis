@@ -1,13 +1,19 @@
 \chapter{Hintergrund}
 \label{chap:background}
 
-\textit{TODO: Metamodell - Graph}
+Um in der weiteren Arbeit den Konsistenzvergleich zwischen BPMN- und BROS-Modellen durführen zu können, werden zunächst die Modelle und ihre unterstützten Elemente vorgestellt.
+Dafür wird wird für jedes Modell ein Metamodell eingeführt.
+Da sich einige Namen zwischen den Modellen doppeln werden die Elemente der Metamodelle mit dem Präfix "Bpmn" bzw. "Bros" benannt.
 
 \section{Business Process Model and Notation}
 
-Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist ein Standard für die grafische Beschreibung von Geschäftsprozessen.
+Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist der Standard für die grafische Beschreibung von Geschäftsprozessen.
 Dabei wird das Verhalten eines Systems mit einer an Flussdiagrammen angelehnten Form beschrieben.
-Die Hauptelemente von BPMN sind:
+Einer der Hauptvorteile von BPMN ist die große Verbreitung.
+Dank ihr können Prozessbeschreibungen auf einfache Art und Weise zwischen verschieden Plattformen und Stackholdern ausgetauscht werden.
+Neben der informellen Beschreibung von Prozessen unterstützt BPMN auch die direkte Ausführung von Geschäftsprozessen.
+Mittels diverser Interpreter können in BPMN modellierte Abläufe zur Automatisierung einfacher Aufgaben oder ganzer Fertigungsprozesse genutzt werden.
+Die Hauptelemente von eines BPMN-Modelles sind:
 
 \begin{itemize}
     \item \textbf{Activity:} 
@@ -45,8 +51,7 @@ Da BPMN schon längere Zeit in Benutzung ist hat es eine gute Toolunterstützung
 Eines dieser Tools ist bpmn.io\footnote{https://demo.bpmn.io/}.
 Es ist ein webbasiertes Tool das einen großteil des BPMN-Standards unterstützt.
 Das Tool speichert und lädt die BPMN-Modelle in einem auf XML-basierenden Format mit der Dateiendung \emph{.bpmn}.
-Für die weitere Arbeit dürfen die BPMN-Modelle nur die oben beschriebenen Elemente enthalten.
-Die Datenstruktur hat dabei einen ähnlichen Aufbau wie das Metamodell.
+Die Datenstruktur basiert auf dem Metamodell das von der \emph{Object Management Group} spezifiziert wurde.
 
 \begin{figure}
     \centering
@@ -55,9 +60,24 @@ Die Datenstruktur hat dabei einen ähnlichen Aufbau wie das Metamodell.
     \label{fig:bpmnMetamodell}
 \end{figure}
 
-Aufgrund der größe des BPMN Standards wird nur ein gekürztes Metamodell auf Basis von \cite{Loja2010} betrachtet das in \cref{fig:bpmnMetamodell} zu sehen ist.
+Für die weitere Arbeit wird nur ein Teil des vollständige BPMN-Standards der \emph{OMG} genutzt.
+Ein deutlich gekürztes Metamodell für Business Prozesse wurde von \cite{Loja2010} erstellt.
+Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodell}).
+Es unterstützt dabei nur die oben genannten BPMN-Elemente.
+Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickeltem Tool nicht betrachtet.
 
-\textit{TODO: Beschreibung Metamodell, Metamodell von \cite{Loja2010} mit Implementierung zusammenführen}
+Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodell} wird ein BPMN-Modell in einem Graphen, genauer einem Baum mit Querverweisen, dargestellt.
+Die Wurzel des Baumes ist das Modell ansich.
+Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
+Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
+Die Events teilen sich in drei Unterklassen auf, die Start-, Intermediate- und EndEvents (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
+Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
+Hierbei ist zu beachten, das obwohl eine Swimlane auch Flowobjekte enthalten kann, das jedes Flowobjekt nur einen Container haben darf.
+So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane seien.
+Jedes Kind einer Swimlane ist transitiv auch Kind von dem Elternprozess der Swimlane.
+Die beiden Flow-Arten bilden die Querverweise innerhalb des Baumes.
+Ein MessageFlow (BpmnMessageFlow) kann zwischen allen BPMN-Elementen gezeichnet werden, wird aber hauptsächlich nur für die Kommunikation zwischen Prozessen verwendet.
+Der SequenceFlow (BpmnSequenceFlow) stellt den Ablauf innerhalb eines Prozesses dar und darf nur zwischen Flowobjekten existieren.
 
 \section{Compartment Role Object Model}
 
@@ -99,12 +119,10 @@ Die dafür genutzten Elemente sind:
 CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{https://github.com/Eden-06/FRaMED-2.0} einen eigenen graphischen Editorsupport.
 Der Name des Editors ist ein Akronym für \emph{Full-fledged Role Modeling EDitor} und wurde speziell für CROM entwickelt.
 
-\textit{TODO}
-
 \section{Business Role-Object Specification}
 
 Der neu entwickelte Ansatz der \emph{Business Role-Object Specification} (\textbf{BROS}) kombiniert die Vorteile der strukturbasierten Modellierung und der verhaltensbasierten Modellierung.
-Als Grundlage für BROS dient die strukturbasierte Modellierungssprache  CROM.
+Als Grundlage für BROS dient die strukturbasierte Modellierungssprache CROM.
 Diese wird mit Hilfe von Events um den Verhaltensaspekt erweitert.
 Zusätzlich zu den CROM-Elemente werden folgende Modellelemente unterstützt.
 
@@ -140,6 +158,13 @@ Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
     \label{fig:brosMetamodell}
 \end{figure}
 
-Mit Ausnahme von RoleConstraints wird das vollständige Metamodell aus \cite{Schoen} betrachtet.
-
-\textit{TODO: Beschreibung Metamodell, Metamodell von \cite{Schoen} mit Implementierung zusammenführen}
+Das Metamodell in \cref{fig:brosMetamodell} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
+Die Eelemte des Metamodelles teilen sich in zwei Klassen auf.
+Auf der einen Seite sind die Connections, zu denen die Create- und DestroyRelation (BrosCreateRelation, BrosDestroyRelation) gehören.
+Auf der anderen Seite sind die Objekte die sich in Endknoten und Objektgruppen teilen.
+Endknoten sind die NaturalTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).
+Die Objektgruppen sind Containerelemente die andere Objekte enthalten können.
+Zu ihnen zählen der CompartmentType (BrosCompartment), das Package (BrosPackage) und die Scene (BrosScene).
+Auch dieses Metamodell entspricht einem Graphen, genauer einem Baum mit Querverweisen.
+Jedes Objekt darf nur Kind einer Objektgruppen seien und die Eltern-Kind-Beziehung ist transitiv.
+Die Connections bilden die Querverweise innerhalb des Baumes.

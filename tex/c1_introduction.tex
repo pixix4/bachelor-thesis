@@ -1,4 +1,5 @@
 \chapter{Einleitung}
+\label{chap:introduction}
 
 \section{Motivation}
 
@@ -8,17 +9,27 @@ Andererseits werden prozedurale Modelle verwendet, um das Verhalten der Software
 Dennoch besteht eine Lücke zwischen diesen beiden Modellperspektiven: Während die Geschäftsprozesse in prozeduralen Modellen modelliert werden, kann die eigentliche Implementierung der Software nicht ohne die strukturbasierte, Modelle erfolgen.
 Die strukturbasierten Modelle müssen daher an den verhaltensbasierten Modellen ausgerichtet sein, damit das anschließend entwickelte Softwaresystem auch die in den Vorgehensmodellen definierten Geschäftsprozesse umsetzt.
 
-\section{Problemdefinition}
-
-Derzeit gibt es keine systematische Möglichkeit, prozessuale Geschäftsprozesse (z.B. in Form von BPMN-Prozessen) in strukturbasierte, Modellen der Software zu spezifizieren, um eine solche Konsistenz sicherzustellen.
+Derzeit gibt es keine systematische Möglichkeit, prozessuale Geschäftsprozesse, in Form von BPMN-Prozessen, in strukturbasierte, Modellen der Software zu spezifizieren, um eine solche Konsistenz sicherzustellen.
 Als erster Ansatz wird dieses Problem in der Sprache der Business Role-Object Specification (BROS) gelöst, indem zeitliche Elemente in eine statische strukturbasierte Modellspezifikation eingefügt werden.
 Es ist jedoch eine manuelle, komplexe und fehleranfällige Aufgabe, die Konsistenz von BROS mit einer bestimmten prozeduralen Geschäftsprozessen sicherzustellen und zu überprüfen.
+Daher wird in dieser Arbeit die Konsistenz zwischen BROS und der prozeduralen BPMN untersucht.
+
+\section{Problemdefinition}
+
+\begin{itemize}
+    \item Welche Konsistenzregeln gelten zwischen BPMN- und BROS-Modellen?
+    \item In wie weit ist eine automatische Konsistenzprüfung möglich?
+    \item Wie sieht eine mögliche Implementierung des automatisierten Konsistenzvergleiches aus?
+\end{itemize}
 
 \section{Struktur der Arbeit}
 
-In dieser Arbeit wird die Konsistenz zwischen BROS und der prozeduralen BPMN untersucht.
-Zu diesem Zweck werden die Modellelemente in einem BROS- und einem BPMN-Modell miteinander verglichen, um etwaige Abweichungen in Bezug auf mehrere Konsistenzkonzepte, sogenannte Konsistenzbeschränkungen, zu ermitteln.
-Basierend auf dieser Analyse werden dem Modellierer Warnungen gegeben, wenn Konsistenzbeschränkungen verletzt werden und wie die Probleme möglicherweise gelöst werden können.
-Diese Aufgabe wird automatisch über ein Tool ausgeführt werden. 
-Die Proof-of-concept Implementierung nutzt dazu die Modelle des BROS-Editor FRaMED.io und des BPMN-Editor bpnm.io.
-Um den Wert und die Flexibilität für zukünftige Entwicklungen zu erhöhen, wird besondere Aufmerksamkeit auf die Erweiterbarkeit des Tools gelegt.
+Zu diesem Zweck werden in \cref{chap:background} die Modellelemente von BPMN und BROS vorgestellt und mit Metamodellen beschrieben.
+Um einen Einblick in das Themengebiet des Konsistenzvergleiches zu bekommen werden im \cref{chap:related_work} aktuelle Konsistenzprüfungsverfahren auf für UML-Modelle klassifiziert.
+Da BROS eine neue Modellierungssprache ist, existieren noch keine Konsistenzbeschränkungen zu anderen Modellen.
+Daher werden in \cref{chap:consistency} Regeln aufgestellt um die Konsistenz zwischen BPMN- und BROS-Modellen zu gewährleisten.
+Für die automatisierte Überprüfung der Konsistenzregeln wird eine Referenzarchitektur erstellt und in \cref{chap:implementation} implementiert.
+Die Implementierung nutzt als Modellquellen die Editoren bpmn.io und FRaMED.io.
+Anschließend wird sie in \cref{chap:evaluation} mit einem Beispiel Use-Case evaluiert.
+Zusätzlich wird die Erweiterbarkeit der Implementierung um ein neue Regeln demonstriert.
+In \cref{chap:conclusion} wird schließlich der Erfolg der Arbeit erörtert.

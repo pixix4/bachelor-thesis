@@ -3,21 +3,27 @@
 
 Viele der bereits existierenden Verfahren lassen sich anpassen und können mit anderen Modellen genutzt werden. 
 Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms auf der verhaltensbasierten Seite verwendet werden.
-Allerdings ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
-Das liegt an der Möglichkeit ein BROS Modell beliebig anzureichern und das Events eine Abstraktion eines beliebigen Prozesses sein können.
-Um dieses Problem zu lösen wird zunächst eine genaue Problemdefinition gegeben.
-Anschließend werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
+Anders als bei UML ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
+Das liegt an dem Funktionsumfang von BROS Modellen.
+Diese können gegenüber dem BPMN Modellen mit zusätzlich Elementen angereichert werden.
+So kann das BROS Modell zusätzliche Elemente beinhalten oder Teile des BPMN Modells auf einer höheren Ebene der Abstraktion darstellen.
+Beispielsweise kann ein BROS-Event die Abstraktion eines gesamten Prozesses innerhalb des BPMN Modelles abbilden.
+Bevor Regel für den Konsistenzvergleich erstellt werden können, muss zunächst eine genaue Problemdefinition gegeben werden.
+Anhand dieser werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
 
 \section{Konsistenzproblem}
 
-Wie bereits erwähnt, sind heutige Softwaresystem stark von den dazugehörigen Modellen anhängig.
-Damit ein solches System erfolgreich implementierten werden kann müssen die Modelle konsistent zueinander seien.
+Wie bereits erwähnt, sind heutige Softwaresystem stark von den dazugehörigen Modellen abhängig.
+Damit ein solches System erfolgreich implementiert werden kann müssen die Modelle konsistent zueinander sein.
 Sollten schon zu Beginn eines Projektes unbemerkt Inkonsistenzen auftreten kann dies zum scheitern des ganzen Projektes führen.
 Die verhaltensbasierte Modelle beschreiben die Interaktion innerhalb eines Systems.
 Dabei benötigen sie die Funktionalität die von den strukturbasierten Modellen bereitgestellt wird.
 Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet kann das Softwaresystem nicht funktionieren.
+Solche Fehler stellen daher in der Industrie ein großes Risiko dar und können die Entwicklungskosten erheblich steigern.
+Um dieses Risiko zu verringern müssen Verfahren entworfen werden, die ein möglichst automatisierte Konsistenzprüfung durchführen können.
 
-Eine formale und allgemeingültige Definition des Konsistenzproblem in der Domain der Modellierung ist in der Literatur nur schwer zu finden.
+Der methodische Entwicklung eines solchen Verfahrens setzt eine genaue Definition des Konsistenzproblems vorraus.
+Allerdings ist eine formale und allgemeingültige Definition des Konsistenzproblem in der Domain der Modellierung in der Literatur nur schwer zu finden.
 Bevor das Konsistenzproblem definiert werden kann muss zunächst beschieben werden was eine Inkonsistenz ist.
 Laut \cite{Nuseibeh1996} tritt eine Inkonsistenz genau dann auf, wenn eine Konsistenzregel verletzt wird.
 Eine Konsistenzregel ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen.
@@ -31,14 +37,20 @@ Mit Hilfe dieser Definition kann das Konsistenzproblem wie folgt definiert werde
     Das Konsistenzproblem beschreibt den Vorgang der Minimierung und Verhinderung von Inkonsistenzen mit Hilfe der Aufstellung und Prüfung von Konsistenzregeln.
 \end{konsistenzproblem}
 
-Diese Definition lässt sich leicht auf Konsistenzverfahren anwenden, die auf der Überprüfung von Regeln basieren.
+Somit muss für die Entwicklung eines Konsistenzverfahrens zunächst definiert werden, welche Inkonsistenzen zwischen den Modellen existieren können und damit auf welchem Regelsatz das Verfahren basiert.
+Anhand des aufgestellten Regelsatzes kann ein Algorithmus zum auffinden der Inkonsistenzen erstellt werden.
+Dafür müssen die Regeln, wie bereits erwähnt, in einer formalen Form und nicht in natürlicher Sprache vorliegen.
+Die Aufgabe der Minimierung und Verhinderung der Inkonsistenz ist auch mit einem automatisierten Tool dem Modellierer überlassen.
+Die Verfahren können dem Modellierer Handlungsempfehlungen geben, eine automatische Korrektur ist allerdings nur schwer möglich.
+So könnte ein Problem zB. durch das entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
+Diese Definition ist daher leicht auf Konsistenzverfahren anwendbar, die auf der Überprüfung von Regeln basieren.
 Aber auch formale Verfahren ohne einen eigenen Regelsatz lassen sich mit dieser Definition beschreiben.
 So können z.B. die Verfahren, die auf der Transformation zu einem Petrinetz basieren mittels der Konsistenzregel "das konstruierte Petrinetz muss lebendig sein" überprüft werden.
 
 \section{Konsistenzregeln} \label{sec:Konsistenzregeln}
 
 Das hier vorgestellte Verfahren basiert auf der \emph{Intra-Modell} bzw. horizontalen Konsistenzprüfung ohne Zwischendarstellung.
-Diese kann in zwei verschiedene Richtungen definiert werden.
+Regeln zum direkten vergleich der Modelle können in zwei verschiedene Richtungen definiert werden.
 Eine Regel kann aufgrund eines Merkmales des ersten Modelles ein Merkmal im zweiten Modell fordern oder umgekehrt.
 Damit basieren diese Regeln auf der logischen Implikation.
 Um eine reflexive Regel zu erhalten (logische Äquivalenz) müssen zwei Regeln erstellt werden die sowohl die Hin- als auch die Rückrichtung abdecken.
@@ -82,7 +94,7 @@ Jedem Kind werden all seine transitiven Eltern zugeordnet.
 Dies beinhaltet auch die Abbildung der Identität.
 Das wichtigste Prädikat ist \emph{match/2}.
 Es bildet das Matching der BPMN-Elemente zu den BROS-Elementen ab.
-Dabei wird angenommen das ein Matching bereits existiert.
+Dabei wird angenommen das ein Matching bereits existiert, wodurch es im weiteren auch als Orakelfunktion bezeichnet wird.
 Ein Matching ist die Menge der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
 
 \begin{lstlisting}[language=Prolog, caption=Definitionen der weiterführenden Regeln, label=lst:definition_predicats]
@@ -121,7 +133,7 @@ Zu jeder \emph{BPMN-Swimlane} innerhalb eines \emph{BPMN-Process} muss ein passe
 Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar. 
 Dieses Konzept wird in BROS mittels Rollen dargestellt.
 Daher muss jeder Teilnehmer des BPMN-Prozesses auch als Rolle im BROS-Modell existieren.
-In \cref{fig:ruleExample2} existiert in dem BPMN-Modell eine BPMN-Swimlane "Kunde", welche im BROS-Modell als BROS-RoleType "Kunde" dargestellt wird.
+In \cref{fig:ruleExample2} existiert in dem BPMN-Modell eine BPMN-Swimlane ''Kunde'', welche im BROS-Modell als BROS-RoleType ''Kunde'' dargestellt wird.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 2, label=lst:rule_2]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
@@ -157,7 +169,7 @@ Ein BPMN-EndEvent beendet die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
 Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn zwischen diesen beiden eine BROS-DestroyRelation existiert.
 Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
-Der erste Fall ist mit Hilfe des Prozessteilnehmers "Kunde" in \cref{fig:ruleExample4} beispielhaft dargestellt.
+Der erste Fall ist mit Hilfe des Prozessteilnehmers ''Kunde'' in \cref{fig:ruleExample4} beispielhaft dargestellt.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 4, label=lst:rule_4]
 rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
@@ -189,7 +201,7 @@ Ein BPMN-StartEvent beginnt die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (vgl. \textbf{Regel 2}).
 Ein BROS-RoleType wird mit einem BROS-Event begonnen, wenn  zwischen diesen beiden eine BROS-CreateRelation existiert.
 Alternativ kann ein BPMN-StartEvent auch durch ein BROS-Event modelliert werden, wenn das BPMN-StartEvent das erste Event des BPMN-Prozesses ist und BROS-CreateRelation zwischen dem BROS-Event und der BROS-Scene existiert die den BROS-Prozess darstellt (vgl. \textbf{Regel 1}).
-Diese Regel entspricht. im Sinne des Ablaufes des Geschäftsprozesses, dem Gegenstück zu \textbf{Regel 4}.
+Diese Regel entspricht, im Sinne des Ablaufes des Geschäftsprozesses, dem Gegenstück zu \textbf{Regel 4}.
 Die Visualisierung nutzt das gleiche Beispiel, nur ist in \cref{fig:ruleExample5} der Fokus auf das BPMN-StartEvent und die BROS-CreateRelation gelegt.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 5, label=lst:rule_5]

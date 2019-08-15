@@ -5,13 +5,16 @@ Der Bereich der Konsistenzprüfung zwischen strukturbasierten und verhaltensbasi
 Insbesondere gibt es ein großes Spektrum an Methoden zum Vergleichen von verschiedenen UML-Modellen.
 Viele dieser Methoden untersuchen die Konsistenz zwischen UML-Klassendiagrammen und UML-Verhaltensmodellen wie UML-Zustands- oder UML-Aktivitätsdiagramme.
 Da sich die Konzepte dieser UML-Modelle mit denen von BROS und BPMN ähneln, lassen sich diese Methoden auch auf BPMN- und BROS-Modelle anwenden.
-Dafür wird zunächst ein Klassifikation von Verfahren zur Konsistenzprüfung vorgestellt.
-Anhand dieses Schemas werden anschließend relevante Arbeiten erläutert und verglichen.
+Um die bestehenden Verfahren zur Konsistenzprüfung zu analysieren wird zunächst ein Klassifikation für diese Verfahren vorgestellt.
+Anhand dieses Schemas werden anschließend relevante Arbeiten und deren Verfahren erläutert und verglichen.
 
 \section{Klassifikation von Verfahren zur Konsistenzprüfung}
 
-Da es bereits etliche Arbeiten im Gebiet der Konsistenzprüfung von UML-Modellen gibt, wurde bereits eine Zusammenstallung der bestehenden Methoden unter anderem von \cite{Usman2008} und \cite{Lucas2009} durchgeführt.
-Um die unterschiedlichen Methoden besser klassifizieren zu können nutzen beide Arbeiten ein ähnliches Klassifikationsschema:
+Da es bereits etliche Arbeiten im Gebiet der Konsistenzprüfung von UML-Modellen gibt, wurden bereits mehrere Zusammenstellungen der bestehenden Verfahren durchgeführt.
+In dieser Arbeit werden das Survey von \cite{Usman2008} und die Review \cite{Lucas2009} genauer betrachtet.
+Beide Autoren haben für die Klassifikation der Arbeit ein Schema erstellt, die sich in vielen Punkten ähneln.
+Für die weiter Arbeit wird eine erweiterte Kombination der beiden Klassifikationsschemas genutzt.
+Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten stammt ist mit Autor der ihn zuerst genannt hat annotiert.
 
 \begin{itemize}
     \item \textbf{Nature (\cite{Usman2008}):}
@@ -24,26 +27,27 @@ Um die unterschiedlichen Methoden besser klassifizieren zu können nutzen beide 
     \item \textbf{Diagrams (\cite{Usman2008}):}
     Es beschreibt welche konkreten Modelle von der Methode unterstützt werden.
     Die Arbeiten von \cite{Usman2008} und \cite{Lucas2009} beziehen sich dabei ausschließlich auf UML Diagramme.
-    Mögliche Werte sind die Modellnamen.
+    Die Verfahren müssen dabei aber nicht auf UML beschränkt sein.
+    Mögliche Werte sind die Namen der unterstützten Modellarten.
     \item \textbf{Consistency Type (\cite{Usman2008}):}
     Es beschreibt welche Arten der Konsistenz von der Methode überprüft werden.
-    Dabei wird unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz bei verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen) und \emph{Evolutionskonsistenz} (Konsistenz der eines Modelles über verschiedene Entwicklungsstufen).
+    Dabei wird unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz in verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen) und \emph{Evolutionskonsistenz} (Konsistenz eines Modelles über verschiedene Entwicklungsstufen).
     Zusätzlich spezifiziert \cite{Usman2008} noch die \emph{semantische-} und die \emph{syntaktische Konsistenz}.
     Diese beziehen sich auf die Konsistenz eines Modelles zu seinem Metamodell.
     Dies wird für die nachfolgende Arbeit als Vorraussetzung angesehen und nicht näher betrachtet.
     \item \textbf{Consistency Strategy (\cite{Usman2008}):}
     Es beschreibt die benutzte Validierungsstrategie.
     \cite{Usman2008} nennt drei verschiedene Strategien die bei der Durchführung des Konsistenzvergleiches genutzt werden können.
-    Diese sind: \emph{Analysis} (Auf einem Algorithmus basierend), \emph{Monitoring} (Auf einem Regelsatz basierend) und \emph{Construction} (Auf der Generierung des zu vergleichenden Modelles basierend).
+    Diese sind: \emph{Analysis} (Auf einem formellen Algorithmus basierend), \emph{Monitoring} (Auf der Überprüfung eines Regelsatz basierend) und \emph{Construction} (Auf der Generierung des zu vergleichenden Modelles basierend).
     \item \textbf{Intermediate Representation (\cite{Usman2008}):}
     Es beschreibt ob die Methode eine temporäre Zwischendarstellung benötigt oder nicht.
     Mögliche Werte sind ja und nein. 
     \item \textbf{Case Study (\cite{Usman2008}):}
-    Es beschreibt ob die Methode an einem Beispiel evaluiert wurde.
+    Es beschreibt ob die Methode von ihrem Autor an einem Beispiel evaluiert wurde.
     Mögliche Werte sind ja und nein. 
     \item \textbf{Automatable (\cite{Usman2008}):}
     Es beschreibt ob die Methode manuell oder automatisiert von einem Programm durchgeführt werden kann.
-    Mögliche Werte sind geringer Aufwand (H), mittel Aufwand (M) und hoher Aufwand (L).
+    Mögliche Werte sind mit geringer Aufwand (H), mit mittel Aufwand (M) und mit hoher Aufwand (L).
     \item \textbf{Tool Support (\cite{Usman2008}):}
     Es beschreibt ob die Methode von einem Tool unterstützt wird oder ein eigenes Tool entwickelt wurde.
     Mögliche Werte sind ja und nein.
@@ -51,19 +55,19 @@ Um die unterschiedlichen Methoden besser klassifizieren zu können nutzen beide 
     Es beschreibt wie gut die Methode um weitere Modelle für den Konsistenzvergleich erweiterbar ist.
     Mögliche Werte sind geringer Aufwand (H), mittel Aufwand (M) und hoher Aufwand (L).
     \item \textbf{Rule Extensibility:}
-    Es beschreibt wie gut die Methode um weitere Konsistenzregeln erweiterbar ist.
+    Es beschreibt wie gut die Methode um weitere Konsistenzregeln innerhalb der unterstützten Modellarten erweiterbar ist.
     Mögliche Werte sind geringer Aufwand (H), mittel Aufwand (M) und hoher Aufwand (L).
 \end{itemize}
 
 Dieses Schema ist direkt auf die Konsistenzprüfung von BPMN- und BROS-Modelle anwendbar.
-Wichtig für die weitere Arbeit sind Verfahren deren \emph{Nature} beide Modelltypen unterstützt und deren \emph{Consistency Type} auf der \emph{Intra-Modell (horizontale) Konsistenz} beruht.
-Der Klassifikationspunkt der Erweiterbarkeit wurde von \cite{Lucas2009} eingeführt.
-Für diese Arbeit wird er aber in die Aspekte der Modelerweiterbarkeit und der Regelerweiterbarkeit aufgeteilt um eine genauere Einteilung der Verfahren zu ermöglichen.
+Der Klassifikationspunkt der Erweiterbarkeit wurde bereits von \cite{Lucas2009} eingeführt.
+Für diese Arbeit wird er allerdings in die Aspekte der Modelerweiterbarkeit und der Regelerweiterbarkeit aufgeteilt um eine genauere Einteilung der Verfahren zu ermöglichen.
+Wichtig für die weitere Arbeit sind außerdem Verfahren deren \emph{Nature} beide Modelltypen unterstützt und deren \emph{Consistency Type} auf der \emph{Intra-Modell (horizontale) Konsistenz} beruht.
 
 \section{Aktuelle Verfahren zur Konsistenzprüfung}
 
 Anhand des aufgestellten Klassifikationsschemas werden in diesem Abschnitt verschiedene Verfahren der Konsistenzprüfung von UML-Modellen vorgestellt.
-Dabei werden nur Verfahren betrachtet die in ihrer \emph{Nature} beide Modelltypen unterstützten.
+Dabei werden nur Verfahren betrachtet die in ihrer \emph{Nature} beide Modelltypen unterstützten, da die Konsistenzprüfung zwischen BPMN und BROS auch beide Modelltypen erfordert.
 Der Klassifikationspunkt \emph{Nature} wird daher nicht weiter betrachtet.
 
 \textbf{Transformation zu \emph{CSP-OZ}:}
@@ -138,7 +142,7 @@ Aufgrund von Einschränkungen von OCL, wie das Fehlen des transitiven Abschlusse
 
 Ein wichtiger Punkt für die weitere Arbeit ist die Erweiterbarkeit.
 Wie bereits genannt, gibt es zwei verschiedene Aspekte der Erweiterbarkeit, die Modellerweiterbarkeit und die Regelerweiterbarkeit.
-Die Modellerweiterbarkeit beschreibt wie leicht sich ein Verfahren um neue Modelltypen erweitern lässt.
+Die Modellerweiterbarkeit beschreibt mit welchem Aufwand sich ein Verfahren um neue Modelltypen erweitern lässt.
 Mit einer guten Modellerweiterbarkeit können viele verschiedene Modelltypen für die Konsistenzprüfung unterstützt werden.
 Im Gegensatz dazu steht die Regelerweiterbarkeit.
 Sie beschreibt den Aufwand des Hinzufügens neuer Konsistenzaspekte zu den bereits unterstützten Modellarten.
@@ -148,7 +152,7 @@ So haben die Verfahren die eine Zwischendarstellung nutzen eine höherer Affinit
 Dahingegen hab die Verfahren ohne Zwischendarstellung eine bessere Regelerweiterbarkeit.
 
 Anhand der Zwischendarstellung lassen sich die beschreiben Verfahren in zwei Kategorien einteilen.
-Zum einen in die die eine Zwischendarstellung benötigen und die die keine Zwischendarstellung nutzen.
+Zum einen in die die eine Zwischendarstellung benötigen und zum anderen die die keine Zwischendarstellung nutzen.
 \cite{Rasch2003}, \cite{Shinkawa2006} und \cite{Mens2005} beschreiben Verfahren die zunächst eine Zwischendarstellung aufbauen und anschließend die Konsistenz der Zwischendarstellung überprüfen.
 Andererseits könne die Verfahren von \cite{Egyed2001} und \cite{Egyed2006} direkt auf den Modellen arbeiten.
 Der Vorteil von einer Zwischendarstellung ist die leichte Erweiterbarkeit um neue Modellarten.

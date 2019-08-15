@@ -73,7 +73,7 @@ Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEven
 Die Events teilen sich in drei Unterklassen auf, die Start-, Intermediate- und EndEvents (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
 Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
 Hierbei ist zu beachten, das obwohl eine Swimlane auch Flowobjekte enthalten kann, das jedes Flowobjekt nur einen Container haben darf.
-So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane seien.
+So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane sein.
 Jedes Kind einer Swimlane ist transitiv auch Kind von dem Elternprozess der Swimlane.
 Die beiden Flow-Arten bilden die Querverweise innerhalb des Baumes.
 Ein MessageFlow (BpmnMessageFlow) kann zwischen allen BPMN-Elementen gezeichnet werden, wird aber hauptsächlich nur für die Kommunikation zwischen Prozessen verwendet.
@@ -166,5 +166,5 @@ Endknoten sind die NaturalTypes (BrosClass), die RoleTypes (BrosRoleType), Event
 Die Objektgruppen sind Containerelemente die andere Objekte enthalten können.
 Zu ihnen zählen der CompartmentType (BrosCompartment), das Package (BrosPackage) und die Scene (BrosScene).
 Auch dieses Metamodell entspricht einem Graphen, genauer einem Baum mit Querverweisen.
-Jedes Objekt darf nur Kind einer Objektgruppen seien und die Eltern-Kind-Beziehung ist transitiv.
+Jedes Objekt darf nur Kind einer Objektgruppen sein und die Eltern-Kind-Beziehung ist transitiv.
 Die Connections bilden die Querverweise innerhalb des Baumes.

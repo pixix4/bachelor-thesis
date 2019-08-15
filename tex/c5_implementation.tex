@@ -114,7 +114,7 @@ Im Lambda wird hier nur ein einfaches Name-Matching durchgeführt.
 Die weitere Struktur wird nicht betrachtet.
 
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel von einer BPMN-SwimLane und einem BROS-RoleType, label=lst:match_lane_role]
-Context.match<BpmnLane, RoleType> { lane, role ->
+Context.match<BpmnLane, BrosRoleType> { lane, role ->
     matchStrings(lane.element.name, role.element.name)
 }
 \end{lstlisting}
@@ -125,10 +125,9 @@ Nachdem die Knoten nach den Metamodell-Typen gefiltert wurden, wird überprüft 
 Dafür bietet die Knoten-Klasse eine weitere Hilfsfunktion die die verbunden Relationen nach ihrem Typ gefiltert zurückgeben kann.
 
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel von einem BPMN-Gateway und einem BROS-Event, label=lst:match_gateway_event]
-Context.match<BpmnGateway, Event> { bpmn, bros ->
-    bpmn.relations<BpmnFlow>().any { flow ->
-        flow.relation.type == BpmnFlow.Type.SEQUENCE &&
-                flow.relation.name.isNotBlank() &&
+Context.match<BpmnGateway, BrosEvent> { bpmn, bros ->
+    bpmn.relations<BpmnSequenceFlow>().any { flow ->
+        flow.relation.name.isNotBlank() &&
                 matchStrings(flow.relation.name, bros.element.desc)
     }
 }
@@ -141,10 +140,9 @@ Ein Matching wird dann gefunden, wenn die Quelle oder das Ziel des BPMN-MessageF
 Dies ermöglicht das schreiben einfacherer Regeln.
 
 \begin{lstlisting}[language=Kotlin, caption=Fixpunkt Matching Regel von einem BPMN-BpmnEvent und einem BROS-Event, label=lst:match_fixpoint_event_event]
-Context.match<BpmnEvent, Event> { bpmn, bros ->
-    bpmn.relations<BpmnFlow>().any { flow ->
-        flow.relation.type == BpmnFlow.Type.MESSAGE &&
-                flow.source in bros.matchingElements ||
+Context.match<BpmnEvent, BrosEvent> { bpmn, bros ->
+    bpmn.relations<BpmnMessageFlow>().any { flow ->
+        flow.source in bros.matchingElements ||
                 flow.target in bros.matchingElements
     }
 }
@@ -190,9 +188,10 @@ Die Referenzangabe zu einem weiteren Knoten ist optional und kann, wenn die Info
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 2, label=lst:implementation_rule_2]
 Context.verifyBpmn<BpmnLane> { bpmn ->
-    for (match in bpmn.matchingElements) {
-        val roleType = match.model<RoleType>() ?: continue
-        return@verifyBpmn Result.match("...", bros = match)
+    for (bros in bpmn.matchingElements) {
+        if (bros.checkType<BrosRoleType>()) {
+            return@verifyBpmn Result.match("...", bros = bros)
+        }
     }
     Result.error("...")
 }
@@ -211,12 +210,13 @@ Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der
 Der Rückgabewert null ermöglicht es auch komplexere Vorbedingungen leicht zu überprüfen.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]
-Context.verifyBpmn<BpmnEvent> { bpmn ->
+Context.verifyBpmn<BpmnEndEvent> { bpmn ->
     if (!bpmn.element.terminationEvent) return@verifyBpmn null
 
-    for (match in bpmn.matchingElements) {
-        val returnEvent = match.model<ReturnEvent>() ?: continue
-        return@verifyBpmn Result.match("...", bros = match)
+    for (bros in bpmn.matchingElements) {
+        if (bros.checkType<BrosReturnEvent>()) {
+            return@verifyBpmn Result.match("...", bros = bros)
+        }
     }
     Result.error("...")
 }
@@ -237,24 +237,22 @@ Beide Konsistenzmeldung haben neben der textuellen Beschreibung auch eine Refere
 Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsistenzmeldung zurückgegeben, allerdings ohne eine Referenz auf ein BROS-Event.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5]
-verifyBpmn<BpmnEvent> { bpmn ->
-    if (
-        bpmn.element.terminationEvent || 
-        bpmn.element.type != BpmnEvent.Type.START
-    ) return@verifyBpmn null
+Context.verifyBpmn<BpmnStartEvent> { bpmn ->
+    for (bros in bpmn.matchingElements) {
+        if (bros.checkType<BrosEvent>()) {
+            val bpmnParents = bpmn.transitiveParent<BpmnElement>()
+            val brosCreate = bros.relations<BrosCreateRelation>()
+                    .firstOrNull()
+                    ?.source as? ModelTree<BrosElement>
 
-    for (match in bpmn.matchingElements) {
-        val event = match.model<Event>() ?: continue
-        val container = bpmn.container()?.element ?: continue
 
-        val createsElement = match.relations<CreateRelationship>()
-                .firstOrNull()
-                ?.target as? ModelTree<ModelElement<*>> ?: continue
-
-        if (createsElement in container.second.matchingElements) {
-            return@verifyBpmn Result.match("...", bros = match)
-        } else {
-            return@verifyBpmn Result.error("...", bros = match)
+            for (bpmnParent in bpmnParents) {
+                if (brosCreate != null && 
+                        brosCreate in bpmnParent.matchingElements) {
+                    return@verifyBpmn Result.match("...", bros = bros)
+                }
+            }
+            return@verifyBpmn Result.error("...", bros = bros)
         }
     }
     Result.error("...")

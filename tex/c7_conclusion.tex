@@ -1,32 +1,62 @@
 \chapter{Schluss}
 \label{chap:conclusion}
 
+In diesem Kapitel soll evaluiert werden in wie weit diese Arbeit die im \cref{chap:introduction} genannten Ziele erfüllt hat.
+
 \section{Zusammenfassung}
 
-Ziel dieser Arbeit war die automatisierte Konsistenzprüfung von BPMN- und BROS-Modellen.
-Dazu wurden anhand bestehender Arbeiten ein neuer Ansatz entwickelt.
-Die Funktionalität dieses Ansatzes wurde anhand einer Referenzimplementierung und einer Fallstudie gezeigt.  
+Ziel der Arbeit war die Konsistenz zwischen BPMN- und BROS-Modellen zu überprüfen.
+Dafür wurden bestehende Konsistenzverfahren für UML-Modelle analysiert und anhand ihrer Eigenschaften klassifiziert.
+Darauf aufbauend wurden sechs Regeln für die Konsistenzprüfung aufgestellt und formalisiert.
+Für die Automatisierung der Konsistenzprüfung wurde eine Referenzarchitektur erstellt, die die formalen Regeln ausführt.
+Um die Funktionalität des Verfahren zu zeigen, wurde ein Tool in Kotlin implementiert um zusätzlich eine mögliche Anbindung an den BROS-Editor FRaMED.io zu erleichtern.
+Diese Implementierung wurde anschließend anhand des Beispieles einer Pizzabestellung von \cite{Schoen} getestet indem ein zu dem BPMN-Modell konsistentes BROS-Modell entwickelt wurde.
+Außerdem wurde die Erweiterbarkeit dieses Verfahrens Regel evaluiert, indem eine weiter Regel zu zu der Implementierung hinzugefügt wurde. 
 
 \section{Wissenschaftlicher Beitrag}
 
-\begin{itemize}
-    \item \textbf{Nature:} beides
-    \item \textbf{Diagrams:} BPMN-BROS
-    \item \textbf{Consistency Type:} \emph{Intra-Modell (horizontale) Konsistenz}
-    \item \textbf{Intermediate Representation:} Nein
-    \item \textbf{Consitency Strategy:} \emph{Monitoring} (Auf einem Regelsatz basierend)
-    \item \textbf{Case Study:} ja
-    \item \textbf{Automatable:} gut (H)
-    \item \textbf{Tool Support:} ja
-    \item \textbf{Extensibility:} gut (H)
-\end{itemize}
+Das in dieser Arbeit vorgestellte Verfahren gehört zu der Klasse der Verfahren ohne Zwischendarstellung (vgl. \cref{tab:Klassifikationsschema_extended}).
+Da es auf dem Auswerten verschiedener Konsistenzregeln basiert, nutzt es die Strategie des Monitorings.
+Damit ist der ähnlichste Ansatz im Bezug auf UML-Modelle das Verfahren nach \cite{Egyed2006}.
+Beide Verfahren testen die Intra-Modell (horizontale) Konsistenz, sind automatisierbar und wurden bereits evaluiert.
+Sie unterscheiden sich neben den unterstützten Modellarten hauptsächlich im Grad der Erweiterbarkeit.
+Das Verfahren von \cite{Egyed2006} benutzt zum Konsistenzvergleich Regeln auf basis von OCL.
+Damit ist die Erweiterbarkeit um neue Modellarten nicht möglich, wenn diese nicht zum UML-Standard gehören.
+Das hier genutzte Verfahren hat auch einen hohen Aufwand, wenn eine neue Modellart hinzugefügt wird.
+Allerdings ist die Erweiterbarkeit um neue Regeln mit weniger Aufwand verbunden.
+Das das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet können beliebige Regeln leicht erstellt werden.
+\cite{Egyed2006} Verfahren ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regeln erschweren könnte.
 
-Der Ansatz und das entwickelte Tool geben dem Modellierer Warnungen und Hinweise die auf mögliche Inkonsistenzen deuten.
-Dabei werden explizit keine Handlungsempfehlungen oder Lösungsmöglichkeiten gegeben.
-Dies liegt in der alleinigen Verantwortung des Modellierers.
-Des Weiteren wird keine syntaktische und semantische Konsistenzprüfung der Einzelmodelle durchgeführt.
-Die zu überprüfenden Modelle müssen alleinstehend Konsistent sein.
-Nur die Korrektheit des Dateiformats wird indirekt überprüft, da es eine Vorraussetzung zum Parsen des Modelles ist.
+\begin{table}
+    \centering
+    \begin{tabular}{p{1.58cm} p{1.50cm} p{0.95cm} p{2.2cm} p{1.60cm} p{0.33cm}
+        p{0.33cm} p{0.67cm} p{0.72cm} p{0.72cm}}
+      &
+      \rot{Diagrams} &
+      \rot{Consistency} \rot{Type} &
+      \rot{Consistency} \rot{Strategy} & 
+      \rot{Intermediate} \rot{Representation} & 
+      \rot{Case Study} & 
+      \rot{Automatable} & 
+      \rot{Tool Support} & 
+      \rot{Model} \rot{Extensibility} & 
+      \rot{Rule} \rot{Extensibility} \\
+      \toprule
+      Rasch 2003    & CD, SM              & Intra            & Monitoring           & CSP/OZ                      & 1          & H           & 0            & H                   & M                  \\
+      \midrule
+      Shinkawa 2006 & UCD, CD, SD, AD, SC & Inter            & Analysis             & CPN                         & 0          & H           & 0            & M                   & L                  \\
+      \midrule
+      Mens 2005     & CD, SD, SC          & All              & Monitoring           & Extended UML                & 1          & H           & 1            & H                   & M                  \\
+      \midrule
+      Egyed 2001    & CD, OD, SD          & Intra, Inter     & Construction         &                             & 0          & H           & part      & M                   & M                  \\
+      \midrule
+      Egyed 2006    & CD, SD, SC          & Intra            & Monitoring           &                             & 1          & H           & 1            & L                   & M                  \\
+      \midrule
+      BROS          & BPMN, BROS          & Intra            & Monitoring           &                             & 1          & H           & 1            & L                   & H                 
+    \end{tabular}
+    \caption{Einordnung des neuen Verfahrens}%
+    \label{tab:Klassifikationsschema_extended}
+  \end{table}
 
 \section{Zukünftige Arbeiten}
 

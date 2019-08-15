@@ -200,9 +200,9 @@ Context.verifyBpmn<BpmnLane> { bpmn ->
 Die \textbf{Regel 3} ist ähnlich aufgebaut wie Regel 2.
 In der Regel 3 wir überprüft das zu jedem BPMN-TerminationEvent ein passendes BROS-ReturnEvent existiert.
 Genau wie die Regel 2 basiert sie auf dem BPMN-Graphen.
-Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-Event das zusätzlich ein Attribut TerminationEvent besitzt.
+Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-EndEvent das zusätzlich ein Attribut TerminationEvent besitzt.
 Hierfür ist die Dreiwertigkeit des Rückgabewertes wichtig.
-Zunächst wird in der Vorbedingung nach einem BPMN-Event gefiltert.
+Zunächst wird in der Vorbedingung nach einem BPMN-EndEvent gefiltert.
 Anschließend wird jedes gefundene BPMN-Element überprüft, ob es auch ein BPMN-TerminationEvent ist.
 Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert null beendet.
 Damit wird die Ausführung der Regel komplett ignoriert, wie es auch bei dem generischen Filterargument geschieht.

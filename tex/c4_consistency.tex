@@ -105,8 +105,10 @@ In BROS wird dies mit einer BROS-Scene repräsentiert.
 Allerdings kann ein BROS-Modell eine Abstraktion eines BPMN-Modelles sein.
 In diesen Fall kann der BPMN-Process auch durch ein BROS-Event modelliert werden.
 Durch diese Abstraktion muss der Inhalt des BPMN-Processes nicht weiter überprüft werden.
+Dies ist exemplarisch in \cref{fig:ruleExample1} für eine BROS-Scene dargestellt.
+In beiden Modellen muss der Prozess enthalten sein, der Inhalt und die Relationen werden nicht betrachtet.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 1, label=lst:rule_1]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 1, label=lst:rule_1]
 rule_1(Bpmn) :- bpmn(Bpmn, "Process") ->
     (
         bros(Bros, "Scene"), match(Bpmn, Bros);
@@ -119,8 +121,9 @@ Zu jeder \emph{BPMN-Swimlane} innerhalb eines \emph{BPMN-Process} muss ein passe
 Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar. 
 Dieses Konzept wird in BROS mittels Rollen dargestellt.
 Daher muss jeder Teilnehmer des BPMN-Prozesses auch als Rolle im BROS-Modell existieren.
+In \cref{fig:ruleExample2} existiert in dem BPMN-Modell eine BPMN-Swimlane "Kunde", welche im BROS-Modell als BROS-RoleType "Kunde" dargestellt wird.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 2, label=lst:rule_2]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 2, label=lst:rule_2]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
     (
         bros(Bros, "RoleType"), match(Bpmn, Bros)
@@ -133,8 +136,9 @@ Eine BPMN-TerminationEvent beendet den aktuellen BPMN-Prozess.
 Der BPMN-Prozess wird in BROS durch eine BROS-Scene dargestellt (vgl. \textbf{Regel 1}).
 Eine BROS-Scene wird durch ein BROS-ReturnEvent beendet.
 Somit muss ein BPMN-TerminationEvent mit einem BROS-ReturnEvent modelliert werden.
+Diese Regel wird in \cref{fig:ruleExample3} visualisiert.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 3, label=lst:rule_3]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 3, label=lst:rule_3]
 rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
     (
         bros(Bros, "ReturnEvent"), 
@@ -151,10 +155,11 @@ rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
 Zu jedem \emph{BPMN-EndEvent} muss ein \emph{BROS-Event} oder \emph{BROS-ReturnEvent} existieren.
 Ein BPMN-EndEvent beendet die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
-Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn  zwischen diesen beiden eine BROS-DestroyRelation existiert.
+Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn zwischen diesen beiden eine BROS-DestroyRelation existiert.
 Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
+Der erste Fall ist mit Hilfe des Prozessteilnehmers "Kunde" in \cref{fig:ruleExample4} beispielhaft dargestellt.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 4, label=lst:rule_4]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 4, label=lst:rule_4]
 rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
     (
         (
@@ -184,8 +189,10 @@ Ein BPMN-StartEvent beginnt die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (vgl. \textbf{Regel 2}).
 Ein BROS-RoleType wird mit einem BROS-Event begonnen, wenn  zwischen diesen beiden eine BROS-CreateRelation existiert.
 Alternativ kann ein BPMN-StartEvent auch durch ein BROS-Event modelliert werden, wenn das BPMN-StartEvent das erste Event des BPMN-Prozesses ist und BROS-CreateRelation zwischen dem BROS-Event und der BROS-Scene existiert die den BROS-Prozess darstellt (vgl. \textbf{Regel 1}).
+Diese Regel entspricht. im Sinne des Ablaufes des Geschäftsprozesses, dem Gegenstück zu \textbf{Regel 4}.
+Die Visualisierung nutzt das gleiche Beispiel, nur ist in \cref{fig:ruleExample5} der Fokus auf das BPMN-StartEvent und die BROS-CreateRelation gelegt.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 5, label=lst:rule_5]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 5, label=lst:rule_5]
 rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
     (
         bros(Bros, "Event"),
@@ -205,8 +212,10 @@ Jedes \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss eine Ursache im BPMN-M
 Es darf kein Event im BROS-Modell geben das nicht im BPMN-Prozess existiert.
 Ein solches BROS-Event hätte keinen Auslöser im Verhaltensmodell und könnte somit nie eintreten.
 Passende BPMN-Elemente sind BPMN-Events unabhängig vom Typ, BPMN-Activities oder auch Ausgänge eines BPMN-Gateways.
+beispielhaft ist diese Regel in \cref{fig:ruleExample6} dargestellt.
+Hier wird der Fall abgebildet, das ein BROS-Event mit einem BPMN-Gateway übereinstimmt.
 
-\begin{lstlisting}[language=Prolog, caption=Regel 6, label=lst:rule_6]
+\begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 6, label=lst:rule_6]
 rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     (
         bpmn(Bpmn, "StartEvent"), match(Bpmn, Bros);
@@ -217,6 +226,55 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
         bpmn(Bpmn, "Gateway"), match(Bpmn, Bros)
     ).
 \end{lstlisting}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule1.jpg}%
+        \caption{Darstellungen der Regel 1}%
+        \label{fig:ruleExample1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule2.jpg}%
+        \caption{Darstellungen der Regel 2}%
+        \label{fig:ruleExample2}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule3.jpg}%
+        \caption{Darstellungen der Regel 3}%
+        \label{fig:ruleExample3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule4.jpg}%
+        \caption{Darstellungen der Regel 4}%
+        \label{fig:ruleExample4}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule5.jpg}%
+        \caption{Darstellungen der Regel 5}%
+        \label{fig:ruleExample5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule6.jpg}%
+        \caption{Darstellungen der Regel 6}%
+        \label{fig:ruleExample6}
+    \end{subfigure}
+    \caption{Exemplarische Darstellungen der Konsistenzregeln 1-6}%
+    \label{fig:pizzaBrosSteps}
+\end{figure}
 
 \section{Referenzarchitektur}
 

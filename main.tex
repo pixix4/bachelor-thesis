@@ -5,7 +5,11 @@
 \SelectInputMappings{adieresis={ä},germandbls={ß}}
 \usepackage[defaultsans]{opensans}
 \usepackage{xcolor}
+\usepackage{pifont}
 \usepackage{amsmath}
+\usepackage{threeparttable}
+\usepackage{wasysym}
+\usepackage{xstring}
 \usepackage{amsthm}
 \usepackage{caption}
 \usepackage{graphicx}
@@ -32,6 +36,19 @@
 
 %\counterwithout{figure}{chapter}
 %\counterwithout{equation}{chapter}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\f}[1]{%
+    \IfEqCase{#1}{%
+        {H}{\CIRCLE}%
+        {M}{\LEFTcircle}%
+        {L}{\Circle}%
+        {0}{\xmark}%
+        {1}{\cmark}%
+    }[\PackageError{f}{Undefined option to f: #1}{}]%
+}%
 
 \lstset{
   basicstyle=\footnotesize, 

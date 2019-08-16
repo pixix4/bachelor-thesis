@@ -2,16 +2,19 @@
 \label{chap:conclusion}
 
 In diesem Kapitel soll evaluiert werden in wie weit diese Arbeit die im \cref{chap:introduction} genannten Ziele erfüllt hat.
+Zu diesem Zweck werden die Ergebnisse der Analyse und der Implementierung zusammengefasst und in das Feld der bestehenden Verfahren einsortiert.
+Abschließend wird ein Ausblick über mögliche Erweiterungen und Verbesserungen des vorgestellten Verfahrens gegeben.
 
 \section{Zusammenfassung}
 
 Ziel der Arbeit war die Konsistenz zwischen BPMN- und BROS-Modellen zu überprüfen.
 Dafür wurden bestehende Konsistenzverfahren für UML-Modelle analysiert und anhand ihrer Eigenschaften klassifiziert.
-Darauf aufbauend wurden sechs Regeln für die Konsistenzprüfung aufgestellt und formalisiert.
+Auf dieser Basis wurden sechs Regeln für die Konsistenzprüfung aufgestellt und formalisiert.
+Diese führen einen direkten vergleich der beiden Modelle durch ohne eine Zwischendarstellung zu benutzen, um eine bessere Regelerweiterbarkeit zu erreichen.
 Für die Automatisierung der Konsistenzprüfung wurde eine Referenzarchitektur erstellt, die die formalen Regeln ausführt.
 Um die Funktionalität des Verfahren zu zeigen, wurde ein Tool in Kotlin implementiert um zusätzlich eine mögliche Anbindung an den BROS-Editor FRaMED.io zu erleichtern.
 Diese Implementierung wurde anschließend anhand des Beispieles einer Pizzabestellung von \cite{Schoen} getestet indem ein zu dem BPMN-Modell konsistentes BROS-Modell entwickelt wurde.
-Außerdem wurde die Erweiterbarkeit dieses Verfahrens Regel evaluiert, indem eine weiter Regel zu zu der Implementierung hinzugefügt wurde. 
+Außerdem wurde die Erweiterbarkeit dieses Verfahrens evaluiert, indem eine weiter Regel zu zu der Implementierung hinzugefügt wurde.
 
 \section{Wissenschaftlicher Beitrag}
 
@@ -28,9 +31,10 @@ Das das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet können
 \cite{Egyed2006} Verfahren ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regeln erschweren könnte.
 
 \begin{table}
+  \begin{threeparttable}
     \centering
     \begin{tabular}{p{1.58cm} p{1.50cm} p{0.95cm} p{2.2cm} p{1.60cm} p{0.33cm}
-        p{0.33cm} p{0.67cm} p{0.72cm} p{0.72cm}}
+        p{0.33cm} p{0.33cm} p{0.72cm} p{0.72cm}}
       &
       \rot{Diagrams} &
       \rot{Consistency} \rot{Type} &
@@ -42,21 +46,32 @@ Das das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet können
       \rot{Model} \rot{Extensibility} & 
       \rot{Rule} \rot{Extensibility} \\
       \toprule
-      Rasch 2003    & CD, SM              & Intra            & Monitoring           & CSP/OZ                      & 1          & H           & 0            & H                   & M                  \\
+      Rasch 2003    & CD, SM              & Intra            & Monitoring           & CSP/OZ                      & \f{1}      & \f{H}       & \f{0}        & \f{H}               & \f{M}              \\
       \midrule
-      Shinkawa 2006 & UCD, CD, SD, AD, SC & Inter            & Analysis             & CPN                         & 0          & H           & 0            & M                   & L                  \\
+      Shinkawa 2006 & UCD, CD, SD, AD, SC & Inter            & Analysis             & CPN                         & \f{0}      & \f{H}       & \f{0}        & \f{M}               & \f{L}              \\
       \midrule
-      Mens 2005     & CD, SD, SC          & All              & Monitoring           & Extended UML                & 1          & H           & 1            & H                   & M                  \\
+      Mens 2005     & CD, SD, SC          & All              & Monitoring           & Extended UML                & \f{1}      & \f{H}       & \f{1}        & \f{H}               & \f{M}              \\
       \midrule
-      Egyed 2001    & CD, OD, SD          & Intra, Inter     & Construction         &                             & 0          & H           & part      & M                   & M                  \\
+      Egyed 2001    & CD, OD, SD          & Intra, Inter     & Construction         &                             & \f{0}      & \f{H}       & $\sim$       & \f{M}               & \f{M}              \\
       \midrule
-      Egyed 2006    & CD, SD, SC          & Intra            & Monitoring           &                             & 1          & H           & 1            & L                   & M                  \\
+      Egyed 2006    & CD, SD, SC          & Intra            & Monitoring           &                             & \f{1}      & \f{H}       & \f{1}        & \f{L}               & \f{M}              \\
       \midrule
-      BROS          & BPMN, BROS          & Intra            & Monitoring           &                             & 1          & H           & 1            & L                   & H                 
+      BROS          & BPMN, BROS          & Intra            & Monitoring           &                             & \f{1}      & \f{H}       & \f{1}        & \f{L}               & \f{H}  
     \end{tabular}
-    \caption{Einordnung des neuen Verfahrens}%
-    \label{tab:Klassifikationsschema_extended}
-  \end{table}
+    \begin{tablenotes}
+      \item \hfil
+      \f{H}$ = $mit geringem Aufwand;
+      \f{M}$ = $mit mittlerem Aufwand;
+      \f{L}$ = $mit hohem Aufwand;
+      \item \hfil
+      \f{1}$ = $ja;
+      \f{0}$ = $nein;
+      $\sim$$ = $teilweise
+    \end{tablenotes}    
+  \end{threeparttable}
+  \caption{Einordnung des neuen Verfahrens}%
+  \label{tab:Klassifikationsschema_extended}
+\end{table}
 
 \section{Zukünftige Arbeiten}
 

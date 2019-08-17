@@ -2,7 +2,7 @@
 \label{chap:background}
 
 Um in der weiteren Arbeit den Konsistenzvergleich zwischen BPMN- und BROS-Modellen durchführen zu können, werden zunächst die Modelle und ihre unterstützten Elemente vorgestellt.
-Dafür wird wird für jedes Modell ein Metamodell eingeführt.
+Dafür wird für jedes Modell ein Metamodell eingeführt.
 Da sich einige Namen zwischen den Modellen doppeln werden die Elemente der Metamodelle mit dem Präfix "BPMN" bzw. "BROS" benannt.
 
 \section{Business Process Model and Notation}
@@ -13,29 +13,31 @@ Einer der Hauptvorteile von BPMN ist die große Verbreitung.
 Dank ihr können Prozessbeschreibungen auf einfache Art und Weise zwischen verschieden Plattformen und Stakeholdern ausgetauscht werden.
 Neben der informellen Beschreibung von Prozessen unterstützt BPMN auch die direkte Ausführung von Geschäftsprozessen.
 Mittels diverser Interpreter können in BPMN modellierte Abläufe zur Automatisierung einfacher Aufgaben oder ganzer Fertigungsprozesse genutzt werden.
-Die Hauptelemente von eines BPMN-Modelles sind:
+Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
 
 \begin{itemize}
     \item \textbf{Activity:} 
     Eine Activity beschreibt eine Tätigkeit die innerhalb des Geschäftsprozesses ausgeführt wird.
-    Da eine Aufgabe ausgeführt wird, kann die Ausführung einer Activity längere Zeit in anspruch nehmen.
-    Zur Darstellung wird ein Rechteck mit abgerundeten Ecken verwendet.
+    Da das ausführen einer Aktion in Zeit in anspruch nehmen kann, kann auch die Abarbeitung einer Activity Zeit benötigen.
+    Zur Darstellung einer Activity wird ein Rechteck mit abgerundeten Ecken verwendet.
     \item \textbf{Gateway:}
     Ein Gateway wird für die Steuerung des Kontrollflusses verwendet. 
     An einem Gateway können verschiedene Kontrollwege zusammenlaufen oder sich teilen. 
     Dabei werden verschiedene Arten, wie zB. AND- und OR-Gateways unterstützt. 
+    Je nach verwendetem Gateway verläuft der weitere Kontrollfluss parallel oder nur einer der möglichen Wege wird genutzt.
     Dargestellt wird ein Gateway mittels einem um 45 Grad gedrehtem Quadrat. 
     \item \textbf{Event:}
-    Ein Event beschreibt Ereignis das innerhalb des Geschäftsprozesses auftreten kann und werden mit einem Kreis dargestellt.
-    Sie beeinflussen den Kontrollfluss, können ihn starten, pausieren oder auch beenden.
-    Events werden in drei verschiedenen Dimensionen eingeteilt, nach ihrer Position, nach ihrer Wirkung und nach ihrer Art.
+    Ein Event beschreibt ein Ereignis das innerhalb des Geschäftsprozesses auftreten kann und wird mit einem Kreis dargestellt.
+    Sie beeinflussen den Kontrollfluss, können ihn starten, beendet oder unabhängige Aktionen auslösen.
+    Events werden in drei verschiedenen Dimensionen eingeteilt: nach ihrer Position, nach ihrer Wirkung und nach ihrer Art.
     Für die weitere Arbeit ist nur die Unterteilung nach ihrer Position innerhalb des Geschäftsprozesses wichtig.
     Dabei wird zwischen einem StartEvent (einfacher Rahmen), einem IntermediateEvent (doppelter Rahmen) und einem EndEvent (dicker Rahmen) unterschieden.
+    Zusätzlich existiert noch das TerminationEvent welches den laufenden Prozess vollständig abbricht und mit einem fast vollständig ausgefülltem EndEvent dargestellt wird.
     \item \textbf{Flow:}
     Ein Flow ist eine gerichtete Verbindung zwischen anderen Modellelementen.
     Dabei wird zwischen SequenceFlows und MessageFlows unterschieden.
     Ein SequenceFlow stellt den Kontrollfluss dar und verbindet Elemente um eine Ausführungsreihenfolge festzulegen.
-    Ein MessageFlow verbindet unterschiedliche Teilnehmer des Geschäftsprozesses und stellt die austausch von Mitteilungen dar.
+    Ein MessageFlow verbindet unterschiedliche Teilnehmer des Geschäftsprozesses und symbolisiert den Austausch von Mitteilungen.
     \item \textbf{Pool:}
     Ein Pool stellt eine Gruppe von zusammengehörenden Teilnehmern innerhalb eines Geschäftsprozesses dar.
     Dargestellt wird ein Pool mit einem Rechteck wobei der Name am linken Rand steht.
@@ -44,14 +46,15 @@ Die Hauptelemente von eines BPMN-Modelles sind:
     Bei einem Pool der nur aus einer Swimlane besteht kann die Swimlane mit dem Pool vereinigt werden.
     Innerhalb eines Pools wird die Simelane als eine horizontale Bahn dargestellt.
     \item \textbf{Process:}
-    Der Process bildet den vollständigen Geschäftsprozess ab und ist das Containerelement für die anderen Modellelemente.
+    Ein Process bildet einen teil des Geschäftsprozesses ab und ist das Containerelement für die anderen Modellelemente.
+    An dem vollständigen Geschäftsprozess können mehrere Prozesse beteiligt sein, die mittels MessageFlows untereinader kommunizieren.
 \end{itemize}
 
 Da BPMN schon längere Zeit in Benutzung ist hat es eine gute Toolunterstützung für die Modellierung.
 Eines dieser Tools ist bpmn.io\footnote{https://demo.bpmn.io/}.
 Es ist ein webbasiertes Tool das einen großteil des BPMN-Standards unterstützt.
 Das Tool speichert und lädt die BPMN-Modelle in einem auf XML-basierenden Format mit der Dateiendung \emph{.bpmn}.
-Die Datenstruktur basiert auf dem Metamodell das von der \emph{Object Management Group}\footnote{https://www.omg.org/spec/BPMN/2.0/About-BPMN/} spezifiziert wurde.
+Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Management Group}\footnote{https://www.omg.org/spec/BPMN/2.0/About-BPMN/} spezifiziert wurde.
 
 \begin{figure}
     \centering
@@ -60,8 +63,8 @@ Die Datenstruktur basiert auf dem Metamodell das von der \emph{Object Management
     \label{fig:bpmnMetamodell}
 \end{figure}
 
-Für die weitere Arbeit wird nur ein Teil des vollständige BPMN-Standards der \emph{OMG} genutzt.
-Ein deutlich gekürztes Metamodell für Business Prozesse wurde von \cite{Loja2010} erstellt.
+Für die weitere Arbeit wird allerdings nur ein Teil des vollständige BPMN-Standards der \emph{OMG} genutzt.
+Ein deutlich gekürzte Version des Metamodelles für Business Prozesse wurde von \cite{Loja2010} erstellt.
 Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodell}).
 Es unterstützt dabei nur die oben genannten BPMN-Elemente.
 Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickeltem Tool nicht betrachtet.
@@ -70,9 +73,9 @@ Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodell} wird ein BPMN-Modell in ei
 Die Wurzel des Baumes ist das Modell ansich.
 Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
 Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
-Die Events teilen sich in drei Unterklassen auf, die Start-, Intermediate- und EndEvents (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
+Die Events teilen sich in die drei Unterklassen die Start-, Intermediate- und EndEvent (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent) auf.
 Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
-Hierbei ist zu beachten, das obwohl eine Swimlane auch Flowobjekte enthalten kann, das jedes Flowobjekt nur einen Container haben darf.
+Hierbei ist zu beachten das, obwohl eine Swimlane auch Flowobjekte enthalten kann, jedes Flowobjekt nur einen Container haben darf.
 So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane sein.
 Jedes Kind einer Swimlane ist transitiv auch Kind von dem Elternprozess der Swimlane.
 Die beiden Flow-Arten bilden die Querverweise innerhalb des Baumes.
@@ -81,11 +84,11 @@ Der SequenceFlow (BpmnSequenceFlow) stellt den Ablauf innerhalb eines Prozesses 
 
 \section{Compartment Role Object Model}
 
-Das \emph{Compartment Role Object Model} (\textbf{CROM}) ist eine Modellierungssprache für Rollenbasierte Systeme.
+Das \emph{Compartment Role Object Model} (\textbf{CROM}) ist eine Modellierungssprache für rollenbasierte Systeme.
 Eine Rolle beschreibt einen Aufgabenbereich der von verschiedenen Entitäten übernommen werden kann, man sagt die Entität spielt die Rolle.
 CROM führt zusätzlich noch das \emph{Compartment} ein, das den Kontext der Rolle abbildet, in dem diese gespielt werden kann.
-Dazu wird das Modell in drei logische Aspekte unterteilt, den Verhaltensaspekt, den Relationenaspekt und den Kontextaspekt.
-Der Verhaltensaspekt beschreibt die Aktoren bzw Entitäten und die Rollen die von diesen gespielt werden können.
+Dadurch wird das Modell in drei logische Aspekte unterteilt, den Verhaltensaspekt, den Relationenaspekt und den Kontextaspekt.
+Der Verhaltensaspekt beschreibt die Aktoren bzw. Entitäten und die Rollen die von diesen gespielt werden können.
 Der Relationenaspekt fügt zu den Rollen weitere Constraints und Verbindungsbeschreibungen hinzu.
 Im dritten Aspekt, dem Kontextaspekt wird mittels der Compartments die Kontextabhängigkeit modelliert.
 Die dafür genutzten Elemente sind:
@@ -96,7 +99,7 @@ Die dafür genutzten Elemente sind:
     Sie wird mit einem abgerundeten Rechteck vergleichbar mit einer UML-Klasse dargestellt.
     Eine Rolle kann einer Entität zusätzliche Attribute und Methoden hinzufügen.
     \item \textbf{CompartmentType:}
-    In einem CompartmentType bildet den Kontext von verschiedene RoleTypes ab.
+    Ein CompartmentType bildet den Kontext von verschiedene RoleTypes ab.
     Das Compartment ist an sich auch eine Rolle und kann von Entitäten gespielt werden.
     Graphisch wird es wie eine UML-Klasse dargestellt, die zusätzlich noch ein weiteres Feld für die beinhalteten Rollen besitzt.
     \item \textbf{NaturalType:}
@@ -118,13 +121,17 @@ Die dafür genutzten Elemente sind:
 
 CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{https://github.com/Eden-06/FRaMED-2.0} einen eigenen graphischen Editorsupport.
 Der Name des Editors ist ein Akronym für \emph{Full-fledged Role Modeling EDitor} und wurde speziell für CROM entwickelt.
+Dabei unterstützt er den vollständigen Standard von CROM.
+Mittels einem Feature Editor lassen sich bestimmt Modellfunktionen ein und ausschalten.
 
 \section{Business Role-Object Specification}
 
 Der neu entwickelte Ansatz der \emph{Business Role-Object Specification} (\textbf{BROS}) kombiniert die Vorteile der strukturbasierten Modellierung und der verhaltensbasierten Modellierung.
 Als Grundlage für BROS dient die strukturbasierte Modellierungssprache CROM.
-Diese wird mit Hilfe von Events um den Verhaltensaspekt erweitert.
-Zusätzlich zu den CROM-Elemente werden folgende Modellelemente unterstützt.
+Diese wird ua. mit Hilfe von Events um den Verhaltensaspekt erweitert.
+Ziel ist es aus einem bereits existieren Geschäftsprozess zu verwenden um auf dessen Basis die Businessobjekte zu modellieren.
+Das so entstandene Modell kann anschließend als Vorlage für die eigentliche Implementierung genutzt werden (vgl \cite{Schoen}).
+Dafür werden zusätzlich zu den CROM-Elemente folgende Modellelemente unterstützt:
 
 \begin{itemize}
     \item \textbf{Scene:}
@@ -149,8 +156,6 @@ Auch BROS besitzt mit \emph{FRaMED.io}\footnote{https://eden-06.github.io/FRaMED
 \emph{FRaMED.io} ist eine Neuentwicklung von \emph{FRaMED-2.0} und wie \emph{bpmn.io} webbasiert.
 Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
 
-\textit{TODO}
-
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth,keepaspectratio]{../images/brosMetamodell.jpg}%
@@ -159,7 +164,7 @@ Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
 \end{figure}
 
 Das Metamodell in \cref{fig:brosMetamodell} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
-Die Eelemte des Metamodelles teilen sich in zwei Klassen auf.
+Die Elemte des Metamodelles teilen sich in zwei Klassen auf.
 Auf der einen Seite sind die Connections, zu denen die Create- und DestroyRelation (BrosCreateRelation, BrosDestroyRelation) gehören.
 Auf der anderen Seite sind die Objekte die sich in Endknoten und Objektgruppen teilen.
 Endknoten sind die NaturalTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).

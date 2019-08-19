@@ -2,13 +2,13 @@
 \label{chap:evaluation}
 
 Nachdem die verschiedenen Konsistenzregeln aufgestellt und implementiert wurden, soll nun die Benutzbarkeit und die Erweiterbarkeit des Tools gezeigt werden.
-Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools aus sicht des Benutzers durgeführt (Abschnitt 1) und anschließend eine neue Regeln aus sicht des Entwicklers implementiert (Abschnitt 2).
+Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools, aus sicht des Benutzers, durgeführt (Abschnitt 1) und anschließend eine neue Regel, aus sicht des Entwicklers, implementiert (Abschnitt 2).
 
 \section{Anwendung am Beispiel einer Pizzabestellung}
 
 In seiner Arbeit hat \cite{Schoen} für die Einführung in BROS das Beispiel einer Pizzabestellung erstellt.
 Das dort gegebene BPMN-Modell wird als Grundlage genutzt um ein neues BROS-Modell zu erstellen und die Konsistenz mit Hilfe des neu entwickelten Tools zu überprüfen.
-Die Modelle werden zu diesem Zweck neu in bpmn.io und FRaMED.io modelliert um sie automatisiert überprüfen zu können.
+Die Modelle werden zu diesem Zweck neu in bpmn.io und FRaMED.io modelliert, um sie automatisiert überprüfen zu können.
 Nachdem ein konsistentes BROS-Modell entwickelt wurde, wird die Benutzbarkeit des Tools diskutiert.
 
 \begin{figure}
@@ -19,12 +19,12 @@ Nachdem ein konsistentes BROS-Modell entwickelt wurde, wird die Benutzbarkeit de
 \end{figure}
 
 In dem Geschäftsprozess der Pizzabestellung gibt es drei Teilnehmer, die in \cref{fig:pizzaBpmn} zu sehen sind.
-Der erste Teilnehmer ist der  \emph{Kunde}.
+Der erste Teilnehmer ist der \emph{Kunde}.
 Dieser startet den Prozess indem er eine Bestellung aufgibt.
-Die Bestellung wird von dem \emph{Kellner} aufgenommen und an den \emph{Koch} weiter gegeben.
-Wenn die Bestellung von dem Koch bearbeitet wird und die Bestellung länger benötigt als gewöhnlich kann sich der Kunde bei dem Kellner bestellen, dessen Aufgabe dann das beruhigen des Kunden ist.
-Sollte dies nicht erfolgreich sein kann der Kunde sich beschweren und seine Bestellung zurücknehmen, was den Prozess vorzeitig beenden.
-Nachdem der Koch die Pizza fertig zubereitet hat übergibt er sie wieder dem Kellner der die Bestellung dem Kunden übereicht.
+Die Bestellung wird von dem \emph{Kellner} aufgenommen und an den \emph{Koch} weiter gereicht.
+Falls, während die Bestellung von dem Koch bearbeitet wird, die Bestellung länger benötigt als gewöhnlich, kann sich der Kunde bei dem Kellner beschweren, dessen Aufgabe dann das beruhigen des Kunden ist.
+Sollte dies nicht erfolgreich sein, kann der Kunde seine Bestellung zurücknehmen, was den Prozess vorzeitig beenden.
+Nachdem der Koch die Pizza fertig zubereitet hat, übergibt er sie wieder dem Kellner, der die Bestellung dem Kunden übereicht.
 Anschließend erstellt der Kellner noch die Rechnung für den Kunden.
 Sobald der Kunde die Pizza gegessen hat ist der Prozess beendet.
 
@@ -37,51 +37,52 @@ Sobald der Kunde die Pizza gegessen hat ist der Prozess beendet.
 
 Für dieses BPMN-Modell kann nun ein dazu passendes BROS-Modell entworfen werden (vgl. \cref{fig:pizzaBros1}).
 Aus dem Prozess lassen sich vier verschiedene Entitäten entnehmen.
-Dies sind \emph{Bestellung}, \emph{Pizza}, \emph{Gast} und \emph{Mitarbeiter}, welche als ClassType modelliert werden.
+Dies sind \emph{Bestellung}, \emph{Pizza}, \emph{Gast} und \emph{Mitarbeiter}, welche als NaturalType modelliert werden.
 Der gesamte Prozess wird mit der Scene \emph{Pizzabestellung} abgebildet.
 Die drei Teilnehmer aus dem BPMN-Modell werden mit Rollen innerhalb der Scene übersetzt, die mit Events verbunden sind.
-Der Ablauf der Beschwerde von Kunden wird mit einer eigenständigen Scene modelliert, die zwei verschiedene ReturnEvents besitzt.
+Der Ablauf einer Beschwerde von einem Kunden, wird mit einer eigenständigen Scene modelliert, die zwei verschiedene ReturnEvents besitzt.
+Diese stellen den Ausgang des Beschwichtigungsversuches durch den Kellner dar.
 
-Nachdem beide Modelle erstellt wurden, kann die Konsistenzprüfung mittels des Tools erfolgen.
+Nachdem beide Modelle erstellt wurden, kann die Konsistenzprüfung mit dem Tools erfolgen.
 Dafür werden die beiden gespeicherten Dateien, mittels Drag'n'Drop in das Benutzerinterface gezogen, wodurch die Prüfung automatisch startet.
-Bei der Überprüfung konnten die Regeln 18 mal angewendet werden und es wurden 12 mal positive Konsistenzmeldungen zurückgegeben.
+Bei der Überprüfung konnten die Regeln 18 mal angewendet werden und es wurden 12 positive Konsistenzmeldungen zurückgegeben.
 Damit sind in dem BROS-Modell 6 Konsistenzprobleme aufgetreten.
 Die davon betroffenen Regeln sind die Regeln 1, 3, 4, 5 und 6.
 
-Der erste Regelverstoß basiert auf der Regel 1 und besagt das für den Bpmn-Prozess "Order Pizza" kein entsprechendes BROS-Element gefunden werden konnte.
-Das liegt an dem Namensunterschied gegenüber der BROS-Scene, die "Pizzabestellung" heißt.
+Der erste Regelverstoß hat seinen Ursprung in der Regel 1 und besagt das für den Bpmn-Prozess ``Order Pizza'' kein entsprechendes BROS-Element gefunden werden konnte.
+Das liegt an dem Namensunterschied gegenüber der BROS-Scene, die ``Pizzabestellung'' heißt.
 Dieses Konsistenzproblem lässt sich auf zwei unterschiedlichen Wegen lösen.
-Zum einen kann ein ein Predefined Matching zwischen dem BPMN-Prozess und der BROS-Scene erstellt werden.
-Dazu kann der BPMN-Prozess mit einem klick auf die ID markiert werden.
-Die BROS-Scene ist unter dem Reiter \emph{BROS matching} auffindbar und kann mit einem klick ebenfalls markiert werden.
-In dem Dialog am unterem Bildschirmrand kann nun das Matching hinzugefügt werden, wodurch die Überprüfung erneut durchgeführt wird.
-Um die Konsistenz auch für zukünftige Modelle für diesen Geschäftsprozess zu erhalten kann die BROS-Scene auch umbenannt werden.
-Nachdem die BROS-Scene zu "OrderPizza" umbenannt (vgl. \cref{fig:pizzaBros3}) wurde kann die Konsistenzprüfung mit dem laden der neuen Datei wiederholt werden.
+Zum einen kann ein Predefined Matching zwischen dem BPMN-Prozess und der BROS-Scene erstellt werden.
+Dazu kann der BPMN-Prozess mit einem Klick auf die ID markiert werden.
+Die BROS-Scene ist unter dem Reiter \emph{BROS matching} auffindbar und kann mit einem Klick ebenfalls markiert werden.
+In dem Dialog, am unterem Bildschirmrand, kann nun das Matching hinzugefügt werden, wodurch die Überprüfung erneut durchgeführt wird.
+Um die Konsistenz auch für zukünftige Modelle des Geschäftsprozesses zu erhalten, kann die BROS-Scene auch umbenannt werden.
+Nachdem die BROS-Scene zu ``OrderPizza'' umbenannt (vgl. \cref{fig:pizzaBros3}) wurde, kann die Konsistenzprüfung, mit dem laden der neuen Datei, wiederholt werden.
 
 Durch das umbenennen der BROS-Scene hat sich auch ein weiteres Konsistenzproblem gelöst, so das nun nur noch 4 Probleme vorliegen.
-Das zweite Problem kommt von der Regel 3 und beschreibt das zu dem BPMN-TerminationEvent "order cancelled" kein passendes BROS-ReturnEvent gefunden wurde.
+Das zweite Problem kommt von der Regel 3 und beschreibt, das zu dem BPMN-TerminationEvent ``order cancelled'', kein passendes BROS-ReturnEvent gefunden wurde.
 Dieses Problem stammt von dem vergessenen BROS-ReturnEvent.
-Es kann leicht behoben werden indem zu der BROS-Scene noch ein weiteres BROS-ReturnEvent mit dem Namen "order cancelled" hinzugefügt wird (vgl. \cref{fig:pizzaBros4}). 
+Es kann leicht behoben werden indem zu der BROS-Scene noch ein weiteres BROS-ReturnEvent mit dem Namen ``order cancelled'' hinzugefügt wird (vgl. \cref{fig:pizzaBros4}). 
 Dabei erhöht sich auch die Anzahl der zutreffenden Regeln um eins auf 19, da ein weiteres BROS-Event existiert, das mit Regel 6 überprüft werden muss.
 
 Für das dritte Konsistenzproblem ist Regel 4 verantwortlich.
-Es besagt das für BPMN-EndEvent "baked pizza send" zwar ein BROS-Event im Matching gefunden werden konnte, aber die Elemente die von den Events beendet werden unterschiedlich sind.
+Es besagt, das für das BPMN-EndEvent ``baked pizza send'' zwar ein BROS-Event im Matching gefunden werden konnte, aber die Elemente, die von den Events beendet werden, unterschiedlich sind.
 Das BPMN-EndEvent beendet die BPMN-Swimlane für den Koch, das BROS-Event hingegen beendet nichts.
 Dies liegt an einer fehlerhaften Verknüpfung der BROS-Event.
-Momentan wird die BROS-Rolle "TatyPizza" von dem BROS-Event "baked pizza send" erzeugt, was allerdings falsch ist.
-Für das erzeugen dieser BROS-Rolle ist das BROS-Event "pizza served" verantwortlich.
-Das BROS-Event "baked pizza send" wird hingegen mit einer BROS-DestroyRelation mit der BROS-Rolle des Koches vebunden, wie in \cref{fig:pizzaBros5} zu sehen ist.
+Momentan wird die BROS-Rolle ``TatyPizza'' von dem BROS-Event ``baked pizza send'' erzeugt, was allerdings falsch ist.
+Für das erzeugen dieser BROS-Rolle ist das BROS-Event ``pizza served'' verantwortlich.
+Das BROS-Event ``baked pizza send'' wird hingegen mit einer BROS-DestroyRelation mit der BROS-Rolle des Koches vebunden, wie in \cref{fig:pizzaBros5} zu sehen ist.
 
 Der vorletzte Regelverstoß basiert auf der Regel 5 und ist trivial zu lösen.
-Er beschreibt, das zu dem BPMN-StartEvent "check menu" kein passendes BROS-Event mit BROS-CreateRelation zu der BROS-Scene "OrderPizza" existiert.
+Er beschreibt, das zu dem BPMN-StartEvent ``check menu'', kein passendes BROS-Event, mit BROS-CreateRelation zu der BROS-Scene ``OrderPizza'', existiert.
 Dieses BROS-Event wurde im bisherigen BROS-Model vergessen.
-Zum lösen des Konsistenzproblems muss ein BROS-Event mit dem Namen "check menu" und der BROS-CreateRelation hinzugefügt werden (vgl. \cref{fig:pizzaBros6}).
+Zum lösen des Konsistenzproblems muss ein BROS-Event, mit dem Namen ``check menu'' und der dazugehörigen BROS-CreateRelation, hinzugefügt werden (vgl. \cref{fig:pizzaBros6}).
 
 Anschließend bleibt nur noch ein Konsistenzproblem übrig.
-Dieses besagt das ein Verstoß gegen Regel 6 vorliegt, indem zu dem BROS-Event "pizza lost" kein passendes BPMN-Element gefunden wurde.
+Dieses besagt, das ein Verstoß gegen Regel 6 vorliegt, indem zu dem BROS-Event ``pizza lost'', kein passendes BPMN-Element gefunden wurde.
 Das ist ein Problem, welches sich nicht einfach lösen lässt, da kein passendes BPMN-Element existiert.
-Mit dem BROS-Event wurde das Modell um eine neu Möglichkeit erweitert, die die Konsistenz verletzt.
-Um dieses Problem zu lösen muss entweder das BROS-Event gelöscht oder das BPMN-Modell angepasst werden.
+Mit dem BROS-Event wurde das Modell um eine neue Funktionalität erweitert, die die Konsistenz verletzt.
+Um dieses Problem zu lösen, muss entweder das BROS-Event gelöscht oder das BPMN-Modell angepasst werden.
 Wenn das BROS-Event aber erhalten bleiben soll und es keine Möglichkeit gibt das BPMN-Modell zu ändern, muss dieser Regelverstoß ignoriert werden.
 
 \begin{figure}
@@ -91,15 +92,15 @@ Wenn das BROS-Event aber erhalten bleiben soll und es keine Möglichkeit gibt da
     \label{fig:pizzaBros6}
 \end{figure}
 
-Damit zeigt {fig:pizzaBros6} das vollständige BROS-Modell das so weit wie möglich mit dem BPMN-Modell konsistent ist.
+Damit zeigt \cref{fig:pizzaBros6} das vollständige BROS-Modell, das so weit wie möglich mit dem BPMN-Modell konsistent ist.
 Dank des Tools konnten viele Konsistenzprobleme gefunden und leicht behoben werden.
-Bei der letzten negativen Konsistenzmeldungen des Tools wurde gezeigt, das dieser Regelverstoß absichtlich herbeigeführt wurde.
+Mit der letzten negativen Konsistenzmeldungen des Tools wurde gezeigt, das ein Regelverstoß absichtlich herbeigeführt werden kann und dies nicht unbedingt einen Fehler darstellt.
 Das Tool hat zurzeit keine Möglichkeit mit bewussten Konsistenzproblemen umzugehen.
 Hierfür wäre eine Funktion zur manuellen Abstufung der Regelverletzung von einem Fehler zu einer Warnung oder Information hilfreich.
 
 \section{Erweiterbarkeit des Ansatzes}
 
-Bisher wurden nur Regeln vorgestellt, die die Konsistenz von BPMN-Modellen zu BROS-Modellen prüfen.
+Bisher wurden nur Regeln implementiert, die die Konsistenz von BPMN-Modellen zu BROS-Modellen prüfen.
 Da das BROS-Modell gegenüber dem BPMN-Modell angereichert werden kann ist dies auch die häufigste Anwendung.
 Allerdings können auch einige Regeln in die andere Richtung überprüft werden.
 Um gleichzeitig die Erweiterbarkeit des Ansatzes und der Implementierung zu zeigen wird \textbf{Regel 6} aus \cref{sec:Konsistenzregeln} hinzugefügt.
@@ -110,11 +111,11 @@ Der genaue Typ des BPMN-Events ist dabei nicht relevant, es kann sich dabei unte
 Jede Regel sollte zur besseren Übersicht in eine eigene Datei ausgelagert werden.
 Die bereits bestehenden Regel befinden sich im Package \emph{io.framed.modules}.
 Für die Regel 6 wird dafür die Datei \emph{Rule6BrosEvent.kt} erstellt.
-Jede Datei enthält eine Funktion die einmalig zum Setup der Regeln ausgeführt wird.
+Jede Datei enthält eine Funktion die zum Setup der Regeln ausgeführt wird.
 Dies hat die Signatur \emph{fun Context.setupRule6BrosEvent()}.
 Damit wird ein Parameter definiert, der den Typ \emph{Context} hat und als Receiver (\emph{this}) genutzt werden kann.
 Innerhalb dieser Funktion können nun die Matching- und Verifikations-Funktionen definiert werden.
-Die explizite angabe des \emph{Context} Receiver Parameters ist nun nicht mehr nötig, da dies durch die Setup-Funktion an innere Funktionen propagiert wird. 
+Die explizite Angabe des \emph{Context}-Receiver-Parameters ist nun nicht mehr nötig, da dies durch die Setup-Funktion an ihre inneren Funktionen propagiert wird. 
 
 Die Matching Regeln zwischen den verschiedenen BPMN-Events und dem BPMN-Gateway wurden im \cref{sec:matching_model_elements} bereits implementiert.
 Für die Erweiterung muss damit nur die Matching Regel für BPMN-Activities mittels Name-Matching hinzugefügt werden.
@@ -124,25 +125,26 @@ Da BROS-Events und BROS-ReturnEvents unterschiedliche Metamodell Typen haben, mu
 Die Implementierung des Lambdas bleibt unverändert.
 
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel zwischen BPMN-Activities und BROS-Events, label=lst:matching_activity_event]
-match<BpmnTask, Event> { bpmn, bros ->
+match<BpmnTask, BrosEvent> { bpmn, bros ->
     matchStrings(bpmn.element.name, bros.element.desc)
 }
 \end{lstlisting}
 
 Nachdem das Matching auf die unterstützten Modellelemente erweitert wurde, kann nun die Verifikationsregel implementiert werden.
-Anders als die in \cref{sec:implementaion_consistency_rules} implementierten Regeln ist Regel 6 von dem BROS-Modell aus gerichtet.
-Darum wird nicht die Funktion \emph{verifyBpmn} sondern äquivalente Funktion \emph{verifyBros} genutzt.
+Anders als die in \cref{sec:implementaion_consistency_rules} implementierten Regeln, ist Regel 6 von dem BROS-Modell aus gerichtet.
+Darum wird nicht die Funktion \emph{verifyBpmn} sondern die äquivalente Funktion \emph{verifyBros} genutzt.
 Im generischen Parameter der Funktion wird nach einem BROS-Event gefiltert.
-Innerhalb des Lambdas wird überprüft ob es ein Element im Matching des BROS-Events gibt das ein BPMN-Element ist.
+Innerhalb des Lambdas wird überprüft ob es ein BPMN-Element im Matching des BROS-Events gibt.
 Hier wird zur Vereinfachung des Quellcodes ausgenutzt, das mit den Matching Regeln keine unzulässigen BROS-Elemente im Matching aufgenommen werden können.
 Sollte das Matching mit anderen BROS-Event zu BPMN-Element Regeln erweitert werden, muss im Schleifenkörper eine genauere Überprüfung des BPMN-Element Typs erfolgen.
-Analog zu der neuen Matching-Regel muss auch die Verifikationsregel ein weiteres mal mit dem Filter nach BROS-ReturnEvents eingefügt werden.
+Analog zu der neuen Matching-Regel muss auch die Verifikationsregel ein weiteres mal, mit dem Filter nach BROS-ReturnEvents, eingefügt werden.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 6, label=lst:implementation_rule_6]
-verifyBros<Event> { bros ->
-    for (element in bros.matchingElements) {
-        val match = element.element as? BpmnElement ?: continue
-        return@verifyBros Result.match("...", bpmn = element)
+verifyBros<BrosEvent> { bros ->
+    for (bpmn in bros.matchingElements) {
+        if (bpmn.checkType<BpmnElement>()) {
+            return@verifyBros Result.match("...", bpmn = bpmn)
+        }
     }
     Result.error("...")
 }
@@ -151,6 +153,6 @@ verifyBros<Event> { bros ->
 Ein Nachteil der Kotlin/JS Plattform ist das Fehlen von Reflection und Annotationprcessing wie in Java bzw. Kotlin/JVM.
 Aus diesem Grund wird die neu hinzugefügte Setup-Funktion nicht automatisch erkannt und muss manuell registriert werden.
 In der Datei \emph{io.framed.modules.Main.kt} existiert eine Liste von Setup-Funktionen die ausgeführt werden.
-Um nun die die neue Regel hinzuzufügen wird der Liste ein neuer Eintrag (\emph{Context::setupRule6BrosEvent}) hinzugefügt.
-Der Aufruf \emph{::} auf eine Funktion gibt eine Funktionsreferenz zurück und erlaubt eine spätere Ausführung.
+Um nun die neue Regel im Tool zu registrieren, wird die Liste um einen neuer Eintrag (\emph{Context::setupRule6BrosEvent}) ergänzt.
+Der Aufruf ``::'' auf eine Funktion gibt eine Funktionsreferenz zurück und erlaubt eine spätere Ausführung.
 Die vollständige Implementierung der Regel 6 ist unter \cref{lst:Rule6BrosEvent} zu finden.

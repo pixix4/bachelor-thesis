@@ -2,7 +2,7 @@
 \label{chap:related_work}
 
 Der Bereich der Konsistenzprüfung zwischen strukturbasierten und verhaltensbasierten Modellen ist seit Jahren gut erforscht.
-Insbesondere gibt es ein großes Spektrum an Methoden zum Vergleichen von verschiedenen UML-Modellen.
+Insbesondere gibt es ein großes Spektrum an Methoden zum Vergleichen von verschiedenen UML-Modellarten.
 Viele dieser Methoden untersuchen die Konsistenz zwischen UML-Klassendiagrammen und UML-Verhaltensmodellen wie UML-Zustands- oder UML-Aktivitätsdiagramme.
 Da sich die Konzepte dieser UML-Modelle mit denen von BROS und BPMN ähneln, lassen sich diese Methoden auch auf BPMN- und BROS-Modelle anwenden.
 Um die bestehenden Verfahren zur Konsistenzprüfung zu analysieren wird zunächst ein Klassifikation für diese Verfahren vorgestellt.
@@ -11,27 +11,27 @@ Anhand dieses Schemas werden anschließend relevante Arbeiten und deren Verfahre
 \section{Klassifikation von Verfahren zur Konsistenzprüfung}
 
 Da es bereits etliche Arbeiten im Gebiet der Konsistenzprüfung von UML-Modellen gibt, wurden bereits mehrere Zusammenstellungen der bestehenden Verfahren durchgeführt.
-In dieser Arbeit werden das Survey von \cite{Usman2008} und die Review \cite{Lucas2009} genauer betrachtet.
-Beide Autoren haben für die Klassifikation der Arbeit ein Schema erstellt, die sich in vielen Punkten ähneln.
+In dieser Arbeit werden das Survey von \cite{Usman2008} und die Review von \cite{Lucas2009} genauer betrachtet.
+Beide Autoren haben für die Klassifikation der Arbeiten, je ein Schema erstellt, die sich in vielen Punkten ähneln.
 Für die weiter Arbeit wird eine erweiterte Kombination der beiden Klassifikationsschemas genutzt.
-Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten stammt ist mit Autor der ihn zuerst genannt hat annotiert.
+Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten entnommen wurde, ist mit dem Autor, der ihn zuerst genannt hat, annotiert.
 
 \begin{itemize}
     \item \textbf{Nature (\cite{Usman2008}):}
     Es beschreibt den Fokus der vergleichbaren Modelltypen.
     Dabei wird zwischen strukturbasierten und verhaltensbasierten Modellen unterschieden.
-    Strukturbasierte Modelle beschreiben den Aufbau eines Systems. Dazu zählen unter anderem UML-Klassen-, UML-Komponentendiagramm und BROS-Modelle.
+    Strukturbasierte Modelle beschreiben den Aufbau eines Systems. Dazu zählen unter anderem UML-Klassen-, UML-Komponentendiagramme und BROS-Modelle.
     Zu den verhaltensbasierten Modellen gehören beispielsweise UML-Zustands-, UML-Aktivitätsdiagramme und BPMN-Modelle.
     Diese Modelle verdeutlichen die Abläufe und Zustände innerhalb eines Systems.
     Mögliche Werte sind strukturbasiert, verhaltensbasiert und beides.
     \item \textbf{Diagrams (\cite{Usman2008}):}
-    Es beschreibt welche konkreten Modelle von der Methode unterstützt werden.
-    Die Arbeiten von \cite{Usman2008} und \cite{Lucas2009} beziehen sich dabei ausschließlich auf UML Diagramme.
+    Es beschreibt welche konkreten Modellarten von der Methode unterstützt werden.
+    Die Arbeiten von \cite{Usman2008} und \cite{Lucas2009} beziehen sich dabei ausschließlich auf UML Modelle.
     Die Verfahren müssen dabei aber nicht auf UML beschränkt sein.
-    Mögliche Werte sind die Namen der unterstützten Modellarten.
+    Mögliche Werte sind die Namen der unterstützten Modelltypen.
     \item \textbf{Consistency Type (\cite{Usman2008}):}
     Es beschreibt welche Arten der Konsistenz von der Methode überprüft werden.
-    Dabei wird unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz in verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen) und \emph{Evolutionskonsistenz} (Konsistenz eines Modelles über verschiedene Entwicklungsstufen).
+    Dabei wird unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz in verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen) und \emph{Evolutionskonsistenz} (Konsistenz eines Modelltyps über verschiedene Entwicklungsstufen).
     Zusätzlich spezifiziert \cite{Usman2008} noch die \emph{semantische-} und die \emph{syntaktische Konsistenz}.
     Diese beziehen sich auf die Konsistenz eines Modelles zu seinem Metamodell.
     Dies wird für die nachfolgende Arbeit als Vorraussetzung angesehen und nicht näher betrachtet.
@@ -47,19 +47,19 @@ Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten stammt ist mit 
     Mögliche Werte sind ja und nein. 
     \item \textbf{Automatable (\cite{Usman2008}):}
     Es beschreibt ob die Methode manuell oder automatisiert von einem Programm durchgeführt werden kann.
-    Mögliche Werte sind mit geringer Aufwand (H), mit mittel Aufwand (M) und mit hoher Aufwand (L).
+    Mögliche Werte sind mit geringem Aufwand (H), mit mittlerem Aufwand (M) und mit hohem Aufwand (L).
     \item \textbf{Tool Support (\cite{Usman2008}):}
     Es beschreibt ob die Methode von einem Tool unterstützt wird oder ein eigenes Tool entwickelt wurde.
     Mögliche Werte sind ja und nein.
     \item \textbf{Model Extensibility:}
     Es beschreibt wie gut die Methode um weitere Modelle für den Konsistenzvergleich erweiterbar ist.
-    Mögliche Werte sind geringer Aufwand (H), mittel Aufwand (M) und hoher Aufwand (L).
+    Mögliche Werte sind geringer Aufwand (H), mittlerer Aufwand (M) und hoher Aufwand (L).
     \item \textbf{Rule Extensibility:}
     Es beschreibt wie gut die Methode um weitere Konsistenzregeln innerhalb der unterstützten Modellarten erweiterbar ist.
-    Mögliche Werte sind geringer Aufwand (H), mittel Aufwand (M) und hoher Aufwand (L).
+    Mögliche Werte sind geringer Aufwand (H), mittlerer Aufwand (M) und hoher Aufwand (L).
 \end{itemize}
 
-Dieses Schema ist direkt auf die Konsistenzprüfung von BPMN- und BROS-Modelle anwendbar.
+Dieses Schema ist direkt auf die Konsistenzprüfung zwischen BPMN- und BROS-Modelle anwendbar.
 Der Klassifikationspunkt der Erweiterbarkeit wurde bereits von \cite{Lucas2009} eingeführt.
 Für diese Arbeit wird er allerdings in die Aspekte der Modelerweiterbarkeit und der Regelerweiterbarkeit aufgeteilt um eine genauere Einteilung der Verfahren zu ermöglichen.
 Wichtig für die weitere Arbeit sind außerdem Verfahren deren \emph{Nature} beide Modelltypen unterstützt und deren \emph{Consistency Type} auf der \emph{Intra-Modell (horizontale) Konsistenz} beruht.
@@ -67,7 +67,7 @@ Wichtig für die weitere Arbeit sind außerdem Verfahren deren \emph{Nature} bei
 \section{Aktuelle Verfahren zur Konsistenzprüfung}
 
 Anhand des aufgestellten Klassifikationsschemas werden in diesem Abschnitt verschiedene Verfahren der Konsistenzprüfung von UML-Modellen vorgestellt.
-Dabei werden nur Verfahren betrachtet die in ihrer \emph{Nature} beide Modelltypen unterstützten, da die Konsistenzprüfung zwischen BPMN und BROS auch beide Modelltypen erfordert.
+Da die Konsistenzprüfung zwischen BPMN und BROS beide Modelltypen erfordert, werden dabei nur Verfahren betrachtet die in ihrer \emph{Nature} beide Modelltypen unterstützten.
 Der Klassifikationspunkt \emph{Nature} wird daher nicht weiter betrachtet.
 
 \textbf{Transformation zu \emph{CSP-OZ}:}
@@ -90,13 +90,13 @@ Diese eigenen sich besonders für Event-basierte Systeme.
 Dabei werden beide Modelltypen und alle Validierungsstrategien unterstützt.
 Für die \emph{Evolutionskonsistenz} wird eine Erweiterung des UML-Metamodells erstellt.
 Zusätzlich führt \cite{Mens2005} eine Fallstudie durch und entwickelt eine Toolunterstützung.
-Ein ähnlicher Ansatz wird von \cite{Simmonds2004} genutzt.
+Ein ähnlicher Ansatz wird von \cite{Simmonds2004} verfolgt.
 Noch weiter geht Satoh et al. (\cite{Usman2008}, 15) indem UML-Klassendiagramme direkt in Logikprogramme übersetzt und ausgeführt werden.
 
 \textbf{Transformation in ein gemeinsames Modell:}
 \cite{Egyed2001} entwickelt die ViewIntegra Methode für die  \emph{Inter-Modell (vertikale)} und \emph{Intra-Modell (horizontale) Konsistenz}.
 Der Fokus der ViewIntegra Methode liegt in der Skalierbarkeit und Effizienz der Überprüfung bei großen Modellen.
-Um dies zu erreichen wird eine iterative Umwandlung von verwandten UML-Modellen beschrieben.
+Um dies zu erreichen wird eine iterative Umwandlung von verwandten UML-Modellarten beschrieben.
 Dieses iterative Vorgehen reduziert den Entwicklungsaufwand erheblich, da nur noch ein Bruchteil aller benötigten Transformationsalgorithmen entwickelt werden muss.
 Dies vereinfacht auch die Erweiterbarkeit um neue Modellarten.
 Die konstruierten Modelle können anschließend direkt mittels \emph{Inter-Modell (vertikale) Konsistenz} überprüft werden.
@@ -168,14 +168,14 @@ Zum einen in die die eine Zwischendarstellung benötigen und zum anderen die die
 \cite{Rasch2003}, \cite{Shinkawa2006} und \cite{Mens2005} beschreiben Verfahren die zunächst eine Zwischendarstellung aufbauen und anschließend die Konsistenz der Zwischendarstellung überprüfen.
 Andererseits könne die Verfahren von \cite{Egyed2001} und \cite{Egyed2006} direkt auf den Modellen arbeiten.
 Der Vorteil von einer Zwischendarstellung ist die leichte Erweiterbarkeit um neue Modellarten.
-Es muss nur eine neue Konvertierungsmethode des Modelles zur Zwischendarstellung entwickelt werden.
-Anschließend können die gleichen Algorithmen zur Konsistenzprüfung wie bei den bestehenden Modellen verwendet werden.
+Es muss nur eine neue Konvertierungsmethode des neuen Modelles zur Zwischendarstellung entwickelt werden.
+Anschließend können die gleichen Algorithmen zur Konsistenzprüfung verwendet werden, die bereits bei dem bestehenden Modellen Anwendung finden.
 Allerdings ist dies auch eine Beschränkung der Erweiterbarkeit.
 Eine Zwischendarstellung hat zumeist den Nachteil des Informationsverlustes.
 Dadurch lassen sich nur schwer neue Regeln für die Konsistenz der Zwischendarstellung hinzufügen.
-Es kann auch sein das eine Modellart nicht kompatibel zu der Zwischendarstellung ist.
-Dann ist eine Erweiterung um diese Modellart nicht möglich.
-Dagegen haben die Verfahren ohne Zwischendarstellung weniger Beschränkungen bei der Erweiterbarkeit von Modellarten.
+Es kann auch sein das eine Modellart nicht kompatibel zu der genutzten Zwischendarstellung ist.
+Dann ist eine Erweiterung um diesen Modelltyp nicht möglich.
+Dahingegen haben die Verfahren ohne Zwischendarstellung weniger Beschränkungen bei der Erweiterbarkeit um weitere Modellarten.
 Hier ist das größte Hindernis der Aufwand eine neue Modellart hinzuzufügen.
 Im schlechtesten Fall müssen beim Hinzufügen einer neuen Modellart N neue Konvertierungsmethoden entwickelt werden.
 Dabei ist N die Anzahl der bereits unterstützten Modellarten.
@@ -186,15 +186,15 @@ Die am meisten benutzte Methode zur Konsistenzprüfung ist das \emph{Monitoring}
 Das \emph{Monitoring} basiert auf der Konsistenzprüfung mittels eines Regelsatzes. 
 Verfahren die \emph{Monitoring} nutzen, haben eine gute Erweiterbarkeit im bezug auf neue Konsistenzregeln.
 Dazu zählen die Verfahren von \cite{Rasch2003}, \cite{Mens2005} und \cite{Egyed2006}.
-\emph{Monitoring} bietet allerdings keine formale Verifikation, sondern nur eine Überprüfung vergleichbar mit Unittests.
+\emph{Monitoring} bietet allerdings keine formale Verifikation, sondern nur eine Überprüfung, vergleichbar mit Unittests.
 Dies wird von dem Verfahren der \emph{Analysis} gelöst.
 Mittels formaler Verifikation kann die Konsistenz bewiesen werden.
 Allerdings sind solcher Verfahren nicht sehr flexibel.
 Bei \cite{Shinkawa2006} kann beispielsweise nur die \emph{Inter-Modell (vertikale) Konsistenz} verifiziert werden.
 Die dritte Methode, die \emph{Construction}, beschreibt Verfahren deren Hauptaufgabe die Konstruktion anderer Modelle ist.
 Hierbei ist die Abgrenzung zu Verfahren die auf einer Zwischendarstellung basieren zu beachten.
-Verfahren die mit einem Transformationsalgorithmus eine Zwischendarstellung konstruieren, die nicht Teil der unterstützten Modellarten ist, zählen nicht dazu.
+Verfahren die mit einem Transformationsalgorithmus eine Zwischendarstellung konstruieren, die nicht Teil der unterstützten Modellarten ist, zählen nicht zu der Methode der \emph{Construction}.
 \cite{Egyed2001} nutzt diese Methode und beschreibt die Transformation zwischen verschiedenen UML-Modellen.
 Die Konsistenzprüfung der Modelle erfolgt mittels \emph{Inter-Modell (vertikale) Konsistenz} und ist unabhängig von dem Konstruktionsverfahren.
-Da die eigentliche Konsistenzprüfung nicht teil eines Konstruktionsverfahrens ist, kann diese Methode orthogonal zu den anderen beiden Methoden verwendet werden.
+Da die eigentliche Konsistenzprüfung nicht zwingend teil eines Konstruktionsverfahrens ist, kann diese Methode orthogonal zu den anderen beiden Methoden verwendet werden.
 

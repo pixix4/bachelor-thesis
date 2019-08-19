@@ -138,7 +138,7 @@ Zu jeder \emph{BPMN-Swimlane} innerhalb eines \emph{BPMN-Process} muss ein passe
 Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar. 
 Dieses Konzept wird in BROS mittels Rollen dargestellt.
 Daher muss jeder Teilnehmer des BPMN-Prozesses auch als Rolle im BROS-Modell existieren.
-In \cref{fig:ruleExample2} existiert in dem BPMN-Modell eine BPMN-Swimlane ''Kunde'', welche im BROS-Modell als BROS-RoleType ''Kunde'' dargestellt wird.
+In \cref{fig:ruleExample2} existiert in dem BPMN-Modell eine BPMN-Swimlane ``Kunde'', welche im BROS-Modell als BROS-RoleType ``Kunde'' dargestellt wird.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 2, label=lst:rule_2]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
@@ -174,7 +174,7 @@ Ein BPMN-EndEvent beendet die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
 Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn zwischen diesen beiden eine BROS-DestroyRelation existiert.
 Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
-Der erste Fall ist mit Hilfe des Prozessteilnehmers ''Kunde'' in \cref{fig:ruleExample4} beispielhaft dargestellt.
+Der erste Fall ist mit Hilfe des Prozessteilnehmers ``Kunde'' in \cref{fig:ruleExample4} beispielhaft dargestellt.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 4, label=lst:rule_4]
 rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->

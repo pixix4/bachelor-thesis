@@ -62,12 +62,12 @@ Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Manageme
         \MMElement{0}{2}{4.5}{1}{BpmnMessageFlow};
 
         \MMElement{-5.75}{0}{4.5}{1}{BpmnSequenceFlow};
-        \MMElement{5.75}{0}{4.5}{1}{BpmnElement};
+        \MMElement{5.75}{0}{4.5}{1}{\textit{BpmnElement}};
 
         \MMElement{0}{-2}{4.5}{1}{BpmnProcess};
         \MMElement{5.75}{-2}{4.5}{1}{BpmnLaneSet};
 
-        \MMElement{0}{-4}{4.5}{1}{BpmnFlowObject};
+        \MMElement{0}{-4}{4.5}{1}{\textit{BpmnFlowObject}};
         \MMElement{5.75}{-4}{4.5}{1}{BpmnLane};
 
         \MMElement{-5.75}{-6}{4.5}{1}{BpmnGateway};
@@ -200,10 +200,61 @@ Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth,keepaspectratio]{../images/brosMetamodell.jpg}%
+    \begin{tikzpicture}
+        \MMElement{-5.75}{4}{4.5}{1}{BrosRelationship};
+        
+        \MMElement{-5.75}{2}{4.5}{1}{BrosCreateRelation};
+        \MMElement{0}{2}{4.5}{1}{\textit{BrosConnection}};
+        
+        \MMElement{-5.75}{0}{4.5}{1}{BrosDestroyRelation};
+        \MMElement{0}{0}{4.5}{1}{\textit{BrosElement}};
+        
+        \MMElement{-5.75}{-2}{4.5}{1}{BrosEvent};
+        \MMElement{0}{-2}{4.5}{1}{\textit{BrosObject}};
+        \MMElement{5.75}{-2}{4.5}{1}{BrosRoleType};
+        
+        \MMElement{-5.75}{-4}{4.5}{1}{BrosReturnEvent};
+        \MMElement{0}{-4}{4.5}{1}{\textit{BrosObjectGroup}};
+        \MMElement{5.75}{-4}{4.5}{1}{BrosClass};
+        
+        \MMElement{-5.75}{-6}{4.5}{1}{BrosPackage};
+        \MMElement{0}{-6}{4.5}{1}{BrosScene};
+        \MMElement{5.75}{-6}{4.5}{1}{BrosCompartment};
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-5.5) -- (0,-4.5);
+        \draw (-5.75,-5.5) -- (-5.75,-5.1) -- (5.75,-5.1) -- (5.75,-5.5);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-3.5) -- (0,-2.5);
+        \draw (-5.75,-3.1) -- (5.75,-3.1);
+        \draw (-5.75,-3.5) -- (-5.75,-2.5);
+        \draw (5.75,-3.5) -- (5.75,-2.5);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-1.5) -- (0,-0.5);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,1.5) -- (0,0.5);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (-3.5,2) -- (-2.25,2);
+        \draw (-3.5, 4) -- (-2.875, 4) -- (-2.875,0) -- (-3.5,0);
+
+        \draw[color=layer2, {Diamond[length=4mm,open]}-] (2.25,-4) -- (2.875,-4) -- (2.875,-2) -- (2.25,-2);
+
+        \draw[color=layer2, ->] (2.25,1.8) -- (4,1.8) -- (4,0.2) -- (2.25,0.2) node[anchor=south west] {\small{source}};
+        \draw[color=layer2, ->] (2.25,2.2) -- (4.5,2.2) -- (4.5,-0.2) -- (2.25,-0.2) node[anchor=north west] {\small{target}};
+
+        \begin{scope}[color=unimportant]
+            \MMElement{-5.75}{6}{4.5}{1}{BrosInheritance};
+            \MMElement{0}{6}{4.5}{1}{BrosFulfillment};
+            \MMElement{5.75}{6}{4.5}{1}{BrosAggregation};
+            \MMElement{5.75}{4}{4.5}{1}{BrosComposition};
+
+            \draw[-{Triangle[length=3mm,width=3mm,open]}] (0, 5.5) -- (0,2.5);
+            \draw (-5.75, 5.5) -- (-5.75,5) -- (5.75,5) (5.75,5.5) -- (5.75,4.5);
+        \end{scope}
+    \end{tikzpicture}%
     \caption{BROS Metamodell}%
     \label{fig:brosMetamodell}
 \end{figure}
+
 
 Das Metamodell in \cref{fig:brosMetamodell} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
 Die Elemte des Metamodelles teilen sich in zwei Klassen auf.

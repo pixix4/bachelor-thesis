@@ -115,6 +115,55 @@ Mit der Hilfe dieser Prädikate können nun Regeln für die Konsistenz zwischen 
 Dafür wird jede Regeln erläutert und an einem Minimalbeispiel visualisiert.
 Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere Arbeit.
 
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule1.jpg}%
+        \caption{Darstellungen der Regel 1}%
+        \label{fig:ruleExample1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule2.jpg}%
+        \caption{Darstellungen der Regel 2}%
+        \label{fig:ruleExample2}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule3.jpg}%
+        \caption{Darstellungen der Regel 3}%
+        \label{fig:ruleExample3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule4.jpg}%
+        \caption{Darstellungen der Regel 4}%
+        \label{fig:ruleExample4}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule5.jpg}%
+        \caption{Darstellungen der Regel 5}%
+        \label{fig:ruleExample5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule6.jpg}%
+        \caption{Darstellungen der Regel 6}%
+        \label{fig:ruleExample6}
+    \end{subfigure}
+    \caption{Exemplarische Darstellungen der Konsistenzregeln 1-6}%
+    \label{fig:pizzaBrosSteps}
+\end{figure}
+
 \textbf{Regel 1:} 
 Zu jedem \emph{BPMN-Process} muss eine \emph{BROS-Scene} oder ein \emph{BROS-Event} existieren.
 Ein BPMN-Process stellt eine Umgebung für einen natürlichen Prozess dar.
@@ -244,55 +293,6 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     ).
 \end{lstlisting}
 
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule1.jpg}%
-        \caption{Darstellungen der Regel 1}%
-        \label{fig:ruleExample1}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule2.jpg}%
-        \caption{Darstellungen der Regel 2}%
-        \label{fig:ruleExample2}
-    \end{subfigure}
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule3.jpg}%
-        \caption{Darstellungen der Regel 3}%
-        \label{fig:ruleExample3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule4.jpg}%
-        \caption{Darstellungen der Regel 4}%
-        \label{fig:ruleExample4}
-    \end{subfigure}
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule5.jpg}%
-        \caption{Darstellungen der Regel 5}%
-        \label{fig:ruleExample5}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \includegraphics[width=\textwidth,keepaspectratio]{../images/rule/rule6.jpg}%
-        \caption{Darstellungen der Regel 6}%
-        \label{fig:ruleExample6}
-    \end{subfigure}
-    \caption{Exemplarische Darstellungen der Konsistenzregeln 1-6}%
-    \label{fig:pizzaBrosSteps}
-\end{figure}
-
 \section{Referenzarchitektur}
 
 Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z.B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
@@ -307,7 +307,52 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth,keepaspectratio]{../images/ModelToGraph.pdf}%
+    \begin{tikzpicture}[>={Latex[length=3mm]}]
+        \draw[dashed] (0,5.4) -- (0,-5.4);
+
+        \draw (-1,1) rectangle (-8,4);
+        \draw (-7,1) -- (-7,4);
+        \draw (-7.5,2.5) node {\rotatebox{90}{\textbf{Kunde}}};
+        \draw (-6,2.5) circle [radius=0.5];
+        \draw (-2,2.5) circle [radius=0.5];
+        \draw (-2,2.5) circle [radius=0.4];
+        \draw (-6,1.8) node {Start};
+        \draw (-2,1.8) node {End};
+        \draw[->] (-5.5,2.5) -- (-2.5,2.5);
+        \draw (-4.5,5) node {\Large\textbf{{BPMN}}};
+
+        \draw[rounded corners=12pt] (3,1.5) rectangle (6,3.5);
+        \draw (3,2.5) -- (6,2.5);
+        \draw (3,2) -- (6,2);
+        \draw (4.5,3) node {\textbf{Kunde}};
+        \draw (1.5,2.5) circle [radius=0.5];
+        \draw (7.5,2.5) circle [radius=0.5];
+        \draw (1.5,1.8) node {Start};
+        \draw (7.5,1.8) node {End};
+        \draw[dashed,->] (2,2.5) -- (3,2.5);
+        \draw[dashed,->] (6,2.5) -- (7,2.5);
+        \draw (4.5,5) node {\Large\textbf{{BROS}}};
+
+        \draw[color=layer1] (-4.5,0) node[fill=white] {Process} --
+            (-4.5,-2) node[fill=white] {Lane(Kunde)} --
+            (-2.5,-4) node[fill=white] {EndEvent(End)} (-4.5,-2) --
+            (-6.5,-4) node[fill=white] {StartEvent(Start)};
+        \draw[color=layer2, ->] (-6,-4.3) -- (-6,-5) -- (-3,-5) -- (-3,-4.3); 
+        \draw[color=layer2] (-4.5,-5) node[anchor=north] {SequenceFlow};
+
+        \draw[color=layer1] (4.5,0) node[fill=white] {Scene} --
+            (2,-2) node[fill=white] {RoleType(Kunde)} (4.5,0) --
+            (4.5,-3) node[fill=white] {Event(Start)} (4.5,0) --
+            (7,-4) node[fill=white] {Event(End)};
+        \draw[color=layer2, ->] (3.3,-3) -- (2.5,-3) -- (2.5,-2.3); 
+        \draw[color=layer2] (2.8,-3) node[anchor=north] {CreateRelation};
+        \draw[color=layer2, ->] (1,-2.3) -- (1,-4) -- (5.3,-4); 
+        \draw[color=layer2] (2.8,-4) node[anchor=north] {DestroyRelation};
+
+        \draw[dashed, color=layer3] (-3.2,-2) -- (0.3,-2);
+        \draw[dashed, color=layer3] (-5.5,-3.7) -- (-5.5,-3.55) -- (4.5,-3.55) -- (4.5,-3.3);
+        \draw[dashed, color=layer3] (-2,-4.3) -- (-2,-5) -- (7,-5) -- (7,-4.3);
+    \end{tikzpicture}
     \caption{Visualisierung des Graph Matching}%
     \label{fig:ModelToGraph}
 \end{figure}

@@ -102,16 +102,16 @@ Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Manageme
         \draw[color=layer2, ->] (2.25,2.2) -- (6,2.2) -- (6,0.5) node[anchor=north west, rotate=90] {\small{target}};
     \end{tikzpicture}%
     \caption{BPMN Metamodell}%
-    \label{fig:bpmnMetamodell}
+    \label{fig:bpmnMetamodel}
 \end{figure}
 
 Für die weitere Arbeit wird allerdings nur ein Teil des vollständige BPMN-Standards der \emph{OMG} genutzt.
 Ein deutlich gekürzte Version des Metamodelles für Business Prozesse wurde von \cite{Loja2010} erstellt.
-Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodell}).
+Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodel}).
 Es unterstützt dabei nur die oben genannten BPMN-Elemente.
 Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickeltem Tool nicht betrachtet.
 
-Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodell} wird ein BPMN-Modell in einem Graphen, genauer einem Baum mit Querverweisen, dargestellt.
+Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodel} wird ein BPMN-Modell in einem Graphen, genauer einem Baum mit Querverweisen, dargestellt.
 Die Wurzel des Baumes ist das Modell ansich.
 Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
 Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
@@ -252,12 +252,12 @@ Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
         \end{scope}
     \end{tikzpicture}%
     \caption{BROS Metamodell}%
-    \label{fig:brosMetamodell}
+    \label{fig:brosMetamodel}
 \end{figure}
 
 
-Das Metamodell in \cref{fig:brosMetamodell} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
-Die Elemte des Metamodelles teilen sich in zwei Klassen auf.
+Das Metamodell in \cref{fig:brosMetamodel} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
+Die Elemente des Metamodelles teilen sich in zwei Klassen auf.
 Auf der einen Seite sind die Connections, zu denen die Create- und DestroyRelation (BrosCreateRelation, BrosDestroyRelation) gehören.
 Auf der anderen Seite sind die Objekte die sich in Endknoten und Objektgruppen teilen.
 Endknoten sind die NaturalTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).

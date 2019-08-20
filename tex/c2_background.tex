@@ -58,7 +58,49 @@ Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Manageme
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth,keepaspectratio]{../images/bpmnMetamodell.jpg}%
+    \begin{tikzpicture}
+        \MMElement{0}{2}{4.5}{1}{BpmnMessageFlow};
+
+        \MMElement{-5.75}{0}{4.5}{1}{BpmnSequenceFlow};
+        \MMElement{5.75}{0}{4.5}{1}{BpmnElement};
+
+        \MMElement{0}{-2}{4.5}{1}{BpmnProcess};
+        \MMElement{5.75}{-2}{4.5}{1}{BpmnLaneSet};
+
+        \MMElement{0}{-4}{4.5}{1}{BpmnFlowObject};
+        \MMElement{5.75}{-4}{4.5}{1}{BpmnLane};
+
+        \MMElement{-5.75}{-6}{4.5}{1}{BpmnGateway};
+        \MMElement{0}{-6}{4.5}{1}{BpmnEvent};
+        \MMElement{5.75}{-6}{4.5}{1}{BpmnTask};
+
+        \MMElement{-5.75}{-8}{4.5}{1}{BpmnStartEvent};
+        \MMElement{0}{-8}{4.5}{1}{BpmnIntermediateEvent};
+        \MMElement{5.75}{-8}{4.5}{1}{BpmnEndEvent};
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (-3.5,0) -- (3.5,0);
+        \draw (0,1.5) -- (0,0);
+        \draw (2.875,-3.8) -- (2.875,0);
+        \draw (2.25,-1.8) -- (3.5,-1.8);
+        \draw (2.25,-3.8) -- (3.5,-3.8);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-5.5) -- (0,-4.5);
+        \draw (-5.75,-5.5) -- (-5.75,-5.1) -- (5.75,-5.1) -- (5.75,-5.5);
+
+        \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-7.5) -- (0,-6.5);
+        \draw (-5.75,-7.5) -- (-5.75,-7.1) -- (5.75,-7.1) -- (5.75,-7.5);
+
+        \draw[color=layer2, {Diamond[length=4mm,open]}-] (2.25,-2.2) -- (3.5,-2.2);
+        \draw[color=layer2, {Diamond[length=4mm,open]}-] (3.5,-4.2) -- (2.25,-4.2);
+        \draw[color=layer2, {Diamond[length=4mm,open]}-] (5.75,-2.5) -- (5.75,-3.5);
+        \draw[color=layer2, {Diamond[length=4mm,open]}-] (0,-2.5) -- (0,-3.5);
+
+        \draw[color=layer2, ->] (-5.5,-0.5) -- (-5.5,-1.8) -- (-2.25,-1.8) node[anchor=south east] {\small{source}};
+        \draw[color=layer2, ->] (-6,-0.5) -- (-6,-2.2) -- (-2.25,-2.2) node[anchor=north east] {\small{target}};
+
+        \draw[color=layer2, ->] (2.25,1.8) -- (5.5,1.8) -- (5.5,0.5) node[anchor=south west, rotate=90] {\small{source}};
+        \draw[color=layer2, ->] (2.25,2.2) -- (6,2.2) -- (6,0.5) node[anchor=north west, rotate=90] {\small{target}};
+    \end{tikzpicture}%
     \caption{BPMN Metamodell}%
     \label{fig:bpmnMetamodell}
 \end{figure}

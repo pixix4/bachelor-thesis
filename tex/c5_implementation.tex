@@ -46,7 +46,7 @@ Genau wie bei dem BPMN-Parser wird auch das BROS-Modell in eine Instanz des BROS
 
 \begin{figure}
     \centering
-    \begin{tikzpicture}[>={Latex[length=3mm]}]
+    \begin{tikzpicture}
         \draw (-1,0) rectangle (-8,3);
         \draw (-1,1) -- (-8,1);
         \draw (-1,2) -- (-8,2);
@@ -64,15 +64,15 @@ Genau wie bei dem BPMN-Parser wird auch das BROS-Modell in eine Instanz des BROS
         \filldraw[fill=white] (5.25,-0.75) rectangle (5.75,-1.25);
         \draw (5.5,-1) node {T};
 
-        \draw[color=layer1, ->] (-2.5, 3) -- (-2.5,4.2) -- (2.5, 4.2) -- (2.5,2.5) -- (-1,2.5) node[anchor=south west] {0..*} node[anchor=north west] {+ children};
-        \draw[color=layer1, ->] (-7.5, 3) -- (-7.5,4.2) -- (-3.5, 4.2) -- (-3.5, 3) node[anchor=south east, align=right] {0..1\\parent};
+        \draw[color=layer1, ->] (-2.5, 3) -- (-2.5,4.2) -- (2.5, 4.2) -- (2.5,2.5) -- (-1,2.5) node[anchor=south west] {\small{0..*}} node[anchor=north west] {\small{+ children}};
+        \draw[color=layer1, {Diamond[length=4mm,open]}->] (-7.5, 3) -- (-7.5,4.2) -- (-3.5, 4.2) -- (-3.5, 3) node[anchor=south east, align=right] {\small{0..1}\\\small{parent}};
 
-        \draw[color=layer2, ->] (-2, 0) -- (-2,-1.5) -- (1, -1.5) node[anchor=south east] {0..*} node[anchor=north east] {+ relations};
-        \draw[color=layer2, ->] (1.5, -1) -- (1.5,0.5) -- (-1, 0.5) node[anchor=south west] {1} node[anchor=north west] {+ target};
-        \draw[color=layer2, ->] (2.5, -1) -- (2.5,1.5) -- (-1, 1.5) node[anchor=south west] {1} node[anchor=north west] {+ source};
+        \draw[color=layer2, ->] (-2, 0) -- (-2,-1.5) -- (1, -1.5) node[anchor=south east] {\small{0..*}} node[anchor=north east] {\small{+ relations}};
+        \draw[color=layer2, ->] (1.5, -1) -- (1.5,0.5) -- (-1, 0.5) node[anchor=south west] {\small{1}} node[anchor=north west] {\small{+ target}};
+        \draw[color=layer2, ->] (2.5, -1) -- (2.5,1.5) -- (-1, 1.5) node[anchor=south west] {\small{1}} node[anchor=north west] {\small{+ source}};
 
-        \draw[color=layer3, ->] (-7.5, 0) -- (-7.5,-1.2) -- (-3.5, -1.2) -- (-3.5, 0) node[anchor=north east, align=right] {0..*\\matchingElements};
-    \end{tikzpicture}
+        \draw[color=layer3, ->] (-7.5, 0) -- (-7.5,-1.2) -- (-3.5, -1.2) -- (-3.5, 0) node[anchor=north east, align=right] {\small{0..*}\\\small{matchingElements}};
+    \end{tikzpicture}%
     \caption{Metamodell der Graphstruktur}%
     \label{fig:UmlGraph}
 \end{figure}

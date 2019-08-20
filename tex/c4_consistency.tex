@@ -307,7 +307,7 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
 
 \begin{figure}
     \centering
-    \begin{tikzpicture}[>={Latex[length=3mm]}]
+    \begin{tikzpicture}
         \draw[dashed] (0,5.4) -- (0,-5.4);
 
         \draw (-1,1) rectangle (-8,4);
@@ -338,21 +338,21 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
             (-2.5,-4) node[fill=white] {EndEvent(End)} (-4.5,-2) --
             (-6.5,-4) node[fill=white] {StartEvent(Start)};
         \draw[color=layer2, ->] (-6,-4.3) -- (-6,-5) -- (-3,-5) -- (-3,-4.3); 
-        \draw[color=layer2] (-4.5,-5) node[anchor=north] {SequenceFlow};
+        \draw[color=layer2] (-4.5,-5) node[anchor=north] {\small{SequenceFlow}};
 
         \draw[color=layer1] (4.5,0) node[fill=white] {Scene} --
             (2,-2) node[fill=white] {RoleType(Kunde)} (4.5,0) --
             (4.5,-3) node[fill=white] {Event(Start)} (4.5,0) --
             (7,-4) node[fill=white] {Event(End)};
         \draw[color=layer2, ->] (3.3,-3) -- (2.5,-3) -- (2.5,-2.3); 
-        \draw[color=layer2] (2.8,-3) node[anchor=north] {CreateRelation};
+        \draw[color=layer2] (2.8,-3) node[anchor=north] {\small{CreateRelation}};
         \draw[color=layer2, ->] (1,-2.3) -- (1,-4) -- (5.3,-4); 
-        \draw[color=layer2] (2.8,-4) node[anchor=north] {DestroyRelation};
+        \draw[color=layer2] (2.8,-4) node[anchor=north] {\small{DestroyRelation}};
 
         \draw[dashed, color=layer3] (-3.2,-2) -- (0.3,-2);
         \draw[dashed, color=layer3] (-5.5,-3.7) -- (-5.5,-3.55) -- (4.5,-3.55) -- (4.5,-3.3);
         \draw[dashed, color=layer3] (-2,-4.3) -- (-2,-5) -- (7,-5) -- (7,-4.3);
-    \end{tikzpicture}
+    \end{tikzpicture}%
     \caption{Visualisierung des Graph Matching}%
     \label{fig:ModelToGraph}
 \end{figure}

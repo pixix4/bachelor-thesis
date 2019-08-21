@@ -191,8 +191,9 @@ Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere 
                 \draw (-5.5,3) node[anchor=north] {Start};
                 \draw[->] (-5,3.5) -- (-2,3.5);
             \end{scope}
-            \draw (-1.5,3.5) circle[radius=0.5];
-            \fill (-1.5,3.5) circle[radius=0.35];
+            \fill (-1.5,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
+            \fill (-1.5,3.5) circle[radius=0.2];
             \draw (-1.5,3) node[anchor=north] {End};
 
             \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
@@ -231,8 +232,8 @@ Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere 
                 \draw (-5.5,3) node[anchor=north] {Start};
                 \draw[->] (-5,3.5) -- (-2,3.5);
             \end{scope}
-            \draw (-1.5,3.5) circle[radius=0.5];
-            \draw (-1.5,3.5) circle[radius=0.35];
+            \fill (-1.5,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
             \draw (-1.5,3) node[anchor=north] {End};
 
             \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
@@ -273,8 +274,8 @@ Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere 
             \draw (-5.5,3) node[anchor=north] {Start};
             \begin{scope}[color=unimportant]
                 \draw[->] (-5,3.5) -- (-2,3.5);
-                \draw (-1.5,3.5) circle[radius=0.5];
-                \draw (-1.5,3.5) circle[radius=0.35];
+                \fill (-1.5,3.5) circle[radius=0.5];
+                \fill[color=white] (-1.5,3.5) circle[radius=0.35];
                 \draw (-1.5,3) node[anchor=north] {End};
             \end{scope}
 
@@ -314,8 +315,8 @@ Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere 
             \draw (-7.5,3.5) node[rotate=90] {Kunde};
 
             \draw (-5.8,3.5) circle[radius=0.5];
-            \draw (-1.2,3.5) circle[radius=0.5];
-            \draw (-1.2,3.5) circle[radius=0.35];
+            \fill (-1.2,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.2,3.5) circle[radius=0.35];
             \draw (-4.8,3.5) -- (-4.4,3.9) -- (-4,3.5) -- (-4.4,3.1) -- cycle;
             \draw (-3,3.5) -- (-2.6,3.9) -- (-2.2,3.5) -- (-2.6,3.1) -- cycle;
             \draw[->] (-5.2,3.5) -- (-4.8,3.5);
@@ -495,8 +496,8 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
         \draw (-7,1) -- (-7,4);
         \draw (-7.5,2.5) node[rotate=90] {\textbf{Kunde}};
         \draw (-6,2.5) circle [radius=0.5];
-        \draw (-2,2.5) circle [radius=0.5];
-        \draw (-2,2.5) circle [radius=0.4];
+        \fill (-2,2.5) circle [radius=0.5];
+        \fill[color=white] (-2,2.5) circle [radius=0.4];
         \draw (-6,1.8) node {Start};
         \draw (-2,1.8) node {End};
         \draw[->] (-5.5,2.5) -- (-2.5,2.5);

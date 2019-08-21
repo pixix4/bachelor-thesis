@@ -1,53 +1,61 @@
 \chapter{Hintergrund}
 \label{chap:background}
 
-Um in der weiteren Arbeit den Konsistenzvergleich zwischen BPMN- und BROS-Modellen durchführen zu können, werden zunächst die Modelle und ihre unterstützten Elemente vorgestellt.
-Dafür wird für jedes Modell ein Metamodell eingeführt.
-Da sich einige Namen zwischen den Modellen doppeln werden die Elemente der Metamodelle mit dem Präfix "BPMN" bzw. "BROS" benannt.
+Um in der weiteren Arbeit den Konsistenzvergleich zwischen BPMN- und BROS-Modellen durchführen zu können, werden zunächst die Modelle vorgestellt.
+Für jedes Modell werden die Modellelemente eingeführt, die in der Arbeit unterstützt werden.
+Diese werden in ein Metamodell eingeordnet das als Grundlage für den späteren Konsistenzvergleich dient.
+Da BROS auf der Modellierungssprache CROM basiert, wird zunächst CROM vorgestellt.
+
+Es existieren Modellelemente die sowohl in BPMN als auch in BROS den gleichen Namen haben (wie zB. ``Event'').
+Um diese leichter unterscheiden zu können, werden die Modellelemente mit dem Präfix "BPMN" bzw. "BROS" benannt.
 
 \section{Business Process Model and Notation}
 
-Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist der Standard für die grafische Beschreibung von Geschäftsprozessen.
+Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist ein weit verbreiteter Standard für die grafische Beschreibung von Geschäftsprozessen.
 Dabei wird das Verhalten eines Systems mit einer an Flussdiagrammen angelehnten Form beschrieben.
 Einer der Hauptvorteile von BPMN ist die große Verbreitung.
-Dank ihr können Prozessbeschreibungen auf einfache Art und Weise zwischen verschieden Plattformen und Stakeholdern ausgetauscht werden.
+Dadurch können Prozessbeschreibungen auf einfache Art und Weise zwischen verschieden Plattformen und Stakeholdern ausgetauscht werden.
 Neben der informellen Beschreibung von Prozessen unterstützt BPMN auch die direkte Ausführung von Geschäftsprozessen.
-Mittels diverser Interpreter können in BPMN modellierte Abläufe zur Automatisierung einfacher Aufgaben oder ganzer Fertigungsprozesse genutzt werden.
+Mittels diversen Interpretern können in BPMN modellierte Abläufe zur Automatisierung einfacher Aufgaben oder ganzer Fertigungsprozesse genutzt werden.
 Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
 
 \begin{itemize}
     \item \textbf{Activity:} 
     Eine Activity beschreibt eine Tätigkeit die innerhalb des Geschäftsprozesses ausgeführt wird.
-    Da das ausführen einer Aktion in Zeit in anspruch nehmen kann, kann auch die Abarbeitung einer Activity Zeit benötigen.
+    Da das ausführen einer Aktion Zeit in Anspruch nehmen kann, kann auch die Abarbeitung einer Activity Zeit benötigen.
     Zur Darstellung einer Activity wird ein Rechteck mit abgerundeten Ecken verwendet.
     \item \textbf{Gateway:}
     Ein Gateway wird für die Steuerung des Kontrollflusses verwendet. 
     An einem Gateway können verschiedene Kontrollwege zusammenlaufen oder sich teilen. 
     Dabei werden verschiedene Arten, wie zB. AND- und OR-Gateways unterstützt. 
-    Je nach verwendetem Gateway verläuft der weitere Kontrollfluss parallel oder nur einer der möglichen Wege wird genutzt.
+    Je nach verwendetem Gateway verläuft der weitere Kontrollfluss zB. parallel oder nur einer der möglichen Wege wird genutzt.
     Dargestellt wird ein Gateway mittels einem um 45 Grad gedrehtem Quadrat. 
     \item \textbf{Event:}
     Ein Event beschreibt ein Ereignis das innerhalb des Geschäftsprozesses auftreten kann und wird mit einem Kreis dargestellt.
-    Sie beeinflussen den Kontrollfluss, können ihn starten, beendet oder unabhängige Aktionen auslösen.
-    Events werden in drei verschiedenen Dimensionen eingeteilt: nach ihrer Position, nach ihrer Wirkung und nach ihrer Art.
-    Für die weitere Arbeit ist nur die Unterteilung nach ihrer Position innerhalb des Geschäftsprozesses wichtig.
+    Events beeinflussen den Kontrollfluss, können ihn starten, beendet oder andere unabhängige Aktionen auslösen.
+    Sie werden in drei verschiedenen Dimensionen eingeteilt: nach ihrer Position, nach ihrer Wirkung und nach ihrer Art.
+    Für die weitere Arbeit ist nur die Unterteilung nach ihrer Position, innerhalb des Geschäftsprozesses, wichtig.
     Dabei wird zwischen einem StartEvent (einfacher Rahmen), einem IntermediateEvent (doppelter Rahmen) und einem EndEvent (dicker Rahmen) unterschieden.
-    Zusätzlich existiert noch das TerminationEvent welches den laufenden Prozess vollständig abbricht und mit einem fast vollständig ausgefülltem EndEvent dargestellt wird.
+    Zusätzlich existiert noch das TerminationEvent welches den laufenden Prozess vollständig abbricht und mit einem fast vollständig ausgefülltem EndEvent repräsentiert wird.
     \item \textbf{Flow:}
-    Ein Flow ist eine gerichtete Verbindung zwischen anderen Modellelementen.
-    Dabei wird zwischen SequenceFlows und MessageFlows unterschieden.
+    Ein Flow ist eine gerichtete Verbindung zwischen Modellelementen.
+    Dabei wird zwischen dne Sequence- und den MessageFlows unterschieden.
     Ein SequenceFlow stellt den Kontrollfluss dar und verbindet Elemente um eine Ausführungsreihenfolge festzulegen.
     Ein MessageFlow verbindet unterschiedliche Teilnehmer des Geschäftsprozesses und symbolisiert den Austausch von Mitteilungen.
+    Beide Flows werden mit einem Pfeil dargestellt, wobei der MessageFlow gestrichelt ist.
     \item \textbf{Pool:}
     Ein Pool stellt eine Gruppe von zusammengehörenden Teilnehmern innerhalb eines Geschäftsprozesses dar.
+    Wenn ein Prozess nur aus einem Pool besteht kann der Pool und der Prozess als ein Element dargestellt werden.
     Dargestellt wird ein Pool mit einem Rechteck wobei der Name am linken Rand steht.
     \item \textbf{Swimlane:}
     Eine Swimlane ist ein einzelner Teilnehmer der zu einem Pool gehört und Aufgaben aus dem Geschäftsprozess erfüllt.
     Bei einem Pool der nur aus einer Swimlane besteht kann die Swimlane mit dem Pool vereinigt werden.
+    Sollte der Pool dabei auch gleichzeitig den Prozess darstellen, so kann die Swimlane als eigenständiger Prozess betrachtet werden.
     Innerhalb eines Pools wird die Simelane als eine horizontale Bahn dargestellt.
     \item \textbf{Process:}
     Ein Process bildet einen teil des Geschäftsprozesses ab und ist das Containerelement für die anderen Modellelemente.
     An dem vollständigen Geschäftsprozess können mehrere Prozesse beteiligt sein, die mittels MessageFlows untereinader kommunizieren.
+    In Teilprozess kann, wie bereits beschieben, als Pool bzw. Swimlane oder auch als Activity dargestellt werden.
 \end{itemize}
 
 Da BPMN schon längere Zeit in Benutzung ist hat es eine gute Toolunterstützung für die Modellierung.

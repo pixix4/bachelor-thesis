@@ -1,0 +1,230 @@
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Process};
+            \draw (-7,3.5) -- (0,3.5);
+            \draw (-6.5,4.75) node[color=unimportant,rotate=90] {A};
+            \draw (-6.5,2.25) node[color=unimportant,rotate=90] {B};
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \begin{scope}[color=unimportant]
+                \draw[rounded corners=4.8pt] (4.2,-2) rectangle (7.2,-4);
+                \draw (4.2,-3) -- (7.2,-3);
+                \draw (4.2,-3.5) -- (7.2,-3.5);
+                \draw (5.6,-2.5) node {A};
+
+                \draw[rounded corners=4.8pt] (0.8,-4) rectangle (3.8,-6);
+                \draw (0.8,-5) -- (3.8,-5);
+                \draw (0.8,-5.5) -- (3.8,-5.5);
+                \draw (2.4,-4.5) node {B};
+            \end{scope}
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 1}%
+        \label{fig:ruleExample1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Kunde};
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \draw[rounded corners=4.8pt] (2.5,-3) rectangle (5.5,-5);
+            \draw (2.5,-4) -- (5.5,-4);
+            \draw (2.5,-4.5) -- (5.5,-4.5);
+            \draw (4,-3.5) node {Kunde};
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 2}%
+        \label{fig:ruleExample2}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Kunde};
+
+            \begin{scope}[color=unimportant]
+                \draw (-5.5,3.5) circle[radius=0.5];
+                \draw (-5.5,3) node[anchor=north] {Start};
+                \draw[->] (-5,3.5) -- (-2,3.5);
+            \end{scope}
+            \fill (-1.5,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
+            \fill (-1.5,3.5) circle[radius=0.2];
+            \draw (-1.5,3) node[anchor=north] {End};
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \begin{scope}[color=unimportant]
+                \draw[rounded corners=4.8pt] (2.5,-3) rectangle (5.5,-5);
+                \draw (2.5,-4) -- (5.5,-4);
+                \draw (2.5,-4.5) -- (5.5,-4.5);
+                \draw (4,-3.5) node {Kunde};
+            \end{scope}
+
+            \filldraw[fill=white] (0,-4) circle[radius=0.5];
+            \draw (0,-4) circle[radius=0.35];
+            \draw (0,-4.5) node[anchor=north,fill=white] {End};
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 3}%
+        \label{fig:ruleExample3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Kunde};
+
+            \begin{scope}[color=unimportant]
+                \draw (-5.5,3.5) circle[radius=0.5];
+                \draw (-5.5,3) node[anchor=north] {Start};
+                \draw[->] (-5,3.5) -- (-2,3.5);
+            \end{scope}
+            \fill (-1.5,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
+            \draw (-1.5,3) node[anchor=north] {End};
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \draw[rounded corners=4.8pt] (4,-3) rectangle (7,-5);
+            \draw (4,-4) -- (7,-4);
+            \draw (4,-4.5) -- (7,-4.5);
+            \draw (5.5,-3.5) node {Kunde};
+
+            \begin{scope}[color=unimportant]
+                \draw (1.5,-2.5) circle[radius=0.5];
+                \draw (1.5,-3) node[anchor=north] {Start};
+                \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3);
+            \end{scope}
+
+            \draw (1.5,-5.5) circle[radius=0.5];
+            \draw (1.5,-6) node[anchor=north,fill=white] {End};
+            \draw[dashed, ->] (5.5,-5) -- (5.5,-5.5) -- (2,-5.5);
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 4}%
+        \label{fig:ruleExample4}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Kunde};
+
+            \draw (-5.5,3.5) circle[radius=0.5];
+            \draw (-5.5,3) node[anchor=north] {Start};
+            \begin{scope}[color=unimportant]
+                \draw[->] (-5,3.5) -- (-2,3.5);
+                \fill (-1.5,3.5) circle[radius=0.5];
+                \fill[color=white] (-1.5,3.5) circle[radius=0.35];
+                \draw (-1.5,3) node[anchor=north] {End};
+            \end{scope}
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \draw[rounded corners=4.8pt] (4,-3) rectangle (7,-5);
+            \draw (4,-4) -- (7,-4);
+            \draw (4,-4.5) -- (7,-4.5);
+            \draw (5.5,-3.5) node {Kunde};
+
+            \draw (1.5,-2.5) circle[radius=0.5];
+            \draw (1.5,-3) node[anchor=north] {Start};
+            \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3);
+
+            \begin{scope}[color=unimportant]
+                \draw (1.5,-5.5) circle[radius=0.5];
+                \draw (1.5,-6) node[anchor=north,fill=white] {End};
+                \draw[dashed, ->] (5.5,-5) -- (5.5,-5.5) -- (2,-5.5);
+            \end{scope}
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 5}%
+        \label{fig:ruleExample5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \vspace{20pt}
+        \centering
+        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+            \draw[dashed] (-8,-7) -- (8,7);
+            \draw (-6,-5.25) node[anchor=south, rotate=41] {BPMN};
+            \draw (-6,-5.25) node[anchor=north, rotate=41] {\textbf{BROS}};
+
+            \draw (-8,6) rectangle (0,1);
+            \draw (-7,6) -- (-7,1);
+            \draw (-7.5,3.5) node[rotate=90] {Kunde};
+
+            \draw (-5.8,3.5) circle[radius=0.5];
+            \fill (-1.2,3.5) circle[radius=0.5];
+            \fill[color=white] (-1.2,3.5) circle[radius=0.35];
+            \draw (-4.8,3.5) -- (-4.4,3.9) -- (-4,3.5) -- (-4.4,3.1) -- cycle;
+            \draw (-3,3.5) -- (-2.6,3.9) -- (-2.2,3.5) -- (-2.6,3.1) -- cycle;
+            \draw[->] (-5.2,3.5) -- (-4.8,3.5);
+            \draw[->] (-2.2,3.5) -- (-1.7,3.5);
+            \draw[->] (-4.4,3.9) -- (-4.4,4.5) -- (-2.6,4.5) -- (-2.6,3.9);
+            \draw (-3.5,4.5) node[anchor=south] {Select A};
+            \draw[->] (-4.4,3.1) -- (-4.4,2.5) -- (-2.6,2.5) -- (-2.6,3.1);
+            \draw (-3.5,2.5) node[anchor=north] {Select B};
+
+            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+            \draw (0,-1.5) -- (8,-1.5);
+            \draw (4,-1) node {Process};
+
+            \draw[rounded corners=4.8pt] (4,-3.5) rectangle (7,-5.5);
+            \draw (4,-4.5) -- (7,-4.5);
+            \draw (4,-5) -- (7,-5);
+            \draw (5.5,-4) node {Kunde};
+
+            \draw (1.5,-2.5) circle[radius=0.5];
+            \draw (1.8,-3) node[anchor=north] {Select A};
+            \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3.5);
+        \end{tikzpicture}%
+        \caption{Darstellungen der Regel 6}%
+        \label{fig:ruleExample6}
+    \end{subfigure}
+    \caption{Exemplarische Darstellungen der Konsistenzregeln 1-6}%
+    \label{fig:ruleExamples}
+\end{figure}

@@ -6,7 +6,7 @@ Für jedes Modell werden die Modellelemente eingeführt, die in der Arbeit unter
 Diese werden in ein Metamodell eingeordnet das als Grundlage für den späteren Konsistenzvergleich dient.
 Da BROS auf der Modellierungssprache CROM basiert, wird zunächst CROM vorgestellt.
 
-Es existieren Modellelemente die sowohl in BPMN als auch in BROS den gleichen Namen haben (wie zB. ``Event'').
+Es existieren Modellelemente die sowohl in BPMN als auch in BROS den gleichen Namen haben (wie z.B. ``Event'').
 Um diese leichter unterscheiden zu können, werden die Modellelemente mit dem Präfix "BPMN" bzw. "BROS" benannt.
 
 \section{Business Process Model and Notation}
@@ -27,8 +27,8 @@ Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
     \item \textbf{Gateway:}
     Ein Gateway wird für die Steuerung des Kontrollflusses verwendet. 
     An einem Gateway können verschiedene Kontrollwege zusammenlaufen oder sich teilen. 
-    Dabei werden verschiedene Arten, wie zB. AND- und OR-Gateways unterstützt. 
-    Je nach verwendetem Gateway verläuft der weitere Kontrollfluss zB. parallel oder nur einer der möglichen Wege wird genutzt.
+    Dabei werden verschiedene Arten, wie z.B. AND- und OR-Gateways unterstützt. 
+    Je nach verwendetem Gateway verläuft der weitere Kontrollfluss z.B. parallel oder nur einer der möglichen Wege wird genutzt.
     Dargestellt wird ein Gateway mittels einem um 45 Grad gedrehtem Quadrat. 
     \item \textbf{Event:}
     Ein Event beschreibt ein Ereignis das innerhalb des Geschäftsprozesses auftreten kann und wird mit einem Kreis dargestellt.
@@ -103,8 +103,8 @@ Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Manageme
         \draw[color=layer2, {Diamond[length=4mm,open]}-] (5.75,-2.5) -- (5.75,-3.5);
         \draw[color=layer2, {Diamond[length=4mm,open]}-] (0,-2.5) -- (0,-3.5);
 
-        \draw[color=layer2, ->] (-5.5,-0.5) -- (-5.5,-1.8) -- (-2.25,-1.8) node[anchor=south east] {\small{source}};
-        \draw[color=layer2, ->] (-6,-0.5) -- (-6,-2.2) -- (-2.25,-2.2) node[anchor=north east] {\small{target}};
+        \draw[color=layer2, ->] (-5.5,-0.5) -- (-5.5,-3.8) -- (-2.25,-3.8) node[anchor=south east] {\small{source}};
+        \draw[color=layer2, ->] (-6,-0.5) -- (-6,-4.2) -- (-2.25,-4.2) node[anchor=north east] {\small{target}};
 
         \draw[color=layer2, ->] (2.25,1.8) -- (5.5,1.8) -- (5.5,0.5) node[anchor=south west, rotate=90] {\small{source}};
         \draw[color=layer2, ->] (2.25,2.2) -- (6,2.2) -- (6,0.5) node[anchor=north west, rotate=90] {\small{target}};
@@ -123,7 +123,7 @@ Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodel} wird ein BPMN-Modell in ein
 Die Wurzel des Baumes ist das Modell ansich.
 Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
 Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
-Die Events teilen sich in die drei Unterklassen die Start-, Intermediate- und EndEvent (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent) auf.
+Die Events teilen sich in die drei Unterklassen, die Start-, Intermediate- und EndEvents, auf (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
 Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
 Hierbei ist zu beachten das, obwohl eine Swimlane auch Flowobjekte enthalten kann, jedes Flowobjekt nur einen Container haben darf.
 So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane sein.
@@ -140,14 +140,15 @@ CROM führt zusätzlich noch das \emph{Compartment} ein, das den Kontext der Rol
 Dadurch wird das Modell in drei logische Aspekte unterteilt, den Verhaltensaspekt, den Relationenaspekt und den Kontextaspekt.
 Der Verhaltensaspekt beschreibt die Aktoren bzw. Entitäten und die Rollen die von diesen gespielt werden können.
 Der Relationenaspekt fügt zu den Rollen weitere Constraints und Verbindungsbeschreibungen hinzu.
-Im dritten Aspekt, dem Kontextaspekt wird mittels der Compartments die Kontextabhängigkeit modelliert.
+Im dritten Aspekt, dem Kontextaspekt wird mittels den Compartments die Kontextabhängigkeit modelliert.
 Die dafür genutzten Elemente sind:
 
 \begin{itemize}
     \item \textbf{RoleType:}
     Eine RoleType ist die Darstellung einer Rolle.
-    Sie wird mit einem abgerundeten Rechteck vergleichbar mit einer UML-Klasse dargestellt.
-    Eine Rolle kann einer Entität zusätzliche Attribute und Methoden hinzufügen.
+    Sie wird mit einem abgerundeten Rechteck dargestellt, das, vergleichbar mit einer UML-Klasse, in drei Bereiche unterteilt ist.
+    In den Bereichen werden der Name, die Attribute und die Methoden der Rolle abgebildet.
+    Eine Entität die diese Rolle spielt werden diese Attribute und Methoden hinzufügt.
     \item \textbf{CompartmentType:}
     Ein CompartmentType bildet den Kontext von verschiedene RoleTypes ab.
     Das Compartment ist an sich auch eine Rolle und kann von Entitäten gespielt werden.
@@ -179,9 +180,11 @@ Mittels einem Feature Editor lassen sich bestimmt Modellfunktionen ein und aussc
 Der neu entwickelte Ansatz der \emph{Business Role-Object Specification} (\textbf{BROS}) kombiniert die Vorteile der strukturbasierten Modellierung und der verhaltensbasierten Modellierung.
 Als Grundlage für BROS dient die strukturbasierte Modellierungssprache CROM.
 Diese wird ua. mit Hilfe von Events um den Verhaltensaspekt erweitert.
-Ziel ist es aus einem bereits existieren Geschäftsprozess zu verwenden um auf dessen Basis die Businessobjekte zu modellieren.
+Ziel ist es einen bereits existierenden Geschäftsprozess wiederzuverwenden um auf dessen Basis die Businessobjekte zu modellieren.
 Das so entstandene Modell kann anschließend als Vorlage für die eigentliche Implementierung genutzt werden (vgl \cite{Schoen}).
-Dafür werden zusätzlich zu den CROM-Elemente folgende Modellelemente unterstützt:
+Dies hat den Vorteil das, obwohl es sich um ein Strukturmodell handelt, weiterhin der Ablauf des Prozesses erkennbar ist.
+Damit ist leichter erkennbar wie Objekte miteinander interagieren.
+Um dies zu ermöglichen wird der CROM-Standard um folgende Modellelemente erweitert:
 
 \begin{itemize}
     \item \textbf{Scene:}
@@ -194,8 +197,8 @@ Dafür werden zusätzlich zu den CROM-Elemente folgende Modellelemente unterstü
     Dabei kann ein Event eine beliebige Abstraktion eines Prozesses sein.
     \item \textbf{Create-/DestroyRelation:}
     Eine Create- bzw. DestroyRelation verbindet ein Event mit einer Scene oder Rolle.
-    Sie beschreibt welches Event für das erstellen oder das auflösen einer Rolle im Geschäftsprozess verantwortlich ist.
-    Eine CreateRelation ist von einem Event zu einer Rolle/Scene gerichtet, eine DestroyRelation verläuft in die gegensätzliche Richtung.
+    Sie beschreibt welches Event für das erstellen oder das auflösen einer Rolle, innerhalb des Geschäftsprozesses, verantwortlich ist.
+    Eine CreateRelation ist von einem Event zu einer Rolle bzw. Scene gerichtet, eine DestroyRelation verläuft in die gegensätzliche Richtung.
     \item \textbf{ReturnEvent:}
     Ein ReturnEvent ist ein Event, welches die aktuelle Scene beendet.
     Es wird als ein Event mit doppeltem Rahmen auf dem Rand der Scene dargestellt.
@@ -205,6 +208,7 @@ Dafür werden zusätzlich zu den CROM-Elemente folgende Modellelemente unterstü
 Auch BROS besitzt mit \emph{FRaMED.io}\footnote{https://eden-06.github.io/FRaMED-io/} Editorsupport.
 \emph{FRaMED.io} ist eine Neuentwicklung von \emph{FRaMED-2.0} und wie \emph{bpmn.io} webbasiert.
 Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
+Sie unterstützt das erstellen von CROM- und BROS-Modellen, ist aber nicht mit existierenden \emph{FRaMED-2.0}-Projekten kompatibel.
 
 \begin{figure}
     \centering
@@ -266,11 +270,20 @@ Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
 
 Das Metamodell in \cref{fig:brosMetamodel} basiert auf dem von \cite{Schoen} und dem in FRaMED.io implementierten Metamodell.
 Die Elemente des Metamodelles teilen sich in zwei Klassen auf.
-Auf der einen Seite sind die Connections, zu denen die Create- und DestroyRelation (BrosCreateRelation, BrosDestroyRelation) gehören.
+Auf der einen Seite sind die Connections, zu denen die Create-, DestroyRelation und die Relationship (BrosCreateRelation, BrosDestroyRelation, BrosRelationship) gehören.
+Dazu zählen auch die vier Connections im oberen Bereich des Metamodelles (BrosInheritance, BrosFulfillment, BrosAggregation, BrosComposition).
+Diese sind für die weitere Arbeit nicht relevant und werden deshalb ausgegraut dargestellt.
+Da diese aber auch häufig für die Modellierung verwendet werden können, werdeb sie im Metamodell mit aufgeführt.
 Auf der anderen Seite sind die Objekte die sich in Endknoten und Objektgruppen teilen.
-Endknoten sind die NaturalTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).
+Endknoten sind die Natural- und DataTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).
 Die Objektgruppen sind Containerelemente die andere Objekte enthalten können.
 Zu ihnen zählen der CompartmentType (BrosCompartment), das Package (BrosPackage) und die Scene (BrosScene).
 Auch dieses Metamodell entspricht einem Graphen, genauer einem Baum mit Querverweisen.
 Jedes Objekt darf nur Kind einer Objektgruppen sein und die Eltern-Kind-Beziehung ist transitiv.
 Die Connections bilden die Querverweise innerhalb des Baumes.
+
+Zusätzlich dazu existieren noch weitere Beschränkungen innerhalb des Metamodelles die nicht mit ihm dargestellt werden können.
+Beispielsweise kann ein BrosCompartment nicht Bestandteil einer BrosScene sein.
+Für die Einhaltung dieser Beschränkungen ist der Modellierer verantwortlich.
+Allerdings kann dies auch automtisiert überprüft werden.
+So unterstützt der BROS-Editor \emph{FRaMED-io} diese Bedingungen und erlaubt nur das erstellen von validen Modellen.

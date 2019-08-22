@@ -184,6 +184,7 @@ Durch das entfernen von Kanten aus dem Graphen ist es bei einem Fixpunkt-Algorit
 Da aber in jeder Iteration, vor dem überprüfen auf Änderungen in der dritten Schicht, eine konstante Kantenmenge entfernt wird, reduziert dies nur den vollständigen Graphen um diese Kantenmenge.
 Dabei bleibt die dritte Schicht, am Ende jeder Iteration, monoton wachsend. 
 
+\pagebreak
 \section{Implementierung der Konsistenzregeln}
 \label{sec:implementaion_consistency_rules}
 
@@ -226,16 +227,18 @@ Context.verifyBpmn<BpmnLane> { bpmn ->
 \end{lstlisting}
 
 Die \textbf{Regel 3} ist ähnlich aufgebaut wie Regel 2.
-In der Regel 3 wir überprüft das zu jedem BPMN-TerminationEvent ein passendes BROS-ReturnEvent existiert.
+In ihr wir überprüft, das zu jedem BPMN-TerminationEvent ein passendes BROS-ReturnEvent existiert.
 Genau wie die Regel 2 basiert sie auf dem BPMN-Graphen.
-Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-EndEvent das zusätzlich ein Attribut TerminationEvent besitzt.
+Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-EndEvent das zusätzlich ein Wahrheitswert TerminationEvent besitzt.
 Hierfür ist die Dreiwertigkeit des Rückgabewertes wichtig.
 Zunächst wird in der Vorbedingung nach einem BPMN-EndEvent gefiltert.
 Anschließend wird jedes gefundene BPMN-Element überprüft, ob es auch ein BPMN-TerminationEvent ist.
 Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert null beendet.
 Damit wird die Ausführung der Regel komplett ignoriert, wie es auch bei dem generischen Filterargument geschieht.
 Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der dritten Schicht nach einem BROS-ReturnEvent gesucht werden.
-Der Rückgabewert null ermöglicht es auch komplexere Vorbedingungen leicht zu überprüfen.
+Sollte ein BROS-ReturnEvent gefunden werden, wird eine positive Konsistenzmeldung zurückgegeben, andernfalls eine negative.
+Dank des Rückgabewertes null, kann die Vorbedingung einfach gehalten werden.
+Auch während der Regelausführung kann sie noch abgebrochen werden, wodurch die Überprüfung nicht in zwei komplexere Lambdas geteilt werden muss.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]
 Context.verifyBpmn<BpmnEndEvent> { bpmn ->
@@ -286,6 +289,7 @@ Context.verifyBpmn<BpmnStartEvent> { bpmn ->
 }
 \end{lstlisting}
 
+\pagebreak
 \section{Benutzerinterface}
 
 Da das entwickelte Tool eine Webanwendung ist kann es in allen moderneren Browsern benutzt werden die Javascript aktiviert haben.
@@ -332,6 +336,7 @@ Dies kann der Modellierer nutzen um die Ergebnisse übersichtlicher darzustellen
 Die drei linken Sektionen beinhalten statistische Informationen zu der Durchführung und dem Ergebnis der Konsistenzprüfung.
 Dabei werden auch Informationen zu dem Matching angezeigt.
 
+\pagebreak
 \begin{itemize}
     \item \textbf{Verification stats:} Informationen zu der aktuellen Verifikation.
     \begin{itemize}

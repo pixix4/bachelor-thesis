@@ -31,10 +31,10 @@ Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten entnommen wurde
     Mögliche Werte sind die Namen der unterstützten Modelltypen.
     \item \textbf{Consistency Type (\cite{Usman2008}):}
     Es beschreibt welche Arten der Konsistenz von der Methode überprüft werden.
-    Dabei wird unterschieden zwischen \emph{Inter-Modell (vertikale) Konsistenz} (Konsistenz in verschiedenen Abstraktionsstufen und gleichem Modelltyp), \emph{Intra-Modell (horizontale) Konsistenz} (Konsistenz bei gleicher Abstraktionsstufe und verschienden Modelltypen) und \emph{Evolutionskonsistenz} (Konsistenz eines Modelltyps über verschiedene Entwicklungsstufen).
+    Dabei wird unterschieden zwischen der \emph{Inter-Modell (vertikale) Konsistenz}, der \emph{Intra-Modell (horizontale) Konsistenz} und der \emph{Evolutionskonsistenz}.
     Zusätzlich spezifiziert \cite{Usman2008} noch die \emph{syntaktische} und die \emph{semantische Konsistenz}.
-    Diese beziehen sich auf die Konsistenz eines Modelles zu seinem Metamodell.
-    In der nachfolgenden Arbeit wird dies als Voraussetzung angesehen und nicht näher betrachtet.
+    Diese beiden Konsistenzarten werden für den späteren Konsistenzvergleich als Voraussetzung angesehen und nicht weiter untersucht.
+    Mögliche Werte sind damit die drei oberen Konsistenzarten.
     \item \textbf{Consistency Strategy (\cite{Usman2008}):}
     Es beschreibt die benutzte Validierungsstrategie.
     \cite{Usman2008} nennt drei verschiedene Strategien die bei der Durchführung des Konsistenzvergleiches genutzt werden können.
@@ -59,10 +59,23 @@ Jeder Punkt der direkt aus einer der beiden bestehenden Arbeiten entnommen wurde
     Mögliche Werte sind geringer Aufwand (H), mittlerer Aufwand (M) und hoher Aufwand (L).
 \end{itemize}
 
+
 Dieses Schema ist direkt auf die Konsistenzprüfung zwischen BPMN- und BROS-Modelle anwendbar.
 Der Klassifikationspunkt der Erweiterbarkeit wurde bereits von \cite{Lucas2009} eingeführt.
 Für diese Arbeit wird er allerdings in die Aspekte der Modelerweiterbarkeit und der Regelerweiterbarkeit aufgeteilt um eine genauere Einteilung der Verfahren zu ermöglichen.
-Wichtig für die weitere Arbeit sind außerdem Verfahren deren \emph{Nature} beide Modelltypen unterstützt und deren \emph{Consistency Type} auf der \emph{Intra-Modell (horizontale) Konsistenz} beruht.
+Wichtig für die weitere Arbeit sind außerdem Verfahren deren \emph{Nature} beide Modelltypen unterstützt und deren \emph{Consistency Type} auf der \emph{Intra-Modell Konsistenz} beruht.
+
+Die \emph{Intra-Modell Konsistenz} beschreibt die Konsistenz zwischen verschiedenen Modellarten, die sich auf der gleichen Abstraktions- und Evolutionsstufe befinden.
+Dahingegen befasst sich die \emph{Inter-Modell Konsistenz} mit der Konsistenz eines Modelltyps auf unterschiedlichen Abstraktionsstufen.
+Die Konsistenz zwischen verschiedenen Evolutionsstufen wird von der \emph{Evolutionskonsistenz} untersucht.
+Diese Überprüfung erfolgt innerhalb einer Modellart auf der gleichen Abstraktionsstufe.
+Mit diesen drei Konsistenzarten kann die Konsistenz der gesamten Modellierung überprüft werden.
+Die Voraussetzung dafür ist, das die zu untersuchenden Modelle korrekt sind.
+Für diese Überprüfung sind die \emph{syntaktische} und die \emph{semantische Konsistenz} verantwortlich.
+Dabei untersucht die \emph{syntaktische Konsistenz} die Korrektheit eines Modelles zu seinem Metamodell, wohingegen die \emph{semantische Konsistenz} die Korrektheit von zusätzlichen Beschränkungen überprüft.
+Wie bereits erwähnt ist diese Korrektheit der Modelle für die weitere Arbeit eine Voraussetzung.
+Methoden die diese Konsistenz überprüfen werden nicht weiter untersucht.
+Zudem existieren bereits Tools die diese Überprüfung sowohl für BPMN (z.B. \emph{bpmn.io}) als auch für BROS (\emph{FRaMED-io}) automatisiert durchführen können.
 
 \section{Aktuelle Verfahren zur Konsistenzprüfung}
 

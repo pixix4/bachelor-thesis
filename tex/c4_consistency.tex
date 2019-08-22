@@ -5,27 +5,27 @@ Viele der bereits existierenden Verfahren lassen sich anpassen und können mit a
 Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms auf der verhaltensbasierten Seite verwendet werden.
 Anders als bei UML ist bei dem Vergleich von BPMN und BROS zu beachten das Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
 Das liegt an dem Funktionsumfang von BROS Modellen.
-Diese können gegenüber den BPMN Modellen, mit zusätzlich Elementen, angereichert werden.
+Diese können gegenüber den BPMN Modellen mit zusätzlich Elementen angereichert werden.
 So kann das BROS Modell zusätzliche Elemente beinhalten oder Teile des BPMN Modells auf einer höheren Ebene der Abstraktion darstellen.
 Beispielsweise kann ein BROS-Event die Abstraktion eines gesamten Prozesses innerhalb des BPMN Modelles abbilden.
 Um diese Konsistenzbeziehung genauer untersuchen zu können, muss zunächst geklärt werden, wie die Konsistenz zwischen Methoden definiert ist.
-Dafür wird eine Definition des Konsistenzproblems gegeben
+Dafür wird eine Definition des Konsistenzproblems gegeben.
 Anhand dieser werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
 
 \section{Konsistenzproblem}
 
-Wie bereits erwähnt, sind heutige Softwaresystem stark von den dazugehörigen Modellen abhängig.
-Damit ein solches System erfolgreich implementiert werden kann müssen die Modelle konsistent zueinander sein.
-Sollten schon zu Beginn eines Projektes unbemerkt Inkonsistenzen auftreten kann dies zum scheitern des gesamten Projektes führen.
+Wie bereits erwähnt, sind heutige Softwaresysteme stark von den dazugehörigen Modellen abhängig.
+Damit ein solches System erfolgreich implementiert werden kann, müssen die Modelle konsistent zueinander sein.
+Sollten schon zu Beginn eines Projektes unbemerkt Inkonsistenzen auftreten, kann dies zum scheitern des gesamten Projektes führen.
 Die verhaltensbasierten Modelle beschreiben die Interaktion innerhalb eines Systems.
 Dabei benötigen sie die Funktionalität die von den strukturbasierten Modellen bereitgestellt wird.
-Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet kann das Softwaresystem nicht ordnungsgemäß funktionieren.
+Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet, kann das Softwaresystem nicht ordnungsgemäß funktionieren.
 Solche Fehler stellen daher in der Industrie ein großes Risiko dar und können die Entwicklungskosten erheblich steigern.
-Um dieses Risiko zu verringern müssen Verfahren entworfen werden, die ein möglichst automatisierte Konsistenzprüfung durchführen können.
+Um dieses Risiko zu verringern, müssen Verfahren entworfen werden, die ein möglichst automatisierte Konsistenzprüfung durchführen können.
 
-Der methodische Entwicklung eines solchen Verfahrens setzt eine genaue Definition des Konsistenzproblems vorraus.
-Allerdings ist eine formale und allgemeingültige Definition des Konsistenzproblem in der Domain der Modellierung in der Literatur nur schwer zu finden.
-Bevor das Konsistenzproblem definiert werden kann muss zunächst beschieben werden was eine Inkonsistenz ist.
+Die methodische Entwicklung eines solchen Verfahrens setzt eine genaue Definition des Konsistenzproblems vorraus.
+Allerdings ist eine formale und allgemeingültige Definition des Konsistenzproblems in der Domain der Modellierung in der Literatur nur schwer zu finden.
+Bevor das Konsistenzproblem definiert werden kann, muss zunächst beschieben werden was eine Inkonsistenz ist.
 Laut \cite{Nuseibeh1996} tritt eine Inkonsistenz genau dann auf, wenn eine Konsistenzregel verletzt wird.
 Eine Konsistenzregel ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen.
 Dies kann in natürlicher Sprache oder in einer formalen Notation beschieben werden, wobei nur letzteres automatisiert überprüft werden kann.
@@ -43,7 +43,7 @@ Anhand des aufgestellten Regelsatzes kann ein Algorithmus zum auffinden der Inko
 Dafür müssen die Regeln, wie bereits erwähnt, in einer formalen Form und nicht in natürlicher Sprache vorliegen.
 Die Aufgabe der Minimierung und Verhinderung der Inkonsistenz ist auch mit einem automatisierten Tool dem Modellierer überlassen.
 Die Verfahren können dem Modellierer Handlungsempfehlungen geben, eine automatische Korrektur ist allerdings nur schwer möglich.
-So könnte ein Problem zB. durch das entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
+So könnte ein Problem z.B. durch das entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
 Da diese Definition auf der Überprüfung von Regeln aufbaut, ist sie leicht auf Verfahren anwendbar, die für die Konsistenzprüfung, ebenfalls auf einem Regelsatz basieren.
 Aber auch formale Verfahren ohne einen eigenen Regelsatz lassen sich mit dieser Definition beschreiben.
 So können z.B. die Verfahren, die auf der Transformation zu einem Petrinetz basieren mittels der Konsistenzregel ``das konstruierte Petrinetz muss lebendig sein'' überprüft werden.
@@ -54,12 +54,12 @@ Das hier vorgestellte Verfahren basiert auf der \emph{Intra-Modell} bzw. horizon
 Regeln zum direkten vergleich der Modelle können in zwei verschiedene Richtungen definiert werden.
 Eine Regel kann aufgrund eines Merkmales des ersten Modelles ein Merkmal im zweiten Modell fordern oder umgekehrt.
 Damit basieren diese Regeln auf der logischen Implikation.
-Um eine reflexive Regel zu erhalten (logische Äquivalenz) müssen zwei Regeln erstellt werden die sowohl die Hin- als auch die Rückrichtung abdecken.
+Um eine reflexive Regel zu erhalten (logische Äquivalenz), müssen zwei Regeln erstellt werden die sowohl die Hin- als auch die Rückrichtung abdecken.
 Im Bezug auf den Vergleich von BPMN und BROS bedeutet das, eine Regel hat immer ein Ursprungs- und ein Zielmodell.
 Da BROS beliebig erweitert werden kann, ist kein strikter Vergleich zwischen BPMN und BROS möglich.
 Aus diesem Grund sind die meisten Regel aus der Sicht des BPMN-Modelles aufgestellt.
 
-Wie bereits in \cref{chap:background} erläutert lassen sich die BPMN- und BROS-Modelle, aufgrund ihrer Metamodelle, in Form von Graphen darstellen.
+Wie bereits in \cref{chap:background} erläutert, lassen sich die BPMN- und BROS-Modelle aufgrund ihrer Metamodelle in Form von Graphen darstellen.
 Mit Hilfe des Graph-Logik-Isomorphismus können dies Graphen auch in Form von Logikprogrammen ausgedrückt werden.
 Für die Spezifikation der Regeln wird im nachfolgenden eine auf Prolog basierende Notation genutzt.
 Dies ermöglicht eine einfache und leicht verständliche Darstellung der Regeln ohne eine eigene domänenspezifische Sprache einführen zu müssen.
@@ -73,7 +73,7 @@ Dabei ist zu beachten das jedes Element nur einen Parent haben darf.
 Es gilt implizit \emph{check\_parent(X) :- parent(X, A), parent(X, B) -> A == B.}.
 Damit wird sichergestellt das es sich bei den Graphen der BPMN- und BROS-Modelle um Bäume handelt.
 Allgemein ist zu beachten das dies keine Zwischendarstellung ist und nur zur syntaktischen Definition der Regeln genutzt wird.
-Da der Graph des BPMN-Modelles und der Graph des BROS-Modelles disjunkt sind muss keine weitere Trennung der \emph{relation/3} und \emph{parent/2} Fakten durchgeführt werden.
+Da der Graph des BPMN-Modelles und der Graph des BROS-Modelles disjunkt sind, muss keine weitere Trennung der \emph{relation/3} und \emph{parent/2} Fakten durchgeführt werden.
 
 \begin{lstlisting}[language=Prolog, caption=Definitionen der Faktenbasis, label=lst:definition_facts]
 % Definition aller BPMN Elemente mit ihrem zugehörigem Typ.
@@ -112,239 +112,10 @@ match(Bpmn, Bros).
 \end{lstlisting}
 
 Mit der Hilfe dieser Prädikate können nun Regeln für die Konsistenz zwischen BPMN- und BROS-Modellen erstellt werden.
-Dafür wird jede Regeln erläutert und an einem Minimalbeispiel visualisiert.
+Dafür wird jede Regel erläutert und an einem Minimalbeispiel visualisiert.
 Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere Arbeit.
 
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Process};
-            \draw (-7,3.5) -- (0,3.5);
-            \draw (-6.5,4.75) node[color=unimportant,rotate=90] {A};
-            \draw (-6.5,2.25) node[color=unimportant,rotate=90] {B};
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \begin{scope}[color=unimportant]
-                \draw[rounded corners=4.8pt] (4.2,-2) rectangle (7.2,-4);
-                \draw (4.2,-3) -- (7.2,-3);
-                \draw (4.2,-3.5) -- (7.2,-3.5);
-                \draw (5.6,-2.5) node {A};
-
-                \draw[rounded corners=4.8pt] (0.8,-4) rectangle (3.8,-6);
-                \draw (0.8,-5) -- (3.8,-5);
-                \draw (0.8,-5.5) -- (3.8,-5.5);
-                \draw (2.4,-4.5) node {B};
-            \end{scope}
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 1}%
-        \label{fig:ruleExample1}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Kunde};
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \draw[rounded corners=4.8pt] (2.5,-3) rectangle (5.5,-5);
-            \draw (2.5,-4) -- (5.5,-4);
-            \draw (2.5,-4.5) -- (5.5,-4.5);
-            \draw (4,-3.5) node {Kunde};
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 2}%
-        \label{fig:ruleExample2}
-    \end{subfigure}
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Kunde};
-
-            \begin{scope}[color=unimportant]
-                \draw (-5.5,3.5) circle[radius=0.5];
-                \draw (-5.5,3) node[anchor=north] {Start};
-                \draw[->] (-5,3.5) -- (-2,3.5);
-            \end{scope}
-            \fill (-1.5,3.5) circle[radius=0.5];
-            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
-            \fill (-1.5,3.5) circle[radius=0.2];
-            \draw (-1.5,3) node[anchor=north] {End};
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \begin{scope}[color=unimportant]
-                \draw[rounded corners=4.8pt] (2.5,-3) rectangle (5.5,-5);
-                \draw (2.5,-4) -- (5.5,-4);
-                \draw (2.5,-4.5) -- (5.5,-4.5);
-                \draw (4,-3.5) node {Kunde};
-            \end{scope}
-
-            \filldraw[fill=white] (0,-4) circle[radius=0.5];
-            \draw (0,-4) circle[radius=0.35];
-            \draw (0,-4.5) node[anchor=north,fill=white] {End};
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 3}%
-        \label{fig:ruleExample3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Kunde};
-
-            \begin{scope}[color=unimportant]
-                \draw (-5.5,3.5) circle[radius=0.5];
-                \draw (-5.5,3) node[anchor=north] {Start};
-                \draw[->] (-5,3.5) -- (-2,3.5);
-            \end{scope}
-            \fill (-1.5,3.5) circle[radius=0.5];
-            \fill[color=white] (-1.5,3.5) circle[radius=0.35];
-            \draw (-1.5,3) node[anchor=north] {End};
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \draw[rounded corners=4.8pt] (4,-3) rectangle (7,-5);
-            \draw (4,-4) -- (7,-4);
-            \draw (4,-4.5) -- (7,-4.5);
-            \draw (5.5,-3.5) node {Kunde};
-
-            \begin{scope}[color=unimportant]
-                \draw (1.5,-2.5) circle[radius=0.5];
-                \draw (1.5,-3) node[anchor=north] {Start};
-                \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3);
-            \end{scope}
-
-            \draw (1.5,-5.5) circle[radius=0.5];
-            \draw (1.5,-6) node[anchor=north,fill=white] {End};
-            \draw[dashed, ->] (5.5,-5) -- (5.5,-5.5) -- (2,-5.5);
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 4}%
-        \label{fig:ruleExample4}
-    \end{subfigure}
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {\textbf{BPMN}};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {BROS};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Kunde};
-
-            \draw (-5.5,3.5) circle[radius=0.5];
-            \draw (-5.5,3) node[anchor=north] {Start};
-            \begin{scope}[color=unimportant]
-                \draw[->] (-5,3.5) -- (-2,3.5);
-                \fill (-1.5,3.5) circle[radius=0.5];
-                \fill[color=white] (-1.5,3.5) circle[radius=0.35];
-                \draw (-1.5,3) node[anchor=north] {End};
-            \end{scope}
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \draw[rounded corners=4.8pt] (4,-3) rectangle (7,-5);
-            \draw (4,-4) -- (7,-4);
-            \draw (4,-4.5) -- (7,-4.5);
-            \draw (5.5,-3.5) node {Kunde};
-
-            \draw (1.5,-2.5) circle[radius=0.5];
-            \draw (1.5,-3) node[anchor=north] {Start};
-            \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3);
-
-            \begin{scope}[color=unimportant]
-                \draw (1.5,-5.5) circle[radius=0.5];
-                \draw (1.5,-6) node[anchor=north,fill=white] {End};
-                \draw[dashed, ->] (5.5,-5) -- (5.5,-5.5) -- (2,-5.5);
-            \end{scope}
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 5}%
-        \label{fig:ruleExample5}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.4\textwidth}
-        \vspace{20pt}
-        \centering
-        \begin{tikzpicture}[scale=0.4, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
-            \draw[dashed] (-8,-7) -- (8,7);
-            \draw (-6,-5.25) node[anchor=south, rotate=41] {BPMN};
-            \draw (-6,-5.25) node[anchor=north, rotate=41] {\textbf{BROS}};
-
-            \draw (-8,6) rectangle (0,1);
-            \draw (-7,6) -- (-7,1);
-            \draw (-7.5,3.5) node[rotate=90] {Kunde};
-
-            \draw (-5.8,3.5) circle[radius=0.5];
-            \fill (-1.2,3.5) circle[radius=0.5];
-            \fill[color=white] (-1.2,3.5) circle[radius=0.35];
-            \draw (-4.8,3.5) -- (-4.4,3.9) -- (-4,3.5) -- (-4.4,3.1) -- cycle;
-            \draw (-3,3.5) -- (-2.6,3.9) -- (-2.2,3.5) -- (-2.6,3.1) -- cycle;
-            \draw[->] (-5.2,3.5) -- (-4.8,3.5);
-            \draw[->] (-2.2,3.5) -- (-1.7,3.5);
-            \draw[->] (-4.4,3.9) -- (-4.4,4.5) -- (-2.6,4.5) -- (-2.6,3.9);
-            \draw (-3.5,4.5) node[anchor=south] {Select A};
-            \draw[->] (-4.4,3.1) -- (-4.4,2.5) -- (-2.6,2.5) -- (-2.6,3.1);
-            \draw (-3.5,2.5) node[anchor=north] {Select B};
-
-            \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
-            \draw (0,-1.5) -- (8,-1.5);
-            \draw (4,-1) node {Process};
-
-            \draw[rounded corners=4.8pt] (4,-3.5) rectangle (7,-5.5);
-            \draw (4,-4.5) -- (7,-4.5);
-            \draw (4,-5) -- (7,-5);
-            \draw (5.5,-4) node {Kunde};
-
-            \draw (1.5,-2.5) circle[radius=0.5];
-            \draw (1.8,-3) node[anchor=north] {Select A};
-            \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3.5);
-        \end{tikzpicture}%
-        \caption{Darstellungen der Regel 6}%
-        \label{fig:ruleExample6}
-    \end{subfigure}
-    \caption{Exemplarische Darstellungen der Konsistenzregeln 1-6}%
-    \label{fig:ruleExamples}
-\end{figure}
+\input{c4_consitency_example_page}
 
 \textbf{Regel 1:} 
 Zu jedem \emph{BPMN-Process} muss eine \emph{BROS-Scene} oder ein \emph{BROS-Event} existieren.
@@ -460,7 +231,7 @@ Jedes \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss eine Ursache im BPMN-M
 Es darf kein Event im BROS-Modell geben das nicht im BPMN-Prozess existiert.
 Ein solches BROS-Event hätte keinen Auslöser im Verhaltensmodell und könnte somit nie eintreten.
 Passende BPMN-Elemente sind BPMN-Events unabhängig vom Typ, BPMN-Activities oder auch Ausgänge eines BPMN-Gateways.
-beispielhaft ist diese Regel in \cref{fig:ruleExample6} dargestellt.
+Beispielhaft ist diese Regel in \cref{fig:ruleExample6} dargestellt.
 Hier wird der Fall abgebildet, das ein BROS-Event mit einem BPMN-Gateway übereinstimmt.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 6, label=lst:rule_6]
@@ -481,13 +252,13 @@ Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein form
 Dies hat den Vorteil das die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung konstruiert werden muss.
 Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen, die als geschichteter Graph dargestellt werden.
 Im ersten Schritt wird ein Matching von Modellelementen aufgebaut.
-Dies wird iterativ, in Form eines Fixpunkt-Algorithmus, durchgeführt um kaskadierendes Matching zu erlauben.
+Dies wird iterativ in Form eines Fixpunkt-Algorithmus durchgeführt um ein kaskadierendes Matching zu erlauben.
 Dieser Schritt wird im folgenden \emph{Matching-Algorithmus} genannt.
 Im zweiten Schritt werden anhand dem Matching die erstellten Regeln ausgeführt.
 Dabei werden die Regelergebnisse aggregiert.
 Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \begin{tikzpicture}
         \draw[dashed] (0,5.4) -- (0,-5.4);
@@ -558,16 +329,17 @@ Um diese Schicht zu konstruieren wird eine Orakelfunktion genutzt.
 Diese ermittelt ob zwei Elemente zueinander passend sind.
 Dabei hat die Orakelfunktion zwei Parameter, den aktuellen Konten des BPMN-Graphen und den des BROS-Graphen.
 Die übergebenen Knoten enthalten Referenzen auf ihre Relationen aus allen drei Schichten.
-In der ersten Schicht sind die Vorfahren und Nachkommen und in der zweiten Schicht die per Relation verbunden Elemente.
+In der ersten Schicht sind die Vorfahren und Nachkommen und in der zweiten Schicht die mittels Relationen verbundenen Elemente.
 Die dritte Schicht ist zu Beginn leer.
 Wenn die Orakelfunktion für das BPMN-Element \emph{x} und das BROS-Element \emph{y} ein Matching feststellt, werden die Kanten \emph{(x, y)} und \emph{(y, x)} der dritten Schicht hinzugefügt.
-Eine einmal hinzugefügt Kante kann nicht wieder entfernt werden.
-Da die dritte Schicht auch mit an das Orakel übergeben wird, kann dieses aufgrund von einem bereits bestehen Matching eine Entscheidung treffen.
-Um dieses Verhalten zu nutzen wird der Vorgang des Matchingaufbaues solange wiederholt bis sich die dritte Schicht nicht weiter ändert.
+Eine einmal hinzugefügte Kante kann nicht wieder entfernt werden.
+Da die dritte Schicht auch mit an das Orakel übergeben wird, kann dieses aufgrund von einem bereits bestehenden Matching eine Entscheidung treffen.
+Um dieses Verhalten zu nutzen zu können, wird der Vorgang des Matchingaufbaues solange wiederholt bis sich die dritte Schicht nicht weiter ändert.
 Dieses Verhalten wird Fixpunkt-Algorithmus genannt.
 Innerhalb einer Iteration des Algorithmus wird die Orakelfunktion auf allen Paaren von Elementen des BPMN- und des BROS-Modelles angewendet.
-Ein Fixpunkt-Algorithmus kann unter umständen nicht terminieren, wenn die Datenstruktur in eine oszillierenden Zustand übergeht.
-Dies wird verhindert indem Kanten nur zu dem Matching hinzugefügen werden und somit nie entfernt werden dürfen, wodurch das Matching monoton wachsend ist.
+
+Ein Fixpunkt-Algorithmus kann unter Umständen nicht terminieren, wenn die Datenstruktur in eine oszillierenden Zustand übergeht.
+Dies wird verhindert indem Kanten nur zu dem Matching hinzugefügt und somit nie entfernt werden dürfen, wodurch das Matching monoton wachsend ist.
 Damit kann die dritte Schicht maximal zu einem vollständigen Graphen anwachsen.
 Anschließend kann keine weitere Kante hinzugefügt werden und der Algorithmus terminiert automatisch.
 
@@ -580,12 +352,13 @@ So werden die Regeln die die Überprüfung aus Sicht des BPMN-Modelles ausführe
 Um eine bessere Fehlermeldung für den Modellierer zu erstellen, wird im Falle einer Regelverletzung nicht nur das BPMN-Element, sondern auch das BROS-Element das zu dem Regelverstoß führt, als negative Konsistenzmeldung gespeichert.
 Mit Hilfe der beiden Elemente und der verletzen Regel kann eine genaue Fehlerbeschreibung gegeben werden.
 Dieses Verhalten ist analog für die Regel die aus Sicht des BROS-Modelles arbeiten.
-Nicht mit den Prologregeln dargestellbar ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
-Jede Regel hat zu beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt.
-Für eine optimale Rückmeldung an den Modellierer muss zwischen einer falschen Vorbedingung und einer wahren Vorbedingung mit wahrer Konsequenz unterschieden werden.
-Im Fall das eine Regel eine wahre Vorbedingung und eine wahre Konsequenz aufweist wird eine positive Konsistenzmeldung gespeichert, andernfalls kann die Regelausführung ignoriert werden.
 
-Das Ergebnis der Konsistenzprüfung ist eine Liste von Konsistenzmeldung.
+Nicht mit den Prologregeln dargestellbar ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
+Jede Regel hat zu Beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt.
+Für eine optimale Rückmeldung an den Modellierer muss zwischen einer falschen Vorbedingung und einer wahren Vorbedingung mit wahrer Konsequenz unterschieden werden.
+Im Fall das eine Regel eine wahre Vorbedingung und eine wahre Konsequenz aufweist, wird eine positive Konsistenzmeldung gespeichert, andernfalls kann die Regelausführung ignoriert werden.
+
+Das Ergebnis der Konsistenzprüfung ist eine Liste von Konsistenzmeldungen.
 Jede Konsistenzmeldung besteht aus ihrem Typ (positiv oder negativ), den betroffenen BPMN- und BROS-Elementen, der zugrundeliegenden Regel und einer textuellen Beschreibung.
 Die negativen Konsistenzmeldung sind die gefunden Inkonsistenzen zwischen bem BPMN- und BROS-Modell.
 Wenn beide Modelle konsistent zueinander sind, beinhaltet das Ergebnis nur positive Konsistenzmeldungen.

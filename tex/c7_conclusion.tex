@@ -1,33 +1,50 @@
 \chapter{Schluss}
 \label{chap:conclusion}
 
-In diesem Kapitel soll evaluiert werden in wie weit diese Arbeit die im \cref{chap:introduction} genannten Ziele erfüllt hat.
-Zu diesem Zweck werden die Ergebnisse der Analyse und der Implementierung zusammengefasst und in das Feld der bestehenden Verfahren einsortiert.
-Abschließend wird ein Ausblick über mögliche Erweiterungen und Verbesserungen des vorgestellten Verfahrens gegeben.
+In diesem Kapitel wird evaluiert in wie weit diese Arbeit die, im \cref{chap:introduction}, genannten Ziele erfüllt hat.
+Zu diesem Zweck werden die Ergebnisse der Analyse und der Implementierung zusammengefasst und in das Feld der bestehenden Verfahren eingeordnet.
+Dabei werden die Ergebnisse der einzelnen Teilschritte analysiert und benutzt um das Klassifikationsschema aus \cref{chap:related_work} zu erweitern.
+Abschließend wird ein Ausblick über mögliche Erweiterungen des vorgestellten Verfahrens und weiterführende Arbeiten auf dem Gebiet des Konsistenzvergleiches zwischen BPMN- und BROS-Modellen gegeben.
 
 \section{Zusammenfassung}
 
-Ziel der Arbeit war die Konsistenz zwischen BPMN- und BROS-Modellen zu überprüfen.
-Dafür wurden bestehende Konsistenzverfahren für UML-Modelle analysiert und anhand ihrer Eigenschaften klassifiziert.
-Auf dieser Basis wurden sechs Regeln für die Konsistenzprüfung aufgestellt und formalisiert.
-Diese führen einen direkten vergleich der beiden Modelle durch ohne eine Zwischendarstellung zu benutzen, um eine bessere Regelerweiterbarkeit zu erreichen.
+Ziel der Arbeit war die Konsistenz zwischen BPMN- und BROS-Modellen zu untersuchen.
+Dieses wurde Erreicht indem eine Lösung des Konsistenzproblems für die beiden Modellarten erstellt wurde.
+Als Einführung in BPMN und BROS wurden deren Konzepte und Metamodelle erläutert.
+Um einen Einstieg in das Themengebiet der Konsistenzprüfung zu erhalten, wurden bestehende Verfahren zur Überprüfung der Konsistenz von UML-Modellen analysiert.
+Dafür wurde ein Klassifikationsschema auf Basis des Schemas von \cite{Usman2008}) erstellt und zur Klassifizierung der Verfahren verwendet.
+
+Mit Hilfe der erstellten Metamodelle und den Konsistenzverfahren für UML-Modelle wurden Konsistenzbedingungen zwischen BPMN- und BROS-Modellen erarbeitet.
+Die sechs erstellten Regeln basieren auf dem direkten Vergleich der Modelle anhand ihrer Metamodelle.
+Diese in Prolog formalisierten Regeln benötigen keine Zwischendarstellung und sind daher leicht erweiterbar.
 Für die Automatisierung der Konsistenzprüfung wurde eine Referenzarchitektur erstellt, die die formalen Regeln ausführt.
-Um die Funktionalität des Verfahren zu zeigen, wurde ein Tool in Kotlin implementiert um zusätzlich eine mögliche Anbindung an den BROS-Editor FRaMED.io zu erleichtern.
-Diese Implementierung wurde anschließend anhand des Beispieles einer Pizzabestellung von \cite{Schoen} getestet indem ein zu dem BPMN-Modell konsistentes BROS-Modell entwickelt wurde.
-Außerdem wurde die Erweiterbarkeit dieses Verfahrens evaluiert, indem eine weiter Regel zu zu der Implementierung hinzugefügt wurde.
+Dieses zweistufige Verfahren baut zunächst eine Zuordnung von Elementen auf und überprüft anschließend die Modelle mit dem Regelsatz auf ihre Konsistenz.
+Im nächsten Schritt wurde das Verfahren implementiert, um einerseits seine Funktionalität zu zeigen und andererseits die Automatisierbarkeit zu beweisen.
+Das dabei erstellte Tool ist in Kotlin entwickelt wurden, um zusätzlich eine mögliche Anbindung an den BROS-Editor \emph{FRaMED.io} zu erleichtern.
+Wie die Modelleditoren \emph{bpmn.io} und \emph{FRaMED.io} ist das Tool webbasiert um plattformübergreifend nutzbar zu sein.
+
+Die Evaluation des Verfahrens teilt sich in zwei Abschnitte auf.
+Zum einen wurde die Anwendbarkeit anhand von einem Beispielsystem getestet.
+Dazu wurde das Beispiel einer Pizzabestellung aus der Arbeit von \cite{Schoen} verwendet.
+In seiner Arbeit hat \cite{Schoen} sowohl ein BPMN- als auch ein BROS-Modell gegeben die zueinander Konsistent sind.
+Zum anderen wurde die Erweiterbarkeit und Modularität des Verfahrens und der Implementierung evaluiert, indem eine weitere Regel aus dem \cref{chap:consistency} zu dem Tool hinzugefügt wurde.
 
 \section{Wissenschaftlicher Beitrag}
 
-Das in dieser Arbeit vorgestellte Verfahren gehört zu der Klasse der Verfahren ohne Zwischendarstellung (vgl. \cref{tab:Klassifikationsschema_extended}).
-Da es auf dem Auswerten verschiedener Konsistenzregeln basiert, nutzt es die Strategie des Monitorings.
-Damit ist der ähnlichste Ansatz im Bezug auf UML-Modelle das Verfahren nach \cite{Egyed2006}.
+Das in dieser Arbeit vorgestellte Verfahren zur Lösung des Konsistenzproblems basiert auf der Überprüfung eines Regelsatz.
+Diese Regeln nutzen die Graphstruktur die durch die Metamodelle aufgestellt werden, um den Konsistenzvergleich durchzuführen.
+Damit gehört das Verfahren, nach dem Klassifikationsschema aus \cref{chap:related_work}, zu der Klasse der Verfahren ohne Zwischendarstellung.
+Die Nutzung eines Regelsatzes entspricht der Konsistenzstrategie des Monitorings.
+In \cref{tab:Klassifikationsschema_extended} ist die Einordnung diese Arbeit in das bestehende Feld von Konsistenzverfahren abgebildet.
+Die größte Übereinstimmung hat das hier vorgestellte Verfahren mit dem Konsistenzverfahren nach \cite{Egyed2006}.
 Beide Verfahren testen die Intra-Modell (horizontale) Konsistenz, sind automatisierbar und wurden bereits evaluiert.
 Sie unterscheiden sich neben den unterstützten Modellarten hauptsächlich im Grad der Erweiterbarkeit.
-Das Verfahren von \cite{Egyed2006} benutzt zum Konsistenzvergleich Regeln auf basis von OCL.
-Damit ist die Erweiterbarkeit um neue Modellarten nicht möglich, wenn diese nicht zum UML-Standard gehören.
-Das hier genutzte Verfahren hat auch einen hohen Aufwand, wenn eine neue Modellart hinzugefügt wird.
+Das Verfahren von \cite{Egyed2006} benutzt zum Konsistenzvergleich Regeln auf Basis von OCL.
+Dies erschwert die Erweiterbarkeit um neue Modellarten ungemein.
+Nur Modellarten die auf zu dem UML-Standard gehöhren, werden von der OCL und damit auch von dem Verfahren unterstützt.
+Auch das hier genutzte Verfahren hat auch einen hohen Aufwand, wenn eine neue Modellart hinzugefügt wird.
 Allerdings ist die Erweiterbarkeit um neue Regeln mit weniger Aufwand verbunden.
-Das das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet können beliebige Regeln leicht erstellt werden.
+Da das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet, können beliebige Regeln leicht erstellt werden.
 \cite{Egyed2006} Verfahren ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regeln erschweren könnte.
 
 \begin{table}
@@ -73,13 +90,43 @@ Das das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet können
   \label{tab:Klassifikationsschema_extended}
 \end{table}
 
+Diese Erweiterbarkeit wurde mit Hilfe der Implementierung nachgewiesen.
+Ziel der Implementierung war, den Konsistenzvergleich zu automatisieren und gleichzeitig die Modularität und damit auch Erweiterbarkeit des Verfahrens zu gewährleisten.
+Dies wurde mit der Aufteilung der Konsistenzbedingungen in einzelne Regeln erreicht.
+Jede dieser Regeln besteht aus einem, teilweise auch mehreren Modulen, die sich unabhängig voneinander aktivieren und ergänzen lassen.
+Die Automatisierbarkeit wurde mit der Implementierung gezeigt und anhand eines Beispieles zusätzlich evaluiert.
+Dabei konnte ein fehlerhaftes BROS-Modell erfolgreich korrigiert werden.
+Da das genutzt Beispiel auf der Arbeit von \cite{Schoen} basiert, konnte diese zur Verifizierung der Korrektheit der Konsistenz genutzt werden.
+
 \section{Zukünftige Arbeiten}
 
-Eine Abgrenzung dieser Arbeit war, das keine Handlungsempfehlungen oder Lösungsmöglichkeiten bei gefundenen Inkonsistenzen gegeben werden.
-In diesem Feld sollte evaluiert werden welche Inkonsistenzmuster häufig auftreten und ob diese eine Vorhersehbare Lösungsmöglichkeit aufweisen.
-Auch könnte die Fehlertoleranz des Tools erhöht werden, indem man eine syntaktische und semantische Konsistenzprüfung der Einzelmodelle integriert.
-Diese ist momentan noch von externen Programmen abhängig oder aufgabe des Modellierers.
-Da externe Programme meist auf diese Aufgabe spezialisiert sind müsste zunächst evaluiert werden ob eine integrierte Lösung auch eine gleichbleibende Erkennungsrate besitzt.
-Um die Benutzbarkeit des Tools weiter zu verbessern kann eine Integration in FRaMED.io erfolgen.
-Die technische Grundlage ist mit der Referenzimplementierung bereits gegeben.
-Hierfür müsste noch evaluiert werden wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.
+Wie in \cref{chap:evaluation} beschrieben, muss ein von dem Tool gefundener Konsistenzfehler, nicht unbedingt ein echter Konsistenzfehler sein.
+Dieser Fehler kann auch von dem Modellierer beabsichtigt sein und eine gewollte Erweiterung des Modelles darstellen.
+Momentan kann das Tool nicht mit diesem Problem umgehen.
+Eine Möglichkeit bestimmt Fehler zu ignorieren oder als gewollt zu kennzeichnen wäre eine sinnvolle Erweiterung für das implementierte Tool.
+
+Um die allgemeine Funktionalität zu verbessern, ist es erforderlich die Konsistenzbeziehungen zwischen BPMN- und BROS-Modellen genauer zu untersuchen.
+In dieser Arbeit wurden nur sechs Konsistenzregeln vorgestellt, die die wichtigsten Bereiche der Konsistenz abdecken.
+So ist sind noch keine Konsistenzbedingungen für z.B. BROS-Compartments oder BPMN-SubProcesses definiert.
+Die Konsistenzregeln die zwischen diesen und weiteren Elementen gelten müssen dafür noch analysiert werden.
+Solange eine Formalisierung dieser Regeln auf Basis der Metamodelle möglich ist, können sie der bestehenden Implementierung hinzugefügt werden.
+
+Neben der Erweiterung um neue Regeln, kann auch die Erweiterung um die syntaktische und semantische Konsistenzprüfung der Einzelmodelle untersucht werden.
+Momentan ist diese Aufgabe abhängig von dem Modellierer.
+Zwar existieren schon Verfahren und automatisierte Tools für diesen Konsistenzvergleich, allerdings sind sie nicht kompatibel mit der aktuellen Implementierung.
+Auch müsste untersucht werden ob dieser Konsistenzvergleich, in einem zufriedenstellenden Funktionsumfang integrierbar ist.
+Externe Programme die diese Funktionalität bereits besitzten, sind zumeist Editoren für diese Modelle.
+Diese sind darauf spezialisiert diese Art von Konsistenzprüfung durchzuführen.
+Eine eigene Implementierung hat die Gefahr einer schlechteren Erkennungsrate.
+
+Eine weitere mögliche Erweiterung des Tools wäre die Integration in den bestehenden BROS-Editor \emph{FRaMED.io}.
+Da BROS-Modelle auf den BPMN-Modellen aufbauen und teilweise wiederverwenden können, kann eine Integration den Entwicklungsprozess eines BROS-Modelles zu einem BPMN-Modell erhebliche vereinfachen.
+So könnte das BPMN-Modell direkt in den Editor geladen werden.
+Dies würde dem Modellierer verschiedene Möglichkeiten geben.
+Zum einen könnten Fehlermeldungen direkt graphisch, in dem BROS-Modell, markiert werden.
+Damit könnten sich Fehler leichter finden und verstehen lassen.
+Zum anderen könnten Teile des BROS-Modelles, anhand des BPMN-Modelles, autogeneriert werden.
+Dies würde dem Modellierer vorallem bei großen Prozessen viel Zeit sparen.
+Da die Referenzimplementierung, wie auch der BROS-Editor, in Kotlin entwickelt wurden, sind sie bereits technisch Kompatibel.
+Allerdings müsste noch evaluiert werden wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.
+Sollte eine Autogenerierung implementiert werden, müsste zusätzlich noch analysiert werden, in wieweit dies möglich ist und wie nutzbar ein solches Modell gegenüber einem manuell erstelltem Modell wäre.

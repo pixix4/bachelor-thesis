@@ -124,23 +124,29 @@ Wenn zu jedem Element der ersten Menge ein passendes Element in der zweiten Meng
 \end{figure}
 
 Zusätzlich zum Name-Matching müssen Regeln definiert werden, auf welchen Elementen das Name-Matching angewendet werden muss.
-Jede Regel muss dafür das \emph{Matching}-Interface implementieren.
+Jede Regel implementiert dafür das \emph{Matching}-Interface.
 Um diese Regeln gebündelt zu erstellen und zu sammeln gibt es die Hilfsklasse \emph{Context}.
 Diese bietet verschiedene Hilfsfunktionen, um auf einfache Art und Weise Matching- und Verifikations-Regeln zu implementieren.
 Dabei benötigt die Hilfsfunktion zum Erstellen einer Matching Regel drei Parameter.
 Die ersten beiden Parameter sind die Referenzen auf das BPMN- und BROS-Metamodell nach denen die Graphknoten gefiltert werden.
 Mit den Sprachfunktionen von Kotlin können diese Referenzen als generischer Parameter der Funktion übergeben werden.
-Der dritte Parameter ist ein Lambda das die beiden Knoten des BPMN-Graphen und des BROS-Graphen auf einen Wahrheitswert abbildet.
-Das Lambda wird nur ausgeführt wenn die Knoten zu den Filtern der ersten beiden Parameter passen.
-Wenn das Lambda ``wahr"" zurück gibt, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
+Der dritte Parameter ist eine anonyme Funktion.
+Diese werden in Kotlin mittels Lambdas dargestellt.
+Auf syntaktischer Ebene kann ein Lambda, sofern es der letzte Parameter einer Funktion ist, außerhalb der Parameterliste geschrieben werden.
+Dies erleichtert die Lesbarkeit des Quellcodes, da er sich optisch einer domainspezifischen Sprache ähnelt.
+Sie bildet die beiden Knoten des BPMN-Graphen und des BROS-Graphen auf einen Wahrheitswert ab.
+Innerhalb des Lambdas kann beliebiger Code ausgeführt werden um die beiden Elemente zu vergleichen.
+Im einfachsten Fall führt das Lambda nur das Name-Matching der beiden Elemente aus.
+Es kann allerdings auch beliebige weitere Merkmale der Elemente, wie deren Struktur, zum vergleich nutzen.
+Dabei hat sie auf alle drei Schichten des Graphen Zugriff.
+Wenn das Lambda ``wahr'' zurück gibt, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
 Da der Graph gerichtet, das Matching allerdings bidirektional ist, müssen zwei Kanten für die Hin- und Rückrichtung hinzugefügt werden.
 Sonst wird das Ergebnis ignoriert, da nur Kanten zum Matching hinzugefügt werden dürfen.
+Das Lambda wird nur ausgeführt wenn die Knoten zu den Filtern der ersten beiden Parameter passen.
 In \cref{lst:match_lane_role} ist das Matching für eine BPMN-Swimlane und einem BROS-RoleType gegeben.
-Mittels der generischen Parameter werden die Graph-Knoten gefiltert und das Lambda wird nur auf den betreffenden Knoten ausgeführt. 
-Im Lambda wird hier nur ein einfaches Name-Matching durchgeführt.
-Die weitere Struktur wird nicht betrachtet.
+Mittels der generischen Parameter werden die Graph-Knoten gefiltert und das Lambda wird nur auf den beiden Knotentypen ausgeführt. 
+Im Lambda wird ein einfaches Name-Matching durchgeführt und die weitere Struktur wird nicht betrachtet.
 
-\pagebreak
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel von einer BPMN-SwimLane und einem BROS-RoleType, label=lst:match_lane_role]
 Context.match<BpmnLane, BrosRoleType> { lane, role ->
     matchStrings(lane.element.name, role.element.name)

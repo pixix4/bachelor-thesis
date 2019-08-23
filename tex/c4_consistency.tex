@@ -187,6 +187,8 @@ Ein BROS-RoleType wird mit einem BROS-Event beendet, wenn zwischen diesen beiden
 Alternativ kann ein BPMN-EndEvent auch durch ein BROS-ReturnEvent modelliert werden, wenn das BPMN-EndEvent das abschließende Event des BPMN-Prozesses ist.
 Der erste Fall ist mit Hilfe des Prozessteilnehmers ``Kunde'' in \cref{fig:ruleExample4} beispielhaft dargestellt.
 
+\pagebreak
+
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 4, label=lst:rule_4]
 rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
     (
@@ -318,7 +320,7 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
     \caption{Visualisierung des Graph Matching}%
     \label{fig:ModelToGraph}
 \end{figure}
-
+\pagebreak
 Um das Verfahren anzuwenden, müssen beiden Modelle in Form eines gerichteten Graph vorliegen, der aus mehreren Ebenen besteht.
 Ein geschichteter Graph basiert auf einem Baum der die Grundstruktur des Modelles und die Eltern-Kind Beziehung abdeckt.
 Um die Relationen zwischen den Modellelementen darzustellen wird ein Schicht mit Querverweisen über den Baum gelegt.

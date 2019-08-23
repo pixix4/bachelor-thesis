@@ -90,8 +90,7 @@ Jede Relation besitzt einen Verweis auf seine Quell- und Zielknoten.
 Auch die Graphrelationen besitzen eine Referenz auf ihre Metamodell-Instanz mit Typannotation.
 Schließlich ist die dritte Schicht, die das Matching zwischen den Modellen darstellt, mit grün markiert.
 Dabei handelt es sich um ein Set von Knoten, die nach der Orakelfunktion zu ihm passend sind.
-Jeder Knoten hat zusätzlich noch eine Hilfsfunktion die einen Iterator zurückgibt.
-Diese implementiert eine einfache Breitensuche um über den Graphen zu iterieren.
+Jeder Knoten hat zusätzlich noch eine Hilfsfunktion die einen Iterator zurückgibt, der eine einfache Breitensuche um über den Graphen implementiert.
 
 \section{Matching der Modelelemente}
 \label{sec:matching_model_elements}
@@ -141,6 +140,7 @@ Mittels der generischen Parameter werden die Graph-Knoten gefiltert und das Lamb
 Im Lambda wird hier nur ein einfaches Name-Matching durchgeführt.
 Die weitere Struktur wird nicht betrachtet.
 
+\pagebreak
 \begin{lstlisting}[language=Kotlin, caption=Matching Regel von einer BPMN-SwimLane und einem BROS-RoleType, label=lst:match_lane_role]
 Context.match<BpmnLane, BrosRoleType> { lane, role ->
     matchStrings(lane.element.name, role.element.name)

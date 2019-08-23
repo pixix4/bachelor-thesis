@@ -43,10 +43,10 @@ Anhand des aufgestellten Regelsatzes kann ein Algorithmus zum auffinden der Inko
 Dafür müssen die Regeln, wie bereits erwähnt, in einer formalen Form und nicht in natürlicher Sprache vorliegen.
 Die Aufgabe der Minimierung und Verhinderung der Inkonsistenz ist auch mit einem automatisierten Tool dem Modellierer überlassen.
 Die Verfahren können dem Modellierer Handlungsempfehlungen geben, eine automatische Korrektur ist allerdings nur schwer möglich.
-So könnte ein Problem z.B. durch das entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
+So könnte ein Problem z. B. durch das entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
 Da diese Definition auf der Überprüfung von Regeln aufbaut, ist sie leicht auf Verfahren anwendbar, die für die Konsistenzprüfung, ebenfalls auf einem Regelsatz basieren.
 Aber auch formale Verfahren ohne einen eigenen Regelsatz lassen sich mit dieser Definition beschreiben.
-So können z.B. die Verfahren, die auf der Transformation zu einem Petrinetz basieren mittels der Konsistenzregel ``das konstruierte Petrinetz muss lebendig sein'' überprüft werden.
+So können z. B. die Verfahren, die auf der Transformation zu einem Petrinetz basieren mittels der Konsistenzregel ``das konstruierte Petrinetz muss lebendig sein'' überprüft werden.
 
 \section{Konsistenzregeln} \label{sec:Konsistenzregeln}
 
@@ -103,7 +103,7 @@ Das wichtigste Prädikat ist \emph{match/2}.
 Es bildet eine Zuordnungen von BPMN-Elemente zu den BROS-Elementen und umgekehrt ab.
 Zwei Elemente haben ein Matching zueinander, wenn sie auf dem semantischen Ebene die gleiche Bedeutung haben.
 Der genaue Aufbau des Matching ist dabei implementierungsabhängig.
-Es kann z.B. auf den Namen der Elemente oder auch deren Struktur basieren.
+Es kann z. B. auf den Namen der Elemente oder auch deren Struktur basieren.
 Im folgenden wird angenommen das ein Matching bereits existiert, wodurch es im weiteren auch als Orakelfunktion bezeichnet wird.
 Technisch ist das Matching die Menge der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
 
@@ -124,7 +124,7 @@ Mit der Hilfe dieser Prädikate können nun Regeln für die Konsistenz zwischen 
 Dafür wird jede Regel erläutert und an einem Minimalbeispiel visualisiert.
 Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere Arbeit.
 
-\input{c4_consitency_example_page}
+\input{c4_consistency_example_page}
 
 \textbf{Regel 1:} 
 Zu jedem \emph{BPMN-Process} muss eine \emph{BROS-Scene} oder ein \emph{BROS-Event} existieren.
@@ -259,9 +259,76 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
 
 \section{Referenzarchitektur}
 
-Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z.B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
+\begin{figure}[b]
+    \centering
+    \begin{tikzpicture}[scale=0.5]
+    
+    \draw (-7,3.3) node {\textbf{Modelle\vphantom{g}}};
+    \draw (0,3.3) node {\textbf{Matching}};
+    \draw (7,3.3) node {\textbf{Verifikation\vphantom{g}}};
+    \draw (14,3.3) node {\textbf{Ergebnis}};
+    
+    \draw (-7.5,2) -- (-7.5,0.5) -- (-6.5,0.5) -- (-6.5,1.7) -- (-6.8,2) -- cycle;
+    \draw (-7.2, 1.5) -- (-6.8,1.5);
+    \draw (-7.2, 1.25) -- (-6.8,1.25);
+    \draw (-7.2, 1) -- (-6.8,1);
+    \draw (-7,0.5) node[anchor=north,scale=0.7] {BPMN};
+    \draw (-7.5,-0.5) -- (-7.5,-2) -- (-6.5,-2) -- (-6.5,-0.8) -- (-6.8,-0.5) -- cycle;
+    \draw (-7.2, -1.5) -- (-6.8,-1.5);
+    \draw (-7.2, -1.25) -- (-6.8,-1.25);
+    \draw (-7.2, -1) -- (-6.8,-1);
+    \draw (-7,-2) node[anchor=north,scale=0.7] {BPMN};
+    
+    
+    \draw[-{Triangle[length=5pt]}] (-4,0) -- (-3,0);
+    
+    
+    \draw (0,1.5) node[scale=0.7] {$$f(x)$$};
+    \draw (-1,2) rectangle (1,1);
+    
+    \draw[color=layer3,dashed] (-1,0.25) -- (1,0.25);
+    \draw[color=layer3,dashed] (-1,-0.75) -- (1,-1.75);
+    \draw[color=layer3,dashed] (1,-0.75) -- (-1,-1.75);
+    
+    \draw (-1.75,0.5) rectangle (-1,0);
+    \draw (-1.75,-0.5) rectangle (-1,-1);
+    \draw (-1.75,-1.5) rectangle (-1,-2);
+    
+    \draw (1.75,0.5) rectangle (1,0);
+    \draw (1.75,-0.5) rectangle (1,-1);
+    \draw (1.75,-1.5) rectangle (1,-2);
+    
+    
+    \draw[-{Triangle[length=5pt]}] (3,0) -- (4,0);
+    
+    
+    \draw (6,1.5) rectangle (8,-1.5);
+    \draw (6.5,0.5) -- (7.5,0.5);
+    \draw (6.5,0) -- (7.5,0);
+    \draw (6.5,-0.5) -- (7.5,-0.5);
+    \filldraw[fill=white] (8,-1.5) circle[radius=0.5];
+    \draw[line width=1pt] (7.75, -1.5) -- (7.9,-1.7) -- (8.25,-1.3);---
+    
+    
+    \draw[-{Triangle[length=5pt]}] (10,0) -- (11,0);
+    
+    
+    \draw (13, 1.6) rectangle (15,1.1);
+    \draw (13, 0.7) rectangle (15,0.2);
+    \draw (13, -0.7) rectangle (15,-0.2);
+    \draw (13, -1.6) rectangle (15,-1.1);
+    
+    
+    \draw (-3.5,0.1) -- (-3.5,2.5) -- (10.5,2.5) -- (10.5,0.1);
+    \draw (-3.5,-0.1) -- (-3.5,-2.5) -- (10.5,-2.5) -- (10.5,-0.1);
+    \end{tikzpicture}%
+    \caption{Referenzarchitektur}%
+    \label{fig:consistencySymbolicPicture}
+\end{figure}
+
+Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z. B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
 Dies hat den Vorteil das die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung konstruiert werden muss.
-Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen, die als geschichteter Graph dargestellt werden.
+Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen, die als geschichteter Graph dargestellt werden und ist in \cref{fig:consistencySymbolicPicture} dargestellt.
 Im ersten Schritt wird ein Matching von Modellelementen aufgebaut.
 Dies wird iterativ in Form eines Fixpunkt-Algorithmus durchgeführt um ein kaskadierendes Matching zu erlauben.
 Dieser Schritt wird im folgenden \emph{Matching-Algorithmus} genannt.
@@ -269,7 +336,19 @@ Im zweiten Schritt werden anhand dem Matching die erstellten Regeln ausgeführt.
 Dabei werden die Regelergebnisse aggregiert.
 Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
 
-\begin{figure}[t]
+Um das Verfahren anzuwenden, müssen beiden Modelle in Form eines gerichteten Graph vorliegen, der aus mehreren Ebenen besteht.
+Ein geschichteter Graph basiert auf einem Baum der die Grundstruktur des Modelles und die Eltern-Kind Beziehung abdeckt.
+Um die Relationen zwischen den Modellelementen darzustellen wird ein Schicht mit Querverweisen über den Baum gelegt.
+In \cref{fig:ModelToGraph} wird die Transformation der Modelle in die dazugehörigen Graphen dargestellt.
+Auf der linken Seite ist ein BPMN-Modell mit dem dazugehörigen Graphen. 
+Auf der rechten Seite ist ein vereinfachtes BROS-Modell mit seinem Graphen.
+Der schwarze Teil der Graphen bildet die Grundstruktur oder auch die erste Schicht.
+Dieser wird mit Hilfe der ``contains''-Relation der Metamodelle direkt aufgebaut.
+In blau ist die zweite Schicht, die Schicht der Relationen, visualisiert.
+Jede Relation ist mit ihrem Typ annotiert und hat eine feste Richtung.
+Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
+
+\begin{figure}
     \centering
     \begin{tikzpicture}
         \draw[dashed] (0,5.4) -- (0,-5.4);
@@ -320,18 +399,6 @@ Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
     \caption{Visualisierung des Graph Matching}%
     \label{fig:ModelToGraph}
 \end{figure}
-\pagebreak
-Um das Verfahren anzuwenden, müssen beiden Modelle in Form eines gerichteten Graph vorliegen, der aus mehreren Ebenen besteht.
-Ein geschichteter Graph basiert auf einem Baum der die Grundstruktur des Modelles und die Eltern-Kind Beziehung abdeckt.
-Um die Relationen zwischen den Modellelementen darzustellen wird ein Schicht mit Querverweisen über den Baum gelegt.
-In \cref{fig:ModelToGraph} wird die Transformation der Modelle in die dazugehörigen Graphen dargestellt.
-Auf der linken Seite ist ein BPMN-Modell mit dem dazugehörigen Graphen. 
-Auf der rechten Seite ist ein vereinfachtes BROS-Modell mit seinem Graphen.
-Der schwarze Teil der Graphen bildet die Grundstruktur oder auch die erste Schicht.
-Dieser wird mit Hilfe der ``contains''-Relation der Metamodelle direkt aufgebaut.
-In blau ist die zweite Schicht, die Schicht der Relationen, visualisiert.
-Jede Relation ist mit ihrem Typ annotiert und hat eine feste Richtung.
-Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
 
 \subsection*{Matching-Algorithmus}
 

@@ -437,8 +437,13 @@ Dieses Verhalten ist analog für die Regel die aus Sicht des BROS-Modelles arbei
 
 Nicht mit den Prologregeln dargestellbar ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
 Jede Regel hat zu Beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt.
-Für eine optimale Rückmeldung an den Modellierer muss zwischen einer falschen Vorbedingung und einer wahren Vorbedingung mit wahrer Konsequenz unterschieden werden.
-Im Fall das eine Regel eine wahre Vorbedingung und eine wahre Konsequenz aufweist, wird eine positive Konsistenzmeldung gespeichert, andernfalls kann die Regelausführung ignoriert werden.
+Für eine optimale Rückmeldung an den Modellierer muss eine erfolgreiche Regelprüfung in zwei Fälle unterschieden werden.
+Eine Regel wird nicht nur als erfolgreich ausgeführt markiert, wenn sie tatsächlich erfolgreich war, sondern auch, wenn sie bei einer falschen Vorbedingung vorzeitig abgebrochen wurde.
+Dieses verhalten stammt aus der Definition.
+Die Implikation gibt wahr zurück, wenn entweder die Vorbedingung falsch ist oder die Konsequenz wahr ist.
+Interessant für den Modellierer ist nur der Fall, das die Konsequenz wahr ist.
+Dabei wird eine positive Konsistenzmeldung gespeichert.
+Bei einer falschen Vorbedingung kann die Ausführung ignoriert werden.
 
 Das Ergebnis der Konsistenzprüfung ist eine Liste von Konsistenzmeldungen.
 Jede Konsistenzmeldung besteht aus ihrem Typ (positiv oder negativ), den betroffenen BPMN- und BROS-Elementen, der zugrundeliegenden Regel und einer textuellen Beschreibung.

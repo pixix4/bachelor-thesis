@@ -70,7 +70,13 @@ Mit dem Fakt \emph{bpmn/2} und \emph{bros/2} werden die jeweiligen Modellelement
 Der Fakt \emph{relation/3} bildet eine Relation zwischen zwei Modellelementen von Quelle nach Ziel ab und ordnet dieser Relation gleichzeitig einen Typ zu.
 Durch \emph{parent/2} wird der hierarchische Aufbau der Modelle abgebildet.
 Dabei ist zu beachten das jedes Element nur einen Parent haben darf.
-Es gilt implizit \emph{check\_parent(X) :- parent(X, A), parent(X, B) -> A == B.}.
+Es gilt implizit:
+
+\begin{lstlisting}[language=Prolog,frame=none]
+check_parent(X) :- parent(X, A), parent(X, B) -> A == B.
+\end{lstlisting}
+\pagebreak
+    
 Damit wird sichergestellt das es sich bei den Graphen der BPMN- und BROS-Modelle um Bäume handelt.
 Allgemein ist zu beachten das dies keine Zwischendarstellung ist und nur zur syntaktischen Definition der Regeln genutzt wird.
 Da der Graph des BPMN-Modelles und der Graph des BROS-Modelles disjunkt sind, muss keine weitere Trennung der \emph{relation/3} und \emph{parent/2} Fakten durchgeführt werden.
@@ -94,9 +100,12 @@ Das Prädikat \emph{transitive\_parent/2} bildet den transitiven Abschluss der \
 Jedem Kind werden all seine transitiven Eltern zugeordnet.
 Dies beinhaltet auch die Abbildung der Identität.
 Das wichtigste Prädikat ist \emph{match/2}.
-Es bildet das Matching der BPMN-Elemente zu den BROS-Elementen ab.
-Dabei wird angenommen das ein Matching bereits existiert, wodurch es im weiteren auch als Orakelfunktion bezeichnet wird.
-Ein Matching ist die Menge der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
+Es bildet eine Zuordnungen von BPMN-Elemente zu den BROS-Elementen und umgekehrt ab.
+Zwei Elemente haben ein Matching zueinander, wenn sie auf dem semantischen Ebene die gleiche Bedeutung haben.
+Der genaue Aufbau des Matching ist dabei implementierungsabhängig.
+Es kann z.B. auf den Namen der Elemente oder auch deren Struktur basieren.
+Im folgenden wird angenommen das ein Matching bereits existiert, wodurch es im weiteren auch als Orakelfunktion bezeichnet wird.
+Technisch ist das Matching die Menge der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
 
 \begin{lstlisting}[language=Prolog, caption=Definitionen der weiterführenden Regeln, label=lst:definition_predicats]
 % Transitiver Abschluss der Modellstruktur.
@@ -322,6 +331,8 @@ In blau ist die zweite Schicht, die Schicht der Relationen, visualisiert.
 Jede Relation ist mit ihrem Typ annotiert und hat eine feste Richtung.
 Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
 
+\subsection*{Matching-Algorithmus}
+
 Mit beiden Graphen kann nun der Matching-Algorithmus durchgeführt werden.
 Das Matching ist die dritte Schicht innerhalb der Graphen, die den Graphen des BPMN-Modelles mit dem Graphen des BROS-Modelles verbindet.
 In \cref{fig:ModelToGraph} wird dies in grün dargestellt.
@@ -342,6 +353,8 @@ Ein Fixpunkt-Algorithmus kann unter Umständen nicht terminieren, wenn die Daten
 Dies wird verhindert indem Kanten nur zu dem Matching hinzugefügt und somit nie entfernt werden dürfen, wodurch das Matching monoton wachsend ist.
 Damit kann die dritte Schicht maximal zu einem vollständigen Graphen anwachsen.
 Anschließend kann keine weitere Kante hinzugefügt werden und der Algorithmus terminiert automatisch.
+
+\subsection*{Verifikations-Algorithmus}
 
 Mit dem konstruierten Matching kann nun der Verifikations-Algorithmus ausgeführt werden.
 In diesem Schritt werden die unter \cref{sec:Konsistenzregeln} aufgestellten Konsistenzregeln überprüft.

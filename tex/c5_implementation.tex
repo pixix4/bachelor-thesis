@@ -133,7 +133,7 @@ Die ersten beiden Parameter sind die Referenzen auf das BPMN- und BROS-Metamodel
 Mit den Sprachfunktionen von Kotlin können diese Referenzen als generischer Parameter der Funktion übergeben werden.
 Der dritte Parameter ist ein Lambda das die beiden Knoten des BPMN-Graphen und des BROS-Graphen auf einen Wahrheitswert abbildet.
 Das Lambda wird nur ausgeführt wenn die Knoten zu den Filtern der ersten beiden Parameter passen.
-Wenn das Lambda wahr zurück gibt, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
+Wenn das Lambda ``wahr"" zurück gibt, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
 Da der Graph gerichtet, das Matching allerdings bidirektional ist, müssen zwei Kanten für die Hin- und Rückrichtung hinzugefügt werden.
 Sonst wird das Ergebnis ignoriert, da nur Kanten zum Matching hinzugefügt werden dürfen.
 In \cref{lst:match_lane_role} ist das Matching für eine BPMN-Swimlane und einem BROS-RoleType gegeben.
@@ -195,8 +195,8 @@ Der erste Parameter ist der Filter des Graph-Knoten.
 Dieser stellt die Vorbedingung aus der Implikation in \cref{sec:Konsistenzregeln} dar.
 Der zweite Parameter ist ein Lambda, das den gefilterten Graphknoten auf ein Konsistenzmeldung abbildet.
 Damit wird die Konsequenz der Implikation dargestellt.
-Neben einer positiven und einer negativen Konsistenzmeldung kann auch ein \emph{null} Wert zurückgegeben werden.
-Ein \emph{null} Wert bedeutet, das die Regel nicht anwendbar ist und das Ergebnis daher ignoriert werden soll.
+Neben einer positiven und einer negativen Konsistenzmeldung kann auch ein ``null"" Wert zurückgegeben werden.
+Ein ``null"" Wert bedeutet, das die Regel nicht anwendbar ist und das Ergebnis daher ignoriert werden soll.
 Damit wird die unter \cref{sec:Konsistenzregeln} beschriebende Dreiwertigkeit umgesetzt.
 Um dies zu veranschaulichen werden nachfolgend die Konsistenzregeln 2, 3 und 5 in ihre Kotlin-Implementierung überführt.
 Zeichenketten innerhalb der Implementierung werden dabei weggelassen und können in der Implementierung nachgelesen werden.
@@ -233,11 +233,11 @@ Allerdings ist ein BPMN-TerminationEvent im BPMN-Metamodell ein normales BPMN-En
 Hierfür ist die Dreiwertigkeit des Rückgabewertes wichtig.
 Zunächst wird in der Vorbedingung nach einem BPMN-EndEvent gefiltert.
 Anschließend wird jedes gefundene BPMN-Element überprüft, ob es auch ein BPMN-TerminationEvent ist.
-Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert null beendet.
+Sollte dies nicht der Fall sein wird das Lambda mit dem Rückgabewert ``null"" beendet.
 Damit wird die Ausführung der Regel komplett ignoriert, wie es auch bei dem generischen Filterargument geschieht.
 Wenn nun ein BPMN-TerminationEvent gefunden ist, kann, analog zu Regel 2, in der dritten Schicht nach einem BROS-ReturnEvent gesucht werden.
 Sollte ein BROS-ReturnEvent gefunden werden, wird eine positive Konsistenzmeldung zurückgegeben, andernfalls eine negative.
-Dank des Rückgabewertes null, kann die Vorbedingung einfach gehalten werden.
+Dank des Rückgabewertes ``null"", kann die Vorbedingung einfach gehalten werden.
 Auch während der Regelausführung kann sie noch abgebrochen werden, wodurch die Überprüfung nicht in zwei komplexere Lambdas geteilt werden muss.
 
 \begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 3, label=lst:implementation_rule_3]

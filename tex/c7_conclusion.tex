@@ -1,15 +1,15 @@
 \chapter{Schluss}
 \label{chap:conclusion}
 
-In diesem Kapitel wird evaluiert in wie weit diese Arbeit die, im \cref{chap:introduction}, genannten Ziele erfüllt hat.
+In diesem Kapitel wird evaluiert in wie weit diese Arbeit die im \cref{chap:introduction} genannten Ziele erfüllt hat.
 Zu diesem Zweck werden die Ergebnisse der Analyse und der Implementierung zusammengefasst und in das Feld der bestehenden Verfahren eingeordnet.
-Dabei werden die Ergebnisse der einzelnen Teilschritte analysiert und benutzt um das Klassifikationsschema aus \cref{chap:related_work} zu erweitern.
+Dabei werden die Ergebnisse der einzelnen Teilschritte analysiert und benutzt, um das Klassifikationsschema aus \cref{chap:related_work} zu erweitern.
 Abschließend wird ein Ausblick über mögliche Erweiterungen des vorgestellten Verfahrens und weiterführende Arbeiten auf dem Gebiet des Konsistenzvergleiches zwischen BPMN- und BROS-Modellen gegeben.
 
 \section{Zusammenfassung}
 
 Ziel der Arbeit war die Konsistenz zwischen BPMN- und BROS-Modellen zu untersuchen.
-Dieses wurde Erreicht indem eine Lösung des Konsistenzproblems für die beiden Modellarten erstellt wurde.
+Dieses wurde erreicht indem eine Lösung des Konsistenzproblems für die beiden Modellarten erstellt wurde.
 Als Einführung in BPMN und BROS wurden deren Konzepte und Metamodelle erläutert.
 Um einen Einstieg in das Themengebiet der Konsistenzprüfung zu erhalten, wurden bestehende Verfahren zur Überprüfung der Konsistenz von UML-Modellen analysiert.
 Dafür wurde ein Klassifikationsschema auf Basis des Schemas von \cite{Usman2008}) erstellt und zur Klassifizierung der Verfahren verwendet.
@@ -26,7 +26,7 @@ Wie die Modelleditoren \emph{bpmn.io} und \emph{FRaMED.io} ist das Tool webbasie
 Die Evaluation des Verfahrens teilt sich in zwei Abschnitte auf.
 Zum einen wurde die Anwendbarkeit anhand von einem Beispielsystem getestet.
 Dazu wurde das Beispiel einer Pizzabestellung aus der Arbeit von \cite{Schoen} verwendet.
-In seiner Arbeit hat \cite{Schoen} sowohl ein BPMN- als auch ein BROS-Modell gegeben die zueinander Konsistent sind.
+In seiner Arbeit hat \cite{Schoen} sowohl ein BPMN- als auch ein BROS-Modell gegeben die zueinander konsistent sind.
 Zum anderen wurde die Erweiterbarkeit und Modularität des Verfahrens und der Implementierung evaluiert, indem eine weitere Regel aus dem \cref{chap:consistency} zu dem Tool hinzugefügt wurde.
 
 \section{Wissenschaftlicher Beitrag}
@@ -41,11 +41,11 @@ Beide Verfahren testen die Intra-Modell (horizontale) Konsistenz, sind automatis
 Sie unterscheiden sich neben den unterstützten Modellarten hauptsächlich im Grad der Erweiterbarkeit.
 Das Verfahren von \cite{Egyed2006} benutzt zum Konsistenzvergleich Regeln auf Basis von OCL.
 Dies erschwert die Erweiterbarkeit um neue Modellarten ungemein.
-Nur Modellarten die auf zu dem UML-Standard gehöhren, werden von der OCL und damit auch von dem Verfahren unterstützt.
-Auch das hier genutzte Verfahren hat auch einen hohen Aufwand, wenn eine neue Modellart hinzugefügt wird.
+Nur Modellarten die auch zu dem UML-Standard gehören, werden von der OCL und damit auch von dem Verfahren unterstützt.
+Auch das hier genutzte Verfahren hat einen hohen Aufwand, wenn eine neue Modellart hinzugefügt wird.
 Allerdings ist die Erweiterbarkeit um neue Regeln mit weniger Aufwand verbunden.
 Da das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet, können beliebige Regeln leicht erstellt werden.
-\cite{Egyed2006} Verfahren ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regeln erschweren könnte.
+\cite{Egyed2006} Verfahren ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regel erschweren könnte.
 
 \begin{table}
   \begin{threeparttable}
@@ -96,37 +96,37 @@ Dies wurde mit der Aufteilung der Konsistenzbedingungen in einzelne Regeln errei
 Jede dieser Regeln besteht aus einem, teilweise auch mehreren Modulen, die sich unabhängig voneinander aktivieren und ergänzen lassen.
 Die Automatisierbarkeit wurde mit der Implementierung gezeigt und anhand eines Beispieles zusätzlich evaluiert.
 Dabei konnte ein fehlerhaftes BROS-Modell erfolgreich korrigiert werden.
-Da das genutzt Beispiel auf der Arbeit von \cite{Schoen} basiert, konnte diese zur Verifizierung der Korrektheit der Konsistenz genutzt werden.
+Da das genutzte Beispiel auf der Arbeit von \cite{Schoen} basiert, konnte diese zur Verifizierung der Korrektheit der Konsistenz genutzt werden.
 
 \section{Zukünftige Arbeiten}
 
 Wie in \cref{chap:evaluation} beschrieben, muss ein von dem Tool gefundener Konsistenzfehler, nicht unbedingt ein echter Konsistenzfehler sein.
 Dieser Fehler kann auch von dem Modellierer beabsichtigt sein und eine gewollte Erweiterung des Modelles darstellen.
 Momentan kann das Tool nicht mit diesem Problem umgehen.
-Eine Möglichkeit bestimmt Fehler zu ignorieren oder als gewollt zu kennzeichnen wäre eine sinnvolle Erweiterung für das implementierte Tool.
+Eine Möglichkeit bestimmt Fehler zu ignorieren oder als gewollt zu kennzeichnen, wäre eine sinnvolle Erweiterung für das implementierte Tool.
 
 Um die allgemeine Funktionalität zu verbessern, ist es erforderlich die Konsistenzbeziehungen zwischen BPMN- und BROS-Modellen genauer zu untersuchen.
 In dieser Arbeit wurden nur sechs Konsistenzregeln vorgestellt, die die wichtigsten Bereiche der Konsistenz abdecken.
-So ist sind noch keine Konsistenzbedingungen für z. B. BROS-Compartments oder BPMN-SubProcesses definiert.
-Die Konsistenzregeln die zwischen diesen und weiteren Elementen gelten müssen dafür noch analysiert werden.
+So sind noch keine Konsistenzbedingungen für z. B. BROS-Compartments oder BPMN-SubProcesses definiert.
+Die Konsistenzregeln die zwischen diesen und weiteren Elementen gelten, müssen dafür noch analysiert werden.
 Solange eine Formalisierung dieser Regeln auf Basis der Metamodelle möglich ist, können sie der bestehenden Implementierung hinzugefügt werden.
 
 Neben der Erweiterung um neue Regeln, kann auch die Erweiterung um die syntaktische und semantische Konsistenzprüfung der Einzelmodelle untersucht werden.
 Momentan ist diese Aufgabe abhängig von dem Modellierer.
 Zwar existieren schon Verfahren und automatisierte Tools für diesen Konsistenzvergleich, allerdings sind sie nicht kompatibel mit der aktuellen Implementierung.
-Auch müsste untersucht werden ob dieser Konsistenzvergleich, in einem zufriedenstellenden Funktionsumfang integrierbar ist.
-Externe Programme die diese Funktionalität bereits besitzten, sind zumeist Editoren für diese Modelle.
+Auch müsste untersucht werden, ob dieser Konsistenzvergleich in einem zufriedenstellenden Funktionsumfang integrierbar ist.
+Externe Programme die diese Funktionalität bereits besitzen, sind zumeist Editoren für diese Modelle.
 Diese sind darauf spezialisiert diese Art von Konsistenzprüfung durchzuführen.
 Eine eigene Implementierung hat die Gefahr einer schlechteren Erkennungsrate.
 
 Eine weitere mögliche Erweiterung des Tools wäre die Integration in den bestehenden BROS-Editor \emph{FRaMED.io}.
-Da BROS-Modelle auf den BPMN-Modellen aufbauen und teilweise wiederverwenden können, kann eine Integration den Entwicklungsprozess eines BROS-Modelles zu einem BPMN-Modell erhebliche vereinfachen.
+Da BROS-Modelle auf den BPMN-Modellen aufbauen und teilweise wiederverwenden können, kann eine Integration den Entwicklungsprozess eines BROS-Modelles zu einem BPMN-Modell erheblich vereinfachen.
 So könnte das BPMN-Modell direkt in den Editor geladen werden.
 Dies würde dem Modellierer verschiedene Möglichkeiten geben.
-Zum einen könnten Fehlermeldungen direkt graphisch, in dem BROS-Modell, markiert werden.
+Zum einen könnten Fehlermeldungen direkt graphisch in dem BROS-Modell markiert werden.
 Damit könnten sich Fehler leichter finden und verstehen lassen.
-Zum anderen könnten Teile des BROS-Modelles, anhand des BPMN-Modelles, autogeneriert werden.
+Zum anderen könnten Teile des BROS-Modelles anhand des BPMN-Modelles autogeneriert werden.
 Dies würde dem Modellierer vorallem bei großen Prozessen viel Zeit sparen.
-Da die Referenzimplementierung, wie auch der BROS-Editor, in Kotlin entwickelt wurden, sind sie bereits technisch Kompatibel.
-Allerdings müsste noch evaluiert werden wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.
+Da die Referenzimplementierung, wie auch der BROS-Editor, in Kotlin entwickelt wurden, sind sie bereits technisch kompatibel.
+Allerdings müsste noch evaluiert werden, wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.
 Sollte eine Autogenerierung implementiert werden, müsste zusätzlich noch analysiert werden, in wieweit dies möglich ist und wie nutzbar ein solches Modell gegenüber einem manuell erstelltem Modell wäre.

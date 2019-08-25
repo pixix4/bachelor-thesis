@@ -22,7 +22,7 @@ Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
 \begin{itemize}
     \item \textbf{Activity:} 
     Eine Activity beschreibt eine Tätigkeit die innerhalb des Geschäftsprozesses ausgeführt wird.
-    Da das ausführen einer Aktion Zeit in Anspruch nehmen kann, kann auch die Abarbeitung einer Activity Zeit benötigen.
+    Da das Ausführen einer Aktion Zeit in Anspruch nehmen kann, kann auch die Abarbeitung einer Activity Zeit benötigen.
     Zur Darstellung einer Activity wird ein Rechteck mit abgerundeten Ecken verwendet.
     \item \textbf{Gateway:}
     Ein Gateway wird für die Steuerung des Kontrollflusses verwendet. 
@@ -32,9 +32,9 @@ Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
     Dargestellt wird ein Gateway mittels einem um 45 Grad gedrehtem Quadrat. 
     \item \textbf{Event:}
     Ein Event beschreibt ein Ereignis das innerhalb des Geschäftsprozesses auftreten kann und wird mit einem Kreis dargestellt.
-    Events beeinflussen den Kontrollfluss, können ihn starten, beendet oder andere unabhängige Aktionen auslösen.
+    Events beeinflussen den Kontrollfluss, können ihn starten, beenden oder andere unabhängige Aktionen auslösen.
     Sie werden in drei verschiedenen Dimensionen eingeteilt: nach ihrer Position, nach ihrer Wirkung und nach ihrer Art.
-    Für die weitere Arbeit ist nur die Unterteilung nach ihrer Position, innerhalb des Geschäftsprozesses, wichtig.
+    Für die weitere Arbeit ist nur die Unterteilung nach ihrer Position, innerhalb des Geschäftsprozesses wichtig.
     Dabei wird zwischen einem StartEvent (einfacher Rahmen), einem IntermediateEvent (doppelter Rahmen) und einem EndEvent (dicker Rahmen) unterschieden.
     Zusätzlich existiert noch das TerminationEvent welches den laufenden Prozess vollständig abbricht und mit einem fast vollständig ausgefülltem EndEvent repräsentiert wird.
     \item \textbf{Flow:}
@@ -53,14 +53,14 @@ Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
     Sollte der Pool dabei auch gleichzeitig den Prozess darstellen, so kann die Swimlane als eigenständiger Prozess betrachtet werden.
     Innerhalb eines Pools wird die Simelane als eine horizontale Bahn dargestellt.
     \item \textbf{Process:}
-    Ein Process bildet einen teil des Geschäftsprozesses ab und ist das Containerelement für die anderen Modellelemente.
+    Ein Process bildet einen Teil des Geschäftsprozesses ab und ist das Containerelement für die anderen Modellelemente.
     An dem vollständigen Geschäftsprozess können mehrere Prozesse beteiligt sein, die mittels MessageFlows untereinader kommunizieren.
-    In Teilprozess kann, wie bereits beschieben, als Pool bzw. Swimlane oder auch als Activity dargestellt werden.
+    Ein Teilprozess kann, wie bereits beschieben, als Pool bzw. Swimlane oder auch als Activity dargestellt werden.
 \end{itemize}
 
-Da BPMN schon längere Zeit in Benutzung ist hat es eine gute Toolunterstützung für die Modellierung.
+Da BPMN schon längere Zeit in Benutzung ist, hat es eine gute Toolunterstützung für die Modellierung.
 Eines dieser Tools ist bpmn.io\footnote{https://demo.bpmn.io/}.
-Es ist ein webbasiertes Tool das einen großteil des BPMN-Standards unterstützt.
+Es ist ein webbasiertes Tool das einen Großteil des BPMN-Standards unterstützt.
 Das Tool speichert und lädt die BPMN-Modelle in einem auf XML-basierenden Format mit der Dateiendung \emph{.bpmn}.
 Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Management Group}\footnote{https://www.omg.org/spec/BPMN/2.0/About-BPMN/} spezifiziert wurde.
 
@@ -114,7 +114,7 @@ Diese Datenstruktur basiert auf dem Metamodell das von der \emph{Object Manageme
 \end{figure}
 
 Für die weitere Arbeit wird allerdings nur ein Teil des vollständige BPMN-Standards der \emph{OMG} genutzt.
-Ein deutlich gekürzte Version des Metamodelles für Business Prozesse wurde von \cite{Loja2010} erstellt.
+Eine deutlich gekürzte Version des Metamodelles für Business Prozesse wurde von \cite{Loja2010} erstellt.
 Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodel}).
 Es unterstützt dabei nur die oben genannten BPMN-Elemente.
 Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickeltem Tool nicht betrachtet.
@@ -122,10 +122,10 @@ Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickeltem Tool 
 Mit dem BPMN-Metamodell aus \cref{fig:bpmnMetamodel} wird ein BPMN-Modell in einem Graphen, genauer einem Baum mit Querverweisen, dargestellt.
 Die Wurzel des Baumes ist das Modell ansich.
 Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
-Jeder Prozess beinhalten verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
-Die Events teilen sich in die drei Unterklassen, die Start-, Intermediate- und EndEvents, auf (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
+Jeder Prozess beinhaltet verschiedene Flowobjekte, dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
+Die Events teilen sich in die drei Unterklassen, die Start-, Intermediate- und EndEvents auf (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
 Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
-Hierbei ist zu beachten das, obwohl eine Swimlane auch Flowobjekte enthalten kann, jedes Flowobjekt nur einen Container haben darf.
+Hierbei ist zu beachten, das obwohl eine Swimlane auch Flowobjekte enthalten kann, jedes Flowobjekt nur einen Container haben darf.
 So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane sein.
 Jedes Kind einer Swimlane ist transitiv auch Kind von dem Elternprozess der Swimlane.
 Die beiden Flow-Arten bilden die Querverweise innerhalb des Baumes.
@@ -148,7 +148,7 @@ Die dafür genutzten Elemente sind:
     Eine RoleType ist die Darstellung einer Rolle.
     Sie wird mit einem abgerundeten Rechteck dargestellt, das, vergleichbar mit einer UML-Klasse, in drei Bereiche unterteilt ist.
     In den Bereichen werden der Name, die Attribute und die Methoden der Rolle abgebildet.
-    Eine Entität die diese Rolle spielt werden diese Attribute und Methoden hinzufügt.
+    Eine Entität die diese Rolle spielt, werden diese Attribute und Methoden hinzufügt.
     \item \textbf{CompartmentType:}
     Ein CompartmentType bildet den Kontext von verschiedene RoleTypes ab.
     Das Compartment ist an sich auch eine Rolle und kann von Entitäten gespielt werden.
@@ -164,7 +164,7 @@ Die dafür genutzten Elemente sind:
     Damit ist das Fulfillment immer von einer Entität auf eine Rolle gerichtet.
     \item \textbf{Relationship:}
     Eine Relationship ist eine Relation zwischen Entitäten oder Rollen die mit einer einfachen Linie ohne Pfeilenden dargestellt wird.
-    Sie kann je nach Annotierung ein Constraint oder auch eine Verbindung zwischen diesen beschrieben.
+    Sie kann je nach Annotierung eine Constraint oder auch eine Verbindung zwischen diesen beschreiben.
     \item \textbf{Package:}
     Ein Package hilft bei der Strukturierung von großen Modellen.
     In ihnen kann ein Submodell abgebildet werden, in das nur Relationen hinein, aber nicht hinaus führen dürfen.
@@ -173,7 +173,7 @@ Die dafür genutzten Elemente sind:
 CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{https://github.com/Eden-06/FRaMED-2.0} einen eigenen graphischen Editorsupport.
 Der Name des Editors ist ein Akronym für \emph{Full-fledged Role Modeling EDitor} und wurde speziell für CROM entwickelt.
 Dabei unterstützt er den vollständigen Standard von CROM.
-Mittels einem Feature Editor lassen sich bestimmt Modellfunktionen ein und ausschalten.
+Mittels einem Feature Editor lassen sich bestimmte Modellfunktionen ein- und ausschalten.
 
 \section{Business Role-Object Specification}
 
@@ -197,7 +197,7 @@ Um dies zu ermöglichen wird der CROM-Standard um folgende Modellelemente erweit
     Dabei kann ein Event eine beliebige Abstraktion eines Prozesses sein.
     \item \textbf{Create-/DestroyRelation:}
     Eine Create- bzw. DestroyRelation verbindet ein Event mit einer Scene oder Rolle.
-    Sie beschreibt welches Event für das erstellen oder das auflösen einer Rolle, innerhalb des Geschäftsprozesses, verantwortlich ist.
+    Sie beschreibt welches Event für das Erstellen oder das Auflösen einer Rolle, innerhalb des Geschäftsprozesses, verantwortlich ist.
     Eine CreateRelation ist von einem Event zu einer Rolle bzw. Scene gerichtet, eine DestroyRelation verläuft in die gegensätzliche Richtung.
     \item \textbf{ReturnEvent:}
     Ein ReturnEvent ist ein Event, welches die aktuelle Scene beendet.
@@ -207,8 +207,8 @@ Um dies zu ermöglichen wird der CROM-Standard um folgende Modellelemente erweit
 
 Auch BROS besitzt mit \emph{FRaMED.io}\footnote{https://eden-06.github.io/FRaMED-io/} Editorsupport.
 \emph{FRaMED.io} ist eine Neuentwicklung von \emph{FRaMED-2.0} und wie \emph{bpmn.io} webbasiert.
-Damit ist es Plattformübergreifend, ohne aufwendige Installation nutzbar.
-Sie unterstützt das erstellen von CROM- und BROS-Modellen, ist aber nicht mit existierenden \emph{FRaMED-2.0}-Projekten kompatibel.
+Damit ist es plattformübergreifend, ohne aufwendige Installation nutzbar.
+Sie unterstützt das Erstellen von CROM- und BROS-Modellen, ist aber nicht mit existierenden \emph{FRaMED-2.0}-Projekten kompatibel.
 
 \begin{figure}
     \centering
@@ -273,17 +273,17 @@ Die Elemente des Metamodelles teilen sich in zwei Klassen auf.
 Auf der einen Seite sind die Connections, zu denen die Create-, DestroyRelation und die Relationship (BrosCreateRelation, BrosDestroyRelation, BrosRelationship) gehören.
 Dazu zählen auch die vier Connections im oberen Bereich des Metamodelles (BrosInheritance, BrosFulfillment, BrosAggregation, BrosComposition).
 Diese sind für die weitere Arbeit nicht relevant und werden deshalb ausgegraut dargestellt.
-Da diese aber auch häufig für die Modellierung verwendet werden können, werdeb sie im Metamodell mit aufgeführt.
+Da diese aber auch häufig für die Modellierung verwendet werden können, sind sie im Metamodell mit aufgeführt.
 Auf der anderen Seite sind die Objekte die sich in Endknoten und Objektgruppen teilen.
 Endknoten sind die Natural- und DataTypes (BrosClass), die RoleTypes (BrosRoleType), Events (BrosEvent) und ReturnEvents (BrosReturnEvent).
 Die Objektgruppen sind Containerelemente die andere Objekte enthalten können.
 Zu ihnen zählen der CompartmentType (BrosCompartment), das Package (BrosPackage) und die Scene (BrosScene).
 Auch dieses Metamodell entspricht einem Graphen, genauer einem Baum mit Querverweisen.
-Jedes Objekt darf nur Kind einer Objektgruppen sein und die Eltern-Kind-Beziehung ist transitiv.
+Jedes Objekt darf nur Kind einer Objektgruppe sein und die Eltern-Kind-Beziehung ist transitiv.
 Die Connections bilden die Querverweise innerhalb des Baumes.
 
 Zusätzlich dazu existieren noch weitere Beschränkungen innerhalb des Metamodelles die nicht mit ihm dargestellt werden können.
 Beispielsweise kann ein BrosCompartment nicht Bestandteil einer BrosScene sein.
 Für die Einhaltung dieser Beschränkungen ist der Modellierer verantwortlich.
 Allerdings kann dies auch automtisiert überprüft werden.
-So unterstützt der BROS-Editor \emph{FRaMED-io} diese Bedingungen und erlaubt nur das erstellen von validen Modellen.
+So unterstützt der BROS-Editor \emph{FRaMED-io} diese Bedingungen und erlaubt nur das Erstellen von validen Modellen.

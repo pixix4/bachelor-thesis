@@ -26,20 +26,21 @@ Eine möglichst automatisierte Konsistenzprüfung könnte den Modellierern nicht
 \section{Problemdefinition}
 
 Die Überprüfung der Konsistenz zwischen Modellen ist auf dem Gebiet von UML gut erforscht und es existieren viele verschiedene Ansätze.
-So kann nicht nur die Konsistenz eines Modelles zu seinen vertiefenden Modellen, sondern auch Konsistenz zwischen mehreren Modellarten überprüft werden.
-Dies ermöglicht es die Konsistenz der Modelle fortlaufend, während der gesamten Konzeptions- und Entwicklungsphase eines Projektes, automatisiert zu überprüfen. 
+So kann nicht nur die Konsistenz eines Modelles zu seinen vertiefenden Modellen, sondern auch die Konsistenz zwischen mehreren Modellarten überprüft werden.
+Dies ermöglicht es, die Konsistenz der Modelle fortlaufend, während der gesamten Konzeptions- und Entwicklungsphase eines Projektes, automatisiert zu überprüfen. 
 Allerdings gilt dies nicht für die Konsistenz zwischen der neuen Modellierungssprache BROS und der BPMN.
 Für diese Modelle gibt es noch kein Verfahren oder Ansatz, um die Konsistenz zwischen den Modellen zu überprüfen.
-Allerdins existieren für beide Modelle schon Verfahren mit Toolunterstützung um die Konsistenz innerhalb der Modelle zu überprüfen.
+Allerdins existieren für beide Modelle schon Verfahren mit Toolunterstützung, um die Konsistenz innerhalb der Modelle zu überprüfen.
 Um diese fehlende Konsistenzprüfung zu entwickeln, muss zunächst geklärt werden, welche Konsistenzregeln zwischen BPMN- und BROS-Modellen gelten.
-Da solche Konsistenzregeln auf unterschiedlichen Weisen erstellt und formalisiert werden können, soll dabei besonders auf eine mögliche Automatisierung geachtet werden.
+Da solche Konsistenzregeln auf unterschiedliche Weisen erstellt und formalisiert werden können, soll dabei besonders auf eine mögliche Automatisierung geachtet werden.
 Wichtig für diese Arbeit sind die Inkonsistenzen, die potentielle Widersprüche zwischen den Modellen darstellen. 
-Die Automatisierung von einem Konsistenzvergleich ist eine wichtiger Aspekt in der Konsistenzprüfung, da eine manuelle Überprüfung nicht nur fehleranfälliger ist, sondern auch besonders bei großen Modellen sehr zeit- und damit auch kostspielig ist.
+Die Automatisierung von einem Konsistenzvergleich ist ein wichtiger Aspekt in der Konsistenzprüfung, da eine manuelle Überprüfung nicht nur fehleranfälliger ist, sondern auch besonders bei großen Modellen sehr zeit- und damit auch kostspielig ist.
 Sollte eine automatische Überprüfung der Konsistenzregeln möglich sein, soll untersucht werden, wie eine mögliche Implementierung des automatisierten Konsistenzvergleiches realisiert werden kann.
 Dazu soll ein Tool entwickelt werden, das mit dem bestehenden BROS-Editor \emph{FRaMED.io} kompatibel ist.
 Für das Tool ist es ausreichend die Inkonsistenzen zu finden.
-Es ist nicht notwendig eine Handlungsempfehlung für den Modellierer zu geben oder eine automatische Korrektur durchzuführen. 
-Da in dieser Arbeit erstmals die Konsistenz zwischen BPMN und BROS untersucht wird, soll bei der Implementierung besonders auf die Modularität und Erweiterbarkeit um neue Konsistenzaspekte geachtet werden.
+Es ist nicht notwendig, eine Handlungsempfehlung für den Modellierer zu geben oder eine automatische Korrektur durchzuführen. 
+Da in dieser Arbeit erstmals die Konsistenz zwischen BPMN und BROS untersucht wird, soll bei der Implementierung besonders auf die Modularität und Erweiterbarkeit auf neue Konsistenzaspekte geachtet werden.
+Zusammenfassend werden folgende Punkte analysiert:
 
 \begin{enumerate}
     \item Welche Konsistenzbeziehungen bestehen zwischen BPMN- und BROS-Modellen?
@@ -53,7 +54,7 @@ Um die Konsistenzbedingungen zwischen BPMN- und BROS-Modellen zu erstellen, werd
 Um einen Einstieg in das Themengebiet des Konsistenzvergleiches zu bekommen, werden im \cref{chap:related_work} aktuelle Konsistenzprüfungsverfahren für UML-Modelle analysiert.
 Diese werden anhand eines Schemas klassifiziert und im Hinblick auf ihre Anwendbarkeit zu weiteren Modellarten untersucht.
 Da BROS eine neue Modellierungssprache ist, existieren noch keine Konsistenzregeln zu anderen Modellen und damit auch nicht zu BPMN.
-Daher werden im \cref{chap:consistency} Regeln aufgestellt um die Konsistenz zwischen BPMN- und BROS-Modellen zu gewährleisten.
+Daher werden im \cref{chap:consistency} Regeln aufgestellt, um die Konsistenz zwischen BPMN- und BROS-Modellen zu gewährleisten.
 Zur Erläuterung der Regeln wird jeweils ein Beispiel und eine formale Definition gegeben.
 Für die automatisierte Überprüfung der Konsistenzregeln wird eine Referenzarchitektur erstellt und im \cref{chap:implementation} implementiert.
 Die Implementierung nutzt als Modellquellen die Editoren \emph{bpmn.io} und \emph{FRaMED.io}.

@@ -3,55 +3,56 @@
 
 \section{Motivation}
 
-Eine der wichtigesten Voraussetzungen für das gelingen heutiger Softwaresysteme sind geeignet definierte Modelle.
+Eine der wichtigesten Voraussetzungen für das Gelingen heutiger Softwaresysteme sind geeignet definierte Modelle.
 Die verschiedenen genutzten Modellarten müssen zwei verschiedene Aspekte der Software abbilden.
 Auf der einen Seite sind die strukturbasierten Modelle.
 Diese spezifizieren unter anderem den internen Aufbau eines Systems.
-Dafür werden häufig UML-Strukturdiagramme verwendet, wie z. B. Klassendiagramme oder Komponentendiagramme.
+Dafür werden häufig UML-Strukturdiagramme verwendet, wie zum Beispiel Klassendiagramme oder Komponentendiagramme.
 Auf der anderen Seite werden verhaltensbasierte Modelle benötigt.
 Mit ihnen werden Abläufe und andere Verhaltensaspekte dargestellt.
-Oftmals werden z. B. BPMN-Diagramme, Petrinetze und UMl-basierte Diagramme wie Sequenzdiagramme genutzt.
+Oftmals werden beispielsweise BPMN-Diagramme, Petrinetze und UML-basierte Diagramme wie Sequenzdiagramme genutzt.
 Allerdings reichen die einzelnen Modelltypen nicht aus um das System ausreichend zu beschreiben.
 Die Abläufe innerhalb der Geschäftsprozesse werden mit den verhaltensbasierten Modellen modelliert.
 Die eigentliche Implementierung des Systems benötigt aber zusätzlich die strukturbasierten Modelle.
 Für den Erfolg eines Softwareprojektes ist es daher essenziell, dass die Strukturmodelle an die Verhaltensmodelle ausgerichtet sind, damit das System die im Geschäftsprozess definierten Abläufe umsetzen kann.
 
-Um dies zu ermöglichen, wurde die Modellierungssprache Business Role-Object Specification (BROS) erstellt.
-Sie schließt die Lücke zwischen den Geschäftsprozesse, in Form von BPMN-Prozessen, und den  strukturbasierten Modellen.
-BROS erreicht dies, indem zeitlichen Elementen in der statischen strukturbasierte Modellspezifikation eingefügt werden.
+Um dies zu ermöglichen, wurde die Modellierungssprache \emph{Business Role-Object Specification} (BROS) erstellt.
+Sie schließt die Lücke zwischen den Geschäftsprozessen, in Form von BPMN-Prozessen, und den  strukturbasierten Modellen.
+BROS erreicht dies, indem zeitliche Elemente in die statische strukturbasierte Modellspezifikation eingefügt werden.
 Die Überprüfung der Konsistenz zwischen dem Geschäftsprozess und der BROS, ist eine komplexe und fehleranfällige Aufgabe, die der Modellierer manuell ausführen muss.
 Daher wird in dieser Arbeit die Konsistenz zwischen BROS und der prozeduralen BPMN untersucht.
-Eine möglichst automatisierte Konsistenzprüfung könnte den Modellierern nicht nur arbeitsaufwand sparen, auch die Korrektheit der Überprüfung würde sich erhöhen.
+Eine möglichst automatisierte Konsistenzprüfung spart den Modellierern Arbeitsaufwand
+Auch die Korrektheit der Überprüfung kann sich erhöhen.
 
 \section{Problemdefinition}
 
-Die Überprüfung der Konsistenz zwischen Modellen ist auf dem Gebiet von UML gut erforscht und es existieren viele verschiedene Ansätze.
+Die Überprüfung der Konsistenz zwischen Modellen wird auf dem Gebiet von UML aktiv erforscht und es existieren viele verschiedene Ansätze.
 So kann nicht nur die Konsistenz eines Modelles zu seinen vertiefenden Modellen, sondern auch die Konsistenz zwischen mehreren Modellarten überprüft werden.
 Dies ermöglicht es, die Konsistenz der Modelle fortlaufend, während der gesamten Konzeptions- und Entwicklungsphase eines Projektes, automatisiert zu überprüfen. 
 Allerdings gilt dies nicht für die Konsistenz zwischen der neuen Modellierungssprache BROS und der BPMN.
-Für diese Modelle gibt es noch kein Verfahren oder Ansatz, um die Konsistenz zwischen den Modellen zu überprüfen.
-Allerdins existieren für beide Modelle schon Verfahren mit Toolunterstützung, um die Konsistenz innerhalb der Modelle zu überprüfen.
+Für diese Modelle gibt es Verfahren mit Toolunterstützung, um die interne Konsistenz der Modelle zu überprüfen.
+Jedoch es noch kein Verfahren oder Ansatz, um die Konsistenz zwischen den beiden Modellen zu überprüfen.
 Um diese fehlende Konsistenzprüfung zu entwickeln, muss zunächst geklärt werden, welche Konsistenzregeln zwischen BPMN- und BROS-Modellen gelten.
 Da solche Konsistenzregeln auf unterschiedliche Weisen erstellt und formalisiert werden können, soll dabei besonders auf eine mögliche Automatisierung geachtet werden.
 Wichtig für diese Arbeit sind die Inkonsistenzen, die potentielle Widersprüche zwischen den Modellen darstellen. 
-Die Automatisierung von einem Konsistenzvergleich ist ein wichtiger Aspekt in der Konsistenzprüfung, da eine manuelle Überprüfung nicht nur fehleranfälliger ist, sondern auch besonders bei großen Modellen sehr zeit- und damit auch kostspielig ist.
+Die Automatisierung eines Konsistenzvergleiches ist ein wichtiger Aspekt in der Konsistenzprüfung, da eine manuelle Überprüfung nicht nur fehleranfälliger ist, sondern auch besonders bei großen Modellen sehr zeitaufwendig und damit auch kostspielig ist.
 Sollte eine automatische Überprüfung der Konsistenzregeln möglich sein, soll untersucht werden, wie eine mögliche Implementierung des automatisierten Konsistenzvergleiches realisiert werden kann.
 Dazu soll ein Tool entwickelt werden, das mit dem bestehenden BROS-Editor \emph{FRaMED.io} kompatibel ist.
-Für das Tool ist es ausreichend die Inkonsistenzen zu finden.
+Für das Tool ist es ausreichend, die Inkonsistenzen zu finden.
 Es ist nicht notwendig, eine Handlungsempfehlung für den Modellierer zu geben oder eine automatische Korrektur durchzuführen. 
 Da in dieser Arbeit erstmals die Konsistenz zwischen BPMN und BROS untersucht wird, soll bei der Implementierung besonders auf die Modularität und Erweiterbarkeit auf neue Konsistenzaspekte geachtet werden.
 Zusammenfassend werden folgende Punkte analysiert:
 
 \begin{enumerate}
     \item Welche Konsistenzbeziehungen bestehen zwischen BPMN- und BROS-Modellen?
-    \item Wie lassen sich die Konsistenz automatisiert überprüfen?
+    \item Wie lassen sich die Konsistenzbedingungen automatisiert überprüfen?
     \item Mit welchem Aufwand ist dieses Verfahren erweiterbar?
 \end{enumerate}
 
 \section{Struktur der Arbeit}
 
 Um die Konsistenzbedingungen zwischen BPMN- und BROS-Modellen zu erstellen, werden im \cref{chap:background} zunächst die Modellelemente, die in dieser Arbeit von BPMN und BROS genutzt werden, vorgestellt und jeweils mit einem Metamodell detaillierter beschrieben.
-Um einen Einstieg in das Themengebiet des Konsistenzvergleiches zu bekommen, werden im \cref{chap:related_work} aktuelle Konsistenzprüfungsverfahren für UML-Modelle analysiert.
+Für den Einstieg in das Themengebiet des Konsistenzvergleiches, werden im \cref{chap:related_work} aktuelle Konsistenzprüfungsverfahren für UML-Modelle analysiert.
 Diese werden anhand eines Schemas klassifiziert und im Hinblick auf ihre Anwendbarkeit zu weiteren Modellarten untersucht.
 Da BROS eine neue Modellierungssprache ist, existieren noch keine Konsistenzregeln zu anderen Modellen und damit auch nicht zu BPMN.
 Daher werden im \cref{chap:consistency} Regeln aufgestellt, um die Konsistenz zwischen BPMN- und BROS-Modellen zu gewährleisten.

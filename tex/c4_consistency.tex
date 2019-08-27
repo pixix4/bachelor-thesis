@@ -2,12 +2,12 @@
 \label{chap:consistency}
 
 Viele der bereits existierenden Verfahren lassen sich anpassen und können mit anderen Modellarten genutzt werden. 
-Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN Modell anstelle eines UML-Sequenzdiagramms auf der verhaltensbasierten Seite verwendet werden.
+Anstelle eines UML Klassendiagramms kann ein BROS Modell auf der strukturbasierten Seite und ein BPMN-Modell anstelle eines UML-Sequenzdiagramms auf der verhaltensbasierten Seite verwendet werden.
 Anders als bei UML, ist bei dem Vergleich von BPMN und BROS zu beachten, dass Inkonsistenzen keine strikten Fehler, sondern nur Warnungen an den Modellierer sind.
 Das liegt an dem Funktionsumfang von BROS Modellen.
-Diese können gegenüber den BPMN Modellen mit zusätzlich Elementen angereichert werden.
-So kann das BROS Modell zusätzliche Elemente beinhalten oder Teile des BPMN Modells auf einer höheren Ebene der Abstraktion darstellen.
-Beispielsweise kann ein BROS-Event die Abstraktion eines gesamten Prozesses innerhalb des BPMN Modelles abbilden.
+Diese können gegenüber den BPMN-Modellen mit zusätzlich Elementen angereichert werden.
+So kann das BROS Modell zusätzliche Elemente beinhalten oder Teile des BPMN-Modells auf einer höheren Ebene der Abstraktion darstellen.
+Beispielsweise kann ein BROS-Event die Abstraktion eines gesamten Prozesses innerhalb des BPMN-Modelles abbilden.
 Um diese Konsistenzbeziehung genauer untersuchen zu können, muss zunächst geklärt werden, wie die Konsistenz zwischen Methoden definiert ist.
 Dafür wird eine Definition des Konsistenzproblems gegeben.
 Anhand dieser, werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
@@ -20,10 +20,10 @@ Sollten schon zu Beginn eines Projektes unbemerkt Inkonsistenzen auftreten, kann
 Die verhaltensbasierten Modelle beschreiben die Interaktion innerhalb eines Systems.
 Dabei benötigen sie die Funktionalität, die von den strukturbasierten Modellen bereitgestellt wird.
 Wenn sich die benötigte und die bereitgestellte Funktionalität unterscheidet, kann das Softwaresystem nicht ordnungsgemäß funktionieren.
-Solche Fehler stellen daher in der Industrie ein großes Risiko dar und können die Entwicklungskosten erheblich steigern.
+Solche Fehler stellen daher in der Industrie ein großes Risiko dar und können die Entwicklungskosten erheblich erhöhen.
 Um dieses Risiko zu verringern, müssen Verfahren entworfen werden, die eine möglichst automatisierte Konsistenzprüfung durchführen können.
 
-Die methodische Entwicklung eines solchen Verfahrens setzt eine genaue Definition des Konsistenzproblems vorraus.
+Die methodische Entwicklung eines solchen Verfahrens setzt eine genaue Definition des Konsistenzproblems voraus.
 Allerdings ist eine formale und allgemeingültige Definition des Konsistenzproblems, in der Domain der Modellierung in der Literatur, nur schwer zu finden.
 Bevor das Konsistenzproblem definiert werden kann, muss zunächst beschieben werden, was eine Inkonsistenz ist.
 Laut \cite{Nuseibeh1996} tritt eine Inkonsistenz genau dann auf, wenn eine Konsistenzregel verletzt wird.
@@ -43,10 +43,10 @@ Anhand des aufgestellten Regelsatzes kann ein Algorithmus zum Auffinden der Inko
 Dafür müssen die Regeln, wie bereits erwähnt, in einer formalen Form und nicht in natürlicher Sprache vorliegen.
 Die Aufgabe der Minimierung und Verhinderung der Inkonsistenz, ist auch mit einem automatisierten Tool, dem Modellierer überlassen.
 Die Verfahren können dem Modellierer Handlungsempfehlungen geben, eine automatische Korrektur ist allerdings nur schwer möglich.
-So könnte ein Problem z. B. durch das Entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
+So könnte ein Problem zum Beispiel durch das Entfernen eines Elementes behoben werden, wodurch kaskadierend nochmehr Konsistenzfehler entstehen könnten.
 Da diese Definition auf der Überprüfung von Regeln aufbaut, ist sie leicht auf Verfahren anwendbar, die für die Konsistenzprüfung, ebenfalls auf einem Regelsatz basieren.
 Aber auch formale Verfahren ohne einen eigenen Regelsatz, lassen sich mit dieser Definition beschreiben.
-So können z. B. die Verfahren, die auf der Transformation zu einem Petrinetz basieren, mittels der Konsistenzregel ``das konstruierte Petrinetz muss lebendig sein'', überprüft werden.
+So können zum Beispiel die Verfahren, die auf der Transformation zu einem Petrinetz basieren, mittels der Konsistenzregel ``das konstruierte Petrinetz muss lebendig sein'', überprüft werden.
 
 \section{Konsistenzregeln} \label{sec:Konsistenzregeln}
 
@@ -103,9 +103,9 @@ Das wichtigste Prädikat ist \emph{match/2}.
 Es bildet eine Zuordnungen von BPMN-Elementen zu den BROS-Elementen und umgekehrt ab.
 Zwei Elemente haben ein Matching zueinander, wenn sie auf dem semantischen Ebene die gleiche Bedeutung haben.
 Der genaue Aufbau des Matching ist dabei implementierungsabhängig.
-Es kann z. B. auf den Namen der Elemente oder auch deren Struktur basieren.
+Es kann zum Beispiel auf den Namen der Elemente oder auch deren Struktur basieren.
 Im folgenden wird angenommen, dass ein Matching bereits existiert, wodurch es im weiteren auch als Orakelfunktion bezeichnet wird.
-Technisch ist das Matching die Menge, der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
+Das Matching ist die Menge, der bidirektionalen Zuordnungen von BPMN-Elementen auf die dazugehörigen BROS-Elemente. 
 
 \begin{lstlisting}[language=Prolog, caption=Definitionen der weiterführenden Regeln, label=lst:definition_predicats]
 % Transitiver Abschluss der Modellstruktur.
@@ -326,7 +326,7 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     \label{fig:consistencySymbolicPicture}
 \end{figure}
 
-Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von z. B. \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
+Im Gegensatz zu anderen Arbeiten wurde zur Überprüfung dieser Regeln kein formales Verfahren auf Basis von zum Beispiel \emph{Description Logic} oder \emph{Petrinetzen} genutzt.
 Dies hat den Vorteil, dass die Regeln direkt auf den Modellen ausgeführt werden können und nicht erst eine Zwischendarstellung konstruiert werden muss.
 Das hier genutzte Verfahren arbeitet in zwei Stufen auf den Modellen, die als geschichteter Graph dargestellt werden und ist in \cref{fig:consistencySymbolicPicture} dargestellt.
 Im ersten Schritt wird ein Matching von Modellelementen aufgebaut.
@@ -334,7 +334,7 @@ Dies wird iterativ in Form eines Fixpunkt-Algorithmus durchgeführt, um ein kask
 Dieser Schritt wird im folgenden \emph{Matching-Algorithmus} genannt.
 Im zweiten Schritt werden anhand dem Matching die erstellten Regeln ausgeführt.
 Dabei werden die Regelergebnisse aggregiert.
-Dieser Vorgang wird als \emph{Verifikations-Algorithmus} bezeichnet.
+Dieser Vorgang wird als \emph{Verifikationsalgorithmus} bezeichnet.
 
 Um das Verfahren anzuwenden, müssen beiden Modelle in Form eines gerichteten Graph vorliegen, der aus mehreren Ebenen besteht.
 Ein geschichteter Graph basiert auf einem Baum, der die Grundstruktur des Modelles und die Eltern-Kind Beziehung abdeckt.
@@ -343,8 +343,8 @@ In \cref{fig:ModelToGraph} wird die Transformation der Modelle in die dazugehör
 Auf der linken Seite ist ein BPMN-Modell mit dem dazugehörigen Graphen. 
 Auf der rechten Seite ist ein vereinfachtes BROS-Modell mit seinem Graphen.
 Der schwarze Teil der Graphen bildet die Grundstruktur oder auch die erste Schicht.
-Dieser wird mit Hilfe der ``contains''-Relation der Metamodelle direkt aufgebaut.
-In blau ist die zweite Schicht, die Schicht der Relationen, visualisiert.
+Dieser wird mit Hilfe der \emph{contains}-Relation der Metamodelle direkt aufgebaut.
+In Blau ist die zweite Schicht visualisiert, welche die Relationen beinhaltet.
 Jede Relation ist mit ihrem Typ annotiert und hat eine feste Richtung.
 Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
 
@@ -407,7 +407,7 @@ Das Matching ist die dritte Schicht innerhalb der Graphen, die den Graphen des B
 In \cref{fig:ModelToGraph} wird dies in grün dargestellt.
 Um diese Schicht zu konstruieren, wird eine Orakelfunktion genutzt.
 Diese ermittelt ob zwei Elemente zueinander passend sind.
-Dabei hat die Orakelfunktion zwei Parameter, den aktuellen Konten des BPMN-Graphen und den des BROS-Graphen.
+Dafür hat die Orakelfunktion zwei Parameter, den aktuellen Konten des BPMN-Graphen und den des BROS-Graphen.
 Die übergebenen Knoten enthalten Referenzen auf ihre Relationen aus allen drei Schichten.
 In der ersten Schicht sind die Vorfahren und Nachkommen, und in der zweiten Schicht die mittels Relationen verbundenen Elemente.
 Die dritte Schicht ist zu Beginn leer.
@@ -418,28 +418,28 @@ Um dieses Verhalten nutzen zu können, wird der Vorgang des Matchingaufbaues sol
 Dieses Verhalten wird Fixpunkt-Algorithmus genannt.
 Innerhalb einer Iteration des Algorithmus wird die Orakelfunktion auf allen Paaren von Elementen des BPMN- und des BROS-Modelles angewendet.
 
-Ein Fixpunkt-Algorithmus kann unter Umständen nicht terminieren, wenn die Datenstruktur in eine oszillierenden Zustand übergeht.
+Ein Fixpunkt-Algorithmus kann unter Umständen nicht terminieren, wenn die Datenstruktur  beginnt zwischen Zuständen zu oszillieren.
 Dies wird verhindert, indem Kanten nur zu dem Matching hinzugefügt und somit nie entfernt werden dürfen, wodurch das Matching monoton wachsend ist.
 Damit kann die dritte Schicht maximal zu einem vollständigen Graphen anwachsen.
 Anschließend kann keine weitere Kante hinzugefügt werden, und der Algorithmus terminiert automatisch.
 
-\subsection*{Verifikations-Algorithmus}
+\subsection*{Verifikationsalgorithmus}
 
-Mit dem konstruierten Matching kann nun der Verifikations-Algorithmus ausgeführt werden.
+Mit dem konstruierten Matching kann nun der Verifikationsalgorithmus ausgeführt werden.
 In diesem Schritt werden die unter \cref{sec:Konsistenzregeln} aufgestellten Konsistenzregeln überprüft.
-Diese Überprüfung kann mittels der genannten Prolog Regeln oder auch direkt auf den Graphen durchgeführt werden.
-Anders als der Matching-Algorithmus wird der Verifikations-Algorithmus nur einmal durchlaufen.
-Da alle Regeln die Konsistenzprüfung von einem Modell auf das andere Modell durchführen, können die Regeln, die auf dem BPMN-Modell basieren, unabhängig von den Regeln, die auf dem BROS-Modell basieren, ausgeführt werden.
+Diese Überprüfung kann mittels der genannten Prolog-Regeln oder auch direkt auf den Graphen durchgeführt werden.
+Anders als der Hauptteil des Matching-Algorithmus wird der Verifikationsalgorithmus nur einmal durchlaufen.
+Da alle Regeln die Konsistenzprüfung von einem Quellmodell zu einem Zielmodell durchführen, können die Regeln, die auf dem BPMN-Modell basieren, unabhängig von den Regeln, die auf dem BROS-Modell basieren, ausgeführt werden.
 So werden die Regeln die die Überprüfung aus Sicht des BPMN-Modelles ausführen, für jedes Element des BPMN-Graphen angewendet.
 Um eine bessere Fehlermeldung für den Modellierer zu erstellen, wird im Falle einer Regelverletzung nicht nur das BPMN-Element, sondern auch das BROS-Element, das zu dem Regelverstoß führt, als negative Konsistenzmeldung gespeichert.
 Mit Hilfe der beiden Elemente und der verletzten Regel, kann eine genaue Fehlerbeschreibung gegeben werden.
 Dieses Verhalten ist analog für die Regeln, die aus Sicht des BROS-Modelles arbeiten.
 
-Nicht mit den Prologregeln darstellbar, ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
+Nicht mit den Prolog-Regeln darstellbar, ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
 Jede Regel hat zu Beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt.
-Für eine optimale Rückmeldung an den Modellierer, muss eine erfolgreiche Regelprüfung in zwei Fälle unterschieden werden.
+Für eine optimale Rückmeldung an den Modellierer muss eine erfolgreiche Regelprüfung in zwei Fälle unterschieden werden.
 Eine Regel wird nicht nur als erfolgreich ausgeführt markiert, wenn sie tatsächlich erfolgreich war, sondern auch, wenn sie bei einer falschen Vorbedingung vorzeitig abgebrochen wurde.
-Dieses Verhalten stammt aus der Definition.
+Dieses Verhalten ergibt sich aus den Prolog-Definitionen.
 Die Implikation gibt wahr zurück, wenn entweder die Vorbedingung falsch ist oder die Konsequenz wahr ist.
 Interessant für den Modellierer ist nur der Fall, dass die Konsequenz wahr ist.
 Dabei wird eine positive Konsistenzmeldung gespeichert.
@@ -447,7 +447,7 @@ Bei einer falschen Vorbedingung kann die Ausführung ignoriert werden.
 
 Das Ergebnis der Konsistenzprüfung ist eine Liste von Konsistenzmeldungen.
 Jede Konsistenzmeldung besteht aus ihrem Typ (positiv oder negativ), den betroffenen BPMN- und BROS-Elementen, der zugrundeliegenden Regel und einer textuellen Beschreibung.
-Die negativen Konsistenzmeldungen, sind die gefunden Inkonsistenzen zwischen bem BPMN- und BROS-Modell.
+Die negativen Konsistenzmeldungen, sind die gefunden Inkonsistenzen zwischen dem BPMN- und BROS-Modell.
 Wenn beide Modelle konsistent zueinander sind, beinhaltet das Ergebnis nur positive Konsistenzmeldungen.
-Diese helfen dem Modellierer die automatische Konsistenzprüfung zu kontrollieren.
+Diese helfen dem Modellierer die automatische Konsistenzprüfung auszuwerten.
 Ohne die positiven Konsistenzmeldungen hätte der Modellierer keine Möglichkeit zu überprüfen, ob überhaupt eine Konsistenzprüfung stattgefunden hat oder ob dabei Fehler aufgetreten sind.

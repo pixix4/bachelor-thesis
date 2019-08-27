@@ -1,4 +1,4 @@
-\chapter{Schluss}
+\chapter{Ergebnisse und Ausblick}
 \label{chap:conclusion}
 
 In diesem Kapitel wird evaluiert in wie weit diese Arbeit, die im \cref{chap:introduction} genannten Ziele erfüllt hat.
@@ -37,7 +37,7 @@ Damit gehört das Verfahren, nach dem Klassifikationsschema aus \cref{chap:relat
 Die Nutzung eines Regelsatzes entspricht der Konsistenzstrategie des Monitorings.
 In \cref{tab:Klassifikationsschema_extended} ist die Einordnung diese Arbeit in das bestehende Feld von Konsistenzverfahren abgebildet.
 Die größte Übereinstimmung hat das hier vorgestellte Verfahren mit dem Konsistenzverfahren nach \cite{Egyed2006}.
-Beide Verfahren testen die Intra-Modell (horizontale) Konsistenz, sind automatisierbar und wurden bereits evaluiert.
+Beide Verfahren testen die \emph{Intra-Modell (horizontale) Konsistenz}, sind automatisierbar und wurden bereits evaluiert.
 Sie unterscheiden sich neben den unterstützten Modellarten hauptsächlich im Grad der Erweiterbarkeit.
 Das Verfahren von \cite{Egyed2006} benutzt zum Konsistenzvergleich Regeln auf Basis von OCL.
 Dies erschwert die Erweiterbarkeit um neue Modellarten ungemein.
@@ -48,6 +48,7 @@ Da das Verfahren direkt auf dem Graphen der Metamodell-Instanz arbeitet, können
 Das Verfahren von \cite{Egyed2006} ist hingegen auf die Möglichkeiten der OCL beschränkt, was die Erstellung einer neuen Regel erschweren könnte.
 
 \begin{table}
+  \centering
   \begin{threeparttable}
     \centering
     \begin{tabular}{p{1.58cm} p{1.50cm} p{0.95cm} p{2.2cm} p{1.60cm} p{0.33cm}
@@ -90,11 +91,11 @@ Das Verfahren von \cite{Egyed2006} ist hingegen auf die Möglichkeiten der OCL b
   \label{tab:Klassifikationsschema_extended}
 \end{table}
 
-Diese Erweiterbarkeit wurde mit Hilfe der Implementierung nachgewiesen.
+Diese Erweiterbarkeit wurde anhand einer Implementierung nachgewiesen.
 Ziel der Implementierung war, den Konsistenzvergleich zu automatisieren und gleichzeitig die Modularität und damit auch Erweiterbarkeit des Verfahrens zu gewährleisten.
 Dies wurde mit der Aufteilung der Konsistenzbedingungen in einzelne Regeln erreicht.
 Jede dieser Regeln besteht aus einem, teilweise auch mehreren Modulen, die sich unabhängig voneinander aktivieren und ergänzen lassen.
-Die Automatisierbarkeit wurde mit der Implementierung gezeigt und anhand eines Beispieles zusätzlich evaluiert.
+Die Automatisierbarkeit wurde mit dieser Implementierung gezeigt und anhand eines Beispieles zusätzlich evaluiert.
 Dabei konnte ein fehlerhaftes BROS-Modell erfolgreich korrigiert werden.
 Da das genutzte Beispiel auf der Arbeit von \cite{Schoen} basiert, konnte diese zur Verifizierung der Korrektheit der Konsistenz genutzt werden.
 
@@ -107,7 +108,7 @@ Eine Möglichkeit bestimmt Fehler zu ignorieren oder als gewollt zu kennzeichnen
 
 Um die allgemeine Funktionalität zu verbessern, ist es erforderlich die Konsistenzbeziehungen zwischen BPMN- und BROS-Modellen genauer zu untersuchen.
 In dieser Arbeit wurden nur sechs Konsistenzregeln vorgestellt, die die wichtigsten Bereiche der Konsistenz abdecken.
-So sind noch keine Konsistenzbedingungen für z. B. BROS-Compartments oder BPMN-SubProcesses definiert.
+So sind noch keine Konsistenzbedingungen für zum Beispiel BROS-Compartments oder BPMN-SubProcesses definiert.
 Die Konsistenzregeln, die zwischen diesen und weiteren Elementen gelten, müssen dafür noch analysiert werden.
 Solange eine Formalisierung dieser Regeln auf Basis der Metamodelle möglich ist, können sie der bestehenden Implementierung hinzugefügt werden.
 
@@ -126,7 +127,7 @@ Dies würde dem Modellierer verschiedene Möglichkeiten geben.
 Zum einen könnten Fehlermeldungen direkt graphisch in dem BROS-Modell markiert werden.
 Damit würden sich Fehler leichter finden und verstehen lassen.
 Zum anderen könnten Teile des BROS-Modelles anhand des BPMN-Modelles autogeneriert werden.
-Dies würde dem Modellierer vorallem bei großen Prozessen viel Zeit sparen.
+Dies würde dem Modellierer vor Allem bei großen Prozessen viel Zeit sparen.
 Da die Referenzimplementierung, wie auch der BROS-Editor, in Kotlin entwickelt worden, sind sie bereits technisch kompatibel.
 Allerdings müsste noch evaluiert werden, wie das Ergebnis der Analyse in die graphische Darstellung integriert werden kann.
 Sollte eine Autogenerierung implementiert werden, müsste zusätzlich noch analysiert werden, in wieweit dies möglich ist, und wie nutzbar ein solches Modell gegenüber einem manuell erstelltem Modell wäre.

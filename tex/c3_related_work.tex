@@ -1,7 +1,7 @@
 \chapter{Verwandte Arbeiten}
 \label{chap:related_work}
 
-Der Bereich der Konsistenzprüfung zwischen strukturbasierten und verhaltensbasierten Modellen ist seit Jahren gut erforscht.
+Der Bereich der Konsistenzprüfung zwischen strukturbasierten und verhaltensbasierten Modellen wird seit Jahren intensiv erforscht.
 Insbesondere gibt es ein großes Spektrum an Methoden zum Vergleichen von verschiedenen UML-Modellarten.
 Viele dieser Methoden untersuchen die Konsistenz zwischen UML-Klassendiagrammen und UML-Verhaltensmodellen, wie UML-Zustands- oder UML-Aktivitätsdiagramme.
 Da sich die Konzepte dieser UML-Modelle mit denen von BROS und BPMN ähneln, lassen sich diese Methoden auch auf BPMN- und BROS-Modelle anwenden.
@@ -75,7 +75,7 @@ Für diese Überprüfung sind die \emph{syntaktische} und die \emph{semantische 
 Dabei untersucht die \emph{syntaktische Konsistenz} die Korrektheit eines Modelles zu seinem Metamodell, wohingegen die \emph{semantische Konsistenz} die Korrektheit von zusätzlichen Beschränkungen überprüft.
 Wie bereits erwähnt, ist diese Korrektheit der Modelle für die weitere Arbeit eine Voraussetzung.
 Methoden, die diese Konsistenz überprüfen, werden nicht weiter untersucht.
-Zudem existieren bereits Tools die diese Überprüfung sowohl für BPMN (z. B. \emph{bpmn.io}) als auch für BROS (\emph{FRaMED-io}) automatisiert durchführen können.
+Zudem existieren bereits Tools die diese Überprüfung sowohl für BPMN (zum Beispiel \emph{bpmn.io}) als auch für BROS (\emph{FRaMED-io}) automatisiert durchführen können.
 
 \section{Aktuelle Verfahren zur Konsistenzprüfung}
 
@@ -104,7 +104,7 @@ Dabei werden beide Modelltypen und alle Validierungsstrategien unterstützt.
 Für die \emph{Evolutionskonsistenz} wird eine Erweiterung des UML-Metamodells erstellt.
 Zusätzlich führt \cite{Mens2005} eine Fallstudie durch und entwickelt eine Toolunterstützung.
 Ein ähnlicher Ansatz wird von \cite{Simmonds2004} verfolgt.
-Noch weiter geht Satoh et al. (\cite{Usman2008}, 15), indem UML-Klassendiagramme direkt in Logikprogramme übersetzt und ausgeführt werden.
+Noch weiter gehen Satoh et al. (\cite{Usman2008}, 15), indem UML-Klassendiagramme direkt in Logikprogramme überführt und auf Erfüllbarkeit überprüft werden.
 
 \textbf{Transformation in ein gemeinsames Modell:}
 \cite{Egyed2001} entwickelt die ViewIntegra Methode für die  \emph{Inter-Modell (vertikale)} und \emph{Intra-Modell (horizontale) Konsistenz}.
@@ -125,6 +125,7 @@ Aufgrund von Einschränkungen von OCL, wie das Fehlen des transitiven Abschlusse
 \section{Vergleich der bestehenden Verfahren}
 
 \begin{table}
+  \centering
   \begin{threeparttable}
     \centering
     \begin{tabular}{p{1.58cm} p{1.50cm} p{0.95cm} p{2.2cm} p{1.60cm} p{0.33cm}
@@ -166,7 +167,7 @@ Aufgrund von Einschränkungen von OCL, wie das Fehlen des transitiven Abschlusse
 \end{table}
 
 Ein wichtiger Punkt für die weitere Arbeit ist die Erweiterbarkeit.
-Wie bereits genannt, gibt es zwei verschiedene Aspekte der Erweiterbarkeit, die Modellerweiterbarkeit und die Regelerweiterbarkeit.
+Wie bereits etabliert, existieren zwei verschiedene Aspekte der Erweiterbarkeit, die Modellerweiterbarkeit und die Regelerweiterbarkeit.
 Die Modellerweiterbarkeit beschreibt mit welchem Aufwand sich ein Verfahren um neue Modelltypen erweitern lässt.
 Mit einer guten Modellerweiterbarkeit können viele verschiedene Modelltypen für die Konsistenzprüfung unterstützt werden.
 Im Gegensatz dazu steht die Regelerweiterbarkeit.
@@ -190,8 +191,7 @@ Es kann auch sein, dass eine Modellart nicht kompatibel zu der genutzten Zwische
 Dann ist eine Erweiterung um diesen Modelltyp nicht möglich.
 Dahingegen haben die Verfahren ohne Zwischendarstellung weniger Beschränkungen bei der Erweiterbarkeit um weitere Modellarten.
 Hier ist das größte Hindernis der Aufwand, eine neue Modellart hinzuzufügen.
-Im schlechtesten Fall, müssen beim Hinzufügen einer neuen Modellart $N$, neue Konvertierungsmethoden entwickelt werden.
-Dabei ist $N$ die Anzahl, der bereits unterstützten Modellarten.
+Im schlechtesten Fall müssen beim Hinzufügen einer neuen Modellart $n$ neue Konvertierungsmethoden entwickelt werden, wobei $n$ die Anzahl, der bereits unterstützten Modellarten ist.
 \cite{Egyed2001} umgeht dieses Problem mittels einer iterativen Transformation.
 Dies bestätigt die Annahme, der Abhängigkeit der Erweiterbarkeit, von der Nutzung einer Zwischendarstellung.
 

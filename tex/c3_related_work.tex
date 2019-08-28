@@ -51,10 +51,10 @@ Jeder Punkt, der direkt aus einer der beiden bestehenden Arbeiten entnommen wurd
     \item \textbf{Tool Support (\cite{Usman2008}):}
     Es beschreibt, ob die Methode von einem Tool unterstützt wird, oder ein eigenes Tool entwickelt wurde.
     Mögliche Werte sind ja und nein.
-    \item \textbf{Model Extensibility:}
+    \item \textbf{Model Extensibility (\cite{Lucas2009}):}
     Es beschreibt, wie gut die Methode um weitere Modelle für den Konsistenzvergleich erweiterbar ist.
     Mögliche Werte sind geringer Aufwand (H), mittlerer Aufwand (M) und hoher Aufwand (L).
-    \item \textbf{Rule Extensibility:}
+    \item \textbf{Rule Extensibility (\cite{Lucas2009}):}
     Es beschreibt, wie gut die Methode um weitere Konsistenzregeln innerhalb der unterstützten Modellarten erweiterbar ist.
     Mögliche Werte sind geringer Aufwand (H), mittlerer Aufwand (M) und hoher Aufwand (L).
 \end{itemize}
@@ -72,7 +72,9 @@ Diese Überprüfung erfolgt innerhalb einer Modellart auf der gleichen Abstrakti
 Mit diesen drei Konsistenzarten kann die Konsistenz der gesamten Modellierung überprüft werden.
 Die Voraussetzung dafür ist, dass die zu untersuchenden Modelle korrekt sind.
 Für diese Überprüfung sind die \emph{syntaktische} und die \emph{semantische Konsistenz} verantwortlich.
-Dabei untersucht die \emph{syntaktische Konsistenz} die Korrektheit eines Modelles zu seinem Metamodell, wohingegen die \emph{semantische Konsistenz} die Korrektheit von zusätzlichen Beschränkungen überprüft.
+Dabei untersucht die \emph{syntaktische Konsistenz} die Korrektheit eines Modelles zu seinem Metamodell.
+Die \emph{semantische Konsistenz} überprüft hingegen die Korrektheit von zusätzlichen Beschränkungen.
+Die bereits eingeführte Bedingung, dass ein BrosCompartment nicht Bestandteil einer BrosScene sein kann, ist beispielsweise eine solche \emph{semantische} Konsistenzbedingung.
 Wie bereits erwähnt, ist diese Korrektheit der Modelle für die weitere Arbeit eine Voraussetzung.
 Methoden, die diese Konsistenz überprüfen, werden nicht weiter untersucht.
 Zudem existieren bereits Tools die diese Überprüfung sowohl für BPMN (zum Beispiel \emph{bpmn.io}) als auch für BROS (\emph{FRaMED-io}) automatisiert durchführen können.
@@ -153,13 +155,13 @@ Aufgrund von Einschränkungen von OCL, wie das Fehlen des transitiven Abschlusse
     \end{tabular}
     \begin{tablenotes}
       \item \hfil
-      \f{H}$ = $mit geringem Aufwand;
-      \f{M}$ = $mit mittlerem Aufwand;
-      \f{L}$ = $mit hohem Aufwand;
+      \f{H}: mit geringem Aufwand;
+      \f{M}: mit mittlerem Aufwand;
+      \f{L}: mit hohem Aufwand;
       \item \hfil
-      \f{1}$ = $ja;
-      \f{0}$ = $nein;
-      $\sim$$ = $teilweise
+      \f{1}: ja;
+      \f{0}: nein;
+      $\sim$: teilweise
     \end{tablenotes}    
   \end{threeparttable}
   \caption{Vergleich der bestehenden Verfahren}%
@@ -189,7 +191,8 @@ Eine Zwischendarstellung hat zumeist den Nachteil des Informationsverlustes.
 Dadurch lassen sich nur schwer neue Regeln, für die Konsistenz der Zwischendarstellung hinzufügen.
 Es kann auch sein, dass eine Modellart nicht kompatibel zu der genutzten Zwischendarstellung ist.
 Dann ist eine Erweiterung um diesen Modelltyp nicht möglich.
-Dahingegen haben die Verfahren ohne Zwischendarstellung weniger Beschränkungen bei der Erweiterbarkeit um weitere Modellarten.
+Diese Beschränkung gilt nicht für die Verfahren ohne Zwischendarstellung.
+Sie sind, solange die Modellarten in einer Beziehung stehen, mit allen Modellarten kompatibel.
 Hier ist das größte Hindernis der Aufwand, eine neue Modellart hinzuzufügen.
 Im schlechtesten Fall müssen beim Hinzufügen einer neuen Modellart $n$ neue Konvertierungsmethoden entwickelt werden, wobei $n$ die Anzahl, der bereits unterstützten Modellarten ist.
 \cite{Egyed2001} umgeht dieses Problem mittels einer iterativen Transformation.
@@ -200,9 +203,10 @@ Das \emph{Monitoring} basiert auf der Konsistenzprüfung mittels eines Regelsatz
 Verfahren die \emph{Monitoring} nutzen, haben eine gute Erweiterbarkeit im Bezug auf neue Konsistenzregeln.
 Dazu zählen die Verfahren von \cite{Rasch2003}, \cite{Mens2005} und \cite{Egyed2006}.
 \emph{Monitoring} bietet allerdings keine formale Verifikation, sondern nur eine Überprüfung, vergleichbar mit Unittests.
+Es werden nur stichprobenartige Tests durchgeführt, wodurch nicht jeder mögliche Fall abgedeckt ist.
 Dies wird von dem Verfahren der \emph{Analysis} gelöst.
 Mittels formaler Verifikation kann die Konsistenz bewiesen werden.
-Allerdings sind solcher Verfahren nicht sehr flexibel.
+Allerdings sind solche Verfahren nicht sehr flexibel.
 Bei \cite{Shinkawa2006} kann beispielsweise nur die \emph{Inter-Modell (vertikale) Konsistenz} verifiziert werden.
 Die dritte Methode, die \emph{Construction}, beschreibt Verfahren, deren Hauptaufgabe die Konstruktion anderer Modelle ist.
 Hierbei ist die Abgrenzung zu Verfahren, die auf einer Zwischendarstellung basieren zu beachten.

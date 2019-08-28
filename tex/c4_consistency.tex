@@ -277,25 +277,26 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     \draw (-7.2, -1.5) -- (-6.8,-1.5);
     \draw (-7.2, -1.25) -- (-6.8,-1.25);
     \draw (-7.2, -1) -- (-6.8,-1);
-    \draw (-7,-2) node[anchor=north,scale=0.7] {BPMN};
+    \draw (-7,-2) node[anchor=north,scale=0.7] {BROS};
     
     
     \draw[-{Triangle[length=5pt]}] (-4,0) -- (-3,0);
     
     
-    \draw (0,1.5) node[scale=0.7] {$$f(x)$$};
-    \draw (-1,2) rectangle (1,1);
+    \draw (0,1.8) node[scale=0.6] {Orakelfunktion};
+    \draw (0,1.0) node[scale=0.7] {$$f(x)$$};
+    \draw (-1,1.4) rectangle (1,0.6);
     
-    \draw[color=layer3,dashed] (-1,0.25) -- (1,0.25);
-    \draw[color=layer3,dashed] (-1,-0.75) -- (1,-1.75);
-    \draw[color=layer3,dashed] (1,-0.75) -- (-1,-1.75);
+    \draw[color=layer3,dashed] (-1,-0.15) -- (1,-0.15);
+    \draw[color=layer3,dashed] (-1,-0.95) -- (1,-1.75);
+    \draw[color=layer3,dashed] (1,-0.95) -- (-1,-1.75);
     
-    \draw (-1.75,0.5) rectangle (-1,0);
-    \draw (-1.75,-0.5) rectangle (-1,-1);
+    \draw (-1.75,0.1) rectangle (-1,-0.4);
+    \draw (-1.75,-0.7) rectangle (-1,-1.2);
     \draw (-1.75,-1.5) rectangle (-1,-2);
     
-    \draw (1.75,0.5) rectangle (1,0);
-    \draw (1.75,-0.5) rectangle (1,-1);
+    \draw (1.75,0.1) rectangle (1,-0.4);
+    \draw (1.75,-0.7) rectangle (1,-1.2);
     \draw (1.75,-1.5) rectangle (1,-2);
     
     
@@ -303,20 +304,34 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
     
     
     \draw (6,1.5) rectangle (8,-1.5);
-    \draw (6.5,0.5) -- (7.5,0.5);
-    \draw (6.5,0) -- (7.5,0);
-    \draw (6.5,-0.5) -- (7.5,-0.5);
+    \draw (6.5,0.75) node[scale=0.5] {1} (6.7,0.75) -- (7.5,0.75);
+    \draw (6.5,0.25) node[scale=0.5] {2} (6.7,0.25) -- (7.5,0.25);
+    \draw (6.5,-0.25) node[scale=0.5] {3} (6.7,-0.25) -- (7.5,-0.25);
+    \draw (6.5,-0.75) node[scale=0.5] {4} (6.7,-0.75) -- (7.5,-0.75);
     \filldraw[fill=white] (8,-1.5) circle[radius=0.5];
-    \draw[line width=1pt] (7.75, -1.5) -- (7.9,-1.7) -- (8.25,-1.3);---
+    \draw[line width=1pt] (7.75, -1.5) -- (7.9,-1.7) -- (8.25,-1.3);
     
     
     \draw[-{Triangle[length=5pt]}] (10,0) -- (11,0);
     
     
-    \draw (13, 1.6) rectangle (15,1.1);
-    \draw (13, 0.7) rectangle (15,0.2);
-    \draw (13, -0.7) rectangle (15,-0.2);
-    \draw (13, -1.6) rectangle (15,-1.1);
+    \draw (12.75, 1.6) rectangle (14.75,1.1);
+    \draw (12.75, 0.7) rectangle (14.75,0.2);
+    \draw (12.75, -0.7) rectangle (14.75,-0.2);
+    \draw (12.75, -1.6) rectangle (14.75,-1.1);
+
+    \draw[line width=0.7pt] (15, 1.35) -- (15.2,1.18) -- (15.45,1.55);
+    \draw[line width=0.7pt] (15, 0.45) -- (15.2,0.28) -- (15.45,0.65);
+    \draw[line width=0.7pt] (15.075, -0.3) -- (15.375,-0.6) (15.375, -0.3) -- (15.075,-0.6);
+    \draw[line width=0.7pt] (15, -1.35) -- (15.2,-1.52) -- (15.45,-1.15);
+
+    \draw (12.8, -0.5) -- (13.05,-0.25);
+    \draw (12.95, -0.65) -- (13.35,-0.25);
+    \draw (13.25, -0.65) -- (13.65,-0.25);
+    \draw (13.55, -0.65) -- (13.95,-0.25);
+    \draw (13.85, -0.65) -- (14.25,-0.25);
+    \draw (14.15, -0.65) -- (14.55,-0.25);
+    \draw (14.45, -0.65) -- (14.7,-0.4);
     
     
     \draw (-3.5,0.1) -- (-3.5,2.5) -- (10.5,2.5) -- (10.5,0.1);
@@ -436,11 +451,18 @@ Mit Hilfe der beiden Elemente und der verletzten Regel, kann eine genaue Fehlerb
 Dieses Verhalten ist analog für die Regeln, die aus Sicht des BROS-Modelles arbeiten.
 
 Nicht mit den Prolog-Regeln darstellbar, ist der Unterschied zwischen erfolgreichen und abgebrochenen Regelprüfungen.
-Jede Regel hat zu Beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt.
+Jede Regel hat zu Beginn eine Implikation, die die Gültigkeit der Regel auf bestimmte Elemente einschränkt, wie beispielsweise in der ersten Zeile von \cref{lst:rule_1}.
 Für eine optimale Rückmeldung an den Modellierer muss eine erfolgreiche Regelprüfung in zwei Fälle unterschieden werden.
 Eine Regel wird nicht nur als erfolgreich ausgeführt markiert, wenn sie tatsächlich erfolgreich war, sondern auch, wenn sie bei einer falschen Vorbedingung vorzeitig abgebrochen wurde.
-Dieses Verhalten ergibt sich aus den Prolog-Definitionen.
-Die Implikation gibt wahr zurück, wenn entweder die Vorbedingung falsch ist oder die Konsequenz wahr ist.
+Dieses Verhalten ergibt sich aus den Prolog-Definitionen: die Implikation gibt wahr zurück, wenn entweder die Vorbedingung falsch ist oder die Konsequenz wahr ist.
+
+\begin{figure}[H]
+    \centering
+    \begin{align}
+        \text{Vorbedingung} \Rightarrow \text{Konsequenz} \Leftrightarrow \neg \text{Vorbedingung} \lor \text{Konsequenz}\nonumber
+    \end{align}
+\end{figure}
+
 Interessant für den Modellierer ist nur der Fall, dass die Konsequenz wahr ist.
 Dabei wird eine positive Konsistenzmeldung gespeichert.
 Bei einer falschen Vorbedingung kann die Ausführung ignoriert werden.

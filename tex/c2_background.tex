@@ -11,13 +11,14 @@ Um diese leichter unterscheiden zu können, werden die Modellelemente mit dem Pr
 
 \section{Business Process Model and Notation}
 
-Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist ein weit verbreiteter Standard für die grafische Beschreibung von Geschäftsprozessen.
+Die \emph{Business Process Model and Notation} (\textbf{BPMN}) ist ein weit verbreiteter Standard für die grafische Beschreibung von Geschäftsprozessen.\footnote{\url{https://www.omg.org/spec/BPMN/2.0/About-BPMN/}}
 Dabei wird das Verhalten eines Systems in einer, an Flussdiagramme angelehnten, Form beschrieben.
 Einer der Hauptvorteile von BPMN ist die große Verbreitung.
 Dadurch können Prozessbeschreibungen auf einfache Art und Weise zwischen verschieden Plattformen und Stakeholdern ausgetauscht werden.
 Neben der informellen Beschreibung von Prozessen unterstützt BPMN auch die direkte Ausführung von Geschäftsprozessen.
 Dafür existieren Interpretern, die in BPMN-Modellierte Abläufe zur Automatisierung einfacher Aufgaben oder ganzer Fertigungsprozesse genutzt werden können.
-Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
+Die Hauptelemente der BPMN sind in der BPMN-Spezifikation definiert.\footnote{\url{https://www.omg.org/spec/BPMN/2.0/PDF}, Seite 29}
+In dieser Arbeit werden folgende Elemente unterstützt:
 
 \begin{itemize}
     \item \textbf{Activity:} 
@@ -60,10 +61,10 @@ Die Hauptelemente der BPMN, die auch in dieser Arbeit unterstützt werden, sind:
 \end{itemize}
 
 Da BPMN schon über einem Jahrzehnt in Benutzung ist, existiert eine gute Toolunterstützung für die Modellierung.
-Eines dieser Tools ist \emph{bpmn.io}\footnote{https://demo.bpmn.io/}.
+Eines dieser Tools ist \emph{bpmn.io}\footnote{\url{https://demo.bpmn.io/}}.
 Hierbei handelt es sich um ein webbasiertes Tool, das einen Großteil des BPMN-Standards unterstützt.
 Das Tool speichert und lädt die BPMN-Modelle in einem auf XML-basierenden Format mit der Dateiendung \emph{.bpmn}.
-Diese Datenstruktur basiert auf dem Metamodell, das von der \emph{Object Management Group}\footnote{https://www.omg.org/spec/BPMN/2.0/About-BPMN/} spezifiziert wurde.
+Diese Datenstruktur basiert auf dem Metamodell, das von der \emph{Object Management Group}\footnote{\url{https://www.omg.org/spec/BPMN/2.0/PDF}} spezifiziert wurde.
 
 \begin{figure}
     \centering
@@ -115,7 +116,8 @@ Diese Datenstruktur basiert auf dem Metamodell, das von der \emph{Object Managem
 \end{figure}
 
 Für die weitere Arbeit wird allerdings nur ein Teil des vollständigen BPMN-Standards der \emph{OMG} genutzt.
-Das hier verwendete Metamodell basiert auf den Metamodellen der \emph{OMG} und von \cite{Loja2010} (vgl. \cref{fig:bpmnMetamodel}), der eine deutlich gekürzte Version des Metamodelles für Business Prozesse erstellt hat.
+Das in \cref{fig:bpmnMetamodel} dargestellte Metamodell ist eine deutlich vereinfachte Variante des Metamodelles der \emph{OMG}.
+Außerdem basiert es auf dem Metamodell von \cite{Loja2010}, der eine gekürzte Version des Metamodelles für Business Prozesse erstellt hat.
 Es unterstützt dabei nur die oben genannten BPMN-Elemente.
 Weitere BPMN-Elemente werden in dieser Arbeit und dem später entwickelten Tool nicht betrachtet.
 
@@ -126,7 +128,7 @@ Die Wurzel des Baumes ist das Modell an sich.
 Dieses kann mehrere Prozesse (BpmnProcess) enthalten.
 Jeder Prozess beinhaltet verschiedene Flowobjekte. 
 Dazu zählen Events (BpmnEvent), Gateways (BpmnGateway) und Activities (BpmnTask).
-Die Events teilen sich in die drei Unterklassen auf: Start-, Intermediate- und EndEvents (BpmnStartEvent, BpmnIntermediateEvent, BpmnEndEvent).
+Die Events teilen sich in die drei Unterklassen auf: Start-, Intermediate- und EndEvents (Bpmn\-Start\-Event, BpmnIntermediateEvent, BpmnEndEvent).
 Außerdem kann ein Prozess mehrere Pools (BpmnLaneSet) und Swimlanes (BpmnLane) enthalten.
 Hierbei ist zu beachten, dass jedes Flowobjekt nur einen Container haben darf, obwohl Swimlanes und Processes Flowobjekte enthalten können.
 So kann ein Flowobjekt nicht gleichzeitig Kind eines Prozesses und einer Swimlane sein.
@@ -137,14 +139,15 @@ Der SequenceFlow (BpmnSequenceFlow) stellt den Ablauf innerhalb eines Prozesses 
 
 \section{Compartment Role Object Model}
 
-Das \emph{Compartment Role Object Model} (\textbf{CROM}) ist eine Modellierungssprache für rollenbasierte Systeme.
+Das \emph{Compartment Role Object Model} (\textbf{CROM}) ist eine Modellierungssprache für rollenbasierte Systeme (vgl. \cite{kuhn2014metamodel}).
 Eine Rolle beschreibt einen Aufgabenbereich der von verschiedenen Entitäten übernommen werden kann.
 Man sagt, die Entität \emph{spielt} die Rolle.
 CROM führt zusätzlich das \emph{Compartment} ein, welches den Kontext der Rolle abbildet, in dem diese gespielt werden kann.
-Dadurch wird das Modell in drei logische Aspekte unterteilt, den Verhaltensaspekt, den Relationenaspekt und den Kontextaspekt.
+Dadurch wird das Modell in drei logische Aspekte unterteilt: den Verhaltensaspekt, den Relationenaspekt und den Kontextaspekt.
 Der Verhaltensaspekt beschreibt die Aktoren bzw. Entitäten und die Rollen, die von diesen gespielt werden können.
 Der Relationenaspekt fügt zu den Rollen weitere Constraints und Verbindungsbeschreibungen hinzu.
 Im dritten Aspekt, dem Kontextaspekt, wird mittels den Compartments die Kontextabhängigkeit modelliert.
+Dies erlaubt die einfache Modellierung von komplexen dynamischen Systemen, was mit UML-Diagrammen einen hohen Aufwand erfordern würde. 
 Die dafür genutzten Elemente sind:
 
 \begin{itemize}
@@ -174,7 +177,7 @@ Die dafür genutzten Elemente sind:
     In ihnen kann ein Submodell abgebildet werden, in das nur Relationen hinein, aber nicht hinaus führen dürfen.
 \end{itemize}
 
-CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{https://github.com/Eden-06/FRaMED-2.0} einen eigenen graphischen Editor.
+CROM besitzt mit dem Eclipse Plugin \emph{FRaMED-2.0}\footnote{\url{https://github.com/Eden-06/FRaMED-2.0}} einen eigenen graphischen Editor.
 Der Name des Editors ist ein Akronym für \emph{Full-fledged Role Modeling EDitor}. 
 Dieser wurde speziell für CROM entwickelt.
 Er unterstützt den vollständigen Standard von CROM.
@@ -184,8 +187,8 @@ Unter zu Hilfename eines \emph{Feature Editor} lassen sich bestimmte Modellfunkt
 
 Der neu entwickelte Ansatz der \emph{Business Role-Object Specification} (\textbf{BROS}) kombiniert die Vorteile der strukturbasierten Modellierung und der verhaltensbasierten Modellierung.
 Als Grundlage für BROS dient die strukturbasierte Modellierungssprache CROM.
-Diese wird u.a. mit Hilfe von Events um den Verhaltensaspekt erweitert.
-Ziel ist es, einen bereits existierenden Geschäftsprozess wiederzuverwenden, um auf dessen Basis, die Businessobjekte zu modellieren.
+Diese wird unter anderem mit Hilfe von Events um den Verhaltensaspekt erweitert.
+Ziel ist es, einen bereits existierenden Geschäftsprozess zu verwenden, um auf dessen Basis, die Businessobjekte, in einer bereits existierenden Struktur, zu modellieren.
 Das so entstandene Modell kann anschließend als Vorlage für die eigentliche Implementierung genutzt werden (vgl \cite{Schoen}).
 Dies hat den Vorteil, dass obwohl es sich um ein Strukturmodell handelt, weiterhin der Ablauf des Prozesses erkennbar ist.
 Damit ist leichter erkennbar, wie Objekte miteinander interagieren.
@@ -210,7 +213,7 @@ Um dies zu ermöglichen, wird der CROM-Standard um folgende Modellelemente erwei
     Das ReturnEvent ist nicht mit einer DestroyRelation verbunden, da es implizit im gesamten Verlauf der Scene auftreten kann.
 \end{itemize}
 
-Auch BROS besitzt mit \emph{FRaMED.io}\footnote{https://eden-06.github.io/FRaMED-io/} einen graphischen Editor.
+Auch BROS besitzt mit \emph{FRaMED.io}\footnote{\url{https://eden-06.github.io/FRaMED-io/}} einen graphischen Editor.
 \emph{FRaMED.io} ist eine Neuentwicklung von \emph{FRaMED-2.0} und wie \emph{bpmn.io} webbasiert.
 Damit ist es plattformübergreifend und ohne aufwendige Installation nutzbar.
 Es unterstützt das Erstellen von CROM- und BROS-Modellen, ist aber nicht mit existierenden \emph{FRaMED-2.0}-Projekten kompatibel.

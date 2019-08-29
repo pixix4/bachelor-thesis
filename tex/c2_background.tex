@@ -100,10 +100,10 @@ Diese Datenstruktur basiert auf dem Metamodell, das von der \emph{Object Managem
         \draw[-{Triangle[length=3mm,width=3mm,open]}] (0,-7.5) -- (0,-6.5);
         \draw (-5.75,-7.5) -- (-5.75,-7.1) -- (5.75,-7.1) -- (5.75,-7.5);
 
-        \draw[color=layer2, {Diamond[length=4mm,open]}-] (2.25,-2.2) -- (3.5,-2.2);
-        \draw[color=layer2, {Diamond[length=4mm,open]}-] (3.5,-4.2) -- (2.25,-4.2);
-        \draw[color=layer2, {Diamond[length=4mm,open]}-] (5.75,-2.5) -- (5.75,-3.5);
-        \draw[color=layer2, {Diamond[length=4mm,open]}-] (0,-2.5) -- (0,-3.5);
+        \draw[color=layer2, {Diamond[length=4mm]}-] (2.25,-2.2) -- (3.5,-2.2);
+        \draw[color=layer2, {Diamond[length=4mm]}-] (3.5,-4.2) -- (2.25,-4.2);
+        \draw[color=layer2, {Diamond[length=4mm]}-] (5.75,-2.5) -- (5.75,-3.5);
+        \draw[color=layer2, {Diamond[length=4mm]}-] (0,-2.5) -- (0,-3.5);
 
         \draw[color=layer2, ->] (-5.5,-0.5) -- (-5.5,-3.8) -- (-2.25,-3.8) node[anchor=south east] {\small{source}};
         \draw[color=layer2, ->] (-6,-0.5) -- (-6,-4.2) -- (-2.25,-4.2) node[anchor=north east] {\small{target}};
@@ -166,7 +166,7 @@ Die dafür genutzten Elemente sind:
     Der NaturalType bildet häufig eine natürliche Person ab, wohingegen der DataType oft einen künstlichen Teilnehmer beschreibt.
     Dabei werden beide Arten mit einer UML-Klasse dargestellt. 
     \item \textbf{Fulfillment:}
-    Ein Fulfillment ist eine Relation, die eine Entität mit einer Rolle oder einem Compartment verbindet.
+    Ein Fulfillment ist eine Relation, die eine Rolle mit einer Entität oder einem Compartment verbindet.
     Sie beschreibt, welche Rolle von welchen Entitäten gespielt werden kann.
     Damit ist das Fulfillment immer von einer Entität auf eine Rolle gerichtet.
     \item \textbf{Relationship:}
@@ -256,7 +256,7 @@ Es unterstützt das Erstellen von CROM- und BROS-Modellen, ist aber nicht mit ex
         \draw[-{Triangle[length=3mm,width=3mm,open]}] (-3.5,2) -- (-2.25,2);
         \draw (-3.5, 4) -- (-2.875, 4) -- (-2.875,0) -- (-3.5,0);
 
-        \draw[color=layer2, {Diamond[length=4mm,open]}-] (2.25,-4) -- (2.875,-4) -- (2.875,-2) -- (2.25,-2);
+        \draw[color=layer2, {Diamond[length=4mm]}-] (2.25,-4) -- (2.875,-4) -- (2.875,-2) -- (2.25,-2);
 
         \draw[color=layer2, ->] (2.25,1.8) -- (4,1.8) -- (4,0.2) -- (2.25,0.2) node[anchor=south west] {\small{source}};
         \draw[color=layer2, ->] (2.25,2.2) -- (4.5,2.2) -- (4.5,-0.2) -- (2.25,-0.2) node[anchor=north west] {\small{target}};

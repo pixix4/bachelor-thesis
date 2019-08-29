@@ -5,21 +5,20 @@ Nachdem das hier vorgestellte Verfahren theoretisch erläutert wurde, wird nun e
 Dafür werden im ersten Abschnitt die technischen Rahmenbedingungen aufgeführt.
 Anschließend wird jeweils die Implementierung des \emph{Matching-Algorithmus} und des \emph{Verifikationsalgorithmus} beschrieben.
 Im vierten Abschnitt wird die Benutzerschnittstelle des implementierten Tools vorgestellt.
-Das Tool ist auf \emph{GitHub} veröffentlicht\footnote{\url{https://pixix4.github.io/bpmn-bros-verifier/}} und kann direkt ausgeführt werden.
+Das Tool ist auf \emph{GitHub} veröffentlicht\footnote{\url{https://pixix4.github.io/bpmn-bros-verifier/}} und kann direkt als Webanwendung ausgeführt werden.
 
 \section{Implementierung der Referenzarchitektur}
 
 Im \cref{sec:Konsistenzregeln} wurden die Konsistenzregeln mit Hilfe von einem Prolog-Dialekt eingeführt.
 Dies legt nah, für die Implementierung auch eine Sprache zu verwenden, die auf Prolog basiert oder einfach mit Prolog interagieren kann.
-Allerdings hat die Implementierung in Prolog einen entscheidenden Nachteil.
-Für den \emph{Verifikationsalgorithmus} wird ein dreiwertiger Rückgabewert pro Regel benötigt.
+Allerdings hat die Implementierung in Prolog einen entscheidenden Nachteil: für den \emph{Verifikationsalgorithmus} wird ein dreiwertiger Rückgabewert pro Regel benötigt.
 Dies lässt sich mit Prolog nicht direkt abbilden.
 Zudem lassen sich die Regeln dank des \emph{Graph-Logik-Isomorphismus} auch direkt auf dem Graphen anwenden.
 Eine weitere Anforderung an die Implementierung ist eine mögliche Integration in den bestehenden BROS-Editor \emph{FRaMED.io}.
 Dieser basiert auf Web-Technologien und ist in der objektorientierten Programmiersprache Kotlin entwickelt.
 Aus diesem Grund wird auch Kotlin für die Entwicklung der Referenzimplementierung verwendet.
 Kotlin ist als JVM-Sprache entwickelt worden, kann aber auch zu Javascript oder LLVM-Bytecode transpiliert werden.
-Dadurch besitzen Kotlin Programme eine hohe Erweiterbarkeit im Bezug auf weitere Laufzeitumgebungen.
+Dadurch besitzen Kotlin Programme eine hohe Flexibilität im Bezug auf weitere Laufzeitumgebungen.
 Wie auch im BROS-Editor FRaMED.io wird die Transpilierung zu Javascript genutzt, wodurch das Tool als eine Webanwendung entwickelt wird.
 Ziel der Implementierung ist es, bestehende BPMN- und BROS-Modelle mit Hilfe des hier vorgestellten Verfahrens auf Konsistenz zu überprüfen.
 
@@ -33,7 +32,7 @@ Der Namespace \emph{bpmndi} und alle seine Kindelemente werden im folgenden igno
 Zum Lesen der BPMN-Datei wird der XML-Parser verwendet, der von Javascript nativ bereitgestellt wird.
 Von den Entwicklern von \emph{bpmn.io} existiert bereits ein Parser und Validierer für BPMN-Dateien (\emph{bpmn-moddle}).
 Dieser wird explizit nicht verwendet, da er in Javascript geschrieben ist und somit eine starke Bindung an die Plattform Javascript erzwingt.
-Die integrierte Validierungsfunktion für BPMN-Modelle wird auch nicht benötigt da eine Vorraussetzung für die Benutzung des Tools die syntaktische und semantische Korrektheit der Modelle ist. 
+Die integrierte Validierungsfunktion für BPMN-Modelle wird auch nicht benötigt, da eine Vorraussetzung für die Benutzung des Tools die syntaktische und semantische Korrektheit der Modelle ist. 
 Mit Hilfe des XML-Parsers wird das BPMN-Modell als eine Instanz des BPMN-Metamodells geladen.
 
 Die enge Kopplung zwischen dem BROS-Editor FRaMED.io und diesem Tool legt nah, auch das auf JSON basierende Format des BROS-Editors zu nutzen.
@@ -64,14 +63,14 @@ Genau wie bei dem BPMN-Parser wird auch das BROS-Modell in eine Instanz des BROS
         \filldraw[fill=white] (5.25,-0.75) rectangle (5.75,-1.25);
         \draw (5.5,-1) node {T};
 
-        \draw[color=layer1, ->] (-2.5, 3) -- (-2.5,4.2) -- (2.5, 4.2) -- (2.5,2.5) -- (-1,2.5) node[anchor=south west] {\small{0..*}} node[anchor=north west] {\small{+ children}};
-        \draw[color=layer1, {Diamond[length=4mm,open]}->] (-7.5, 3) -- (-7.5,4.2) -- (-3.5, 4.2) -- (-3.5, 3) node[anchor=south east, align=right] {\small{0..1}\\\small{parent}};
+        \draw[color=layer1, {Diamond[length=4mm]}->] (-2.5, 3) -- (-2.5,4.2) -- (2.5, 4.2) -- (2.5,2.5) -- (-1,2.5) node[anchor=south west] {\small{0..*}} node[anchor=north west] {\small{+ children}};
+        \draw[color=layer1, ->] (-7.5, 3) -- (-7.5,4.2) -- (-3.5, 4.2) -- (-3.5, 3) node[anchor=south east, align=right] {\small{0..1}\\\small{+ parent}};
 
         \draw[color=layer2, ->] (-2, 0) -- (-2,-1.5) -- (1, -1.5) node[anchor=south east] {\small{0..*}} node[anchor=north east] {\small{+ relations}};
         \draw[color=layer2, ->] (1.5, -1) -- (1.5,0.5) -- (-1, 0.5) node[anchor=south west] {\small{1}} node[anchor=north west] {\small{+ target}};
         \draw[color=layer2, ->] (2.5, -1) -- (2.5,1.5) -- (-1, 1.5) node[anchor=south west] {\small{1}} node[anchor=north west] {\small{+ source}};
 
-        \draw[color=layer3, ->] (-7.5, 0) -- (-7.5,-1.2) -- (-3.5, -1.2) -- (-3.5, 0) node[anchor=north east, align=right] {\small{0..*}\\\small{matchingElements}};
+        \draw[color=layer3, ->] (-7.5, 0) -- (-7.5,-1.2) -- (-3.5, -1.2) -- (-3.5, 0) node[anchor=north east, align=right] {\small{0..*}\\\small{+ matchingElements}};
     \end{tikzpicture}%
     \caption{Metamodell der Graphstruktur}%
     \label{fig:UmlGraph}
@@ -125,7 +124,8 @@ Wenn zu jedem Element der ersten Menge, ein passendes Element in der zweiten Men
     \label{eq:name_matching}
 \end{figure}
 
-Zusätzlich zum Name-Matching müssen Regeln definiert werden, auf welchen Elementen das Name-Matching angewendet werden muss.
+Zusätzlich zum Name-Matching müssen neue Regeln definiert werden, auf welchen Elementen das Name-Matching angewendet werden muss.
+Diese sind unabhängig von den Konsistenzregeln und dienen zum Aufbau des Matchings.
 Jede Regel implementiert dafür das \emph{Matching}-Interface.
 Um diese Regeln gebündelt zu erstellen, und zu sammeln, gibt es die Hilfsklasse \emph{Context}.
 Diese bietet verschiedene Hilfsfunktionen, um auf einfache Art und Weise, Matching- und Verifikations-Regeln zu implementieren.
@@ -141,8 +141,8 @@ Innerhalb des Lambdas kann beliebiger Code ausgeführt werden, um die beiden Ele
 Im einfachsten Fall führt das Lambda nur das Name-Matching der beiden Elemente aus.
 Es kann allerdings auch beliebige weitere Merkmale der Elemente, wie deren Struktur, zum Vergleich nutzen.
 Dabei hat sie auf alle drei Schichten des Graphen Zugriff.
-Wenn das Lambda \emph{wahr} zurück gibt, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
-Da der Graph gerichtet ist, das Matching allerdings bidirektional ist, müssen zwei Kanten für die Hin- und Rückrichtung hinzugefügt werden.
+Wenn das Lambda \emph{wahr} zurückgibt, das heißt, das Name-Matching war positiv, werden der dritten Schicht die beiden Kanten zwischen dem BPMN- und BROS-Knoten hinzugefügt, sofern diese nicht bereits existieren.
+Da der Graph gerichtet, das Matching allerdings bidirektional ist, müssen zwei Kanten für die Hin- und Rückrichtung hinzugefügt werden.
 Sonst wird das Ergebnis ignoriert, da nur Kanten zum Matching hinzugefügt werden dürfen.
 Das Lambda wird nur ausgeführt, wenn die Knoten zu den Filtern der ersten beiden Parameter passen.
 In \cref{lst:match_lane_role} ist das Matching für eine BPMN-Swimlane und einem BROS-RoleType gegeben.
@@ -185,11 +185,12 @@ Context.match<BpmnEvent, BrosEvent> { bpmn, bros ->
 \end{lstlisting}
 
 Allerdings kann es auch vorkommen, dass trotz dieser Regeln ein Matching zwischen zwei Elementen nicht gefunden wird, oder auch fälschlicher Weise gefunden wird.
-Für diesen Fall hat der Modellierer die Möglichkeit ein sogenanntes \emph{Predefined-Matching} hinzuzufügen.
+Für diesen Fall hat der Modellierer die Möglichkeit ein sogenanntes \emph{Predefined-Matching} zu definieren.
 Damit lässt sich ein Matching zwischen Elementen hinzufügen oder auch entfernen.
+Dies ist beispielsweise hilfreich, wenn Elemente absichtlich unterschiedliche Namen haben.
 Das \emph{Predefined-Matching} wird in jeder Iteration des Fixpunkt-Algorithmus, nachdem die Regeln auf den gesamten Graphen angewendet wurden, ausgeführt.
 Durch das Entfernen von Kanten aus dem Graphen ist es bei einem Fixpunkt-Algorithmus theoretisch möglich, in einen nicht terminierenden Zustand überzugehen.
-Da aber in jeder Iteration vor dem Überprüfen auf Änderungen in der dritten Schicht, eine konstante Kantenmenge entfernt wird, reduziert dies nur den vollständigen Graphen, um diese Kantenmenge.
+Da aber in jeder Iteration vor dem Überprüfen auf Änderungen in der dritten Schicht, eine konstante Kantenmenge entfernt wird, reduziert dies nur den vollständigen Graphen um diese Kantenmenge.
 Dabei bleibt die dritte Schicht am Ende jeder Iteration monoton wachsend. 
 
 \section{Implementierung der Konsistenzregeln}
@@ -206,7 +207,7 @@ Neben einer positiven und einer negativen Konsistenzmeldung kann auch ein \emph{
 Ein \emph{null} Wert bedeutet, dass die Regel nicht anwendbar ist, und das Ergebnis daher ignoriert werden soll.
 Damit wird die unter \cref{sec:Konsistenzregeln} beschriebende Dreiwertigkeit umgesetzt.
 Um dies zu veranschaulichen, werden nachfolgend die Konsistenzregeln 2, 3 und 5 in ihre Kotlin-Implementierung überführt.
-Zeichenketten innerhalb der Implementierung werden dabei weggelassen und können in der Implementierung nachgelesen werden.
+Innerhalb dieses Kapitels werden Zeichenketten im Quellcode weggelassen und können in der Implementierung nachgelesen werden.
 
 \textbf{Regel 2} ist die einfachste zu implementierende Regel.
 Sie besagt, dass zu jeder BPMN-Swimlane ein passender BROS-RoleType existieren muss.
@@ -273,7 +274,7 @@ Wenn dieses Überprüfung erfolgreich ist, wird eine positive Konsistenzmeldung 
 Beide Konsistenzmeldungen haben neben der textuellen Beschreibung auch eine Referenz auf das BPMN-Event.
 Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsistenzmeldung zurückgegeben, allerdings ohne eine Referenz auf ein BROS-Event.
 
-\begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5,float,floatplacement=H]
+\begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5,float,floatplacement=H, xleftmargin=.05\textwidth, xrightmargin=.05\textwidth]
 Context.verifyBpmn<BpmnStartEvent> { bpmn ->
     for (bros in bpmn.matchingElements) {
         if (bros.checkType<BrosEvent>()) {

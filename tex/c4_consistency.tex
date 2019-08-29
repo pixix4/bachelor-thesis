@@ -12,7 +12,7 @@ Um diese Konsistenzbeziehung genauer untersuchen zu können, muss zunächst gekl
 Dafür wird eine Definition des Konsistenzproblems gegeben.
 Anhand dieser, werden verschiedene Regeln zur Konsistenzprüfung zwischen BPMN und BROS vorgestellt und ein Verfahren zur automatischen Prüfung dieser Regeln erläutert.
 
-\section{Konsistenzproblem}
+\section{Konsistenzprobleme}
 
 Wie bereits erwähnt, sind heutige Softwaresysteme stark von den dazugehörigen Modellen abhängig.
 Damit ein solches System erfolgreich implementiert werden kann, müssen die Modelle konsistent zueinander sein.
@@ -70,10 +70,10 @@ Mit dem Fakt \emph{bpmn/2} und \emph{bros/2} werden die jeweiligen Modellelement
 Der Fakt \emph{relation/3} bildet eine Relation zwischen zwei Modellelementen von Quelle nach Ziel ab und ordnet dieser Relation gleichzeitig einem Typ zu.
 Durch \emph{parent/2} wird der hierarchische Aufbau der Modelle abgebildet.
 Dabei ist zu beachten, das jedes Element nur einen Parent haben darf.
-Es gilt implizit:
+Es gilt:
 
 \begin{lstlisting}[language=Prolog,frame=none]
-check_parent(X) :- parent(X, A), parent(X, B) -> A == B.
+check_parent(C) :- parent(C, P), parent(C, Q) -> P == Q.
 \end{lstlisting}
 \pagebreak
     
@@ -126,7 +126,7 @@ Die darauffolgende Formalisierung in Prolog dient als Referenz für die weitere 
 
 \input{c4_consistency_example_page}
 
-\textbf{Regel 1:} 
+\textbf{Regel 1 (BPMN-Process):} 
 Zu jedem \emph{BPMN-Process} muss eine \emph{BROS-Scene} oder ein \emph{BROS-Event} existieren.
 Ein BPMN-Process stellt eine Umgebung für einen natürlichen Prozess dar.
 In BROS wird dies mit einer BROS-Scene repräsentiert.
@@ -144,7 +144,7 @@ rule_1(Bpmn) :- bpmn(Bpmn, "Process") ->
     ).
 \end{lstlisting}
 
-\textbf{Regel 2:}
+\textbf{Regel 2 (BPMN-Swimlane):}
 Zu jeder \emph{BPMN-Swimlane} innerhalb eines \emph{BPMN-Process} muss ein passender \emph{BROS-RoleType} existieren.
 Eine Swimlane stellt einen Teilnehmer innerhalb des BPMN-Prozesses dar. 
 Dieses Konzept wird in BROS mittels Rollen dargestellt.
@@ -158,7 +158,7 @@ rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
     ).
 \end{lstlisting}
 
-\textbf{Regel 3:}
+\textbf{Regel 3 (BPMN-TerminationEvent):}
 Zu jedem \emph{BPMN-TerminationEvent} muss eine \emph{BROS-ReturnEvent} existieren.
 Eine BPMN-TerminationEvent beendet den aktuellen BPMN-Prozess.
 Der BPMN-Prozess wird in BROS durch eine BROS-Scene dargestellt (vgl. \textbf{Regel 1}).
@@ -179,7 +179,7 @@ rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
     ).
 \end{lstlisting}
 
-\textbf{Regel 4:}
+\textbf{Regel 4 (BPMN-EndEvent):}
 Zu jedem \emph{BPMN-EndEvent} muss ein \emph{BROS-Event} oder \emph{BROS-ReturnEvent} existieren.
 Ein BPMN-EndEvent beendet die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (Vgl. \textbf{Regel 2}).
@@ -213,14 +213,14 @@ rule_4(Bpmn) :- bpmn(Bpmn, "EndEvent") ->
     ).
 \end{lstlisting}
 
-\textbf{Regel 5:}
+\textbf{Regel 5 (BPMN-StartEvent):}
 Zu jedem \emph{BPMN-StartEvent} muss ein \emph{BROS-Event} existieren.
 Ein BPMN-StartEvent beginnt die aktuelle BPMN-Swimlane.
 Jede BPMN-Swimlane wird von einem BROS-RoleType repräsentiert (vgl. \textbf{Regel 2}).
 Ein BROS-RoleType wird mit einem BROS-Event begonnen, wenn  zwischen diesen beiden eine BROS-CreateRelation existiert.
 Alternativ kann ein BPMN-StartEvent auch durch ein BROS-Event modelliert werden, wenn das BPMN-StartEvent das erste Event des BPMN-Prozesses ist und eine BROS-CreateRelation zwischen dem BROS-Event und der BROS-Scene existiert, die den BROS-Prozess darstellt (vgl. \textbf{Regel 1}).
 Diese Regel entspricht, im Sinne des Ablaufes des Geschäftsprozesses, dem Gegenstück zu \textbf{Regel 4}.
-Die Visualisierung nutzt das gleiche Beispiel, nur ist in \cref{fig:ruleExample5} der Fokus auf das BPMN-StartEvent und die BROS-CreateRelation gelegt.
+Die Visualisierung nutzt daher das gleiche Beispiel, nur ist in \cref{fig:ruleExample5} der Fokus auf das BPMN-StartEvent und die BROS-CreateRelation gelegt.
 
 \begin{lstlisting}[language=Prolog, caption=Formalisierung der Regel 5, label=lst:rule_5]
 rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
@@ -235,7 +235,7 @@ rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
     ).
 \end{lstlisting}
 
-\textbf{Regel 6:}
+\textbf{Regel 6 (BROS-Event):}
 Zu jedem \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss ein \emph{BPMN-Element} existieren.
 Dies ist die einzige Regel, die von dem BROS-Modell aus das BPMN-Modell überprüft.
 Jedes \emph{BROS-Event} bzw. \emph{BROS-ReturnEvent} muss eine Ursache im BPMN-Modell haben.
@@ -366,50 +366,54 @@ Die Graphen des BPMN-Modelles und des BROS-Modelles sind zueinander disjunkt.
 \begin{figure}
     \centering
     \begin{tikzpicture}
-        \draw[dashed] (0,5.4) -- (0,-5.4);
+        \draw[dashed] (0,4.4) -- (0,-5.4);
 
-        \draw (-1,1) rectangle (-8,4);
-        \draw (-7,1) -- (-7,4);
-        \draw (-7.5,2.5) node[rotate=90] {\textbf{Kunde}};
-        \draw (-6,2.5) circle [radius=0.5];
-        \fill (-2,2.5) circle [radius=0.5];
-        \fill[color=white] (-2,2.5) circle [radius=0.4];
-        \draw (-6,1.8) node {Start};
-        \draw (-2,1.8) node {End};
-        \draw[->] (-5.5,2.5) -- (-2.5,2.5);
-        \draw (-4.5,5) node {\Large\textbf{{BPMN}}};
+        \draw (-1,0) rectangle (-8,3);
+        \draw (-7,0) -- (-7,3);
+        \draw (-7.5,1.5) node[rotate=90] {\textbf{Kunde}};
+        \draw (-6,1.5) circle [radius=0.5];
+        \fill (-2,1.5) circle [radius=0.5];
+        \fill[color=white] (-2,1.5) circle [radius=0.4];
+        \draw (-6,0.8) node {Start};
+        \draw (-2,0.8) node {End};
+        \draw[->] (-5.5,1.5) -- (-2.5,1.5);
+        \draw (-4.5,4) node {\Large\textbf{{BPMN}}};
 
-        \draw[rounded corners=12pt] (3,1.5) rectangle (6,3.5);
-        \draw (3,2.5) -- (6,2.5);
-        \draw (3,2) -- (6,2);
-        \draw (4.5,3) node {\textbf{Kunde}};
-        \draw (1.5,2.5) circle [radius=0.5];
-        \draw (7.5,2.5) circle [radius=0.5];
-        \draw (1.5,1.8) node {Start};
-        \draw (7.5,1.8) node {End};
-        \draw[dashed,->] (2,2.5) -- (3,2.5);
-        \draw[dashed,->] (6,2.5) -- (7,2.5);
-        \draw (4.5,5) node {\Large\textbf{{BROS}}};
+        \draw[rounded corners=12pt] (3,0.5) rectangle (6,2.5);
+        \draw (3,1.5) -- (6,1.5);
+        \draw (3,1) -- (6,1);
+        \draw (4.5,2) node {\textbf{Kunde}};
+        \draw (1.5,1.5) circle [radius=0.5];
+        \draw (7.5,1.5) circle [radius=0.5];
+        \draw (1.5,0.8) node {Start};
+        \draw (7.5,0.8) node {End};
+        \draw[dashed,->] (2,1.5) -- (3,1.5);
+        \draw[dashed,->] (6,1.5) -- (7,1.5);
+        \draw (4.5,4) node {\Large\textbf{{BROS}}};
 
-        \draw[color=layer1] (-4.5,0) node[fill=white] {Process} --
+        \draw[color=layer1] (-4.5,-0.7) node[fill=white] {Process} --
             (-4.5,-2) node[fill=white] {Lane(Kunde)} --
             (-2.5,-4) node[fill=white] {EndEvent(End)} (-4.5,-2) --
             (-6.5,-4) node[fill=white] {StartEvent(Start)};
         \draw[color=layer2, ->] (-6,-4.3) -- (-6,-5) -- (-3,-5) -- (-3,-4.3); 
         \draw[color=layer2] (-4.5,-5) node[anchor=north] {\small{SequenceFlow}};
 
-        \draw[color=layer1] (4.5,0) node[fill=white] {Scene} --
-            (2,-2) node[fill=white] {RoleType(Kunde)} (4.5,0) --
-            (4.5,-3) node[fill=white] {Event(Start)} (4.5,0) --
+        \draw[color=layer1] (4.5,-0.7) node[fill=white] {Scene} --
+            (2,-2) node[fill=white] {RoleType(Kunde)} (4.5,-0.7) --
+            (4.5,-3) node[fill=white] {Event(Start)} (4.5,-0.7) --
             (7,-4) node[fill=white] {Event(End)};
         \draw[color=layer2, ->] (3.3,-3) -- (2.5,-3) -- (2.5,-2.3); 
         \draw[color=layer2] (2.8,-3) node[anchor=north] {\small{CreateRelation}};
         \draw[color=layer2, ->] (1,-2.3) -- (1,-4) -- (5.3,-4); 
         \draw[color=layer2] (2.8,-4) node[anchor=north] {\small{DestroyRelation}};
 
-        \draw[dashed, color=layer3] (-3.2,-2) -- (0.3,-2);
-        \draw[dashed, color=layer3] (-5.5,-3.7) -- (-5.5,-3.55) -- (4.5,-3.55) -- (4.5,-3.3);
-        \draw[dashed, color=layer3] (-2,-4.3) -- (-2,-5) -- (7,-5) -- (7,-4.3);
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-3.2,-2) -- (0.3,-2);
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-5.5,-3.7) -- (-5.5,-3.55) -- (4.5,-3.55) -- (4.5,-3.3);
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-2,-4.3) -- (-2,-5) -- (7,-5) -- (7,-4.3);
+
+        \draw[color=layer1] (-5, -6) -- (-4,-6) node[anchor=west] {Schicht 1};
+        \draw[color=layer2, ->] (-1, -6) -- (0,-6) node[anchor=west] {Schicht 2};
+        \draw[color=layer3, dash pattern=on 4pt off 2pt] (3, -6) -- (4,-6) node[anchor=west] {Schicht 3};
     \end{tikzpicture}%
     \caption{Visualisierung des Graph Matching}%
     \label{fig:ModelToGraph}

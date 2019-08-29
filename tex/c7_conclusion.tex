@@ -26,7 +26,7 @@ Wie die Modelleditoren \emph{bpmn.io} und \emph{FRaMED.io}, ist das Tool webbasi
 Die Evaluation des Verfahrens teilt sich in zwei Abschnitte auf.
 Zum einen wurde die Anwendbarkeit anhand von einem Beispielsystem getestet.
 Dazu wurde das Beispiel einer Pizzabestellung aus der Arbeit von \cite{Schoen} verwendet.
-In seiner Arbeit hat \cite{Schoen} sowohl ein BPMN- als auch ein BROS-Modell gegeben, die zueinander konsistent sind.
+In ihrer Arbeit haben \cite{Schoen} sowohl ein BPMN- als auch ein BROS-Modell gegeben, die zueinander konsistent sind.
 Zum anderen wurde die Erweiterbarkeit und Modularität des Verfahrens und der Implementierung evaluiert, indem eine weitere Regel aus dem \cref{chap:consistency} zu dem Tool hinzugefügt wurde.
 
 \section{Wissenschaftlicher Beitrag}
@@ -74,6 +74,7 @@ Das Verfahren von \cite{Egyed2006} ist hingegen auf die Möglichkeiten der OCL b
       \midrule
       Egyed 2006    & CD, SD, SC          & Intra            & Monitoring           &                             & \f{1}      & \f{H}       & \f{1}        & \f{L}               & \f{M}              \\
       \midrule
+      \rowcolor{rowhighlight}
       BROS          & BPMN, BROS          & Intra            & Monitoring           &                             & \f{1}      & \f{H}       & \f{1}        & \f{L}               & \f{H}  
     \end{tabular}
     \begin{tablenotes}
@@ -84,7 +85,15 @@ Das Verfahren von \cite{Egyed2006} ist hingegen auf die Möglichkeiten der OCL b
       \item \hfil
       \f{1}: ja;
       \f{0}: nein;
-      $\sim$: teilweise
+      $\sim$: teilweise;
+      \item \hfil
+      CD: Class Diagram;
+      SM: State Machine;
+      USC: Use Case Diagram;
+      \item \hfil
+      SD: Sequence Diagram;
+      AD: Activity Diagram;
+      SC: Statechart
     \end{tablenotes}    
   \end{threeparttable}
   \caption{Einordnung des neuen Verfahrens}%
@@ -99,9 +108,9 @@ Die Automatisierbarkeit wurde mit dieser Implementierung gezeigt und anhand eine
 Dabei konnte ein fehlerhaftes BROS-Modell erfolgreich korrigiert werden.
 Da das genutzte Beispiel auf der Arbeit von \cite{Schoen} basiert, konnte diese zur Verifizierung der Korrektheit der Konsistenz genutzt werden.
 
-\section{Zukünftige Arbeiten}
+\section{Limitationen und Zukünftige Arbeiten}
 
-Wie in \cref{chap:evaluation} beschrieben muss ein von dem Tool gefundener Konsistenzfehler, nicht unbedingt ein echter Konsistenzfehler sein.
+Wie in \cref{chap:evaluation} beschrieben muss ein von dem Tool gefundener Konsistenzfehler nicht unbedingt ein echter Konsistenzfehler sein.
 Dieser Fehler kann auch von dem Modellierer beabsichtigt sein und eine gewollte Erweiterung des Modelles darstellen.
 Momentan kann das Tool nicht mit diesem Problem umgehen.
 Eine Möglichkeit bestimmt Fehler zu ignorieren oder als gewollt zu kennzeichnen, wäre eine sinnvolle Erweiterung für das implementierte Tool.

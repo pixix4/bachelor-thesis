@@ -6,7 +6,7 @@ Dafür wird in diesem Kapitel eine beispielhafte Anwendung des Tools, aus Sicht 
 
 \section{Anwendung am Beispiel einer Pizzabestellung}
 
-In seiner Arbeit hat \cite{Schoen} für die Einführung in BROS das Beispiel einer Pizzabestellung erstellt.
+In ihrer Arbeit haben \cite{Schoen} für die Einführung in BROS das Beispiel einer Pizzabestellung erstellt.
 Das dort gegebene BPMN-Modell wird als Grundlage genutzt, um ein neues BROS-Modell zu erstellen, und die Konsistenz mit Hilfe des neu entwickelten Tools zu überprüfen.
 Die Modelle werden zu diesem Zweck neu in bpmn.io und FRaMED.io modelliert, um sie automatisiert überprüfen zu können.
 Nachdem ein konsistentes BROS-Modell entwickelt wurde, wird die Benutzbarkeit des Tools diskutiert.
@@ -52,7 +52,7 @@ Die davon betroffenen Regeln sind die Regeln 1, 3, 4, 5 und 6.
 \begin{figure}[H]
     \centering
      \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error1.png}%
-    \caption{Fehlermeldungen 1}%
+    \caption{Regelverstoß 1: Kein BROS-Element gefunden}%
     \label{fig:error1}
 \end{figure}
 
@@ -68,12 +68,12 @@ Um die Konsistenz auch für zukünftige Modelle des Geschäftsprozesses zu erhal
 \begin{figure}[H]
     \centering
      \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error2.png}%
-    \caption{Fehlermeldungen 2}%
+    \caption{Regelverstoß 2: Endelemente der Events sind unterschiedlich}%
     \label{fig:error2}
 \end{figure}
 
 Regel 4 ist die Ursache für das zweite Konsistenzproblem.
-Es besagt, dass das BPMN-EndEvent ``pizza eaten'' zwar ein Matching mit dem BROS-ReturnEvent ``Pizza  eaten'' aufweist aber beide Elemente beenden unterschiedliche Teilprozesse (vgl. \cref{fig:error2}).
+Es besagt, dass das BPMN-EndEvent ``pizza eaten'' zwar ein Matching mit dem BROS-ReturnEvent ``Pizza  eaten'' aufweist, aber beide Elemente unterschiedliche Teilprozesse beenden (vgl. \cref{fig:error2}).
 Dies liegt an der fehlenden Zuordnung des BPMN-Prozesses ``Order Pizza'' und der BROS-Scene ``Pizzabestellung''.
 Da diese Zuordnung schon mit dem Lösen des ersten Regelverstoßes behoben wurde, ist keine weitere Änderung notwendig.
 Nachdem die BROS-Scene zu ``OrderPizza'' umbenannt (vgl. \cref{fig:pizzaBros3}) wurde, kann die Konsistenzprüfung mit dem Laden der neuen Datei wiederholt werden.
@@ -81,11 +81,11 @@ Nachdem die BROS-Scene zu ``OrderPizza'' umbenannt (vgl. \cref{fig:pizzaBros3}) 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error3.png}%
-    \caption{Fehlermeldung 3}%
+    \caption{Regelverstoß 3: Kein BROS-Element gefunden}%
     \label{fig:error3}
 \end{figure}
 
-Das dritte Problem kommt von der Regel 3 und beschreibt, dass zu dem BPMN-TerminationEvent ``order cancelled'' kein passendes BROS-ReturnEvent gefunden wurde (vgl. \cref{fig:error3}).
+Das dritte Problem stammt von der Regel 3 und beschreibt, dass zu dem BPMN-Termination\-Event ``order cancelled'' kein passendes BROS-ReturnEvent gefunden wurde (vgl. \cref{fig:error3}).
 Dieses Problem stammt von dem vergessenen BROS-ReturnEvent.
 Es kann leicht behoben werden, indem zu der BROS-Scene noch ein weiteres BROS-ReturnEvent mit dem Namen ``order cancelled'' hinzugefügt wird (vgl. \cref{fig:pizzaBros4}). 
 Dabei erhöht sich auch die Anzahl der zutreffenden Regeln um eins auf 19, da ein weiteres BROS-Event existiert, das mit Regel 6 überprüft werden muss.
@@ -93,7 +93,7 @@ Dabei erhöht sich auch die Anzahl der zutreffenden Regeln um eins auf 19, da ei
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error4.png}%
-    \caption{Fehlermeldung 4}%
+    \caption{Regelverstoß 4: Endelemente der Events sind unterschiedlich}%
     \label{fig:error4}
 \end{figure}
 
@@ -108,7 +108,7 @@ Das BROS-Event ``baked pizza send'' wird hingegen mit einer BROS-DestroyRelation
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error5.png}%
-    \caption{Fehlermeldung 5}%
+    \caption{Regelverstoß 5: Kein BROS-Element gefunden}%
     \label{fig:error5}
 \end{figure}
 
@@ -120,7 +120,7 @@ Zum Lösen des Konsistenzproblems, muss ein BROS-Event mit dem Namen ``check men
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,keepaspectratio]{../images/example/error6.png}%
-    \caption{Fehlermeldung 6}%
+    \caption{Regelverstoß 6: Kein BPMN-Element gefunden}%
     \label{fig:error6}
 \end{figure}
 
@@ -147,7 +147,7 @@ Hierfür wäre eine Funktion zur manuellen Abstufung der Regelverletzung von ein
 
 \section{Erweiterbarkeit des Ansatzes}
 
-Bisher wurden nur Regeln implementiert, die die Konsistenz von BPMN-Modellen zu BROS-Modellen prüfen.
+Bisher wurden nur Regeln in ihre Kotlin-Implementierung überführt, die die Konsistenz von BPMN-Modellen zu BROS-Modellen prüfen.
 Da das BROS-Modell gegenüber dem BPMN-Modell angereichert werden kann ist dies auch die häufigste Anwendung.
 Allerdings können auch einige Regeln in die andere Richtung überprüft werden.
 Um gleichzeitig die Erweiterbarkeit des Ansatzes und der Implementierung zu zeigen, wird \textbf{Regel 6} aus \cref{sec:Konsistenzregeln} hinzugefügt.

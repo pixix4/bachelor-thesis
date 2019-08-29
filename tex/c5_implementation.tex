@@ -90,7 +90,9 @@ Jede Relation besitzt einen Verweis auf seine Quell- und Zielknoten.
 Auch die Graphrelationen besitzen eine Referenz auf ihre Metamodell-Instanz mit Typannotation.
 Schließlich ist die dritte Schicht, die das Matching zwischen den Modellen darstellt, mit Grün markiert.
 Dabei handelt es sich um ein Set von Knoten, die nach der Orakelfunktion zu ihm passend sind.
-Jeder Knoten hat zusätzlich noch eine Hilfsfunktion, die einen Iterator zurückgibt, der eine einfache Breitensuche über den Graphen implementiert.
+Da das Matching bidirektional ist, muss jeder Knoten in dem Set auch einen Rückverweis besitzen.
+Jeder Knoten hat zusätzlich noch eine Hilfsfunktion, die einen Iterator zurückgibt.
+Dieser implementiert eine einfache Breitensuche, um eine leichte Iteration über den Graphen zu ermöglichen.
 
 \section{Matching der Modelelemente}
 \label{sec:matching_model_elements}
@@ -190,7 +192,6 @@ Durch das Entfernen von Kanten aus dem Graphen ist es bei einem Fixpunkt-Algorit
 Da aber in jeder Iteration vor dem Überprüfen auf Änderungen in der dritten Schicht, eine konstante Kantenmenge entfernt wird, reduziert dies nur den vollständigen Graphen, um diese Kantenmenge.
 Dabei bleibt die dritte Schicht am Ende jeder Iteration monoton wachsend. 
 
-\pagebreak
 \section{Implementierung der Konsistenzregeln}
 \label{sec:implementaion_consistency_rules}
 
@@ -272,7 +273,7 @@ Wenn dieses Überprüfung erfolgreich ist, wird eine positive Konsistenzmeldung 
 Beide Konsistenzmeldungen haben neben der textuellen Beschreibung auch eine Referenz auf das BPMN-Event.
 Sollte kein passendes BPMN-Event gefunden werden, wird auch eine negative Konsistenzmeldung zurückgegeben, allerdings ohne eine Referenz auf ein BROS-Event.
 
-\begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5]
+\begin{lstlisting}[language=Kotlin, caption=Implementierung von Regel 5, label=lst:implementation_rule_5,float,floatplacement=H]
 Context.verifyBpmn<BpmnStartEvent> { bpmn ->
     for (bros in bpmn.matchingElements) {
         if (bros.checkType<BrosEvent>()) {
@@ -294,7 +295,6 @@ Context.verifyBpmn<BpmnStartEvent> { bpmn ->
 }
 \end{lstlisting}
 
-\pagebreak
 \section{Benutzerinterface}
 
 Da das entwickelte Tool eine Webanwendung ist, kann es in allen moderneren Browsern benutzt werden, die Javascript aktiviert haben.
@@ -340,7 +340,6 @@ Dies kann der Modellierer nutzen um die Ergebnisse übersichtlicher darzustellen
 Die drei linken Sektionen beinhalten statistische Informationen zur Durchführung und dem Ergebnis der Konsistenzprüfung.
 Dabei werden auch Informationen zum Matching angezeigt.
 
-\pagebreak
 \begin{itemize}
     \item \textbf{Verification stats:} Informationen zu der aktuellen Verifikation.
     \begin{itemize}

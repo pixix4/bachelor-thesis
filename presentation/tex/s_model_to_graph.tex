@@ -1,0 +1,56 @@
+\begin{figure}
+  \centering
+  \begin{adjustbox}{width=.75\linewidth,center}
+    \begin{tikzpicture}
+        \draw[dashed] (0,4.4) -- (0,-5.4);
+
+        \draw (-1,0) rectangle (-8,3);
+        \draw (-7,0) -- (-7,3);
+        \draw (-7.5,1.5) node[rotate=90] {\textbf{Chef}};
+        \draw (-6,1.5) circle [radius=0.5];
+        \fill (-2,1.5) circle [radius=0.5];
+        \fill[color=background] (-2,1.5) circle [radius=0.4];
+        \draw (-6,0.8) node {Start};
+        \draw (-2,0.8) node {End};
+        \draw[->] (-5.5,1.5) -- (-2.5,1.5);
+        \draw (-4.5,4) node {\Large\textbf{{BPMN}}};
+
+        \draw[rounded corners=12pt] (3,0.5) rectangle (6,2.5);
+        \draw (3,1.5) -- (6,1.5);
+        \draw (3,1) -- (6,1);
+        \draw (4.5,2) node {\textbf{Chef}};
+        \draw (1.5,1.5) circle [radius=0.5];
+        \draw (7.5,1.5) circle [radius=0.5];
+        \draw (1.5,0.8) node {Start};
+        \draw (7.5,0.8) node {End};
+        \draw[dashed,->] (2,1.5) -- (3,1.5);
+        \draw[dashed,->] (6,1.5) -- (7,1.5);
+        \draw (4.5,4) node {\Large\textbf{{BROS}}};
+
+        \draw[color=layer1] (-4.5,-0.7) node[fill=background] {Process} --
+            (-4.5,-2) node[fill=background] {Lane(Chef)} --
+            (-2.5,-4) node[fill=background] {EndEvent(End)} (-4.5,-2) --
+            (-6.5,-4) node[fill=background] {StartEvent(Start)};
+        \draw[color=layer2, ->] (-6,-4.3) -- (-6,-5) -- (-3,-5) -- (-3,-4.3); 
+        \draw[color=layer2] (-4.5,-5) node[anchor=north] {\small{SequenceFlow}};
+
+        \draw[color=layer1] (4.5,-0.7) node[fill=background] {Scene} --
+            (2,-2) node[fill=background] {RoleType(Chef)} (4.5,-0.7) --
+            (4.5,-3) node[fill=background] {Event(Start)} (4.5,-0.7) --
+            (7,-4) node[fill=background] {Event(End)};
+        \draw[color=layer2, ->] (3.3,-3) -- (2.5,-3) -- (2.5,-2.3); 
+        \draw[color=layer2] (2.8,-3) node[anchor=north] {\small{CreateRelation}};
+        \draw[color=layer2, ->] (1,-2.3) -- (1,-4) -- (5.3,-4); 
+        \draw[color=layer2] (2.8,-4) node[anchor=north] {\small{DestroyRelation}};
+
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-3.2,-2) -- (0.3,-2);
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-5.5,-3.7) -- (-5.5,-3.55) -- (4.5,-3.55) -- (4.5,-3.3);
+        \draw[dash pattern=on 4pt off 2pt, color=layer3] (-2,-4.3) -- (-2,-5) -- (7,-5) -- (7,-4.3);
+
+        \draw[color=layer1] (-5, -6) -- (-4,-6) node[anchor=west] {Schicht 1};
+        \draw[color=layer2, ->] (-1, -6) -- (0,-6) node[anchor=west] {Schicht 2};
+        \draw[color=layer3, dash pattern=on 4pt off 2pt] (3, -6) -- (4,-6) node[anchor=west] {Schicht 3};
+    \end{tikzpicture}%
+  \end{adjustbox}
+  \label{fig:ModelToGraph}
+\end{figure}

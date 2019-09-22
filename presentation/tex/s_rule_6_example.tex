@@ -1,0 +1,35 @@
+\begin{tikzpicture}[scale=0.5, every node/.style={scale=0.8},>={Latex[length=1.5mm]}]
+  \draw[dashed] (-8,-7) -- (8,7);
+  \draw (-6,-5.25) node[anchor=south, rotate=41] {BPMN};
+  \draw (-6,-5.25) node[anchor=north, rotate=41] {\textbf{BROS}};
+
+  \draw (-8,6) rectangle (0,1);
+  \draw (-7,6) -- (-7,1);
+  \draw (-7.5,3.5) node[rotate=90] {Chef};
+
+  \draw (-5.8,3.5) circle[radius=0.5];
+  \fill (-1.2,3.5) circle[radius=0.5];
+  \fill[color=white] (-1.2,3.5) circle[radius=0.35];
+  \draw (-4.8,3.5) -- (-4.4,3.9) -- (-4,3.5) -- (-4.4,3.1) -- cycle;
+  \draw (-3,3.5) -- (-2.6,3.9) -- (-2.2,3.5) -- (-2.6,3.1) -- cycle;
+  \draw[->] (-5.2,3.5) -- (-4.8,3.5);
+  \draw[->] (-2.2,3.5) -- (-1.7,3.5);
+  \draw[->] (-4.4,3.9) -- (-4.4,4.5) -- (-2.6,4.5) -- (-2.6,3.9);
+  \draw (-3.5,4.5) node[anchor=south] {Select A};
+  \draw[->] (-4.4,3.1) -- (-4.4,2.5) -- (-2.6,2.5) -- (-2.6,3.1);
+  \draw (-3.5,2.5) node[anchor=north] {Select B};
+
+  \draw[rounded corners=4.8pt] (0,-0.5) rectangle (8,-6.5);
+  \draw (0.2,-0.56) -- (0.2,-6.44);
+  \draw (0,-1.5) -- (8,-1.5);
+  \draw (4,-1) node {OrderPizza};
+
+  \draw[rounded corners=4.8pt] (4,-3.5) rectangle (7,-5.5);
+  \draw (4,-4.5) -- (7,-4.5);
+  \draw (4,-5) -- (7,-5);
+  \draw (5.5,-4) node {Chef};
+
+  \draw (1.5,-2.5) circle[radius=0.5];
+  \draw (1.8,-3) node[anchor=north] {Select A};
+  \draw[dashed, ->] (2,-2.5) -- (5.5,-2.5) -- (5.5,-3.5);
+\end{tikzpicture}

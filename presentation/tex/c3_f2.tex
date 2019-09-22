@@ -18,6 +18,18 @@
     \item Alle Teilwörter des kürzeren Namens müssen im längerem Namen enthalten sein
   \end{enumerate}
 \end{frame}
+\begin{frame}{Matching}
+  \begin{figure}
+    \centering
+    \begin{align}
+        \text{'Aktion war erfolgreich'}\ ,&\ \text{'ErfolgreicheAktion'} \nonumber\\
+        \text{\{'aktion', 'erfolgreich', 'war'\}}\ ,&\ \text{\{'aktion', 'erfolgreiche'\}} \nonumber\\
+        \text{\{'aktion', 'erfolgreiche'\}}\ ,&\ \text{\{'aktion', 'erfolgreich', 'war'\}} \nonumber\\
+        \text{\{'\textbf{akti}on'} \subseteq \text{'\textbf{akti}on'\}}\ ,&\ \text{\{'\textbf{erfolgreic}he'} \subseteq \text{'\textbf{erfolgrei}ch'\}} \nonumber
+    \end{align}
+    \label{eq:name_matching}
+  \end{figure}
+\end{frame}
 \begin{frame}[fragile]{Matching}
 \begin{lstlisting}[language=Kotlin]
 fun matchStrings(shorterName: String, longerName: String): Boolean {
@@ -35,18 +47,6 @@ fun matchStrings(shorterName: String, longerName: String): Boolean {
     }
 }
 \end{lstlisting}
-\end{frame}
-\begin{frame}{Matching}
-  \begin{figure}
-    \centering
-    \begin{align}
-        \text{'Aktion war erfolgreich'}\ ,&\ \text{'ErfolgreicheAktion'} \nonumber\\
-        \text{\{'aktion', 'erfolgreich', 'war'\}}\ ,&\ \text{\{'aktion', 'erfolgreiche'\}} \nonumber\\
-        \text{\{'aktion', 'erfolgreiche'\}}\ ,&\ \text{\{'aktion', 'erfolgreich', 'war'\}} \nonumber\\
-        \text{\{'\textbf{akti}on'} \subseteq \text{'\textbf{akti}on'\}}\ ,&\ \text{\{'\textbf{erfolgreic}he'} \subseteq \text{'\textbf{erfolgrei}ch'\}} \nonumber
-    \end{align}
-    \label{eq:name_matching}
-  \end{figure}
 \end{frame}
 \begin{frame}[fragile]{Matching}
 \begin{lstlisting}[language=Prolog]

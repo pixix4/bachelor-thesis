@@ -37,21 +37,21 @@ fun matchStrings(shorterName: String, longerName: String): Boolean {
   val longerNameSet = splitNameToSet(longerName)
 
   return shorterNameSet.all { short ->
-        val s = trimEnding(short)
+    val s = trimEnding(short)
 
-        longerNameSet.any { long ->
-            val l = trimEnding(long)
+    longerNameSet.any { long ->
+      val l = trimEnding(long)
 
-            long.startsWith(s) || short.startsWith(l)
-        }
+      long.startsWith(s) || short.startsWith(l)
     }
+  }
 }
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]{Matching}
 \begin{lstlisting}[language=Prolog]
 match<BpmnLane, BrosRoleType> { lane, role ->
-    matchStrings(lane.element.name, role.element.name)
+  matchStrings(lane.element.name, role.element.name)
 }
 \end{lstlisting}
 \end{frame}
@@ -60,7 +60,7 @@ match<BpmnLane, BrosRoleType> { lane, role ->
 \begin{lstlisting}[language=Prolog]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
   (
-      bros(Bros, "RoleType"), match(Bpmn, Bros)
+    bros(Bros, "RoleType"), match(Bpmn, Bros)
   ).
 \end{lstlisting}
 \end{frame}
@@ -68,12 +68,11 @@ rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
 \begin{lstlisting}[language=Kotlin]
 Context.verifyBpmn<BpmnLane> { bpmn ->
   for (bros in bpmn.matchingElements) {
-      if (bros.checkType<BrosRoleType>()) {
-          return@verifyBpmn 
-              Result.match("...", bros = bros)
-      }
+    if (bros.checkType<BrosRoleType>()) {
+      return Result.match("...", bros = bros)
+    }
   }
-  Result.error("...")
+  return Result.error("...")
 }
 \end{lstlisting}
 \end{frame}

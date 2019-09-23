@@ -1,13 +1,11 @@
 \section{Welche Konsistenzbeziehungen bestehen zwischen BPMN- und BROS-Modellen?}
 
 \begin{frame}{Konsistenzproblem}
-  Eine \textbf{Inkonsistenz} tritt genau dann auf, wenn eine Konsistenzregel verletzt wird.
+  Eine \textbf{Inkonsistenz} tritt genau dann auf, wenn eine Konsistenzregel verletzt wird. (\cite{Nuseibeh1996})
 
-  Eine \textbf{Konsistenzregel} ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen.
+  Eine \textbf{Konsistenzregel} ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen. Es beschreibt eine Relation oder einen Fakt der notwendig ist.
 
   Das \textbf{Konsistenzproblem} beschreibt den Vorgang der Minimierung und Verhinderung von Inkonsistenzen mit Hilfe der Aufstellung und Prüfung von Konsistenzregeln.
-
-  TODO: Referenzen, Konsistenz
 \end{frame}
 
 \begin{frame}{Business Process Model and Notation}
@@ -147,10 +145,10 @@ match(Bpmn, Bros).
         \begin{adjustbox}{width=0.8\linewidth,center}
           \begin{tikzpicture}
             \node at (0,0) {\input{tex/s_rule_3_example}};
-            \filldraw[draw=background,fill=background,fill opacity=0, draw opacity=0] (-4,-3.5) rectangle (4,3.5);
+            \filldraw[draw=background,fill=background,fill opacity=0.8, draw opacity=0.8] (-4,-3.5) rectangle (4,3.5);
           \end{tikzpicture}
         \end{adjustbox}
-        \caption*{\tiny{Regel 3: BPMN-TerminationEvent}}%
+        \caption*{\tiny{\textcolor{black!20}{Regel 3: BPMN-TerminationEvent}}}%
     \end{subfigure}
     \begin{subfigure}{0.3\textwidth}
         \vspace{4pt}
@@ -190,29 +188,7 @@ match(Bpmn, Bros).
 \begin{lstlisting}[language=Prolog]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
   (
-      bros(Bros, "RoleType"), match(Bpmn, Bros)
-  ).
-\end{lstlisting}
-\end{frame}
-\begin{frame}{BPMN-TerminationEvent - BROS-ReturnEvent}
-  \begin{figure}
-    \centering
-    \begin{adjustbox}{width=0.5\linewidth,center}
-      \input{tex/s_rule_3_example}
-    \end{adjustbox}
-  \end{figure}
-\end{frame}
-\begin{frame}[fragile]{BPMN-TerminationEvent - BROS-ReturnEvent}
-\begin{lstlisting}[language=Prolog]
-rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
-  (
-      bros(Bros, "ReturnEvent"), 
-      match(Bpmn, Bros),
-      (
-          parent(Bros, BrosParent),
-          transitive_parent(Bpmn, BpmnParent),
-          match(BpmnParent, BrosParent)
-      )
+    bros(Bros, "RoleType"), match(Bpmn, Bros)
   ).
 \end{lstlisting}
 \end{frame}
@@ -228,13 +204,13 @@ rule_3(Bpmn) :- bpmn(Bpmn, "TerminationEvent") ->
 \begin{lstlisting}[language=Prolog]
 rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
   (
-      bros(Bros, "Event"),
-      match(Bpmn, Bros),
-      (
-          relation(Bros, X, "CreateRelation"),
-          transitive_parent(Bpmn, BpmnParent),
-          match(BpmnParent, X)
-      )
+    bros(Bros, "Event"),
+    match(Bpmn, Bros),
+    (
+      relation(Bros, X, "CreateRelation"),
+      transitive_parent(Bpmn, BpmnParent),
+      match(BpmnParent, X)
+    )
   ).
 \end{lstlisting}
 \end{frame}

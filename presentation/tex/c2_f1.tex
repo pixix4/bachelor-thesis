@@ -1,9 +1,9 @@
 \section{Welche Konsistenzbeziehungen bestehen zwischen BPMN- und BROS-Modellen?}
 
 \begin{frame}{Konsistenzproblem}
-  Eine \textbf{Inkonsistenz} tritt genau dann auf, wenn eine Konsistenzregel verletzt wird. (\cite{Nuseibeh1996})
+  Eine \textbf{Inkonsistenz} tritt genau dann auf, wenn eine Konsistenzregel verletzt wird. [\cite{Nuseibeh1996}]
 
-  Eine \textbf{Konsistenzregel} ist eine Formalisierung von einem Aspekt der Konsistenz zwischen den betrachteten Modellen. Es beschreibt eine Relation oder einen Fakt der notwendig ist.
+  Eine \textbf{Konsistenzregel} ist eine Formalisierung von einem Aspekt der Konsistenz (Zusammenhang) zwischen den betrachteten Modellen.
 
   Das \textbf{Konsistenzproblem} beschreibt den Vorgang der Minimierung und Verhinderung von Inkonsistenzen mit Hilfe der Aufstellung und Prüfung von Konsistenzregeln.
 \end{frame}
@@ -46,7 +46,7 @@ parent(Child, Parent).
 check_parent(C) :- 
   parent(C, P), parent(C, Q) -> P == Q.
 
-% Transitiver Abschluss der Modellstruktur.
+% Transitiver Abschluss der Modellstruktur (gekürzt).
 transitive_parent(Child, Parent).
 
 % Orakel für das Matching von Modellelementen.

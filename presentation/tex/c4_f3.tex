@@ -1,6 +1,5 @@
 \section{Mit welchem Aufwand ist dieses Verfahren erweiterbar?}
 
-
 \begin{frame}{Konsistenzbeziehungen}
   \begin{figure}
     \centering
@@ -99,7 +98,7 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
 
 \begin{frame}[fragile]{BROS-Event - BPMN-Element}
 \begin{lstlisting}[language=Prolog]
-match<BpmnTask, BrosEvent> { bpmn, bros ->
+Context.match<BpmnTask, BrosEvent> { bpmn, bros ->
   matchStrings(bpmn.element.name, bros.element.desc)
 }
 \end{lstlisting}
@@ -107,7 +106,7 @@ match<BpmnTask, BrosEvent> { bpmn, bros ->
 
 \begin{frame}[fragile]{BROS-Event - BPMN-Element}
 \begin{lstlisting}[language=Kotlin]
-verifyBros<BrosEvent> { bros ->
+Context.verifyBros<BrosEvent> { bros ->
   for (bpmn in bros.matchingElements) {
     if (bpmn.checkType<BpmnElement>()) {
       return@verifyBros Result.match("...", bpmn = bpmn)

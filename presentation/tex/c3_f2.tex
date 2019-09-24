@@ -31,26 +31,8 @@
   \end{figure}
 \end{frame}
 \begin{frame}[fragile]{Matching}
-\begin{lstlisting}[language=Kotlin]
-fun matchStrings(shorterName: String, longerName: String): Boolean {
-  val shorterNameSet = splitNameToSet(shorterName)
-  val longerNameSet = splitNameToSet(longerName)
-
-  return shorterNameSet.all { short ->
-    val s = trimEnding(short)
-
-    longerNameSet.any { long ->
-      val l = trimEnding(long)
-
-      long.startsWith(s) || short.startsWith(l)
-    }
-  }
-}
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{Matching}
 \begin{lstlisting}[language=Prolog]
-match<BpmnLane, BrosRoleType> { lane, role ->
+Context.match<BpmnLane, BrosRoleType> { lane, role ->
   matchStrings(lane.element.name, role.element.name)
 }
 \end{lstlisting}
@@ -88,7 +70,7 @@ Context.verifyBpmn<BpmnLane> { bpmn ->
   \begin{figure}
     \centering
     \begin{adjustbox}{width=1.1\linewidth,center}
-      \includegraphics{images/example/error3.png}
+      \includegraphics{images/example/error5.png}
     \end{adjustbox}
   \end{figure}
 \end{frame}

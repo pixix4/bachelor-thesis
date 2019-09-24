@@ -25,12 +25,12 @@
   \begin{figure}
     \centering
     \begin{adjustbox}{width=0.9\linewidth,center}
-      \includegraphics{images/example/bros-rule6.png}
+      \includegraphics{images/example/bros-rule1.png}
     \end{adjustbox}
   \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Prolog-Datenstrukutr}
+\begin{frame}[fragile]{Prolog-Datenstrukutur}
 \begin{lstlisting}[language=Prolog]
 % Definition aller BPMN Elemente.
 bpmn(Bpmn, Type).
@@ -43,16 +43,6 @@ relation(Source, Target, Type).
 
 % Definition der Eltern-Kind Beziehung.
 parent(Child, Parent).
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]{Hilfsfunktionen}
-\begin{lstlisting}[language=Prolog]
-% Konsistenz der Eltern-Kind Beziehung.
-check_parent(C) :- 
-  parent(C, P), parent(C, Q) -> P == Q.
-
-% Transitiver Abschluss der Modellstruktur (gekürzt).
-transitive_parent(Child, Parent).
 
 % Orakel für das Matching von Modellelementen.
 match(Bpmn, Bros).

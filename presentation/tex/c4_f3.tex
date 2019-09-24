@@ -97,22 +97,20 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
 \end{frame}
 
 \begin{frame}[fragile]{BROS-Event - BPMN-Element}
-\begin{lstlisting}[language=Prolog]
-Context.match<BpmnTask, BrosEvent> { bpmn, bros ->
-  matchStrings(bpmn.element.name, bros.element.desc)
-}
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{BROS-Event - BPMN-Element}
 \begin{lstlisting}[language=Kotlin]
-Context.verifyBros<BrosEvent> { bros ->
-  for (bpmn in bros.matchingElements) {
-    if (bpmn.checkType<BpmnElement>()) {
-      return@verifyBros Result.match("...", bpmn = bpmn)
-    }
+fun Context.setupRule6 {
+  match<BpmnTask, BrosEvent> { bpmn, bros ->
+    return matchStrings(bpmn.element.name, bros.element.desc)
   }
-  Result.error("...")
+  verifyBros<BrosEvent> { bros ->
+    for (bpmn in bros.matchingElements) {
+      if (bpmn.checkType<BpmnElement>()) {
+        return Result.match("...", bpmn = bpmn)
+      }
+    }
+    return Result.error("...")
+  }
 }
+val activeModules = listOf(..., Context::setupRule6)
 \end{lstlisting}
 \end{frame}

@@ -5,12 +5,12 @@ fun matchStrings(shorterName: String, longerName: String): Boolean {
   val longerNameSet = splitNameToSet(longerName)
 
   return shorterNameSet.all { short ->
-    val s = trimEnding(short)
+    val sh = trimEnding(short)
 
-    longerNameSet.any { long ->
-      val l = trimEnding(long)
+    return longerNameSet.any { long ->
+      val lo = trimEnding(long)
 
-      long.startsWith(s) || short.startsWith(l)
+      return long.startsWith(sh) || short.startsWith(lo)
     }
   }
 }

@@ -22,18 +22,17 @@
   \begin{figure}
     \centering
     \begin{align}
-        \text{'Aktion war erfolgreich'}\ ,&\ \text{'ErfolgreicheAktion'} \nonumber\\
-        \text{\{'aktion', 'erfolgreich', 'war'\}}\ ,&\ \text{\{'aktion', 'erfolgreiche'\}} \nonumber\\
-        \text{\{'aktion', 'erfolgreiche'\}}\ ,&\ \text{\{'aktion', 'erfolgreich', 'war'\}} \nonumber\\
-        \text{\{'\textbf{akti}on'} \subseteq \text{'\textbf{akti}on'\}}\ ,&\ \text{\{'\textbf{erfolgreic}he'} \subseteq \text{'\textbf{erfolgrei}ch'\}} \nonumber
+        \text{'Select pizza'}\ ,&\ \text{'pizza selected'} \nonumber\\
+        \text{\{'select', 'pizza'\}}\ ,&\ \text{\{'pizza', 'selected'\}} \nonumber\\
+        \text{\{'\textbf{sele}ct'} \subseteq \text{'\textbf{select}ed'\}}\ ,&\ \text{\{'\textbf{piz}za'} \subseteq \text{'\textbf{piz}za'\}} \nonumber
     \end{align}
     \label{eq:name_matching}
   \end{figure}
 \end{frame}
 \begin{frame}[fragile]{Matching}
-\begin{lstlisting}[language=Prolog]
+\begin{lstlisting}[language=Kotlin]
 Context.match<BpmnLane, BrosRoleType> { lane, role ->
-  matchStrings(lane.element.name, role.element.name)
+  return matchStrings(lane.element.name, role.element.name)
 }
 \end{lstlisting}
 \end{frame}
@@ -69,10 +68,8 @@ Context.verifyBpmn<BpmnLane> { bpmn ->
   \end{itemize}
   \begin{figure}
     \centering
-    \begin{adjustbox}{width=1.1\linewidth,center}
+    \begin{adjustbox}{width=1\linewidth,center}
       \includegraphics{images/example/error5.png}
     \end{adjustbox}
   \end{figure}
 \end{frame}
-
-\section{Demo}

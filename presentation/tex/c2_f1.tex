@@ -38,11 +38,11 @@ bpmn(Bpmn, Type).
 % Definition aller BROS Elemente.
 bros(Bros, Type).
 
-% Definition aller Relationen.
-relation(Source, Target, Type).
-
 % Definition der Eltern-Kind Beziehung.
 parent(Child, Parent).
+
+% Definition aller Relationen.
+relation(Source, Target, Type).
 
 % Orakel für das Matching von Modellelementen.
 match(Bpmn, Bros).
@@ -171,7 +171,7 @@ match(Bpmn, Bros).
   \end{figure}
 \end{frame}
 
-\begin{frame}{BPMN-Swimlane - BROS-RoleType}
+\begin{frame}{BPMN-Swimlane $\Rightarrow$ BROS-RoleType}
   \begin{figure}
     \centering
     \begin{adjustbox}{width=0.5\linewidth,center}
@@ -179,7 +179,7 @@ match(Bpmn, Bros).
     \end{adjustbox}
   \end{figure}
 \end{frame}
-\begin{frame}[fragile]{BPMN-Swimlane - BROS-RoleType}
+\begin{frame}[fragile]{BPMN-Swimlane $\Rightarrow$ BROS-RoleType}
 \begin{lstlisting}[language=Prolog]
 rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
   (
@@ -187,7 +187,7 @@ rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
   ).
 \end{lstlisting}
 \end{frame}
-\begin{frame}{BPMN-StartEvent - BROS-Event}
+\begin{frame}{BPMN-StartEvent $\Rightarrow$ BROS-Event}
   \begin{figure}
     \centering
     \begin{adjustbox}{width=0.5\linewidth,center}
@@ -195,7 +195,7 @@ rule_2(Bpmn) :- bpmn(Bpmn, "Swimlane") ->
     \end{adjustbox}
   \end{figure}
 \end{frame}
-\begin{frame}[fragile]{BPMN-StartEvent - BROS-Event}
+\begin{frame}[fragile]{BPMN-StartEvent $\Rightarrow$ BROS-Event}
 \begin{lstlisting}[language=Prolog]
 rule_5(Bpmn) :- bpmn(Bpmn, "StartEvent") ->
   (

@@ -73,7 +73,7 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{BROS-Event - BPMN-Element}
+\begin{frame}{BROS-Event $\Rightarrow$ BPMN-Element}
     \begin{figure}
       \centering
       \begin{adjustbox}{width=0.5\linewidth,center}
@@ -82,7 +82,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{BROS-Event - BPMN-Element}
+\begin{frame}[fragile]{BROS-Event $\Rightarrow$ BPMN-Element}
 \begin{lstlisting}[language=Prolog]
 rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
   (
@@ -96,7 +96,7 @@ rule_6(Bros) :- (bros(Bros, "Event"); bros(Bros, "ReturnEvent")) ->
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{BROS-Event - BPMN-Element}
+\begin{frame}[fragile]{BROS-Event $\Rightarrow$ BPMN-Element}
 \begin{lstlisting}[language=Kotlin]
 fun Context.setupRule6 {
   match<BpmnTask, BrosEvent> { bpmn, bros ->
